@@ -53,16 +53,16 @@ img.ico { flex: none; vertical-align: middle; }
         一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
    .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
    图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
-:root { --skyh: 300px; --band: 96px; }
+:root { --skyh: 284px; --band: 56px; }
 .sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
-  background: url("assets/summit-sky.png") repeat-x left bottom / auto 200px,
-    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 198px) no-repeat; }
-.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 48px; pointer-events: none; display: none;
-  background: url("assets/cloud-edge.png") repeat-x left top / auto 48px; image-rendering: pixelated; }
+  background: url("assets/summit-sky.png") repeat-x left bottom / auto 184px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 182px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 28px; pointer-events: none; display: none;
+  background: url("assets/cloud-edge.png") repeat-x left top / auto 28px; image-rendering: pixelated; }
 .stuck .sky::before { display: block; }
 header { padding: 22px 0 0; position: relative; }
-.plateau { height: 184px; position: relative;
-  background: url("assets/summit-ground.png") repeat-x left top / auto 184px; image-rendering: pixelated; }
+.plateau { height: 200px; position: relative;
+  background: url("assets/summit-ground.png") repeat-x left top / auto 200px; image-rendering: pixelated; }
 .plateau .wrap { position: relative; height: 100%; }
 .stuck img.prop { z-index: 1; }
 .tabs { display: flex; gap: 14px; margin: 0 2px 4px; flex-wrap: wrap; }
@@ -183,7 +183,7 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
   .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card { padding: 14px 14px 12px; }
   .boards { grid-template-columns: 1fr; }
-  :root { --skyh: 310px; }
+  :root { --skyh: 294px; }
   .hero { max-width: none; }
   img.prop { transform-origin: bottom right; transform: scale(.75); }
   img.prop-cart { right: 64px; } img.prop-board { right: 80px; }
