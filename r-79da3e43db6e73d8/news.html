@@ -73,7 +73,13 @@ img.prop-board { right: 9%; bottom: 10px; }
 /* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background: var(--grass) url("assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
-.sky { position: relative; box-shadow: 0 4px 0 0 var(--grass-3), 0 8px 0 0 rgba(40, 90, 30, .25); }
+/* 头部高地和下方山谷之间是一道悬崖：崖顶草皮压在头部草地上，崖壁垂到地图上 */
+.sky { position: relative; }
+.sky > .wrap { position: relative; z-index: 2; }
+.sky::after { content: ""; position: absolute; left: 0; right: 0; bottom: -128px; height: 184px; z-index: 1; pointer-events: none;
+  background: url("assets/cliff.png") repeat-x left top / auto 184px; image-rendering: pixelated;
+  filter: drop-shadow(0 6px 0 rgba(40, 70, 20, .3)); }
+.main { padding-top: 118px; }
 .yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
 .yard img { image-rendering: pixelated; }
 
