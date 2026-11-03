@@ -13,7 +13,7 @@
 <style>
 :root {
   /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
-  --sky: #63aae0; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --sky: #056bc5; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
   --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
   --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
   --text: #5c3e27; --dim: #9a7a5c;
@@ -46,13 +46,30 @@ img.ico { flex: none; vertical-align: middle; }
   box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
 
 /* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
-.sky { background: var(--sky) url("assets/scene.png") repeat-x left bottom / auto 328px; }
-header { padding: 22px 0 96px; position: relative; min-height: 328px; }
+/* 页面顶部是山顶：天空 → 云海 → 崖边 → 有铁轨的平台，平台下沿的灌木直接压在山谷背景地图上。
+   场景图左右镜像拼接可无缝平铺；场景上方不够高时用天空色补齐（只补到场景图上沿，底边保持透明） */
+/* 页面顶部是山顶，分两层：
+   .sky 天空和云海上半部分，吸顶：往上滚到只剩底部一条就停住，常驻在最上面；停住后下沿露出一圈云底，
+        一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
+   .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
+   图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
+:root { --skyh: 300px; --band: 96px; }
+.sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
+  background: url("assets/summit-sky.png") repeat-x left bottom / auto 200px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 198px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 48px; pointer-events: none; display: none;
+  background: url("assets/cloud-edge.png") repeat-x left top / auto 48px; image-rendering: pixelated; }
+.stuck .sky::before { display: block; }
+header { padding: 22px 0 0; position: relative; }
+.plateau { height: 184px; position: relative;
+  background: url("assets/summit-ground.png") repeat-x left top / auto 184px; image-rendering: pixelated; }
+.plateau .wrap { position: relative; height: 100%; }
+.stuck img.prop { z-index: 1; }
 .tabs { display: flex; gap: 14px; margin: 0 2px 4px; flex-wrap: wrap; }
 .tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
 .tabs a.on { color: var(--text); background: var(--paper); }
 .tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
-.hero { margin: 22px 0 0; max-width: calc(100% - 190px); position: relative; z-index: 3; }
+.hero { margin: 22px 0 0; position: relative; z-index: 3; }
 h1 { display: inline-block; font: 400 clamp(24px, 5vw, 36px)/1.2 var(--pixel); margin: 0 0 14px; padding: 10px 22px; letter-spacing: .04em;
   color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
   background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
@@ -62,24 +79,18 @@ h1 { display: inline-block; font: 400 clamp(24px, 5vw, 36px)/1.2 var(--pixel); m
 .stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
 .stats b { color: var(--text); font-weight: 400; }
 /* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
-img.prop { position: absolute; z-index: 1; filter: drop-shadow(3px 3px 0 var(--shadow)); }
-img.prop-cart { right: 7%; bottom: 60px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+img.prop { position: absolute; z-index: 7; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 8%; bottom: 90px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
 img.prop-cart.drag { cursor: grabbing; }
-img.prop-board { right: 9%; bottom: 10px; }
-.deco { position: absolute; right: 0; bottom: 6px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+img.prop-board { right: 16%; bottom: 30px; }
+.deco { position: absolute; right: 0; bottom: 4px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
 .deco img { height: 80px; width: auto; }
 .deco img + img { height: 60px; }
 
 /* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background: var(--grass) url("assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
-/* 头部高地和下方山谷之间是一道悬崖：崖顶草皮压在头部草地上，崖壁垂到地图上 */
-.sky { position: relative; }
-.sky > .wrap { position: relative; z-index: 2; }
-.sky::after { content: ""; position: absolute; left: 0; right: 0; bottom: -128px; height: 184px; z-index: 1; pointer-events: none;
-  background: url("assets/cliff.png") repeat-x left top / auto 184px; image-rendering: pixelated;
-  filter: drop-shadow(0 6px 0 rgba(40, 70, 20, .3)); }
-.main { padding-top: 118px; }
+.main { padding-top: 4px; }
 .yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
 .yard img { image-rendering: pixelated; }
 
@@ -172,10 +183,10 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
   .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card { padding: 14px 14px 12px; }
   .boards { grid-template-columns: 1fr; }
-  header { padding-bottom: 150px; }
+  :root { --skyh: 310px; }
   .hero { max-width: none; }
   img.prop { transform-origin: bottom right; transform: scale(.75); }
-  img.prop-cart { right: 64px; } img.prop-board { right: 70px; }
+  img.prop-cart { right: 64px; } img.prop-board { right: 80px; }
   .deco img { height: 60px; } .deco img + img { height: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
@@ -189,9 +200,11 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
     <h1>需求综合报告</h1>
     <div class="stats"><span>更新于 <b class="c-cyan">2026-11-03</b></span><span>统计最近 <b>90</b> 天</span><span><b>289</b> 个需求</span><span><b>293</b> 条帖子</span><span><b>7</b> 个来源</span></div>
     </div>
-    <img class="ico prop prop-cart" src="assets/cart.png" width="111" height="108" alt="装满宝石的矿车">
-    <div class="deco"><img src="assets/sunflower.png" alt=""><img src="assets/sunflower.png" alt=""></div>
   </header>
+</div></div>
+<div class="plateau"><div class="wrap">
+  <img class="ico prop prop-cart" src="assets/cart.png" width="111" height="108" alt="装满宝石的矿车">
+  <div class="deco"><img src="assets/sunflower.png" alt=""><img src="assets/sunflower.png" alt=""></div>
 </div></div>
 <div class="wrap main">
   <h2><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true">今日推荐</h2>
@@ -199,86 +212,71 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <article class="card">
   <div class="card-head"><span class="rank">#1</span><span class="nid">编号 C360</span><span class="tag">Chrome 扩展</span></div>
   <h3>让浏览器音频填充到 5.1/7.1 环绕音箱的 Chrome 扩展</h3>
-  <p class="lede">PC 接 5.1/7.1 音箱时，浏览器音频通常只从前面两个音箱出声；Windows 的 Speaker Fill 默认关闭、很多声卡驱动也不提供，用户希望用 Chrome 扩展把…</p>
-  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.1</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.1 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>7–10 天（含真实设备验证）</b><span>预计开发</span></div></div>
+  <p class="lede">PC 接 5.1/7.1 音箱时，浏览器音频只从前面两只出声；Windows 的 Speaker Fill 默认关闭、很多声卡驱动不提供，用户希望用扩展做上混。</p>
+  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.1</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.1 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>4~6 天</b><span>预计开发</span></div></div>
   <div class="actions"><a class="btn" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/" target="_blank" rel="noopener"><img class="ico " src="assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
-<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">reddit:1xm8zsm</a>）</strong>：PC 接 5.1/7.1 音箱时，浏览器音频通常只从前面两个音箱出声；Windows 的 Speaker Fill 默认关闭、很多声卡驱动也不提供，用户希望用 Chrome 扩展把浏览器音频上混到全部声道。</p>
-<p><strong>为什么值得做</strong>：痛点明确且可一句话说清，目标用户（家庭影院/环绕音箱用户）虽小众但付费意愿存在；作者已用约 250 行做出原型，说明技术路径可行、起点成本低。<strong>风险要写明</strong>：竞品检查结果是 none 但备注指出“已有多个成熟 Chrome 扩展直接实现上混且持续维护，需求已被基本满足”，差异化空间很窄；另外原型未在真实 7.1 环境验证、后置/侧置声道可能接反，且与站点 Web Audio 冲突、DRM 媒体失效是硬限制。做的话必须主打“真实多声道校准 + 与 DRM/Web Audio 兼容性说明”，否则容易被现成扩展替代。</p>
-<p><strong>建议形式</strong>：Chrome 扩展（Manifest V3，可选 offscreen document 做音频处理）。</p>
-<p><strong>最小可行版本 3 个核心功能</strong>：
-1. 对当前标签页音频做上混（至少支持 5.1），提供开/关与强度档位；
-2. 声道测试与左右/前后声道校准向导（解决原型“后置/侧置可能接反”的问题）；
-3. 在 DRM/Web Audio 站点上自动降级并明确提示，而不是静默失效。</p>
-<p><strong>怎么验证有人要</strong>：回复原帖 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">reddit:1xm8zsm</a>，请作者用他的真实 7.1 设备做一次盲测；把校准向导 demo 发到 r/hometheater、r/BudgetAudiophile 和 Chrome 扩展社区，观察是否有“我装了但声道反了”的反馈。</p>
-<p><strong>预计开发天数</strong>：7–10 天（含真实设备验证）。</p>
+<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">reddit:1xm8zsm</a>）</strong>：PC 接 5.1/7.1 音箱时，浏览器音频只从前面两只出声；Windows 的 Speaker Fill 默认关闭、很多声卡驱动不提供，用户希望用扩展做上混。</p>
+<p><strong>为什么值得做</strong>：唯一的需求源帖有真实痛点，且作者自建版本仅约 250 行、未上架商店、未在真实 7.1 环境验证，后置/侧置声道可能接反，说明“能跑”和“能卖”之间还有工程空间。<strong>风险很大且必须写明</strong>：竞品检查虽然标 none，但同一栏的空缺说明已指出“已有多个成熟 Chrome 扩展直接实现上混、有人在用、持续维护，需求已被基本满足，不建议做”；同时与站点 Web Audio 冲突、DRM 媒体会失效。如果一定要做，只能切“真实多声道校准 + 声道测试音 + 上架商店”这一小块，不要指望做通用音频增强器。</p>
+<p><strong>建议形式</strong>：Chrome 扩展（Manifest V3，tabCapture + Web Audio 多声道输出）。</p>
+<p><strong>MVP 三个核心功能</strong>：① 一键开启/关闭的前置→环绕上混，带前后声道增益滑块；② 内置声道测试音（左前/右前/中置/低音/后置/侧置逐个发声）用于纠正用户接线；③ 无法处理的场景（DRM、站点已占用 AudioContext）给出明确提示而不是静默失败。</p>
+<p><strong>怎么验证</strong>：回复原帖并附可手动加载的 crx；发到 r/chrome_extensions、r/htpc、r/SurroundSound 各一帖，观察是否有人回报真实 5.1/7.1 设备的声道错位问题。</p>
+<p><strong>预计开发天数</strong>：4~6 天。</p>
 </div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#2</span><span class="nid">编号 C351</span><span class="tag">软件插件</span></div>
-  <h3>自动读取 Excel 图表格式属性（线色、字号、数据点大小等）的工具</h3>
-  <p class="lede">用户需要逐一检查多个 Excel 图表的格式细节（线条颜色、坐标轴标签字号、标题大小、数据点大小等），手动点击效率极低，希望“粘贴图表就得到一份属性清单”。</p>
-  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.1</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>6–9 天</b><span>预计开发</span></div></div>
+  <h3>自动读取 Excel 图表格式属性的工具</h3>
+  <p class="lede">用户要逐个点开多个 Excel 图表看线色、坐标轴字号、标题大小、数据点大小，希望“粘贴/选中图表就得到一份属性清单”。</p>
+  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.1</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>3~5 天</b><span>预计开发</span></div></div>
   <div class="actions"><a class="btn" href="https://www.reddit.com/r/excel/comments/1xixe63/" target="_blank" rel="noopener"><img class="ico " src="assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
-<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xixe63/">reddit:1xixe63</a>）</strong>：用户需要逐一检查多个 Excel 图表的格式细节（线条颜色、坐标轴标签字号、标题大小、数据点大小等），手动点击效率极低，希望“粘贴图表就得到一份属性清单”。</p>
-<p><strong>为什么值得做</strong>：需求非常具体、验收标准清晰（输出一份属性清单），一个人用 AI 辅助完全可做；回复只给了“用 VBA 读 Chart 对象模型 / pywin32 导 JSON”的方向，普通 Excel 用户不会写代码，空缺明确。风险是受众偏窄、付费意愿只有 2 分，且 Office.js 对图表格式的读写能力有限，可能要走 VBA/COM 路线（仅 Windows），跨平台会受限。</p>
-<p><strong>建议形式</strong>：Excel 插件（Office.js 加载项）或 Windows 上的 VBA/Python 小工具，优先做“加载项 + 一键导出 JSON/CSV”。</p>
-<p><strong>最小可行版本 3 个核心功能</strong>：
-1. 选中一个或多个图表，一键导出格式属性清单（线色、字号、标题大小、数据点大小、坐标轴格式）；
-2. 输出为可复制的表格/JSON/CSV，便于对比；
-3. 支持“图表 A vs 图表 B”差异高亮，直接回答“两个图哪里不一致”。</p>
-<p><strong>怎么验证有人要</strong>：回复原帖 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xixe63/">reddit:1xixe63</a> 并附一个样例输出；发到 r/excel 与 Microsoft Tech Community 的 Excel 板块，看是否有人愿意拿自己的图表来试。</p>
-<p><strong>预计开发天数</strong>：6–9 天。</p>
+<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xixe63/">reddit:1xixe63</a>）</strong>：用户要逐个点开多个 Excel 图表看线色、坐标轴字号、标题大小、数据点大小，希望“粘贴/选中图表就得到一份属性清单”。</p>
+<p><strong>为什么值得做</strong>：竞品检查为 none，空缺明确——现有回复只给了 VBA 读 Chart 对象模型、pywin32 导 JSON 两条要自己写代码的路，普通 Excel 用户用不了；这正是“AI 辅助一个人几天能做完”的典型小工具。<strong>风险</strong>：付费意愿只有 2，用户是一次性查格式而非高频；格式属性覆盖面取决于解析方式，需要接受“先覆盖常用 10~15 个属性”。</p>
+<p><strong>建议形式</strong>：优先做网页工具（上传 .xlsx，直接解析包内 chart XML，零安装），备选 Office.js 插件（需企业侧加载，门槛更高）。</p>
+<p><strong>MVP 三个核心功能</strong>：① 上传 xlsx 后列出全部图表及其所在工作表；② 每个图表输出结构化属性表（线色、字号、标题字号、数据点大小、坐标轴范围），并标出与同文件其他图表不一致的项；③ 一键导出 CSV/JSON 用于比对或交接。</p>
+<p><strong>怎么验证</strong>：回复原帖并请楼主拿自己的多图表文件试；发到 r/excel 与 r/vba 各一帖，用“上传即出清单”的截图换反馈。</p>
+<p><strong>预计开发天数</strong>：3~5 天。</p>
 </div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#3</span><span class="nid">编号 C375</span><span class="tag">桌面应用</span></div>
   <h3>在任务栏显示当前虚拟桌面名称</h3>
-  <p class="lede">同时使用 5–8 个虚拟桌面时，很难一眼看出当前在哪个桌面，导致频繁的上下文切换成本；希望在任务栏显示当前虚拟桌面名称。</p>
-  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.0</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>5–8 天</b><span>预计开发</span></div></div>
+  <p class="lede">同时用 5~8 个虚拟桌面，任务栏原生不显示桌面名，第三方工具只显示序号，导致频繁切换成本。</p>
+  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.0</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>2~4 天</b><span>预计开发</span></div></div>
   <div class="actions"><a class="btn" href="https://github.com/microsoft/PowerToys/issues/51835" target="_blank" rel="noopener"><img class="ico " src="assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
-<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51835">gh:microsoft/PowerToys#51835</a>）</strong>：同时使用 5–8 个虚拟桌面时，很难一眼看出当前在哪个桌面，导致频繁的上下文切换成本；希望在任务栏显示当前虚拟桌面名称。</p>
-<p><strong>为什么值得做</strong>：需求朴素、用户画像清晰（多桌面重度用户），一个人做桌面小工具完全可行。<strong>风险要写明</strong>：竞品检查备注指出“需求已被多个成熟开源工具满足”——托盘显示有 WindowsVirtualDesktopHelper（有媒体推荐、持续维护），任务栏内嵌有 DeskBand 类工具；PowerToys 官方也未纳入。因此只能靠“任务栏内嵌 + 显示自定义名称 + 低资源占用”做差异化，且要面对 Windows 任务栏 API 的非公开/易变问题。</p>
-<p><strong>建议形式</strong>：Windows 桌面小应用（托盘 + 可选任务栏内嵌）。</p>
-<p><strong>最小可行版本 3 个核心功能</strong>：
-1. 实时显示当前虚拟桌面序号与自定义名称；
-2. 支持给每个桌面命名并持久化；
-3. 托盘常驻、开机自启、低内存占用，并能在任务栏区域显示（或至少托盘 + 悬浮提示）。</p>
-<p><strong>怎么验证有人要</strong>：在原 issue <a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51835">gh:microsoft/PowerToys#51835</a> 下回复你的实现并请对方试用；发到 r/Windows11 与 PowerToys 讨论区，重点问“你用的是哪个现有工具、缺什么”。</p>
-<p><strong>预计开发天数</strong>：5–8 天。</p>
+<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51835">gh:microsoft/PowerToys#51835</a>)</strong>：同时用 5~8 个虚拟桌面，任务栏原生不显示桌面名，第三方工具只显示序号，导致频繁切换成本。</p>
+<p><strong>为什么值得做</strong>：需求描述非常具体（要名称而非序号），Windows 侧实现路径清晰。<strong>风险必须写明</strong>：竞品检查栏为空缺但内容明确写着“需求已被多个成熟开源工具满足：托盘显示有 WindowsVirtualDesktopHelper（有媒体推荐、持续维护），任务栏内嵌有 DeskBand 类工具”；此外 PowerToys 官方 issue 存在被采纳的可能。差异化只能落在“真正嵌进任务栏、显示自定义名称、多显示器各自显示”，且要接受这可能是一个只有几百用户的工具。</p>
+<p><strong>建议形式</strong>：Windows 桌面小应用（C# + WinUI/WPF，读取虚拟桌面 API 与注册表映射）。</p>
+<p><strong>MVP 三个核心功能</strong>：① 任务栏区域常驻显示当前桌面名称；② 允许用户给每个桌面起名并持久化；③ 切换桌面时即时刷新（轮询或事件），多显示器可选只在主屏显示。</p>
+<p><strong>怎么验证</strong>：在原 issue 里回复并附截图与 exe；发到 r/Windows11 与 r/PowerToys，重点问“是否愿意从托盘工具换到任务栏内嵌”。</p>
+<p><strong>预计开发天数</strong>：2~4 天。</p>
 </div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#4</span><span class="nid">编号 C359</span><span class="tag">网页工具</span></div>
-  <h3>需要一个能稳定抽取 V2EX 帖子评论的抽奖工具</h3>
-  <p class="lede">用户发帖抽奖时，现成的 V2EX 评论抽奖工具经常抽风、无法正常抽取，找不到可靠的替代品。</p>
-  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.9</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>4–6 天</b><span>预计开发</span></div></div>
+  <h3>稳定抽取 V2EX 帖子评论的抽奖工具</h3>
+  <p class="lede">V2EX 发帖抽奖时，现成工具经常抽风、抽取失败，用户找不到可靠替代品。</p>
+  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.9</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>2~3 天</b><span>预计开发</span></div></div>
   <div class="actions"><a class="btn" href="https://www.v2ex.com/t/1253695" target="_blank" rel="noopener"><img class="ico " src="assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
-<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>）</strong>：用户发帖抽奖时，现成的 V2EX 评论抽奖工具经常抽风、无法正常抽取，找不到可靠的替代品。</p>
-<p><strong>为什么值得做</strong>：难度低（难度 2）、需求边界极清楚（给定帖子 URL → 稳定拉全评论 → 公平抽取），一个人几天能做出可用版本；竞品检查显示“没有任何专门针对 V2EX 帖子的评论抽奖工具”，现有 V2EX 扩展只做浏览增强。风险是付费意愿只有 1 分，基本只能靠捐赠/免费引流；另外 V2EX 有分页、登录可见、频率限制等反爬约束，稳定性正是这类工具翻车的原因，必须把“分页拉全 + 去重 + 失败重试”做扎实。</p>
-<p><strong>建议形式</strong>：小型网页工具（前端 + 轻量后端代理，或纯前端 + 用户粘贴 cookie/用公开 API）。</p>
-<p><strong>最小可行版本 3 个核心功能</strong>：
-1. 输入帖子链接，自动翻页拉取全部楼层评论并去重；
-2. 一键随机抽取中奖者，附可复现的随机种子/抽取记录；
-3. 导出中奖名单（含楼层号与用户名），并标注抽取时间与总楼层数以便公示。</p>
-<p><strong>怎么验证有人要</strong>：直接在 <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a> 原帖回复你的工具链接并请楼主实测；再在 V2EX 的“分享创造”节点发一帖，观察是否有人拿自己的抽奖帖来试。</p>
-<p><strong>预计开发天数</strong>：4–6 天。</p>
+<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>）</strong>：V2EX 发帖抽奖时，现成工具经常抽风、抽取失败，用户找不到可靠替代品。</p>
+<p><strong>为什么值得做</strong>：竞品检查 none，且明确指出“现有 V2EX 扩展只做浏览增强，通用评论抽奖工具又不支持 V2EX”，空缺干净；技术上只是抓取 + 随机抽取 + 结果可验证，工程量小。<strong>风险</strong>：付费意愿只有 1（几乎不可能收费），需求频次低、只在发抽奖帖时用；V2EX 对抓取有频率限制，需要做分页节流与缓存；还要处理“同一用户多楼只算一次”“马甲号”“截止楼层”等规则争议。</p>
+<p><strong>建议形式</strong>：纯前端网页工具（用户粘贴帖子链接或 ID，前端分页拉取并本地抽取），不保存任何用户数据。</p>
+<p><strong>MVP 三个核心功能</strong>：① 输入帖子 ID，拉取全部楼层并显示总楼层数与有效参与人数；② 可配置规则（截止楼层、同一用户去重、排除楼主、排除无头像/新注册用户）；③ 抽取过程使用可公开验证的随机种子并生成截图式结果页，方便贴回原帖公示。</p>
+<p><strong>怎么验证</strong>：直接回复原帖并附上工具链接；在 V2EX 自己发一篇“抽奖工具自荐 + 现场抽一次”的帖子，用真实抽奖结果换口碑。</p>
+<p><strong>预计开发天数</strong>：2~3 天。</p>
 </div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#5</span><span class="nid">编号 C25</span><span class="tag">软件插件</span><span class="tag"><img class="ico " src="assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div>
   <h3>让 AI 直接读写并部署 Google Apps Script，无需打开浏览器或安装 clasp</h3>
-  <p class="lede">AI 改完 GAS 代码后仍要人手动打开浏览器部署新版本；受限电脑装不了 Node.js/clasp；长代码难定位函数、跨文件同名函数静默覆盖等 GAS 特有 bug 难排查。</p>
-  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.7</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>2.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>10–15 天</b><span>预计开发</span></div></div>
+  <p class="lede">AI 改完 GAS 代码后仍要人手动开浏览器部署新版本；受限电脑装不了 Node.js/clasp；长代码难定位函数、跨文件同名函数会静默覆盖。</p>
+  <div class="meters"><div class="m"><img class="ico " src="assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.7</b><span>综合分</span></div><div class="m"><img class="ico " src="assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>2.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>6~9 天</b><span>预计开发</span></div></div>
   <div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener"><img class="ico " src="assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
-<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">qiita:228dfa134c76e15ab1a8</a>）</strong>：AI 改完 GAS 代码后仍要人手动打开浏览器部署新版本；受限电脑装不了 Node.js/clasp；长代码难定位函数、跨文件同名函数静默覆盖等 GAS 特有 bug 难排查。</p>
-<p><strong>为什么值得做</strong>：痛点非常真实（“受限电脑装不了 Node.js”是竞品都没解决的核心），竞品检查为 weak——现有工具几乎都是 MCP 服务器形态、依赖本地 Node.js，恰好绕开了这个痛点；作者自制的『秀GASマネージャー』只是个人自用脚本，没有安装分发。风险是难度 4、需要吃透 Apps Script API 与 OAuth 授权，且 Google 侧 API 权限/配额可能限制“直接部署”；付费意愿 2 分，面向的是重度 GAS 用户。</p>
-<p><strong>建议形式</strong>：软件插件（优先做“无需本地 Node.js 的 MCP/插件”形态）。</p>
-<p><strong>最小可行版本 3 个核心功能</strong>：
-1. 通过 OAuth 直接读写指定 GAS 项目文件，无需本地 Node.js/clasp；
-2. 一键创建新版本并更新部署（含部署 ID 映射）；
-3. 静态检查：跨文件同名函数告警、按函数名定位并跳转。</p>
-<p><strong>怎么验证有人要</strong>：回复原帖 <a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">qiita:228dfa134c76e15ab1a8</a>，请作者用他的受限环境实测“不装 Node.js 能否部署”；发到 Google Apps Script 社区（G+ 替代的 Reddit r/GoogleAppsScript）与 Qiita 的 GAS 标签，重点收集“公司电脑装不了 Node”的反馈。</p>
-<p><strong>预计开发天数</strong>：10–15 天。</p>
+<p><strong>需求概括（<a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">qiita:228dfa134c76e15ab1a8</a>）</strong>：AI 改完 GAS 代码后仍要人手动开浏览器部署新版本；受限电脑装不了 Node.js/clasp；长代码难定位函数、跨文件同名函数会静默覆盖。</p>
+<p><strong>为什么值得做</strong>：竞品检查 weak，空缺描述很准——“现有工具几乎都是 MCP 服务器形态，依赖本地 Node.js，恰好没解决‘受限电脑装不了 Node.js/clasp’的核心痛点”。这是 5 条里唯一“痛点与现有方案错位”最明显的。<strong>风险</strong>：难度 4，是名单里最重的；需要 Apps Script API + OAuth 授权，配额与权限审核有门槛；作者本人已有可用的 MCP 服务器『秀GASマネージャー』，属个人自用，你要做的是“分发与零安装”，而不是重新发明核心逻辑；另外 Google 侧 API 变更会导致长期维护成本。</p>
+<p><strong>建议形式</strong>：Chrome 扩展（在 script.google.com 编辑器内注入面板，OAuth 授权后直接调用 Apps Script API 完成写入、创建版本与部署）。</p>
+<p><strong>MVP 三个核心功能</strong>：① OAuth 连接后列出用户所有 GAS 项目与文件，支持按函数名搜索定位；② 写入前做同名函数/重复声明检查并高亮冲突；③ 一键“保存 → 创建新版本 → 更新部署”，并显示部署 ID 与生效版本号。</p>
+<p><strong>怎么验证</strong>：回复原 Qiita 文章并附演示视频；发到 Qiita 与 X 的 #GAS 话题，重点招募“公司电脑装不了 Node”的用户试用。</p>
+<p><strong>预计开发天数</strong>：6~9 天。</p>
 </div></details></div>
 </article></div>
   <h2><img class="ico " src="assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">完整分析</h2>
@@ -294,90 +292,78 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 </thead>
 <tbody>
 <tr>
-<td>Obsidian / 笔记工具增强</td>
-<td>9</td>
-<td>reddit, forum:obsidian, gh:joplin</td>
-<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x8xryb/" target="_blank" rel="noopener">reddit:1x8xryb</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xl234z/" target="_blank" rel="noopener">reddit:1xl234z</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xm7pg2/" target="_blank" rel="noopener">reddit:1xm7pg2</a>、<a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16788" target="_blank" rel="noopener">gh:laurent22/joplin#16788</a></td>
+<td>VS Code / 编辑器与 AI 编码工作流</td>
+<td>27</td>
+<td>github、qiita、se</td>
+<td><a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>、<a class="chip" href="https://qiita.com/Clairdeluna_eve/items/e292a87e8610a8355730" target="_blank" rel="noopener">qiita:e292a87e8610a8355730</a>、<a class="chip" href="https://qiita.com/joker_/items/fa431f65dde03a94384f" target="_blank" rel="noopener">qiita:fa431f65dde03a94384f</a></td>
 </tr>
 <tr>
-<td>VS Code / 编辑器细节改进</td>
-<td>12</td>
-<td>gh:microsoft/vscode, qiita, se</td>
-<td><a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/340383" target="_blank" rel="noopener">gh:microsoft/vscode#340383</a>、<a class="chip" href="https://qiita.com/Clairdeluna_eve/items/e292a87e8610a8355730" target="_blank" rel="noopener">qiita:e292a87e8610a8355730</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95572/extension-for-coloring-fixed-width-files" target="_blank" rel="noopener">se:softwarerecs:95572</a></td>
+<td>浏览器扩展与网页增强</td>
+<td>22</td>
+<td>reddit、hn、qiita</td>
+<td><a class="chip" href="https://www.reddit.com/r/chrome/comments/1x9rjzq/" target="_blank" rel="noopener">reddit:1x9rjzq</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://qiita.com/hotate_2235/items/25b8a7b52819035bba5b" target="_blank" rel="noopener">qiita:25b8a7b52819035bba5b</a>、<a class="chip" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab" target="_blank" rel="noopener">qiita:70e09095d14bb87757ab</a></td>
 </tr>
 <tr>
-<td>表格 / 办公自动化</td>
-<td>6</td>
-<td>reddit, qiita</td>
-<td><a class="chip" href="https://www.reddit.com/r/excel/comments/1xixe63/" target="_blank" rel="noopener">reddit:1xixe63</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xkymt2/" target="_blank" rel="noopener">reddit:1xkymt2</a>、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a></td>
+<td>Windows / macOS 桌面系统工具</td>
+<td>20</td>
+<td>github、qiita、hn</td>
+<td><a class="chip" href="https://github.com/microsoft/PowerToys/issues/51835" target="_blank" rel="noopener">gh:microsoft/PowerToys#51835</a>、<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>、<a class="chip" href="https://qiita.com/umaxiaotian/items/b0b249f732f428955867" target="_blank" rel="noopener">qiita:b0b249f732f428955867</a></td>
 </tr>
 <tr>
-<td>浏览器扩展：网页内容控制与安全</td>
-<td>10</td>
-<td>reddit, hn, qiita</td>
-<td><a class="chip" href="https://www.reddit.com/r/chrome/comments/1x9rjzq/" target="_blank" rel="noopener">reddit:1x9rjzq</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>、<a class="chip" href="https://qiita.com/hotate_2235/items/25b8a7b52819035bba5b" target="_blank" rel="noopener">qiita:25b8a7b52819035bba5b</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49559493" target="_blank" rel="noopener">hn:49559493</a></td>
+<td>笔记与知识库（Obsidian / Joplin / Notion）</td>
+<td>17</td>
+<td>reddit、forum:obsidian、github</td>
+<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x8xryb/" target="_blank" rel="noopener">reddit:1x8xryb</a>、<a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16779" target="_blank" rel="noopener">gh:laurent22/joplin#16779</a>、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/" target="_blank" rel="noopener">reddit:1xfr8v3</a></td>
 </tr>
 <tr>
-<td>AI / LLM 工作流与本地模型</td>
-<td>12</td>
-<td>qiita, hn, v2ex</td>
-<td><a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a>、<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a>、<a class="chip" href="https://qiita.com/maeda-niku18/items/8e51a9d50f66e2a64cc0" target="_blank" rel="noopener">qiita:8e51a9d50f66e2a64cc0</a></td>
+<td>办公表格、表单与文档</td>
+<td>15</td>
+<td>reddit、qiita、hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/excel/comments/1xixe63/" target="_blank" rel="noopener">reddit:1xixe63</a>、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>、<a class="chip" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677" target="_blank" rel="noopener">qiita:8ce616b8a37248af3677</a></td>
 </tr>
 <tr>
-<td>桌面系统小工具（Windows / macOS）</td>
-<td>9</td>
-<td>qiita, hn, gh:microsoft/PowerToys, gh:flameshot</td>
-<td><a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50110933" target="_blank" rel="noopener">hn:50110933</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51795" target="_blank" rel="noopener">gh:microsoft/PowerToys#51795</a></td>
+<td>AI / LLM 应用与提示词工具</td>
+<td>14</td>
+<td>qiita、hn</td>
+<td><a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a>、<a class="chip" href="https://qiita.com/vaon-luandv/items/67fece9a9434bfd9fed8" target="_blank" rel="noopener">qiita:67fece9a9434bfd9fed8</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a>、<a class="chip" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af" target="_blank" rel="noopener">qiita:8f9489403e10f585c3af</a></td>
 </tr>
 <tr>
-<td>待办 / 计划 / 习惯养成</td>
+<td>开发者、自托管与社区平台工具</td>
+<td>14</td>
+<td>qiita、v2ex、se、hn</td>
+<td><a class="chip" href="https://www.v2ex.com/t/1253695" target="_blank" rel="noopener">v2ex:1253695</a>、<a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>、<a class="chip" href="https://qiita.com/anquimomonaca/items/c85c8f5d60c18d2b09ec" target="_blank" rel="noopener">qiita:c85c8f5d60c18d2b09ec</a></td>
+</tr>
+<tr>
+<td>个人生活、日程与习惯</td>
+<td>13</td>
+<td>reddit、qiita、hn、se</td>
+<td><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xid69e/" target="_blank" rel="noopener">reddit:1xid69e</a>、<a class="chip" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf" target="_blank" rel="noopener">qiita:e9bbed361dcabf20a0cf</a>、<a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95595/offline-windows-ledger-for-a-one-person-microgreens-farm-trays-standing-order" target="_blank" rel="noopener">se:softwarerecs:95595</a></td>
+</tr>
+<tr>
+<td>图片 / 视频 / 音频媒体处理</td>
 <td>7</td>
-<td>reddit, qiita, hn</td>
-<td><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xid69e/" target="_blank" rel="noopener">reddit:1xid69e</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xkymt2/" target="_blank" rel="noopener">reddit:1xkymt2</a>、<a class="chip" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf" target="_blank" rel="noopener">qiita:e9bbed361dcabf20a0cf</a>、<a class="chip" href="https://qiita.com/satoshot/items/aa04078ea2e698e64ea9" target="_blank" rel="noopener">qiita:aa04078ea2e698e64ea9</a></td>
-</tr>
-<tr>
-<td>数据同步 / 备份 / 媒体管理</td>
-<td>8</td>
-<td>reddit, hn, qiita</td>
-<td><a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50112258" target="_blank" rel="noopener">hn:50112258</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xjgi9f/" target="_blank" rel="noopener">reddit:1xjgi9f</a>、<a class="chip" href="https://qiita.com/ysk400rr/items/de7ce6576a44260fa6f0" target="_blank" rel="noopener">qiita:de7ce6576a44260fa6f0</a></td>
-</tr>
-<tr>
-<td>本地文档转换 / 解析</td>
-<td>5</td>
-<td>qiita, hn</td>
-<td><a class="chip" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a" target="_blank" rel="noopener">qiita:f055dadbce1bd27ecb3a</a>、<a class="chip" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf" target="_blank" rel="noopener">qiita:01397cecf44ebbc0cbcf</a>、<a class="chip" href="https://qiita.com/chenyk/items/62fb3f14de40cb9b2e34" target="_blank" rel="noopener">qiita:62fb3f14de40cb9b2e34</a></td>
-</tr>
-<tr>
-<td>通知 / 提醒 / 消息转发</td>
-<td>5</td>
-<td>qiita, se</td>
-<td><a class="chip" href="https://qiita.com/rinfromniigata/items/d7131f574eb87d7f412c" target="_blank" rel="noopener">qiita:d7131f574eb87d7f412c</a>、<a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a></td>
+<td>reddit、qiita、hn、v2ex</td>
+<td><a class="chip" href="https://www.reddit.com/r/software/comments/1xf6xqm/" target="_blank" rel="noopener">reddit:1xf6xqm</a>、<a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>、<a class="chip" href="https://qiita.com/chenyk/items/62fb3f14de40cb9b2e34" target="_blank" rel="noopener">qiita:62fb3f14de40cb9b2e34</a>、<a class="chip" href="https://www.v2ex.com/t/1253706" target="_blank" rel="noopener">v2ex:1253706</a></td>
 </tr>
 </tbody>
 </table></div>
 </div></details><details class="fold"><summary>跨平台共同需求</summary><div class="detail">
-<ul>
-<li><strong>Obsidian 插件生态缺口</strong>：reddit 与 forum:obsidian 都指向同一类诉求——属性/内容规范化（<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x8xryb/" target="_blank" rel="noopener">reddit:1x8xryb</a> 属性命名）、自动着色（<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xmctyd/" target="_blank" rel="noopener">reddit:1xmctyd</a>）、Callout 渲染跟随模式（<a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>）、启动默认视图（<a class="chip" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046" target="_blank" rel="noopener">forum:obsidian:120046</a>）、代码块编辑稳定性（<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xl234z/" target="_blank" rel="noopener">reddit:1xl234z</a>）。英文社区偏“功能缺失/工作流自动化”，官方论坛偏“渲染模式与默认视图”这类内核行为，二者都强调“原生不支持、只能靠变通”。</li>
-<li><strong>AI 编码工具的周边缺口</strong>：qiita 与 gh:microsoft/vscode 都在谈 VS Code + AI。日文侧偏“把 AI 接到本地/受限环境”（<a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a> GAS 部署、<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a> OpenVINO 本地 LLM、<a class="chip" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11" target="_blank" rel="noopener">qiita:12ba0b2c6e44f7d38d11</a> 终端内快捷翻译）；GitHub issue 侧偏“编辑器 UI/行为细节”（<a class="chip" href="https://github.com/microsoft/vscode/issues/344616" target="_blank" rel="noopener">gh:microsoft/vscode#344616</a>、#340650、#341290）。差异在于：日文社区想要“能落地的完整工作流”，英文 issue 想要“官方设置项”。</li>
-<li><strong>Gmail/邮件与任务工具的打通</strong>：<a class="chip" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/" target="_blank" rel="noopener">reddit:1xfr8v3</a>（邮件/聊天→Notion）、<a class="chip" href="https://news.ycombinator.com/item?id=50022196" target="_blank" rel="noopener">hn:50022196</a>（招聘邮件分类）、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/" target="_blank" rel="noopener">reddit:1xlwp3a</a>（Google Tasks→日历）在英文社区反复出现，共同点是“输入环节靠手动搬运”，各帖说法不同但核心都是“把外部消息结构化进已有工作区”。</li>
-<li><strong>Excel 自动化</strong>：<a class="chip" href="https://www.reddit.com/r/excel/comments/1xixe63/" target="_blank" rel="noopener">reddit:1xixe63</a>（读取图表格式）、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a>（跨 35 表统计）、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xkymt2/" target="_blank" rel="noopener">reddit:1xkymt2</a>（任务追踪表）三帖都是“Excel 能做但太繁琐”，英文社区倾向“给我一个现成工具/模板”，日文侧 <a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>（表单→收据 PDF）与 <a class="chip" href="https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13" target="_blank" rel="noopener">qiita:df2fb24f6a0bfec5bb13</a>（自然语言调 VBA 宏库）则更接受“插件化 + 本地脚本产品化”。</li>
-<li><strong>链接/内容可信度与去噪</strong>：<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>（UA 差异检测）、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>（过滤仿冒品牌）、<a class="chip" href="https://news.ycombinator.com/item?id=50144294" target="_blank" rel="noopener">hn:50144294</a>（标记私募收购）、<a class="chip" href="https://qiita.com/fujiken818/items/920803e3c31273ffd015" target="_blank" rel="noopener">qiita:920803e3c31273ffd015</a>（不只看 HTTP 200 的失效检测）都属“现有工具判断太粗”，英文社区偏“浏览器扩展即时提示”，日文侧偏“检测逻辑要更可靠、可批量”。</li>
-</ul>
+<p><strong>1. “个人脚本产品化”真空。</strong> 日文区最集中：作者已用 GAS、AHK、Python、Discord Bot 做出可用原型，但缺安装包、配置界面和分发（<a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>、<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a>、<a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>、<a class="chip" href="https://qiita.com/satoshot/items/aa04078ea2e698e64ea9" target="_blank" rel="noopener">qiita:aa04078ea2e698e64ea9</a>），说法是“自分用スクリプトなので他人は使えない”。英文区同样存在但形态是半成品插件：<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xcqyl2/" target="_blank" rel="noopener">reddit:1xcqyl2</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x9mqf1/" target="_blank" rel="noopener">reddit:1x9mqf1</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50347401" target="_blank" rel="noopener">hn:50347401</a>。差别在于日文原型多为 Excel/GAS/AHK 办公场景，英文原型多为编辑器插件。</p>
+<p><strong>2. 本地化 / 离线 / 数据不外流。</strong> 三边都有但不是同一件事：qiita 多是合规与现场限制（<a class="chip" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a" target="_blank" rel="noopener">qiita:f055dadbce1bd27ecb3a</a> 客户现场禁止安装、<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a> 出差无法连云、<a class="chip" href="https://qiita.com/hanamilo/items/3c2c7675661590a4309a" target="_blank" rel="noopener">qiita:3c2c7675661590a4309a</a> 要向公司证明没有外联、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a> 客户代码不能进云端）；reddit 更强调“不订阅、免费无限量”（<a class="chip" href="https://www.reddit.com/r/software/comments/1xf6xqm/" target="_blank" rel="noopener">reddit:1xf6xqm</a>）；hn 强调“不想为自动填一个数字付 99 美元”（<a class="chip" href="https://news.ycombinator.com/item?id=50112258" target="_blank" rel="noopener">hn:50112258</a>）。同一技术方向，付费动机完全不同。</p>
+<p><strong>3. 任务 / 日程与日历的双向割裂。</strong> reddit 有三条：<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/" target="_blank" rel="noopener">reddit:1xlwp3a</a>（任务分组要映射到对应日历）、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xjgi9f/" target="_blank" rel="noopener">reddit:1xjgi9f</a>（时间追踪要写回主日历）、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1xm6kml/" target="_blank" rel="noopener">reddit:1xm6kml</a>（任务完成要清掉提醒）；qiita 是 <a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>（家务与垃圾日要 AI 主动推送）。英文抱怨“工具之间不同步”，日文抱怨“连去问这一步都嫌麻烦”，后者更偏被动推送。</p>
+<p><strong>4. 想关掉 / 想识别 AI 的存在。</strong> <a class="chip" href="https://www.reddit.com/r/chrome/comments/1x9rjzq/" target="_blank" rel="noopener">reddit:1x9rjzq</a> 要关掉 Chrome 硬塞的 AI 入口、<a class="chip" href="https://github.com/microsoft/vscode/issues/345151" target="_blank" rel="noopener">gh:microsoft/vscode#345151</a> 要过滤更新日志里的 AI 条目、<a class="chip" href="https://news.ycombinator.com/item?id=49582536" target="_blank" rel="noopener">hn:49582536</a> 要把 AI 生成文字渐隐、<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a> 要发现网站对不同 UA 返回不同内容、<a class="chip" href="https://qiita.com/hotate_2235/items/25b8a7b52819035bba5b" target="_blank" rel="noopener">qiita:25b8a7b52819035bba5b</a> 要 AI 说得更短。英文偏“关掉/识别”，日文偏“约束输出质量”。</p>
+<p><strong>5. 表格与表单到成品输出。</strong> reddit 集中在 Excel 内部（<a class="chip" href="https://www.reddit.com/r/excel/comments/1xixe63/" target="_blank" rel="noopener">reddit:1xixe63</a> 图表属性、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a> 跨 35 个工作表统计）；qiita 集中在 Google 生态的自动产出（<a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a> RSS→表格、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a> 表单→日式收据 PDF、<a class="chip" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677" target="_blank" rel="noopener">qiita:8ce616b8a37248af3677</a> 表单→Notion）；hn 偏线下小群体（<a class="chip" href="https://news.ycombinator.com/item?id=49780959" target="_blank" rel="noopener">hn:49780959</a>）。英文要“分析清楚”，日文要“出单据”。</p>
 </div></details><details class="fold"><summary>不建议做的</summary><div class="detail">
-<ul>
-<li><strong>已被成熟免费方案基本覆盖的</strong>：<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51835" target="_blank" rel="noopener">gh:microsoft/PowerToys#51835</a>（虚拟桌面名称，已有 WindowsVirtualDesktopHelper、DeskBand 类工具）与 <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/" target="_blank" rel="noopener">reddit:1xm8zsm</a>（环绕上混，竞品检查备注明确指出已有多个成熟扩展在用且持续维护）——即便进了推荐名单，也应清楚它们只能靠细节差异化，不宜作为主力产品。</li>
-<li><strong>官方即将实现 / 依赖上游内核行为的</strong>：<a class="chip" href="https://github.com/microsoft/vscode/issues/340383" target="_blank" rel="noopener">gh:microsoft/vscode#340383</a>（按文件编码切换字体）、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>（Copilot 禁止回退外部模型）、<a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>（资源管理器扁平化）、<a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>（Callout 跟随渲染模式）——这类需求要么官方 issue 已在 backlog，要么受上游渲染/API 限制，扩展只能做补丁，容易被版本更新打回。</li>
-<li><strong>太专业 / 受众过窄的</strong>：<a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>（RTSP 流质量验收）、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a>（按库版本追踪破坏性变更）、<a class="chip" href="https://news.ycombinator.com/item?id=50342831" target="_blank" rel="noopener">hn:50342831</a>（科学新闻证据等级）、<a class="chip" href="https://github.com/laurent22/joplin/issues/16779" target="_blank" rel="noopener">gh:laurent22/joplin#16779</a>（Joplin 双向链接索引）——需要行业知识或深入上游代码库，一个人做产品化成本高、用户基数小。</li>
-<li><strong>付费意愿低、只能靠爱发电的</strong>：<a class="chip" href="https://www.v2ex.com/t/1253695" target="_blank" rel="noopener">v2ex:1253695</a>（V2EX 抽奖，付费意愿 1）、<a class="chip" href="https://news.ycombinator.com/item?id=50262216" target="_blank" rel="noopener">hn:50262216</a>（无 JS 的 HN 评论折叠，付费意愿 1）、<a class="chip" href="https://github.com/microsoft/vscode/issues/345151" target="_blank" rel="noopener">gh:microsoft/vscode#345151</a>（隐藏 AI 更新日志，付费意愿 1）、<a class="chip" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab" target="_blank" rel="noopener">qiita:70e09095d14bb87757ab</a>（日文字数统计，付费意愿 1）——可做但不适合当“值得投入的产品”。</li>
-<li><strong>平台强依赖、随时可能失效的</strong>：<a class="chip" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960" target="_blank" rel="noopener">qiita:207104b10a46ea6d9960</a>（靠 Feature Flag 恢复 Claude 分离 UI）、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm5k0j/" target="_blank" rel="noopener">reddit:1xm5k0j</a>（Stremio→PotPlayer，只支持 Windows/单播放器）、<a class="chip" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677" target="_blank" rel="noopener">qiita:8ce616b8a37248af3677</a>（Notion API 版本迁移 + 限流）——随第三方产品更新极易失效，维护成本高于收益。</li>
-</ul>
+<p><strong>1. 竞品或官方即将覆盖、做了也难差异化。</strong> <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/" target="_blank" rel="noopener">reddit:1xm8zsm</a> 已被多个成熟上混扩展覆盖，<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51835" target="_blank" rel="noopener">gh:microsoft/PowerToys#51835</a> 已被 WindowsVirtualDesktopHelper 与 DeskBand 类工具满足；<a class="chip" href="https://www.reddit.com/r/chrome/comments/1x9rjzq/" target="_blank" rel="noopener">reddit:1x9rjzq</a> 有 flags、注册表策略、换浏览器、替换新标签页四条替代路径，且 flags 会随版本变化，维护成本高。这类需求的“空缺”是信息差，不是市场空位。</p>
+<p><strong>2. 依赖 VS Code / Copilot 内部渲染细节、官方一改就失效。</strong> <a class="chip" href="https://github.com/microsoft/vscode/issues/343293" target="_blank" rel="noopener">gh:microsoft/vscode#343293</a>（滚动条遮挡选项）、<a class="chip" href="https://github.com/microsoft/vscode/issues/341290" target="_blank" rel="noopener">gh:microsoft/vscode#341290</a>（issue 编号变链接）、<a class="chip" href="https://github.com/microsoft/vscode/issues/341245" target="_blank" rel="noopener">gh:microsoft/vscode#341245</a>（浮动窗口依赖非公开命令 _workbench.openWith）、<a class="chip" href="https://github.com/microsoft/vscode/issues/343902" target="_blank" rel="noopener">gh:microsoft/vscode#343902</a>（切换环境后自动开工作区选择器）。付费意愿普遍 1~2，且官方 issue 已在 backlog，随时可能被原生实现。</p>
+<p><strong>3. 需要重型基础设施或企业权限，一个人做不动。</strong> <a class="chip" href="https://www.v2ex.com/t/1253706" target="_blank" rel="noopener">v2ex:1253706</a>（AI 长视频自动粗剪，难度 5、需素材理解与编排）、<a class="chip" href="https://qiita.com/kuis/items/d696ddf067eddde79e7f" target="_blank" rel="noopener">qiita:d696ddf067eddde79e7f</a>（短视频全自动流水线，作者自述浏览器内存上限一晚只跑 48 条）、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>（多用户自托管 Web Push 服务器，要处理订阅、鉴权、nginx 部署）、<a class="chip" href="https://qiita.com/mnoda/items/1511f46212883dcacca2" target="_blank" rel="noopener">qiita:1511f46212883dcacca2</a>（Exchange Online 批量日历分发，需企业租户权限，且作者已开源免费版）。</p>
+<p><strong>4. 数据源不在自己手里，或强依赖第三方 ToS。</strong> <a class="chip" href="https://news.ycombinator.com/item?id=50144294" target="_blank" rel="noopener">hn:50144294</a>（私募股权标记，现有 worseonpurpose.com 被质疑 AI 生成、可信度存疑，专业数据在 PitchBook 这类付费 B2B 里）、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran" target="_blank" rel="noopener">se:softwarerecs:95654</a>（按页数筛 PDF，需要自建全量索引）、<a class="chip" href="https://news.ycombinator.com/item?id=49710490" target="_blank" rel="noopener">hn:49710490</a>（服装质量，缺乏可结构化的质量信号）、<a class="chip" href="https://qiita.com/anquimomonaca/items/c85c8f5d60c18d2b09ec" target="_blank" rel="noopener">qiita:c85c8f5d60c18d2b09ec</a>（Kakuyomu 统计，只对单一站点作者有用）、<a class="chip" href="https://qiita.com/pipin68k/items/4195b99395438c88b0d0" target="_blank" rel="noopener">qiita:4195b99395438c88b0d0</a>（ブクログ导出 + NDL 检索，面向极小众藏书用户）。</p>
+<p><strong>5. 已有成熟免费方案，且用户明确不愿付费。</strong> <a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>（macOS 关闭鼠标加速，LinearMouse 等已覆盖）、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51795" target="_blank" rel="noopener">gh:microsoft/PowerToys#51795</a>（系统级均衡器，Equalizer APO / FxSound 免费且成熟）、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51759" target="_blank" rel="noopener">gh:microsoft/PowerToys#51759</a>（zip 转 exe/msi，7-Zip SFX、WinRAR、IExpress、Inno Setup 已够用）、<a class="chip" href="https://www.reddit.com/r/software/comments/1xf6xqm/" target="_blank" rel="noopener">reddit:1xf6xqm</a>（离线抠图，localbg.app 已被楼主确认效果最好，rembg 开源免费）。</p>
 </div></details><details class="fold"><summary>英文、日文、中文社区的差异</summary><div class="detail">
-<ul>
-<li><strong>英文社区（reddit / hn / se / gh issue）</strong>：偏“我日常被这个小摩擦卡住，给我一个能立刻装的工具”。需求颗粒度小、验收标准明确（一键关闭 AI 入口、抽奖要稳、邮件自动进 Notion、按 UA 对比页面），对浏览器扩展和桌面小工具接受度高，但也最容易被现成免费扩展覆盖——很多帖的竞品检查都是“weak 且已有多个成熟工具”。</li>
-<li><strong>日文社区（qiita）</strong>：偏“我已经用脚本/组合方案勉强解决了，但想要一个开箱即用、能分发的成品”。大量需求是“作者自建原型 → 缺安装包/配置界面/多用户支持”（GAS 部署、NoTabKana、OpenVINO 本地 LLM、收据 PDF、生命助手），对本地化细节（和历、敬称、发票登记号、日本地址、全角半角）和“受限环境/离线”特别敏感。机会在于把个人脚本产品化，而不是从零发明需求。</li>
-<li><strong>中文社区（v2ex）</strong>：样本少，但特征鲜明——偏“社区场景内的小工具”（V2EX 抽奖）和“重投入的 AI 生产力”（AI 长视频自动剪辑，难度 5、付费意愿 4）。前者适合一个人快速做、靠社区口碑传播；后者不适合单人 AI 辅助开发。</li>
-<li><strong>共同机会</strong>：三边都反复出现“把外部信息结构化进已有工作区”（邮件/聊天→Notion、RSS→表格、聊天记录→实现备忘）与“AI 输出要可控可复现”（固定格式、按章节读写、提示词对比），这类需求跨语言、跨平台，且竞品检查多为 weak，是单人开发者最现实的切入口。</li>
-</ul>
+<p><strong>英文区（reddit / hn / se）</strong>：需求以“我自己用着不爽”为起点，颗粒度细、场景私人化。reddit 集中在 Obsidian 插件与 Excel 具体操作（<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x8xryb/" target="_blank" rel="noopener">reddit:1x8xryb</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xm7pg2/" target="_blank" rel="noopener">reddit:1xm7pg2</a>、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xixe63/" target="_blank" rel="noopener">reddit:1xixe63</a>），发帖人往往已经试过一圈工具；hn 明显偏隐私、内容真实性与“不想被平台塞东西”（<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49582536" target="_blank" rel="noopener">hn:49582536</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49755505" target="_blank" rel="noopener">hn:49755505</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49559493" target="_blank" rel="noopener">hn:49559493</a>），且偏好轻量浏览器扩展；se 是“帮我找一个能做 X 的软件”，需求最碎、最像采购清单。付费意愿整体偏低，2 分占绝大多数，3 分集中在有职业用途的条目（<a class="chip" href="https://news.ycombinator.com/item?id=50112258" target="_blank" rel="noopener">hn:50112258</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16788" target="_blank" rel="noopener">gh:laurent22/joplin#16788</a> 附近的技术场景）。机会在“浏览器扩展 + 轻量网页工具”：实现成本低、原帖验证快，适合一个人两三天出一个能截图回复的东西。</p>
+<p><strong>日文区（qiita）</strong>：最鲜明的特征是“作者已经自己写完了”。大量条目本身就是“我用 GAS / AutoHotkey / Python / Discord Bot 做了一个能跑的版本，但它只是个人脚本”，缺的是安装包、配置界面、多用户和分发（<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13" target="_blank" rel="noopener">qiita:df2fb24f6a0bfec5bb13</a>、<a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>、<a class="chip" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af" target="_blank" rel="noopener">qiita:8f9489403e10f585c3af</a>）。第二个特征是本地业务细节极深：和历日期、様/御中敬称、发票登记号、日语 IME 选词、含表情符号的字数统计、NDL 分类、Kakuyomu 数据（<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>、<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab" target="_blank" rel="noopener">qiita:70e09095d14bb87757ab</a>、<a class="chip" href="https://qiita.com/pipin68k/items/4195b99395438c88b0d0" target="_blank" rel="noopener">qiita:4195b99395438c88b0d0</a>）。第三是合规与办公现场：客户现场禁止装软件、要证明没有外联、Copilot 不能回退到云端（<a class="chip" href="https://qiita.com/hanamilo/items/3c2c7675661590a4309a" target="_blank" rel="noopener">qiita:3c2c7675661590a4309a</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a> 虽在 GitHub 但语境一致）。付费意愿 3 分比例明显高于英文区。机会不在“想新点子”，而在“把已验证的个人脚本做成免配置的成品”，并且要真的照顾日本办公细节。</p>
+<p><strong>中文区（v2ex）</strong>：样本只有两条，但方向很集中——一条是社区运营工具（<a class="chip" href="https://www.v2ex.com/t/1253695" target="_blank" rel="noopener">v2ex:1253695</a> 抽奖），一条是高付费意愿的 AI 生产力（<a class="chip" href="https://www.v2ex.com/t/1253706" target="_blank" rel="noopener">v2ex:1253706</a> 长视频自动剪辑，付费意愿 4、难度 5）。前者工程极小、后者工程极大，中间地带缺失。可推断中文区的机会更偏“围绕具体社区/平台的小工具”和“愿意为效率付费的重活”，而不是英文区那种细碎的个人插件。</p>
+<p><strong>交叉机会</strong>：把日文区“已自建、待产品化”的脚本，用英文区偏好的轻量形态（单文件网页 / 浏览器扩展）重做一遍，是这份数据里最可复制的模式；反过来，英文区对隐私与内容过滤的敏感度，可以直接套到日文区的合规叙事上。</p>
 </div></details><details class="fold"><summary>引用的需求</summary><div class="detail">
 <div class="table"><table>
 <thead>
@@ -389,39 +375,14 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 </thead>
 <tbody>
 <tr>
-<td><code>reddit:1x8xryb</code></td>
-<td>Obsidian 属性命名规范检查与批量统一工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x8xryb/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xl234z</code></td>
-<td>Obsidian 手机端代码块编辑插件（键盘弹出时不崩溃）</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xl234z/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xm7pg2</code></td>
-<td>在 Obsidian Bases 中支持幂、三角函数、开方等复杂数学运算</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xm7pg2/">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:obsidian:120058</code></td>
-<td>让 Obsidian 的 Callout 内容跟随文件当前模式（Live Preview/阅读视图）显示</td>
-<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:laurent22/joplin#16788</code></td>
-<td>为 Joplin 的 MCP 增加“相关笔记”语义检索工具</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16788">链接</a></td>
-</tr>
-<tr>
 <td><code>gh:microsoft/vscode#344742</code></td>
 <td>VS Code 文件资源管理器增加扁平化视图选项</td>
 <td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344742">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#340383</code></td>
-<td>按文件编码自动切换 VS Code 编辑器字体</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/340383">链接</a></td>
+<td><code>gh:microsoft/vscode#338860</code></td>
+<td>让 Copilot 只使用本地 LLM，禁止自动回退到外部模型</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/338860">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:e292a87e8610a8355730</code></td>
@@ -429,29 +390,9 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://qiita.com/Clairdeluna_eve/items/e292a87e8610a8355730">链接</a></td>
 </tr>
 <tr>
-<td><code>se:softwarerecs:95572</code></td>
-<td>为 VS Code 中固定宽度字段文件按列着色</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95572/extension-for-coloring-fixed-width-files">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xixe63</code></td>
-<td>自动读取 Excel 图表格式属性（线色、字号、数据点大小等）的工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xixe63/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xkymt2</code></td>
-<td>一个简单、可视化、支持多人协作分工的 Excel 任务追踪表</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xkymt2/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xjfw79</code></td>
-<td>跨多个相同工作表按日期区间统计下拉选项出现次数</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:4e417be09c6cf64547b3</code></td>
-<td>用 Google 表单自动生成日本式收据 PDF（含和历日期、敬称、发票登记号）</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3">链接</a></td>
+<td><code>qiita:fa431f65dde03a94384f</code></td>
+<td>把 Mermaid 复杂类图转成可编辑、可导出的 draw.io 图，且不破坏原文件</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/joker_/items/fa431f65dde03a94384f">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1x9rjzq</code></td>
@@ -464,39 +405,19 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50168676">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:49886395</code></td>
-<td>过滤亚马逊上仿冒品牌垃圾商品的浏览器扩展</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49886395">链接</a></td>
-</tr>
-<tr>
 <td><code>qiita:25b8a7b52819035bba5b</code></td>
 <td>让 Claude 等 AI 输出更简洁、结论先行，避免冗长</td>
 <td><a target="_blank" rel="noopener" href="https://qiita.com/hotate_2235/items/25b8a7b52819035bba5b">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:49559493</code></td>
-<td>浏览器扩展：自动清除并随机篡改链接中的追踪参数</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49559493">链接</a></td>
+<td><code>qiita:70e09095d14bb87757ab</code></td>
+<td>在浏览器里准确统计含表情符号的日文字数并提示超出限制</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:228dfa134c76e15ab1a8</code></td>
-<td>让 AI 直接读写并部署 Google Apps Script，无需打开浏览器或安装 clasp</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:a98b283eed4045391dc0</code></td>
-<td>在笔记本上用 OpenVINO 本地运行日语 LLM 的简易 GUI 工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50060564</code></td>
-<td>标准化分享和对比 AI 编程提示词、生成结果与 token 消耗的平台</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50060564">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:8e51a9d50f66e2a64cc0</code></td>
-<td>用本地小模型对历史客服回复CSV做语义模糊检索，辅助撰写新回复</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/maeda-niku18/items/8e51a9d50f66e2a64cc0">链接</a></td>
+<td><code>gh:microsoft/PowerToys#51835</code></td>
+<td>在任务栏显示当前虚拟桌面名称</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51835">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:723f8fccd84e39f9c666</code></td>
@@ -504,19 +425,94 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:50110933</code></td>
-<td>为 macOS 提供类似 Podman Quadlets 的声明式服务管理工具</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50110933">链接</a></td>
-</tr>
-<tr>
 <td><code>hn:49806516</code></td>
 <td>为 macOS 提供关闭鼠标加速的图形化开关</td>
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49806516">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/PowerToys#51795</code></td>
-<td>为 Windows 添加系统级音频均衡器</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51795">链接</a></td>
+<td><code>qiita:b0b249f732f428955867</code></td>
+<td>为 Windows 的 USB/IP 提供图形界面，让用户能轻松把 USB 设备通过网络共享给另一台电脑</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/umaxiaotian/items/b0b249f732f428955867">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x8xryb</code></td>
+<td>Obsidian 属性命名规范检查与批量统一工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x8xryb/">链接</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:120058</code></td>
+<td>让 Obsidian 的 Callout 内容跟随文件当前模式（Live Preview/阅读视图）显示</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16779</code></td>
+<td>为 Joplin 笔记的双向链接建立索引，以支持反向链接面板和断链检测</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16779">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xfr8v3</code></td>
+<td>把邮件和聊天消息自动收进 Notion，免去手动复制粘贴</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xixe63</code></td>
+<td>自动读取 Excel 图表格式属性（线色、字号、数据点大小等）的工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xixe63/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xjfw79</code></td>
+<td>跨多个相同工作表按日期区间统计下拉选项出现次数</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:4e417be09c6cf64547b3</code></td>
+<td>用 Google 表单自动生成日本式收据 PDF（含和历日期、敬称、发票登记号）</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:8ce616b8a37248af3677</code></td>
+<td>把外部问询表单直接接入 Notion 数据库，并适配日本地址与限流</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:b5fb1ca9e460c7e14b9e</code></td>
+<td>为 Wan 2.5 视频生成模型按固定顺序组装提示词（画面、台词、音效）的小工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:67fece9a9434bfd9fed8</code></td>
+<td>从需求定义书用AI生成面向用户视角的验收测试检查清单（带截图栏）</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/vaon-luandv/items/67fece9a9434bfd9fed8">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50060564</code></td>
+<td>标准化分享和对比 AI 编程提示词、生成结果与 token 消耗的平台</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50060564">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:8f9489403e10f585c3af</code></td>
+<td>在一个界面统一管理所有 Claude Code 会话的本地看板工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af">链接</a></td>
+</tr>
+<tr>
+<td><code>v2ex:1253695</code></td>
+<td>需要一个能稳定抽取 V2EX 帖子评论的抽奖工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:228dfa134c76e15ab1a8</code></td>
+<td>让 AI 直接读写并部署 Google Apps Script，无需打开浏览器或安装 clasp</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">链接</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95677</code></td>
+<td>自托管的 Web Push 通知服务器，支持多用户、WebUI 管理和 CLI/curl 触发</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:c85c8f5d60c18d2b09ec</code></td>
+<td>自动收集Kakuyomu（日本小说网站）作品统计数据并保存历史记录</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/anquimomonaca/items/c85c8f5d60c18d2b09ec">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1xid69e</code></td>
@@ -529,9 +525,19 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:aa04078ea2e698e64ea9</code></td>
-<td>把待办管理做成带好感度和角色设定的恋爱养成式双向对话机器人</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/satoshot/items/aa04078ea2e698e64ea9">链接</a></td>
+<td><code>qiita:9c08ac6c5a5ef5b4f7d6</code></td>
+<td>用 AI 管理家务周期、垃圾日和购物清单，并主动推送提醒</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6">链接</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95595</code></td>
+<td>面向单人微型农场（微型菜苗）的离线 Windows 台账工具，管理育苗盘周期、常备订单与收支</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95595/offline-windows-ledger-for-a-one-person-microgreens-farm-trays-standing-order">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xf6xqm</code></td>
+<td>离线可用的高质量抠图/去背景工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xf6xqm/">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1xhwqwp</code></td>
@@ -539,19 +545,39 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:50112258</code></td>
-<td>让 Withings 健康数据免费同步到 Apple Health 的小工具</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50112258">链接</a></td>
+<td><code>qiita:62fb3f14de40cb9b2e34</code></td>
+<td>带时间戳和说话人分离的音频转文字工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/chenyk/items/62fb3f14de40cb9b2e34">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xjgi9f</code></td>
-<td>时间追踪记录自动同步到 Google 日历的轻量工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xjgi9f/">链接</a></td>
+<td><code>v2ex:1253706</code></td>
+<td>AI 长视频/大量素材自动剪辑工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:de7ce6576a44260fa6f0</code></td>
-<td>低成本把 NAS 照片自动备份到 S3 深归档，并用树莓派自建照片浏览</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/ysk400rr/items/de7ce6576a44260fa6f0">链接</a></td>
+<td><code>qiita:7891fed6c9eaae905bc6</code></td>
+<td>用 GAS 定时把 RSS 文章去重收集到 Google 表格</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:aa04078ea2e698e64ea9</code></td>
+<td>把待办管理做成带好感度和角色设定的恋爱养成式双向对话机器人</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/satoshot/items/aa04078ea2e698e64ea9">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xcqyl2</code></td>
+<td>写作时自动追踪小说角色状态与时间线的 Obsidian 插件</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xcqyl2/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x9mqf1</code></td>
+<td>把浏览器阅读列表导入 Obsidian 并离线阅读的插件</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x9mqf1/">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50347401</code></td>
+<td>网页存档的差异对比与可视化探索工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50347401">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:f055dadbce1bd27ecb3a</code></td>
@@ -559,59 +585,19 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:01397cecf44ebbc0cbcf</code></td>
-<td>把 Markdown 渲染结果以富文本格式复制到 Word/邮件/聊天工具的单文件网页工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf">链接</a></td>
+<td><code>qiita:a98b283eed4045391dc0</code></td>
+<td>在笔记本上用 OpenVINO 本地运行日语 LLM 的简易 GUI 工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:62fb3f14de40cb9b2e34</code></td>
-<td>带时间戳和说话人分离的音频转文字工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/chenyk/items/62fb3f14de40cb9b2e34">链接</a></td>
+<td><code>qiita:3c2c7675661590a4309a</code></td>
+<td>检测自建内部工具中隐藏的外部网络请求（隐私/合规自查）</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/hanamilo/items/3c2c7675661590a4309a">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:d7131f574eb87d7f412c</code></td>
-<td>把 Mastodon 账号的新帖自动转发到 Discord 频道</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/rinfromniigata/items/d7131f574eb87d7f412c">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:9c08ac6c5a5ef5b4f7d6</code></td>
-<td>用 AI 管理家务周期、垃圾日和购物清单，并主动推送提醒</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6">链接</a></td>
-</tr>
-<tr>
-<td><code>se:softwarerecs:95677</code></td>
-<td>自托管的 Web Push 通知服务器，支持多用户、WebUI 管理和 CLI/curl 触发</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xmctyd</code></td>
-<td>Obsidian 中自动高亮数字或给数字换色</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmctyd/">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:obsidian:120046</code></td>
-<td>让 Obsidian 启动时默认打开关系图谱视图</td>
-<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:12ba0b2c6e44f7d38d11</code></td>
-<td>在 Claude Code 终端内选中文本即可翻译/解释/总结的快捷操作插件</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:microsoft/vscode#344616</code></td>
-<td>VS Code 最大化副侧边栏时保留主侧边栏（资源管理器）可见的开关</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344616">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xfr8v3</code></td>
-<td>把邮件和聊天消息自动收进 Notion，免去手动复制粘贴</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50022196</code></td>
-<td>自动识别并分类招聘邮件，过滤掉群发的个性化垃圾邮件</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50022196">链接</a></td>
+<td><code>hn:50112258</code></td>
+<td>让 Withings 健康数据免费同步到 Apple Health 的小工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50112258">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1xlwp3a</code></td>
@@ -619,64 +605,14 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:df2fb24f6a0bfec5bb13</code></td>
-<td>用自然语言指令直接调用本地 VBA 宏库来操作 Excel，无需每次让 AI 生成代码</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13">链接</a></td>
+<td><code>reddit:1xjgi9f</code></td>
+<td>时间追踪记录自动同步到 Google 日历的轻量工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xjgi9f/">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:50144294</code></td>
-<td>标记被私募股权收购公司的浏览器扩展/目录</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50144294">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:920803e3c31273ffd015</code></td>
-<td>更可靠的链接失效检测工具，不只看 HTTP 200</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/fujiken818/items/920803e3c31273ffd015">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xm8zsm</code></td>
-<td>让浏览器音频填充到 5.1/7.1 环绕音箱的 Chrome 扩展</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:microsoft/PowerToys#51835</code></td>
-<td>在任务栏显示当前虚拟桌面名称</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51835">链接</a></td>
-</tr>
-<tr>
-<td><code>v2ex:1253695</code></td>
-<td>需要一个能稳定抽取 V2EX 帖子评论的抽奖工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:microsoft/vscode#338860</code></td>
-<td>让 Copilot 只使用本地 LLM，禁止自动回退到外部模型</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/338860">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:a5e7ce5c9a32f976e339</code></td>
-<td>IP 摄像头 RTSP 流质量验收检测工具（帧率/丢包/时间戳/冻结画面）</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339">链接</a></td>
-</tr>
-<tr>
-<td><code>se:softwarerecs:95656</code></td>
-<td>按库版本追踪弃用与破坏性变更的 API/订阅源工具</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50342831</code></td>
-<td>为科学新闻提供研究证据等级与领域进展脉络的辅助工具</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50342831">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:laurent22/joplin#16779</code></td>
-<td>为 Joplin 笔记的双向链接建立索引，以支持反向链接面板和断链检测</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16779">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50262216</code></td>
-<td>为禁用 JavaScript 的 Hacker News 提供纯 CSS 的评论折叠/展开功能</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50262216">链接</a></td>
+<td><code>reddit:1xm6kml</code></td>
+<td>任务标记完成后自动关闭 Notion 提醒</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xm6kml/">链接</a></td>
 </tr>
 <tr>
 <td><code>gh:microsoft/vscode#345151</code></td>
@@ -684,28 +620,108 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/345151">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:70e09095d14bb87757ab</code></td>
-<td>在浏览器里准确统计含表情符号的日文字数并提示超出限制</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab">链接</a></td>
+<td><code>hn:49582536</code></td>
+<td>浏览器扩展：按 AI 生成概率将网页文字渐隐显示</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49582536">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:207104b10a46ea6d9960</code></td>
-<td>恢复 Claude 中 Chat 与 Cowork 分离的界面切换</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960">链接</a></td>
+<td><code>hn:49780959</code></td>
+<td>面向小型固定群体的简易活动报名与通知管理工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49780959">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xm5k0j</code></td>
-<td>把 Stremio Web 的流媒体链接一键发送到本地 PotPlayer 播放</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm5k0j/">链接</a></td>
+<td><code>reddit:1xm8zsm</code></td>
+<td>让浏览器音频填充到 5.1/7.1 环绕音箱的 Chrome 扩展</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:8ce616b8a37248af3677</code></td>
-<td>把外部问询表单直接接入 Notion 数据库，并适配日本地址与限流</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677">链接</a></td>
+<td><code>gh:microsoft/vscode#343293</code></td>
+<td>VS Code 提问工具的长选项列表被原生滚动条遮挡，难以看清选项</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/343293">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#341290</code></td>
+<td>让 VS Code Copilot 聊天中的 issue/PR 编号自动变成可点击链接</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/341290">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#341245</code></td>
+<td>让 VS Code 扩展能把编辑器打开为可指定尺寸、紧凑、置顶的浮动窗口</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/341245">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#343902</code></td>
+<td>切换远程/本地环境后自动打开工作区选择器</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/343902">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:d696ddf067eddde79e7f</code></td>
+<td>一键自动批量生成短视频的AI流水线工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/kuis/items/d696ddf067eddde79e7f">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:1511f46212883dcacca2</code></td>
+<td>为 Exchange Online 管理员提供 Outlook 群组日历的批量配置与分发工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/mnoda/items/1511f46212883dcacca2">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50144294</code></td>
+<td>标记被私募股权收购公司的浏览器扩展/目录</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50144294">链接</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95654</code></td>
+<td>按页数范围筛选 PDF 的搜索工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49710490</code></td>
+<td>帮助用户识别和找到真正高质量、耐穿服装的工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49710490">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:4195b99395438c88b0d0</code></td>
+<td>把ブクログ藏书导出后按日本十进分类法（NDL检索）重新分类展示的工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/pipin68k/items/4195b99395438c88b0d0">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/PowerToys#51795</code></td>
+<td>为 Windows 添加系统级音频均衡器</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51795">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/PowerToys#51759</code></td>
+<td>把 zip 压缩包一键转换成 exe 或 msi 自解压安装包</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51759">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm7pg2</code></td>
+<td>在 Obsidian Bases 中支持幂、三角函数、开方等复杂数学运算</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xm7pg2/">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49755505</code></td>
+<td>希望有一个全局开关，让所有网站都不再提示使用 passkey 登录</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49755505">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49559493</code></td>
+<td>浏览器扩展：自动清除并随机篡改链接中的追踪参数</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49559493">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16788</code></td>
+<td>为 Joplin 的 MCP 增加“相关笔记”语义检索工具</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16788">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:df2fb24f6a0bfec5bb13</code></td>
+<td>用自然语言指令直接调用本地 VBA 宏库来操作 Excel，无需每次让 AI 生成代码</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13">链接</a></td>
 </tr>
 </tbody>
 </table></div></div></details><details class="fold"><summary>往期存档</summary><div class="detail archive"><a href="archive/2026-W45.html">2026-W45</a></div></details>
-  <footer><div class="yard"><img class="ico " src="assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-03 18:05 JST · 每天自动更新</span></footer>
+  <footer><div class="yard"><img class="ico " src="assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-03 18:39 JST · 每天自动更新</span></footer>
 </div>
 <script>
 (() => {
@@ -723,7 +739,7 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
     cancelAnimationFrame(raf);
     const grab = e.clientX - now();
     let lastX = e.clientX, lastT = e.timeStamp;
-    cart.setPointerCapture(e.pointerId);
+    try { cart.setPointerCapture(e.pointerId); } catch (_) {}
     cart.classList.add("drag");
     const move = (ev) => {
       set(ev.clientX - grab);
@@ -741,6 +757,17 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
     cart.addEventListener("pointercancel", up, { once: true });
   });
   addEventListener("resize", () => { if (x !== null) set(x); });
+})();
+</script>
+<script>
+(() => {
+  const sky = document.querySelector(".sky");
+  if (!sky) return;
+  const check = () => document.body.classList.toggle(
+    "stuck", sky.getBoundingClientRect().top <= parseFloat(getComputedStyle(sky).top) + 0.5);
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("resize", check);
+  check();
 })();
 </script>
 </body>

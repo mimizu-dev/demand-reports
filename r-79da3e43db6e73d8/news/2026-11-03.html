@@ -13,7 +13,7 @@
 <style>
 :root {
   /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
-  --sky: #63aae0; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --sky: #056bc5; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
   --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
   --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
   --text: #5c3e27; --dim: #9a7a5c;
@@ -46,13 +46,30 @@ img.ico { flex: none; vertical-align: middle; }
   box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
 
 /* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
-.sky { background: var(--sky) url("../assets/scene.png") repeat-x left bottom / auto 328px; }
-header { padding: 22px 0 96px; position: relative; min-height: 328px; }
+/* 页面顶部是山顶：天空 → 云海 → 崖边 → 有铁轨的平台，平台下沿的灌木直接压在山谷背景地图上。
+   场景图左右镜像拼接可无缝平铺；场景上方不够高时用天空色补齐（只补到场景图上沿，底边保持透明） */
+/* 页面顶部是山顶，分两层：
+   .sky 天空和云海上半部分，吸顶：往上滚到只剩底部一条就停住，常驻在最上面；停住后下沿露出一圈云底，
+        一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
+   .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
+   图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
+:root { --skyh: 300px; --band: 96px; }
+.sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
+  background: url("../assets/summit-sky.png") repeat-x left bottom / auto 200px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 198px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 48px; pointer-events: none; display: none;
+  background: url("../assets/cloud-edge.png") repeat-x left top / auto 48px; image-rendering: pixelated; }
+.stuck .sky::before { display: block; }
+header { padding: 22px 0 0; position: relative; }
+.plateau { height: 184px; position: relative;
+  background: url("../assets/summit-ground.png") repeat-x left top / auto 184px; image-rendering: pixelated; }
+.plateau .wrap { position: relative; height: 100%; }
+.stuck img.prop { z-index: 1; }
 .tabs { display: flex; gap: 14px; margin: 0 2px 4px; flex-wrap: wrap; }
 .tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
 .tabs a.on { color: var(--text); background: var(--paper); }
 .tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
-.hero { margin: 22px 0 0; max-width: calc(100% - 190px); position: relative; z-index: 3; }
+.hero { margin: 22px 0 0; position: relative; z-index: 3; }
 h1 { display: inline-block; font: 400 clamp(24px, 5vw, 36px)/1.2 var(--pixel); margin: 0 0 14px; padding: 10px 22px; letter-spacing: .04em;
   color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
   background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
@@ -62,24 +79,18 @@ h1 { display: inline-block; font: 400 clamp(24px, 5vw, 36px)/1.2 var(--pixel); m
 .stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
 .stats b { color: var(--text); font-weight: 400; }
 /* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
-img.prop { position: absolute; z-index: 1; filter: drop-shadow(3px 3px 0 var(--shadow)); }
-img.prop-cart { right: 7%; bottom: 60px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+img.prop { position: absolute; z-index: 7; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 8%; bottom: 90px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
 img.prop-cart.drag { cursor: grabbing; }
-img.prop-board { right: 9%; bottom: 10px; }
-.deco { position: absolute; right: 0; bottom: 6px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+img.prop-board { right: 16%; bottom: 30px; }
+.deco { position: absolute; right: 0; bottom: 4px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
 .deco img { height: 80px; width: auto; }
 .deco img + img { height: 60px; }
 
 /* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background: var(--grass) url("../assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
-/* 头部高地和下方山谷之间是一道悬崖：崖顶草皮压在头部草地上，崖壁垂到地图上 */
-.sky { position: relative; }
-.sky > .wrap { position: relative; z-index: 2; }
-.sky::after { content: ""; position: absolute; left: 0; right: 0; bottom: -128px; height: 184px; z-index: 1; pointer-events: none;
-  background: url("../assets/cliff.png") repeat-x left top / auto 184px; image-rendering: pixelated;
-  filter: drop-shadow(0 6px 0 rgba(40, 70, 20, .3)); }
-.main { padding-top: 118px; }
+.main { padding-top: 4px; }
 .yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
 .yard img { image-rendering: pixelated; }
 
@@ -172,10 +183,10 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
   .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card { padding: 14px 14px 12px; }
   .boards { grid-template-columns: 1fr; }
-  header { padding-bottom: 150px; }
+  :root { --skyh: 310px; }
   .hero { max-width: none; }
   img.prop { transform-origin: bottom right; transform: scale(.75); }
-  img.prop-cart { right: 64px; } img.prop-board { right: 70px; }
+  img.prop-cart { right: 64px; } img.prop-board { right: 80px; }
   .deco img { height: 60px; } .deco img + img { height: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
@@ -189,9 +200,11 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
     <h1>资讯速递</h1>
     <div class="stats"><span>内容日期 <b class="c-cyan">2026-11-02</b></span><span><b>61</b> 条热门</span><span><b>6</b> 个来源</span></div>
     </div>
-    <img class="ico prop prop-board" src="../assets/board.png" width="117" height="129" alt="村口布告栏">
-    <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
   </header>
+</div></div>
+<div class="plateau"><div class="wrap">
+  <img class="ico prop prop-board" src="../assets/board.png" width="78" height="86" alt="村口布告栏">
+  <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
 </div></div>
 <div class="wrap main">
   <p class="headline"><img class="ico " src="../assets/chat.png" width="36" height="32" alt="" aria-hidden="true">AI代理工具与记忆层集中爆发，HN上“HN书籍/维基”类小工具走红</p>
@@ -201,5 +214,16 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
   <h2><img class="ico " src="../assets/sprout.png" width="32" height="36" alt="" aria-hidden="true">往期</h2><details class="fold"><summary>往期资讯</summary><div class="detail archive"><a href="../news.html">最新</a></div></details>
   <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-03 09:20 JST · 汇总前一天的热门内容</span></footer>
 </div>
+<script>
+(() => {
+  const sky = document.querySelector(".sky");
+  if (!sky) return;
+  const check = () => document.body.classList.toggle(
+    "stuck", sky.getBoundingClientRect().top <= parseFloat(getComputedStyle(sky).top) + 0.5);
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("resize", check);
+  check();
+})();
+</script>
 </body>
 </html>
