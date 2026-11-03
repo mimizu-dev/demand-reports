@@ -4,346 +4,392 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <title>需求综合报告 · 更新于 2026-11-03</title>
+<link rel="icon" href="../assets/cart.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Sweetie-16 像素调色板 */
-  --bg: #0d0e1c; --panel: #1a1c2c; --panel-2: #262b44; --line: #333c57; --bd: #566c86;
-  --text: #f4f4f4; --dim: #94b0c2;
-  --cyan: #73eff7; --blue: #41a6f6; --pink: #ff77a8; --lime: #a7f070; --amber: #ffcd75; --red: #ef5d63; --violet: #a46bd6;
-  --pixel: "DotGothic16", "Noto Sans SC", monospace; --arcade: "Press Start 2P", "DotGothic16", monospace;
-  --mono: "DotGothic16", ui-monospace, monospace;
-  --u: 4px;  /* 一个"像素"的大小 */
+  /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
+  --sky: #63aae0; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
+  --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
+  --text: #5c3e27; --dim: #9a7a5c;
+  --blue: #4a86b8; --green: #5f9a4a; --orange: #c98a3a; --red: #c0605a; --gold: #b8913c;
+  --shadow: rgba(40, 90, 30, .25);
+  --pixel: "DotGothic16", "Noto Sans SC", monospace;
+  --u: 4px;
 }
 * { box-sizing: border-box; }
-html { image-rendering: pixelated; }
-body { margin: 0; color: var(--text); font: 15px/1.75 "Noto Sans SC", system-ui, sans-serif; background-color: var(--bg);
-  background-image:
-    radial-gradient(var(--line) 1px, transparent 1.5px),
-    radial-gradient(#22264a 1px, transparent 1.5px);
-  background-size: 32px 32px, 32px 32px; background-position: 0 0, 16px 16px; }
-body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9;
-  background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
-a { color: var(--cyan); text-decoration: none; }
-::selection { background: var(--pink); color: var(--bg); }
+img.ico, .deco img { image-rendering: pixelated; image-rendering: crisp-edges; }
+body { margin: 0; overflow-x: clip; color: var(--text); font: 15px/1.75 "Noto Sans SC", system-ui, sans-serif; background-color: var(--grass);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Crect x='6' y='8' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='8' y='6' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='30' y='30' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='32' y='28' width='2' height='2' fill='%238acb57'/%3E%3Crect x='20' y='40' width='2' height='2' fill='%238acb57'/%3E%3Crect x='40' y='12' width='2' height='2' fill='%236ab33b'/%3E%3C/svg%3E");
+  background-size: 48px 48px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: var(--wood-l); color: var(--ink); }
 .wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
-.c-cyan { color: var(--cyan); } .c-pink { color: var(--pink); } .c-lime { color: var(--lime); }
-.c-amber { color: var(--amber); } .c-red { color: var(--red); } .dim { color: var(--dim); }
-svg.px { width: 16px; height: 16px; fill: currentColor; shape-rendering: crispEdges; flex: none; }
-svg.sprite { shape-rendering: crispEdges; display: block; }
+.c-cyan { color: var(--blue); } .c-pink { color: var(--red); } .c-lime { color: var(--green); }
+.c-amber { color: var(--orange); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+img.ico { flex: none; vertical-align: middle; }
 
-/* 像素边框：上下左右各一条，四角留缺口 + 硬阴影 */
-.pxbox, .card, .fold, .board, .headline, .m, .tabs a.on, .btn, .stats span, .rank, .refs a, .chip, .archive a {
-  --c: var(--bd);
-  box-shadow: 0 calc(-1 * var(--u)) 0 0 var(--c), 0 var(--u) 0 0 var(--c), calc(-1 * var(--u)) 0 0 0 var(--c), var(--u) 0 0 0 var(--c); }
-.card, .fold, .board { box-shadow: 0 -4px 0 0 var(--c), 0 4px 0 0 var(--c), -4px 0 0 0 var(--c), 4px 0 0 0 var(--c),
-  8px 8px 0 0 #05060d, 4px 12px 0 0 #05060d, 12px 4px 0 0 #05060d; }
-.m, .stats span, .rank, .refs a, .chip, .archive a, .btn { --u: 2px; }
+/* 木框羊皮纸面板：木头边框 + 内侧深色线 + 外侧缺角描边 + 投影 */
+.card, .fold, .board { background: var(--paper); border: 5px solid var(--wood);
+  box-shadow: inset 0 0 0 2px var(--wood-l), inset 0 0 0 4px var(--paper-2),
+    0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink),
+    5px 8px 0 0 var(--shadow); }
+/* 小号木牌：按钮、标签、排名 */
+.tabs a, .btn, .rank, .stats span, .refs a, .chip, .archive a, .m {
+  --c: var(--ink);
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
 
-/* 顶部 */
-header { padding: 28px 0 10px; }
-.prompt { font: 10px var(--arcade); color: var(--lime); letter-spacing: .06em; }
-.prompt::after { content: "█"; animation: blink 1s steps(1) infinite; margin-left: 6px; }
-@keyframes blink { 50% { opacity: 0; } }
-.tabs { display: flex; gap: 14px; margin: 18px 4px 4px; }
-.tabs a { font: 400 15px var(--pixel); color: var(--dim); padding: 4px 14px; background: transparent; }
-.tabs a.on { --c: var(--cyan); color: var(--bg); background: var(--cyan); }
-.tabs a:not(.on):hover { color: var(--cyan); }
-.tabs a.on::before { content: "▶ "; }
-.hero { display: flex; align-items: center; gap: 22px; margin: 18px 0 8px; }
-.hero svg.sprite { width: 96px; height: 96px; flex: none; filter: drop-shadow(4px 4px 0 #05060d); animation: bob 1.2s steps(2) infinite; }
-@keyframes bob { 50% { transform: translateY(-4px); } }
-h1 { font: 400 clamp(26px, 5vw, 42px)/1.2 var(--pixel); margin: 0 0 10px; letter-spacing: .04em; color: var(--text);
-  text-shadow: 3px 3px 0 var(--violet), 6px 6px 0 #05060d; }
-.stats { display: flex; flex-wrap: wrap; gap: 12px 14px; font: 13px var(--mono); color: var(--dim); padding-left: 2px; }
-.stats span { background: var(--panel); padding: 1px 10px; }
+/* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
+.sky { background: var(--sky) url("../assets/scene.png") repeat-x left bottom / auto 328px; }
+header { padding: 22px 0 96px; position: relative; min-height: 328px; }
+.tabs { display: flex; gap: 14px; margin: 0 2px 4px; flex-wrap: wrap; }
+.tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
+.tabs a.on { color: var(--text); background: var(--paper); }
+.tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
+.hero { margin: 22px 0 0; max-width: calc(100% - 190px); position: relative; z-index: 1; }
+h1 { display: inline-block; font: 400 clamp(24px, 5vw, 36px)/1.2 var(--pixel); margin: 0 0 14px; padding: 10px 22px; letter-spacing: .04em;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
+  border: 4px solid var(--wood-d);
+  box-shadow: 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 5px 7px 0 0 rgba(40, 70, 110, .18); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 12px; font: 13px var(--pixel); color: var(--dim); padding-left: 2px; }
+.stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
 .stats b { color: var(--text); font-weight: 400; }
-.ground { height: 16px; margin: 18px 0 6px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23262b44'/%3E%3Crect width='16' height='4' fill='%2338b764'/%3E%3Crect y='4' width='16' height='2' fill='%23257179'/%3E%3Crect x='2' y='9' width='4' height='2' fill='%23333c57'/%3E%3Crect x='10' y='12' width='4' height='2' fill='%23333c57'/%3E%3Crect x='4' width='2' height='2' y='-0' fill='%23a7f070'/%3E%3Crect x='12' width='2' height='2' fill='%23a7f070'/%3E%3C/svg%3E") repeat-x;
-  background-size: 16px 16px; }
+/* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
+img.prop { position: absolute; z-index: 1; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 7%; bottom: 60px; }
+img.prop-board { right: 9%; bottom: 10px; }
+.deco { position: absolute; right: 0; bottom: 6px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+.deco img { height: 80px; width: auto; }
+.deco img + img { height: 60px; }
 
-h2 { font: 400 20px var(--pixel); margin: 34px 0 18px; display: flex; align-items: center; gap: 12px; }
-h2::before { content: ""; width: 12px; height: 12px; background: var(--pink);
-  box-shadow: 4px 4px 0 0 var(--violet); animation: blink 1.6s steps(1) infinite; }
+/* 宽屏时两侧是连续的俯视地图（农场、小镇、森林 / 矿洞、磨坊、牧场，靠河流和道路连成一片），
+   每侧一张可上下无缝循环的长图，段与段之间用林带衔接；像游戏里的地图界面一样装在木框里（贴屏幕的外侧不加框） */
+.main { position: relative; }
+.side { position: absolute; top: 6px; bottom: 24px; width: min(360px, calc((100vw - 1000px) / 2 - 16px)); display: none;
+  pointer-events: none; image-rendering: pixelated; background-repeat: repeat-y; background-size: 360px auto;
+  background-clip: padding-box; border: 6px solid var(--wood); }
+.side.l { right: calc(100% + 8px); border-left: 0; background-image: url("../assets/map-left.png"); background-position: right top;
+  box-shadow: inset -2px 0 0 var(--wood-d), inset 0 2px 0 var(--wood-d), inset 0 -2px 0 var(--wood-d),
+    3px 0 0 0 var(--ink), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), 5px 8px 0 0 var(--shadow); }
+.side.r { left: calc(100% + 8px); border-right: 0; background-image: url("../assets/map-right.png"); background-position: left top;
+  box-shadow: inset 2px 0 0 var(--wood-d), inset 0 2px 0 var(--wood-d), inset 0 -2px 0 var(--wood-d),
+    -3px 0 0 0 var(--ink), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), 5px 8px 0 0 var(--shadow); }
+.side::before { content: ""; position: absolute; inset: -6px 0; border-top: 2px solid var(--wood-l); border-bottom: 2px solid var(--wood-l); }
+@media (min-width: 1120px) { .side { display: block; } }
+.yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
+.yard img { image-rendering: pixelated; }
+
+h2 { font: 400 20px var(--pixel); margin: 30px 0 16px; display: flex; align-items: center; gap: 10px; color: #fffbea;
+  text-shadow: 2px 2px 0 var(--grass-3), -1px 0 0 var(--grass-3), 0 -1px 0 var(--grass-3), 0 1px 0 var(--grass-3), 1px 0 0 var(--grass-3); }
+h2 img.ico { filter: drop-shadow(2px 2px 0 var(--shadow)); }
 
 /* 卡片 */
 .cards { display: grid; gap: 26px; padding: 4px; }
-.card { background: var(--panel); padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
-.card:hover { --c: var(--cyan); }
-.card-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.rank { --c: var(--amber); font: 12px var(--arcade); color: var(--bg); background: var(--amber); padding: 4px 8px 3px; }
-.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--mono); color: var(--dim); }
-.tag svg.px { width: 12px; height: 12px; }
-.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--text); }
-.lede { color: #c2d3e0; margin: 0 0 14px; }
+.card { padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.rank { font: 15px/1 var(--pixel); color: var(--paper); background: var(--wood); padding: 5px 8px 4px; text-shadow: 1px 1px 0 var(--wood-d); }
+.nid { font: 13px/1 var(--pixel); color: var(--wood-d); background: var(--paper-2); padding: 4px 8px; border: 2px dashed var(--wood); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--dim); }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.lede { color: var(--text); margin: 0 0 14px; }
 .meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
-.m { --c: var(--line); background: var(--panel-2); padding: 8px 10px; display: grid; gap: 4px; align-content: start; }
-.m b { font: 400 14px var(--mono); }
-.m b.big { font: 18px/1 var(--arcade); }
-.m span { font: 12px var(--mono); color: var(--dim); }
-.pips { display: inline-flex; gap: 2px; padding: 2px; background: #0d0e1c; width: max-content; }
-.pips i { width: 8px; height: 10px; background: #333c57; }
-.pips.amber i.on { background: var(--amber); box-shadow: inset 0 -3px 0 #ef7d57; }
-.pips.lime i.on { background: var(--lime); box-shadow: inset 0 -3px 0 #38b764; }
+.m { --c: var(--wood); background: var(--paper-2); padding: 8px 8px 8px 50px; display: grid; gap: 2px; align-content: center;
+  position: relative; min-height: 58px; min-width: 0; }
+.m img.ico { position: absolute; left: 7px; top: 50%; transform: translateY(-50%); }
+.m b { font: 400 14px var(--pixel); }
+.m b.big { font: 22px/1 var(--pixel); }
+.m span { font: 12px var(--pixel); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: var(--wood-d); width: max-content; }
+.pips i { width: 8px; height: 10px; background: var(--paper-3); }
+.pips.amber i.on { background: #ecb35f; box-shadow: inset 0 -3px 0 #d0914a; }
+.pips.lime i.on { background: #a8d27e; box-shadow: inset 0 -3px 0 #7fb25f; }
 .actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
-.btn { --c: var(--cyan); display: inline-flex; align-items: center; gap: 6px; font: 13px var(--mono); color: var(--cyan); background: var(--panel); padding: 2px 10px; }
-.btn:hover { background: var(--cyan); color: var(--bg); }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--paper); background: var(--green); padding: 2px 10px;
+  text-shadow: 1px 1px 0 #44743a; }
+.btn:hover { background: #6daa56; text-decoration: none; }
 .btn:active { transform: translate(2px, 2px); }
-.btn svg.px { width: 12px; height: 12px; }
-details summary { cursor: pointer; list-style: none; font: 13px var(--mono); color: var(--dim); }
+details summary { cursor: pointer; list-style: none; font: 13px var(--pixel); color: var(--dim); }
 details summary::-webkit-details-marker { display: none; }
-details summary::before { content: "▶ "; color: var(--pink); display: inline-block; }
+details summary::before { content: "▶ "; color: var(--wood); display: inline-block; }
 details[open] > summary::before { content: "▼ "; }
-details summary:hover { color: var(--text); }
+details summary:hover { color: var(--ink); }
 .actions details { flex: 0 1 auto; }
 .actions details summary { padding: 2px 4px; }
 .actions details[open] { flex-basis: 100%; }
 .actions details[open] summary { margin-bottom: 8px; display: inline-block; }
-.detail { font-size: 14px; color: #c2d3e0; }
+.detail { font-size: 14px; color: var(--text); }
 .detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
-.detail li::marker { color: var(--pink); }
-.fold { background: var(--panel); padding: 12px 18px; margin: 0 8px 22px 4px; }
-.fold > summary { font: 400 16px var(--pixel); color: var(--text); }
+.detail li::marker { color: var(--wood); }
+.fold { padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--ink); }
 .fold[open] > summary { margin-bottom: 10px; }
-.table { overflow-x: auto; border: 2px solid var(--line); }
+.table { overflow-x: auto; border: 3px solid var(--wood); background: #fff3d2; }
 table { border-collapse: collapse; width: 100%; font-size: 13px; }
-th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--line); vertical-align: top; }
-th { background: var(--panel-2); font: 13px var(--mono); color: var(--amber); white-space: nowrap; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--paper-3); vertical-align: top; }
+th { background: var(--paper-2); font: 13px var(--pixel); color: var(--wood-d); white-space: nowrap; }
 td:first-child { min-width: 8em; }
-.chip { --c: #257179; font: 12px var(--mono); color: var(--cyan); padding: 0 6px; margin: 2px; white-space: nowrap; display: inline-block; }
+.chip { --c: var(--wood); font: 12px var(--pixel); color: var(--blue); background: var(--paper); padding: 0 6px; margin: 3px; white-space: nowrap; display: inline-block; }
 .archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
-.archive a { font: 13px var(--mono); padding: 1px 10px; background: var(--panel-2); }
-footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; text-align: center; }
+.archive a { --c: var(--wood); font: 13px var(--pixel); padding: 1px 10px; background: var(--paper-2); }
+footer { font: 12px/2 var(--pixel); color: #fffbea; padding: 24px 0 40px; text-align: center; text-shadow: 1px 1px 0 var(--grass-3); }
 
 /* 资讯页 */
-.headline { --c: var(--lime); font: 400 17px/1.6 var(--pixel); background: var(--panel); padding: 12px 16px 12px 44px; margin: 20px 4px 0;
-  position: relative; }
-.headline::before { content: "!"; position: absolute; left: 12px; top: 12px; width: 20px; height: 20px; background: var(--lime);
-  color: var(--bg); font: 12px/20px var(--arcade); text-align: center; }
+.headline { font: 400 16px/1.6 var(--pixel); color: var(--ink); background: var(--paper); padding: 12px 16px 12px 58px; margin: 0 0 18px 2px;
+  position: relative; border: 4px solid var(--wood); max-width: 760px;
+  box-shadow: inset 0 0 0 2px var(--wood-l), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 5px 7px 0 0 var(--shadow); }
+.headline img.ico { position: absolute; left: 12px; top: 12px; }
 .hl h3 { margin: 0 0 6px; }
 .refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
-.refs a { --c: #257179; min-width: 0; font: 12px var(--mono); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--panel-2); }
-.refs a:hover { background: var(--cyan); color: var(--bg); }
+.refs a { --c: var(--wood); min-width: 0; font: 12px var(--pixel); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--paper-2); }
+.refs a:hover { background: var(--wood-l); color: var(--ink); text-decoration: none; }
 .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
-.board { background: var(--panel); padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
-.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 16px; display: flex; justify-content: space-between; gap: 8px;
-  background: var(--panel-2); border-bottom: 4px solid var(--line); }
-.board h3 small { font: 12px var(--mono); color: var(--dim); }
-.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--line); }
+.board { padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px); border-bottom: 3px solid var(--wood-d); }
+.board h3 span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.board h3 small { font: 12px var(--pixel); color: var(--paper-2); text-shadow: 1px 1px 0 var(--wood-d); white-space: nowrap; }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--paper-3); }
 .board h3 + .row { border-top: 0; }
-.row .no { font: 10px/22px var(--arcade); color: var(--pink); }
-.row:nth-of-type(-n+3) .no { color: var(--amber); }
+.row .no { font: 14px/24px var(--pixel); color: var(--dim); }
+.row:nth-of-type(-n+3) .no { color: var(--orange); }
 .row .t { min-width: 0; }
-.row .t a { color: var(--text); font-weight: 500; overflow-wrap: anywhere; }
-.row .t a:hover { color: var(--cyan); }
+.row .t a { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--blue); }
 .row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
-.row .h { font: 12px var(--mono); color: var(--amber); white-space: nowrap; text-align: right; }
-.row .h a { display: block; color: var(--dim); }
-.row .h a:hover { color: var(--cyan); }
+.row .h { font: 12px var(--pixel); color: var(--orange); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--blue); }
 .board details summary { margin-top: 6px; }
 @media (max-width: 760px) {
-  .meters { grid-template-columns: repeat(3, 1fr); }
+  .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card { padding: 14px 14px 12px; }
   .boards { grid-template-columns: 1fr; }
-  .hero svg.sprite { width: 64px; height: 64px; }
-  .hero { gap: 14px; }
+  header { padding-bottom: 150px; }
+  .hero { max-width: none; }
+  img.prop { transform-origin: bottom right; transform: scale(.75); }
+  img.prop-cart { right: 64px; } img.prop-board { right: 70px; }
+  .deco img { height: 60px; } .deco img + img { height: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="sky"><div class="wrap">
   <header>
-    <div class="prompt">&gt; demand-miner --report</div>
     <nav class="tabs"><a class="on" href="../index.html">需求雷达</a><a class="" href="../news.html">资讯速递</a></nav>
-    <div class="hero"><svg class="sprite" viewBox="0 0 16 16" role="img" aria-label="像素矿工"><rect x="5" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="2" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="2" width="1" height="1" fill="#ffcd75"/><rect x="6" y="2" width="1" height="1" fill="#ffcd75"/><rect x="7" y="2" width="1" height="1" fill="#ffcd75"/><rect x="8" y="2" width="1" height="1" fill="#ffcd75"/><rect x="9" y="2" width="1" height="1" fill="#ffcd75"/><rect x="10" y="2" width="1" height="1" fill="#ffcd75"/><rect x="11" y="2" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="3" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="3" width="1" height="1" fill="#ffcd75"/><rect x="5" y="3" width="1" height="1" fill="#ffcd75"/><rect x="6" y="3" width="1" height="1" fill="#ffcd75"/><rect x="7" y="3" width="1" height="1" fill="#ffcd75"/><rect x="8" y="3" width="1" height="1" fill="#f4f4f4"/><rect x="9" y="3" width="1" height="1" fill="#f4f4f4"/><rect x="10" y="3" width="1" height="1" fill="#ffcd75"/><rect x="11" y="3" width="1" height="1" fill="#ffcd75"/><rect x="12" y="3" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="4" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="4" width="1" height="1" fill="#ffcd75"/><rect x="5" y="4" width="1" height="1" fill="#ffcd75"/><rect x="6" y="4" width="1" height="1" fill="#ffcd75"/><rect x="7" y="4" width="1" height="1" fill="#ffcd75"/><rect x="8" y="4" width="1" height="1" fill="#f4f4f4"/><rect x="9" y="4" width="1" height="1" fill="#f4f4f4"/><rect x="10" y="4" width="1" height="1" fill="#ffcd75"/><rect x="11" y="4" width="1" height="1" fill="#ffcd75"/><rect x="12" y="4" width="1" height="1" fill="#1a1c2c"/><rect x="2" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="11" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="6" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="6" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="14" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="14" y="8" width="1" height="1" fill="#94b0c2"/><rect x="15" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="9" width="1" height="1" fill="#94b0c2"/><rect x="14" y="9" width="1" height="1" fill="#566c86"/><rect x="15" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="10" width="1" height="1" fill="#566c86"/><rect x="14" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="5" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="12" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="11" width="1" height="1" fill="#ef7d57"/><rect x="14" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="12" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="12" width="1" height="1" fill="#f8c4a0"/><rect x="5" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="12" width="1" height="1" fill="#29366f"/><rect x="7" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="12" width="1" height="1" fill="#29366f"/><rect x="10" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="12" width="1" height="1" fill="#f8c4a0"/><rect x="12" y="12" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="12" width="1" height="1" fill="#ef7d57"/><rect x="4" y="13" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="13" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="13" width="1" height="1" fill="#ef7d57"/><rect x="4" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="14" width="1" height="1" fill="#29366f"/><rect x="6" y="14" width="1" height="1" fill="#29366f"/><rect x="7" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="14" width="1" height="1" fill="#29366f"/><rect x="10" y="14" width="1" height="1" fill="#29366f"/><rect x="11" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="14" width="1" height="1" fill="#ef7d57"/><rect x="4" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="11" y="15" width="1" height="1" fill="#1a1c2c"/></svg><div>
+    <div class="hero">
     <h1>需求综合报告</h1>
     <div class="stats"><span>更新于 <b class="c-cyan">2026-11-03</b></span><span>统计最近 <b>90</b> 天</span><span><b>218</b> 个需求</span><span><b>221</b> 条帖子</span><span><b>5</b> 个来源</span></div>
-    </div></div>
+    </div>
+    <img class="ico prop prop-cart" src="../assets/cart.png" width="111" height="108" alt="装满宝石的矿车">
+    <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
   </header>
-  <div class="ground"></div>
-  <h2>今日推荐</h2>
+</div></div>
+<div class="wrap main"><div class="side l"></div><div class="side r"></div>
+  <h2><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true">今日推荐</h2>
   <div class="cards">
 <article class="card">
-  <div class="card-head"><span class="rank">#1</span><span class="tag">软件插件</span><span class="tag"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>2 个帖子</span></div>
+  <div class="card-head"><span class="rank">#1</span><span class="nid">编号 C25</span><span class="tag">软件插件</span><span class="tag"><img class="ico " src="../assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div>
   <h3>让 AI 直接读写并部署 Google Apps Script，无需打开浏览器或安装 clasp</h3>
-  <p class="lede"></p>
-  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">5.7</b><span>综合分</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>2.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>-</b><span>预计开发</span></div></div>
-  <div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>原帖</a><details><summary>展开详情</summary><div class="detail">
-<p>需求概括（附 ID）：<a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">qiita:228dfa134c76e15ab1a8</a>。核心痛点是 AI 改完 GAS 代码后仍要人工打开浏览器部署，受限电脑装不了 Node.js/clasp，长代码难定位函数、跨文件同名函数会静默覆盖。</p>
-<p>为什么值得做：需求来自真实 GAS 使用场景，现有工具几乎都是 MCP 服务器形态且依赖本地 Node.js，恰好没解决“受限电脑装不了 Node.js/clasp”的空缺；作者自己的「秀GASマネージャー」虽覆盖核心需求，但无安装分发、无多用户配置界面，普通 GAS 用户难以直接使用。风险是 Google Apps Script API/OAuth 首次授权通常仍需浏览器，且作者已有个人 MCP 服务器，官方 clasp 也在演进；需要把差异化明确放在“免 Node、免手动部署、函数级索引与冲突提示”。</p>
-<p>建议形式：Windows 免安装单文件桌面工具（内嵌运行时）＋浏览器扩展桥接，首次 OAuth 后由工具直接调用 Apps Script API。</p>
-<p>最小可行版本的 3 个核心功能：
-- Google 账号 OAuth 后列出脚本项目，拉取/编辑/保存文件。
-- 函数索引与跨文件同名函数冲突提示。
-- 一键创建部署版本并返回 Web App URL。</p>
-<p>怎么验证有人要：回复 qiita 原帖；发到 Qiita 的 #GAS、#GoogleAppsScript 标签和 Google Apps Script 社区；在 X 上带 #GAS 发布演示。</p>
-<p>预计开发天数：12～16 天。</p>
+  <p class="lede">（）：AI 改完 GAS 代码后仍要人打开浏览器手动部署；受限电脑装不了 Node.js/clasp；长代码难定位函数、跨文件同名函数静默覆盖等 GAS 特有 bug 难排查。</p>
+  <div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.7</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>2.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>10–14 天</b><span>预计开发</span></div></div>
+  <div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
+<p><strong>需求概括</strong>（<a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">qiita:228dfa134c76e15ab1a8</a>）：AI 改完 GAS 代码后仍要人打开浏览器手动部署；受限电脑装不了 Node.js/clasp；长代码难定位函数、跨文件同名函数静默覆盖等 GAS 特有 bug 难排查。</p>
+<p><strong>为什么值得做</strong>：痛点是“受限电脑 + 依赖 AI 写 GAS”这个交集，现有工具几乎全是 MCP 服务器形态、依赖本地 Node.js，恰好绕开了核心场景；竞品检查为 weak，空缺明确。风险有三：一是 Google 侧要走 OAuth 与 Apps Script API，授权审核和配额是硬门槛；二是已有作者自制的『秀GASマネージャー』覆盖了核心流程，虽然只是自用脚本，但说明“够用就好”的用户可能不付费；三是目标人群（用 AI 写 GAS 又被锁电脑）偏窄，付费意愿只有 2。</p>
+<p><strong>建议形式</strong>：浏览器扩展（在 GAS 编辑器侧边栏注入面板）+ 一个可选的轻量本地桥。</p>
+<p><strong>最小可行版本 3 个核心功能</strong>：
+1. 通过 OAuth 读取当前项目的全部 .gs 文件与函数清单，供 AI 读写；
+2. 一键创建新版本并更新部署（不打开 GAS 部署界面）；
+3. 跨文件同名函数/未被调用的函数检测与冲突提示。</p>
+<p><strong>怎么验证有人要</strong>：回复原 qiita 帖并附上可试用链接；在 Qiita 发一篇“不用 Node 也能让 AI 部署 GAS”的实操文；同时发到 r/GoogleAppsScript 和 X 的 GAS 话题下收集前 20 个试用申请。</p>
+<p><strong>预计开发天数</strong>：10–14 天。</p>
 </div></details></div>
 </article>
 <article class="card">
-  <div class="card-head"><span class="rank">#2</span><span class="tag">Chrome 扩展</span></div>
-  <h3>检测网站按 User-Agent 返回不同内容（如隐藏给 AI 的指令）的浏览器扩展</h3>
-  <p class="lede"></p>
-  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">5.1</b><span>综合分</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>0.7 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>-</b><span>预计开发</span></div></div>
-  <div class="actions"><a class="btn" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>原帖</a><details><summary>展开详情</summary><div class="detail">
-<p>需求概括（附 ID）：<a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50168676">hn:50168676</a>。网站会根据 UA 返回不同内容，普通用户无法知道自己看到的页面与 AI 爬虫或其他设备看到的内容有差异。</p>
-<p>为什么值得做：竞品检查为 weak，现有工具几乎都是“UA 切换器”，需要用户自己切换、自己肉眼比对；没有工具自动以多个 UA（尤其 AI 爬虫 UA）抓取同一页面并高亮差异。风险是跨域抓取受 host permissions 和反爬限制，部分站点会封禁或返回假内容；UA 伪装也可能有伦理与商店审核问题；付费意愿仅 2，适合做轻量免费/捐赠或隐私工具品牌。</p>
-<p>建议形式：Chrome 扩展，输入 URL 或对当前页生成对比报告。</p>
-<p>最小可行版本的 3 个核心功能：
-- 以普通 Chrome、Googlebot、GPTBot/ClaudeBot 等 3～5 个 UA 抓取同一 URL。
-- 对正文、隐藏文本、关键差异做结构化 diff 并高亮。
-- 保存本地对比记录，对明显差异给出告警。</p>
-<p>怎么验证有人要：回复 HN 原帖；发 Show HN；发到 r/webdev、r/privacy、Privacy Guides 社区。</p>
-<p>预计开发天数：4～6 天。</p>
+  <div class="card-head"><span class="rank">#2</span><span class="nid">编号 C36</span><span class="tag">Chrome 扩展</span></div>
+  <h3>检测网站按 User-Agent 返回不同内容的浏览器扩展</h3>
+  <p class="lede">（）：网站会按 UA 返回不同内容，普通用户无法察觉自己看到的页面与 AI 爬虫或其他设备看到的内容不同（如 WhatsApp 帮助页对 LLM 隐藏了监管机构推荐内容）。</p>
+  <div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.1</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.7 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>4–6 天</b><span>预计开发</span></div></div>
+  <div class="actions"><a class="btn" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
+<p><strong>需求概括</strong>（<a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50168676">hn:50168676</a>）：网站会按 UA 返回不同内容，普通用户无法察觉自己看到的页面与 AI 爬虫或其他设备看到的内容不同（如 WhatsApp 帮助页对 LLM 隐藏了监管机构推荐内容）。</p>
+<p><strong>为什么值得做</strong>：竞品检查 weak，现有工具都是“UA 切换器”，要用户自己切换、自己肉眼比对，没有工具自动用多个 UA（尤其是 AI 爬虫 UA）抓取同一页面并高亮差异。难度只有 2、单人几天可做完，且话题本身在 HN 上有传播性。风险是需求可能一次性——用户查过一次就不再打开；另外跨域抓取受 CORS 限制，需要用后台 fetch 或代理，部分站点会直接 403。</p>
+<p><strong>建议形式</strong>：Chrome 扩展。</p>
+<p><strong>最小可行版本 3 个核心功能</strong>：
+1. 对当前标签页 URL，用普通浏览器 / GPTBot / ClaudeBot / Googlebot 等若干 UA 分别抓取；
+2. 归一化后做正文差异高亮，标出“只对某一方可见”的段落；
+3. 保存最近检测记录，并在命中差异时给出角标提示。</p>
+<p><strong>怎么验证有人要</strong>：回复原 HN 帖；发 Show HN；在 r/webdev、r/privacy 各发一次，观察是否有人主动报“帮我查查某站”。</p>
+<p><strong>预计开发天数</strong>：4–6 天。</p>
 </div></details></div>
 </article>
 <article class="card">
-  <div class="card-head"><span class="rank">#3</span><span class="tag">网页工具</span></div>
+  <div class="card-head"><span class="rank">#3</span><span class="nid">编号 C11</span><span class="tag">网页工具</span></div>
   <h3>用 GAS 定时把 RSS 文章去重收集到 Google 表格</h3>
-  <p class="lede"></p>
-  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>-</b><span>预计开发</span></div></div>
-  <div class="actions"><a class="btn" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>原帖</a><details><summary>展开详情</summary><div class="detail">
-<p>需求概括（附 ID）：<a target="_blank" rel="noopener" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6">qiita:7891fed6c9eaae905bc6</a>。想按早晚批量阅读关注领域文章，不想被逐条通知打扰，也不想同一篇被重复追加。</p>
-<p>为什么值得做：现有搜索结果多是教程代码或需自行部署的 GitHub 脚本，缺少开箱即用、带配置界面（添加 RSS、设定早晚时间、自动去重）的网页工具；作者自己的 GAS 脚本只是个人配置，没有配额/失败处理。风险是 GAS 配额与触发器限制、RSS 源反爬、Google OAuth 验证；付费意愿 2，适合免费增值或模板化产品。</p>
-<p>建议形式：网页工具（Google 登录 + GAS Web App 或托管后端写入 Google 表格）。</p>
-<p>最小可行版本的 3 个核心功能：
-- 添加多个 RSS 源并设置早/晚收集时间。
-- 按 URL/标题去重后写入指定 Google 表格。
-- 显示失败源、配额错误和重试状态。</p>
-<p>怎么验证有人要：回复 qiita 原帖；发到 Qiita #GAS #RSS、Zenn、r/rss。</p>
-<p>预计开发天数：5～7 天。</p>
+  <p class="lede">（）：想按早晚批量阅读关注领域的文章，不想被逐条通知打扰，也不想同一篇文章被重复追加。</p>
+  <div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>5–7 天</b><span>预计开发</span></div></div>
+  <div class="actions"><a class="btn" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
+<p><strong>需求概括</strong>（<a target="_blank" rel="noopener" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6">qiita:7891fed6c9eaae905bc6</a>）：想按早晚批量阅读关注领域的文章，不想被逐条通知打扰，也不想同一篇文章被重复追加。</p>
+<p><strong>为什么值得做</strong>：竞品检查 weak——搜索结果全是教程代码或需自行部署的 GitHub 脚本，没有开箱即用、带配置界面（添加 RSS、设定早晚时间、自动去重）的网页工具；作者自己的脚本也需手动建表、填表头、配触发器。风险是这类需求“教程已经够用”，付费意愿只有 2，且 Feedly、Zapier、IFTTT 覆盖了相邻场景；真正愿付钱的是不想碰 GAS 编辑器的非技术用户，规模有限。</p>
+<p><strong>建议形式</strong>：网页工具（OAuth 授权后自动建表、写触发器，用户不接触代码）。</p>
+<p><strong>最小可行版本 3 个核心功能</strong>：
+1. 粘贴多个 RSS/Atom 源，设定每天早晚两个抓取时间；
+2. 按标题 + 链接 + 发布时间去重后追加到指定 Google 表格；
+3. 抓取失败/配额超限的可视化状态与重试。</p>
+<p><strong>怎么验证有人要</strong>：回复原帖；在 Qiita 写一篇“不写一行 GAS 也能做早晚新闻表”；把工具发到 r/rss 和 X 的 GAS 社群，统计授权建表人数。</p>
+<p><strong>预计开发天数</strong>：5–7 天。</p>
 </div></details></div>
 </article>
 <article class="card">
-  <div class="card-head"><span class="rank">#4</span><span class="tag">网页工具</span></div>
-  <h3>为 Wan 2.5 视频生成模型按固定顺序组装提示词（画面、台词、音效）的小工具</h3>
-  <p class="lede"></p>
-  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>-</b><span>预计开发</span></div></div>
-  <div class="actions"><a class="btn" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>原帖</a><details><summary>展开详情</summary><div class="detail">
-<p>需求概括（附 ID）：<a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">qiita:b5fb1ca9e460c7e14b9e</a>。Wan 2.5 要求把画面描述、台词、环境音和 BGM 写进同一段提示词，手动写顺序易乱、台词易被误改，难以对比多个镜头。</p>
-<p>为什么值得做：竞品检查 weak，现有结果只有一个 Qiita 函数直接解决固定顺序组装，但不是网页工具；其余是通用提示词助手或教程。空缺明确：面向 Wan 2.5 的专用网页表单。风险是模型版本和提示词语法变化快、用户群窄、付费意愿 2；适合做轻量工具并靠社区传播。</p>
-<p>建议形式：单页网页表单，本地保存数据。</p>
-<p>最小可行版本的 3 个核心功能：
-- 按画面、台词、环境音、BGM 固定顺序填写并实时预览最终提示词。
-- 镜头库与模板保存，支持多镜头切换。
-- 一键复制/导出提示词。</p>
-<p>怎么验证有人要：回复 qiita 原帖；发到 Qiita #Wan2.5 #動画生成、X 的 AI 视频社区。</p>
-<p>预计开发天数：3～5 天。</p>
+  <div class="card-head"><span class="rank">#4</span><span class="nid">编号 C23</span><span class="tag">网页工具</span></div>
+  <h3>为 Wan 2.5 视频生成模型按固定顺序组装提示词的小工具</h3>
+  <p class="lede">（）：Wan 2.5 要求把画面描述、台词、环境音和 BGM 写进同一段提示词，手写时顺序容易乱、台词容易被误改，导致生成效果不稳定、难以对比多个镜头。</p>
+  <div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>3–5 天</b><span>预计开发</span></div></div>
+  <div class="actions"><a class="btn" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
+<p><strong>需求概括</strong>（<a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">qiita:b5fb1ca9e460c7e14b9e</a>）：Wan 2.5 要求把画面描述、台词、环境音和 BGM 写进同一段提示词，手写时顺序容易乱、台词容易被误改，导致生成效果不稳定、难以对比多个镜头。</p>
+<p><strong>为什么值得做</strong>：竞品检查 weak，现有结果里只有一个 Qiita 函数直接解决固定顺序，且不是网页工具；面向 Wan 2.5 的专用网页表单是明确空缺。风险很直接：绑定单一模型版本，模型方一次更新（内置模板、改变字段顺序）工具就归零；受众是视频生成的重度玩家，人数少、付费意愿 2，几乎只能靠免费+引流变现。</p>
+<p><strong>建议形式</strong>：单页网页工具（可离线单文件）。</p>
+<p><strong>最小可行版本 3 个核心功能</strong>：
+1. 按“画面 → 台词 → 环境音 → BGM”固定顺序的分字段表单与实时拼装预览；
+2. 多镜头管理，每个镜头保存为一条记录并可复制单条提示词；
+3. 模板与镜头库的本地保存/导出 JSON。</p>
+<p><strong>怎么验证有人要</strong>：回复原 Qiita 帖；在 Qiita 和 X 的 Wan 2.5 话题下发一条“填表就能出顺序正确的提示词”；观察一周内是否有人要求加字段。</p>
+<p><strong>预计开发天数</strong>：3–5 天。</p>
 </div></details></div>
 </article>
 <article class="card">
-  <div class="card-head"><span class="rank">#5</span><span class="tag">桌面应用</span><span class="tag"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>2 个帖子</span></div>
+  <div class="card-head"><span class="rank">#5</span><span class="nid">编号 C212</span><span class="tag">桌面应用</span><span class="tag"><img class="ico " src="../assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div>
   <h3>让 Windows 自带日语输入法像 Mac 一样用数字键直接选候选词，免去反复按 Tab</h3>
-  <p class="lede"></p>
-  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">4.9</b><span>综合分</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>-</b><span>预计开发</span></div></div>
-  <div class="actions"><a class="btn" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>原帖</a><details><summary>展开详情</summary><div class="detail">
-<p>需求概括（附 ID）：<a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">qiita:723f8fccd84e39f9c666</a>。Windows 微软日语 IME 汉字转换后必须按 Tab 打开候选再用数字选词，大量输入日语时很烦；用户又不想装第三方输入法。</p>
-<p>为什么值得做：作者已用 AutoHotkey v2 写了 NoTabKana 并开源，但只是个人 AHK 脚本，缺安装包、配置界面、开机自启、对其他 IME 的兼容和更新分发；竞品检查 weak，现有方案都是个人 AHK 脚本。风险是低级键盘钩子可能被杀软误报、不同 Windows/IME 版本行为差异、作者已有开源脚本；但“打包成可安装桌面应用”的空缺明确。</p>
-<p>建议形式：Windows 托盘桌面应用，低级键盘钩子＋设置界面。</p>
-<p>最小可行版本的 3 个核心功能：
-- 数字键直接选择候选词，必要时自动补 Tab。
-- =/- 翻页及开关快捷键。
-- 安装包、开机自启、基础设置界面。</p>
-<p>怎么验证有人要：回复 qiita 原帖；发到 Qiita #Windows #IME、GitHub Release、X 日语输入社区。</p>
-<p>预计开发天数：5～8 天。</p>
+  <p class="lede">（）：微软日语 IME 汉字转换后必须按 Tab 才打开候选列表再按数字选词，大量输入日语时极其烦人；又不想为此安装第三方输入法。</p>
+  <div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">4.9</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>6–9 天</b><span>预计开发</span></div></div>
+  <div class="actions"><a class="btn" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><details><summary>展开详情</summary><div class="detail">
+<p><strong>需求概括</strong>（<a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">qiita:723f8fccd84e39f9c666</a>）：微软日语 IME 汉字转换后必须按 Tab 才打开候选列表再按数字选词，大量输入日语时极其烦人；又不想为此安装第三方输入法。</p>
+<p><strong>为什么值得做</strong>：痛点高频且情绪强，竞品检查 weak，现有方案都是个人写的 AutoHotkey 脚本（作者自己的 NoTabKana，MIT），没有安装包、配置界面、开机自启和更新分发——这正是“从脚本到产品”的空缺。风险：一是 NoTabKana 已开源，用户可以直接拿去用，付费理由弱（付费意愿 2）；二是 Windows IME 与安全软件对键盘钩子敏感，容易误报，不同版本 IME 行为差异需要长期维护。</p>
+<p><strong>建议形式</strong>：Windows 桌面应用（安装包 + 托盘设置）。</p>
+<p><strong>最小可行版本 3 个核心功能</strong>：
+1. 数字键自动补 Tab 并直接选词、<code>=</code>/<code>-</code> 翻页；
+2. 托盘开关、开机自启、按进程白名单启停；
+3. 一键安装包与版本更新提示（不要求用户装 AutoHotkey）。</p>
+<p><strong>怎么验证有人要</strong>：回复原帖并附安装包；在 Qiita 发使用前后对比文；发到 X 的日语输入话题和窓の杜类投稿渠道，统计下载与“按键不生效”的反馈比例。</p>
+<p><strong>预计开发天数</strong>：6–9 天。</p>
 </div></details></div>
 </article></div>
-  <h2>完整分析</h2>
+  <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">完整分析</h2>
   <details class="fold"><summary>主题归类</summary><div class="detail">
 <div class="table"><table>
 <thead>
 <tr>
 <th>主题</th>
-<th style="text-align: right;">需求数</th>
+<th>需求数</th>
 <th>涉及平台</th>
-<th>代表需求（写 ID）</th>
+<th>代表需求（ID）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>AI 辅助开发与编码代理</td>
-<td style="text-align: right;">43</td>
-<td>qiita、hn、github</td>
-<td><a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>、<a class="chip" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11" target="_blank" rel="noopener">qiita:12ba0b2c6e44f7d38d11</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a></td>
+<td>编辑器与 IDE 插件增强</td>
+<td>29</td>
+<td>GitHub、qiita、StackExchange</td>
+<td><a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>、<a class="chip" href="https://qiita.com/Clairdeluna_eve/items/e292a87e8610a8355730" target="_blank" rel="noopener">qiita:e292a87e8610a8355730</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95572/extension-for-coloring-fixed-width-files" target="_blank" rel="noopener">se:softwarerecs:95572</a></td>
 </tr>
 <tr>
-<td>笔记与 Markdown/文档处理</td>
-<td style="text-align: right;">19</td>
-<td>forum、github、qiita、se</td>
-<td><a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16779" target="_blank" rel="noopener">gh:laurent22/joplin#16779</a>、<a class="chip" href="https://qiita.com/joker_/items/fa431f65dde03a94384f" target="_blank" rel="noopener">qiita:fa431f65dde03a94384f</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95572/extension-for-coloring-fixed-width-files" target="_blank" rel="noopener">se:softwarerecs:95572</a></td>
+<td>桌面系统与效率工具</td>
+<td>22</td>
+<td>qiita、GitHub、Hacker News</td>
+<td><a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51759" target="_blank" rel="noopener">gh:microsoft/PowerToys#51759</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>、<a class="chip" href="https://qiita.com/umaxiaotian/items/b0b249f732f428955867" target="_blank" rel="noopener">qiita:b0b249f732f428955867</a></td>
 </tr>
 <tr>
-<td>浏览器扩展与网页信息增强</td>
-<td style="text-align: right;">17</td>
-<td>hn、qiita、se</td>
-<td><a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50022196" target="_blank" rel="noopener">hn:50022196</a>、<a class="chip" href="https://qiita.com/Takashi_MonbaDev/items/497627e449caa8b4e465" target="_blank" rel="noopener">qiita:497627e449caa8b4e465</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49755505" target="_blank" rel="noopener">hn:49755505</a></td>
+<td>浏览器扩展与网页内容增强</td>
+<td>21</td>
+<td>Hacker News、qiita</td>
+<td><a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50022196" target="_blank" rel="noopener">hn:50022196</a>、<a class="chip" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960" target="_blank" rel="noopener">qiita:207104b10a46ea6d9960</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49656324" target="_blank" rel="noopener">hn:49656324</a></td>
 </tr>
 <tr>
-<td>桌面系统与输入设备效率</td>
-<td style="text-align: right;">17</td>
-<td>qiita、hn、github</td>
-<td><a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://qiita.com/tukiharu/items/8d5f16e82816d8fc9eb4" target="_blank" rel="noopener">qiita:8d5f16e82816d8fc9eb4</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>、<a class="chip" href="https://github.com/flameshot-org/flameshot/issues/5000" target="_blank" rel="noopener">gh:flameshot-org/flameshot#5000</a></td>
+<td>AI 开发与编码代理工作流</td>
+<td>18</td>
+<td>qiita、Hacker News、StackExchange</td>
+<td><a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a>、<a class="chip" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11" target="_blank" rel="noopener">qiita:12ba0b2c6e44f7d38d11</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49595348" target="_blank" rel="noopener">hn:49595348</a></td>
 </tr>
 <tr>
-<td>内容生成、提示词与多模态创作</td>
-<td style="text-align: right;">13</td>
-<td>qiita、hn</td>
-<td><a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a>、<a class="chip" href="https://qiita.com/Tachiuo/items/8a2f621d3a9cec885170" target="_blank" rel="noopener">qiita:8a2f621d3a9cec885170</a>、<a class="chip" href="https://qiita.com/kuis/items/d696ddf067eddde79e7f" target="_blank" rel="noopener">qiita:d696ddf067eddde79e7f</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49824788" target="_blank" rel="noopener">hn:49824788</a></td>
+<td>办公文档、表格与业务自动化</td>
+<td>17</td>
+<td>qiita、Hacker News</td>
+<td><a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>、<a class="chip" href="https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13" target="_blank" rel="noopener">qiita:df2fb24f6a0bfec5bb13</a>、<a class="chip" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677" target="_blank" rel="noopener">qiita:8ce616b8a37248af3677</a></td>
 </tr>
 <tr>
-<td>数据采集、办公自动化与表格</td>
-<td style="text-align: right;">11</td>
-<td>qiita、se</td>
-<td><a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>、<a class="chip" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677" target="_blank" rel="noopener">qiita:8ce616b8a37248af3677</a>、<a class="chip" href="https://qiita.com/tarou_0818/items/ae5786c4c7b7a7c86077" target="_blank" rel="noopener">qiita:ae5786c4c7b7a7c86077</a></td>
+<td>信息获取、内容消费与创意工具</td>
+<td>17</td>
+<td>qiita、Hacker News、StackExchange</td>
+<td><a class="chip" href="https://qiita.com/eri1600/items/1dc522be2aab57501c03" target="_blank" rel="noopener">qiita:1dc522be2aab57501c03</a>、<a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49793876" target="_blank" rel="noopener">hn:49793876</a>、<a class="chip" href="https://qiita.com/anquimomonaca/items/c85c8f5d60c18d2b09ec" target="_blank" rel="noopener">qiita:c85c8f5d60c18d2b09ec</a></td>
 </tr>
 <tr>
-<td>本地 AI、隐私与自托管基础设施</td>
-<td style="text-align: right;">11</td>
-<td>qiita、hn、se、github</td>
-<td><a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>、<a class="chip" href="https://qiita.com/hanamilo/items/3c2c7675661590a4309a" target="_blank" rel="noopener">qiita:3c2c7675661590a4309a</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49677927" target="_blank" rel="noopener">hn:49677927</a></td>
+<td>笔记与知识管理</td>
+<td>11</td>
+<td>GitHub(Joplin)、Obsidian 论坛、qiita</td>
+<td><a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16788" target="_blank" rel="noopener">gh:laurent22/joplin#16788</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16779" target="_blank" rel="noopener">gh:laurent22/joplin#16779</a>、<a class="chip" href="https://qiita.com/EasyCording/items/4f09608ac8b779e42533" target="_blank" rel="noopener">qiita:4f09608ac8b779e42533</a></td>
 </tr>
 <tr>
-<td>垂直专业与行业工具</td>
-<td style="text-align: right;">11</td>
-<td>qiita、hn、se</td>
-<td><a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>、<a class="chip" href="https://qiita.com/YusukeHarada/items/77c6bc5c47d0264d1aff" target="_blank" rel="noopener">qiita:77c6bc5c47d0264d1aff</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95595/offline-windows-ledger-for-a-one-person-microgreens-farm-trays-standing-order" target="_blank" rel="noopener">se:softwarerecs:95595</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49780959" target="_blank" rel="noopener">hn:49780959</a></td>
+<td>垂直专业工具与自托管基础设施</td>
+<td>7</td>
+<td>qiita、StackExchange</td>
+<td><a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>、<a class="chip" href="https://qiita.com/YusukeHarada/items/77c6bc5c47d0264d1aff" target="_blank" rel="noopener">qiita:77c6bc5c47d0264d1aff</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>、<a class="chip" href="https://qiita.com/Nokhysh/items/cbee14e45f068be1d4e9" target="_blank" rel="noopener">qiita:cbee14e45f068be1d4e9</a></td>
 </tr>
 <tr>
-<td>生活、习惯与娱乐小工具</td>
-<td style="text-align: right;">8</td>
-<td>qiita、hn、se</td>
-<td><a class="chip" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf" target="_blank" rel="noopener">qiita:e9bbed361dcabf20a0cf</a>、<a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50262216" target="_blank" rel="noopener">hn:50262216</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49602056" target="_blank" rel="noopener">hn:49602056</a></td>
+<td>生活、健康与习惯</td>
+<td>6</td>
+<td>Hacker News、qiita、StackExchange</td>
+<td><a class="chip" href="https://news.ycombinator.com/item?id=50112258" target="_blank" rel="noopener">hn:50112258</a>、<a class="chip" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf" target="_blank" rel="noopener">qiita:e9bbed361dcabf20a0cf</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95606/dynamically-display-text-on-a-remote-android-tv-display" target="_blank" rel="noopener">se:softwarerecs:95606</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49710490" target="_blank" rel="noopener">hn:49710490</a></td>
 </tr>
 </tbody>
 </table></div>
 </div></details><details class="fold"><summary>跨平台共同需求</summary><div class="detail">
-<ul>
-<li><strong>把个人脚本产品化</strong>：qiita 大量条目是“作者已用 GAS/Python/AutoHotkey 脚本部分解决，但无界面、无安装包、普通用户用不了”，如 <a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>、<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>；hn 也有类似形态，如 <a class="chip" href="https://news.ycombinator.com/item?id=49780959" target="_blank" rel="noopener">hn:49780959</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49819092" target="_blank" rel="noopener">hn:49819092</a>。说法差异：日文侧更常直接说“個人スクリプト止まり”，英文侧更常说“early personal project / needs productization”。</li>
-<li><strong>AI 编码代理的可控性与上下文管理</strong>：qiita 关注终端内快捷操作、多会话看板、限流熔断（<a class="chip" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11" target="_blank" rel="noopener">qiita:12ba0b2c6e44f7d38d11</a>、<a class="chip" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af" target="_blank" rel="noopener">qiita:8f9489403e10f585c3af</a>、<a class="chip" href="https://qiita.com/Kazeneko/items/b3df525ee38941ec98f8" target="_blank" rel="noopener">qiita:b3df525ee38941ec98f8</a>）；GitHub VS Code issue 关注禁止回退外部模型、技能对比、BYOK 动态 OAuth（<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/344494" target="_blank" rel="noopener">gh:microsoft/vscode#344494</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/337592" target="_blank" rel="noopener">gh:microsoft/vscode#337592</a>）；hn 关注提示词/结果/token 透明对比与 skills 共享（<a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49595348" target="_blank" rel="noopener">hn:49595348</a>）。</li>
-<li><strong>浏览器端把不可见信息显性化</strong>：hn 侧有 UA 差异检测、招聘邮件分类、私募股权标记、亚马逊仿冒过滤、AI 生成文字渐隐（<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50022196" target="_blank" rel="noopener">hn:50022196</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50144294" target="_blank" rel="noopener">hn:50144294</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49582536" target="_blank" rel="noopener">hn:49582536</a>）；qiita 侧有误触广告/钓鱼白名单、恢复 Claude Chat/Cowork 分离 UI（<a class="chip" href="https://qiita.com/Takashi_MonbaDev/items/497627e449caa8b4e465" target="_blank" rel="noopener">qiita:497627e449caa8b4e465</a>、<a class="chip" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960" target="_blank" rel="noopener">qiita:207104b10a46ea6d9960</a>）；se 侧有服务条款/隐私政策分析（<a class="chip" href="https://news.ycombinator.com/item?id=49656324" target="_blank" rel="noopener">hn:49656324</a>）。英文更偏消费决策与平台透明度，日文更偏误操作防护与界面恢复。</li>
-<li><strong>笔记/文档的视图与索引缺口</strong>：forum Obsidian 要“启动即打开关系图谱”“Callout 跟随当前模式渲染”（<a class="chip" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046" target="_blank" rel="noopener">forum:obsidian:120046</a>、<a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>）；GitHub Joplin 要反向链接索引、白板导出 PDF、MCP 按章节读写（<a class="chip" href="https://github.com/laurent22/joplin/issues/16779" target="_blank" rel="noopener">gh:laurent22/joplin#16779</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16871" target="_blank" rel="noopener">gh:laurent22/joplin#16871</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16789" target="_blank" rel="noopener">gh:laurent22/joplin#16789</a>）；qiita 要 Markdown 富文本复制、Mermaid 类图无损转 draw.io（<a class="chip" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf" target="_blank" rel="noopener">qiita:01397cecf44ebbc0cbcf</a>、<a class="chip" href="https://qiita.com/joker_/items/fa431f65dde03a94384f" target="_blank" rel="noopener">qiita:fa431f65dde03a94384f</a>）。论坛说法偏使用体验，issue 说法偏数据模型/API。</li>
-<li><strong>通知与聚合落到现有工作流</strong>：qiita 有 RSS→Google 表格、Mastodon→Discord、AI 资讯→iPhone 小组件（<a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>、<a class="chip" href="https://qiita.com/rinfromniigata/items/d7131f574eb87d7f412c" target="_blank" rel="noopener">qiita:d7131f574eb87d7f412c</a>、<a class="chip" href="https://qiita.com/eri1600/items/1dc522be2aab57501c03" target="_blank" rel="noopener">qiita:1dc522be2aab57501c03</a>）；se 有自托管 Web Push（<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>）；hn 有小群体活动报名通知（<a class="chip" href="https://news.ycombinator.com/item?id=49780959" target="_blank" rel="noopener">hn:49780959</a>）。日文偏“落到表格/Discord”，英文偏“自托管/浏览器原生协议”。</li>
-<li><strong>本地优先与隐私合规</strong>：qiita 说“出差不能用云 AI”“现场禁止安装”“要证明数据没外流”（<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>、<a class="chip" href="https://qiita.com/Toppo8/items/31db81e05096c8d6f7b8" target="_blank" rel="noopener">qiita:31db81e05096c8d6f7b8</a>、<a class="chip" href="https://qiita.com/hanamilo/items/3c2c7675661590a4309a" target="_blank" rel="noopener">qiita:3c2c7675661590a4309a</a>）；hn 说工作身份与个人账户隔离、桌面端本地模型试用（<a class="chip" href="https://news.ycombinator.com/item?id=49677927" target="_blank" rel="noopener">hn:49677927</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49627397" target="_blank" rel="noopener">hn:49627397</a>）；GitHub 说 Copilot 只用本地 LLM、Joplin API 禁用密码登录（<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16969" target="_blank" rel="noopener">gh:laurent22/joplin#16969</a>）。</li>
-</ul>
+<p>同一需求被多平台重复提出的情况很少（只有 <a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a> 和 <a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a> 各出现 2 次，且都在 qiita）。更明显的是几种跨平台的“诉求模式”：</p>
+<ol>
+<li>
+<p><strong>“个人脚本已经能跑，但没人把它做成产品”</strong>。qiita 上大量条目标注“部分解决：作者自己已做出……但只是个人脚本”，如 <a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>、<a class="chip" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af" target="_blank" rel="noopener">qiita:8f9489403e10f585c3af</a>；HN/SE 上则是“回复里给了个 GitHub 脚本”的形态，如 <a class="chip" href="https://softwarerecs.stackexchange.com/questions/95686/open-source-tool-to-auto-generate-api-regression-tests-from-real-traffic-linux" target="_blank" rel="noopener">se:softwarerecs:95686</a>。差别在于：日文侧倾向于把自用脚本当原型，直接讨论产品化；英文侧更常停在“有开源实现就够了”。</p>
+</li>
+<li>
+<p><strong>本地化或受限环境下的 AI</strong>。<a class="chip" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8" target="_blank" rel="noopener">qiita:228dfa134c76e15ab1a8</a>（受限电脑装不了 Node.js/clasp）、<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>（禁止 Copilot 回退到外部模型）、<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>（离线日语 LLM）、<a class="chip" href="https://news.ycombinator.com/item?id=49627397" target="_blank" rel="noopener">hn:49627397</a>（桌面端侧模型）指向同一件事：数据不出门、依赖不落地。日文侧强调“出差/客户现场”，英文侧强调“合规与费用”。</p>
+</li>
+<li>
+<p><strong>在编辑器内让 AI 产出的引用可点击、可追溯</strong>。<a class="chip" href="https://github.com/microsoft/vscode/issues/341290" target="_blank" rel="noopener">gh:microsoft/vscode#341290</a>（issue 编号转链接）、#336248（PR 悬停富预览）、#342543（链接悬停预览）、<a class="chip" href="https://qiita.com/locolisu/items/81cf8f1140fe58f36e66" target="_blank" rel="noopener">qiita:81cf8f1140fe58f36e66</a>（把浏览器里的指令传进 Codex 会话）本质相同；GitHub 侧希望官方改渲染层，qiita 侧则自己搭 MCP + 扩展绕过。</p>
+</li>
+<li>
+<p><strong>浏览器里“实时判断并标记”</strong>。<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>（UA 差异）、<a class="chip" href="https://news.ycombinator.com/item?id=50144294" target="_blank" rel="noopener">hn:50144294</a>（私募股权标记）、<a class="chip" href="https://news.ycombinator.com/item?id=49656324" target="_blank" rel="noopener">hn:49656324</a>（条款风险）、<a class="chip" href="https://news.ycombinator.com/item?id=49582536" target="_blank" rel="noopener">hn:49582536</a>（AI 生成文字渐隐）、<a class="chip" href="https://qiita.com/hotate_2235/items/25b8a7b52819035bba5b" target="_blank" rel="noopener">qiita:25b8a7b52819035bba5b</a>——都是“不用手动比对，浏览时就给我结论”。英文侧偏隐私与信息不对称，日文侧偏阅读效率。</p>
+</li>
+<li>
+<p><strong>输入、焦点、窗口的失控感</strong>。<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>（IME 要按 Tab）、<a class="chip" href="https://news.ycombinator.com/item?id=50107094" target="_blank" rel="noopener">hn:50107094</a>（启动器抢焦点）、<a class="chip" href="https://news.ycombinator.com/item?id=50017797" target="_blank" rel="noopener">hn:50017797</a>（快捷键符号记不住）、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/50482" target="_blank" rel="noopener">gh:microsoft/PowerToys#50482</a>（三指拖拽）——Windows 侧抱怨“缺 macOS 的体验”，macOS 侧抱怨“缺图形化开关”。</p>
+</li>
+</ol>
 </div></details><details class="fold"><summary>不建议做的</summary><div class="detail">
-<ul>
-<li><strong>平台级基础设施/专业运维工具</strong>：如 <a class="chip" href="https://softwarerecs.stackexchange.com/questions/95686/open-source-tool-to-auto-generate-api-regression-tests-from-real-traffic-linux" target="_blank" rel="noopener">se:softwarerecs:95686</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50110933" target="_blank" rel="noopener">hn:50110933</a>、<a class="chip" href="https://qiita.com/Nokhysh/items/cbee14e45f068be1d4e9" target="_blank" rel="noopener">qiita:cbee14e45f068be1d4e9</a>。太专业，涉及后端、自托管、证书、服务发现，单人维护成本高，付费意愿不足以支撑。</li>
-<li><strong>VS Code 原生 UI 微调类</strong>：如 <a class="chip" href="https://github.com/microsoft/vscode/issues/344616" target="_blank" rel="noopener">gh:microsoft/vscode#344616</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/340650" target="_blank" rel="noopener">gh:microsoft/vscode#340650</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/343904" target="_blank" rel="noopener">gh:microsoft/vscode#343904</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/345151" target="_blank" rel="noopener">gh:microsoft/vscode#345151</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/343293" target="_blank" rel="noopener">gh:microsoft/vscode#343293</a>。受官方 API 限制，很多只能改 CSS 或依赖非公开命令，官方随时可能实现，付费意愿多为 1～2。</li>
-<li><strong>已有成熟免费方案且差异化弱</strong>：如 <a class="chip" href="https://github.com/microsoft/PowerToys/issues/51759" target="_blank" rel="noopener">gh:microsoft/PowerToys#51759</a>（7-Zip/WinRAR/Inno Setup 已覆盖）、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>（LinearMouse 等已可关鼠标加速）、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/50482" target="_blank" rel="noopener">gh:microsoft/PowerToys#50482</a>（已有 ThreeFingerDragOnWindows）、<a class="chip" href="https://news.ycombinator.com/item?id=49861720" target="_blank" rel="noopener">hn:49861720</a>（已有 better YouTube preview）。获客难，除非有明确体验优势。</li>
-<li><strong>高度垂直行业工具</strong>：如 <a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>（IP 摄像头 RTSP 验收）、<a class="chip" href="https://qiita.com/YusukeHarada/items/77c6bc5c47d0264d1aff" target="_blank" rel="noopener">qiita:77c6bc5c47d0264d1aff</a>（UDS/DoIP）、qiita:df2f24f6a0bfec5bb13（Excel VBA 宏库）、<a class="chip" href="https://qiita.com/iceblue/items/725bc1f282b666db065a" target="_blank" rel="noopener">qiita:725bc1f282b666db065a</a>（费用审计）。需要领域知识和销售渠道，个人难验证，先做通用小工具更稳。</li>
-<li><strong>娱乐/社交实验型</strong>：如 <a class="chip" href="https://qiita.com/tetsuro731/items/daa5c5938d874af3a335" target="_blank" rel="noopener">qiita:daa5c5938d874af3a335</a>（AI 海龟汤）、<a class="chip" href="https://qiita.com/satoshot/items/aa04078ea2e698e64ea9" target="_blank" rel="noopener">qiita:aa04078ea2e698e64ea9</a>（恋爱养成待办）、<a class="chip" href="https://news.ycombinator.com/item?id=49634984" target="_blank" rel="noopener">hn:49634984</a>（论坛负面批评分流）、<a class="chip" href="https://news.ycombinator.com/item?id=49602056" target="_blank" rel="noopener">hn:49602056</a>（HN 丰富评价机制）。好玩但留存和付费弱，且依赖平台规则与社区文化。</li>
-</ul>
+<ol>
+<li>
+<p><strong>VS Code 原生 UI 细节类 issue</strong>：如 <a class="chip" href="https://github.com/microsoft/vscode/issues/343293" target="_blank" rel="noopener">gh:microsoft/vscode#343293</a>（滚动条遮挡选项）、#345151（隐藏 AI 更新日志）、#343902、#344616、#340650、#338183、#335423、#339486、#343904。这些都在官方 backlog 里，插件只能靠修改 CSS 或非公开 API 实现，官方一实现就归零；付费意愿普遍是 1–2。</p>
+</li>
+<li>
+<p><strong>依赖第三方产品内部 Feature Flag 的改造</strong>：如 <a class="chip" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960" target="_blank" rel="noopener">qiita:207104b10a46ea6d9960</a>（恢复 Claude 的 Chat/Cowork 分离界面）。作者自己都写明“易随官方更新失效”，一个人无法承担持续逆向的成本。</p>
+</li>
+<li>
+<p><strong>重资产或强专业领域</strong>：<a class="chip" href="https://qiita.com/kuis/items/d696ddf067eddde79e7f" target="_blank" rel="noopener">qiita:d696ddf067eddde79e7f</a>（短视频全自动流水线，作者自己都撞上浏览器内存上限）、<a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>（RTSP 验收）、<a class="chip" href="https://qiita.com/YusukeHarada/items/77c6bc5c47d0264d1aff" target="_blank" rel="noopener">qiita:77c6bc5c47d0264d1aff</a>（UDS/DoIP）、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95686/open-source-tool-to-auto-generate-api-regression-tests-from-real-traffic-linux" target="_blank" rel="noopener">se:softwarerecs:95686</a>（流量生成回归测试）、<a class="chip" href="https://qiita.com/mnoda/items/1511f46212883dcacca2" target="_blank" rel="noopener">qiita:1511f46212883dcacca2</a>（Exchange Online 批量配置）。需要领域知识、企业级可靠性和销售，不是一个人用 AI 几天能交付的。</p>
+</li>
+<li>
+<p><strong>已有成熟免费方案或官方已覆盖</strong>：<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>（macOS 关鼠标加速，LinearMouse 等已覆盖）、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>（Knockoff、Fakespot）、<a class="chip" href="https://qiita.com/hidao/items/5e6a7ae69019b75374b1" target="_blank" rel="noopener">qiita:5e6a7ae69019b75374b1</a>（commitlint/husky/commitizen 已够用，只是配置麻烦）、<a class="chip" href="https://qiita.com/tuyomori/items/50e587e6c541e0089769" target="_blank" rel="noopener">qiita:50e587e6c541e0089769</a>（ChatGPT 官方 Library 已支持 Dropbox 目录浏览）、<a class="chip" href="https://news.ycombinator.com/item?id=49861720" target="_blank" rel="noopener">hn:49861720</a>（better YouTube preview 已实现长按预览）、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/50482" target="_blank" rel="noopener">gh:microsoft/PowerToys#50482</a>（ThreeFingerDragOnWindows 已有 1.1k stars）。</p>
+</li>
+<li>
+<p><strong>付费意愿极低的一次性微工具</strong>：<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran" target="_blank" rel="noopener">se:softwarerecs:95654</a>（按页数筛 PDF，需自建索引，难度与回报不匹配）、<a class="chip" href="https://news.ycombinator.com/item?id=49602056" target="_blank" rel="noopener">hn:49602056</a>（HN 更丰富评价机制，平台不改就没用）、<a class="chip" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab" target="_blank" rel="noopener">qiita:70e09095d14bb87757ab</a>（日文字数统计，浏览器已有多种替代）、<a class="chip" href="https://github.com/microsoft/vscode/issues/343293" target="_blank" rel="noopener">gh:microsoft/vscode#343293</a> 这类“只影响一次操作”的体验修补。做出来也很难收回开发时间。</p>
+</li>
+</ol>
 </div></details><details class="fold"><summary>英文、日文、中文社区的差异</summary><div class="detail">
-<ul>
-<li><strong>日文社区（qiita）</strong>：需求大量集中在日常业务自动化和桌面效率，如 GAS/Excel、Windows 日语 IME、收据 PDF、Search Console、Kakuyomu 数据、NDL 分类、家务提醒。常见表述是“個人スクリプトで部分解決”“現場でインストールできない”“非技術者には難しい”，说明机会主要在把个人脚本做成开箱即用、有界面、有安装包的小工具。付费意愿多为 2～3，适合低价或免费增值。机会点是“降低配置门槛”和“适配日本本地格式/习惯”（和历、敬称、发票登记号、日本地址、日语输入）。</li>
-<li><strong>英文社区（hn、github、forum、se）</strong>：hn 更偏浏览器扩展、信息甄别、隐私、本地模型和消费决策；GitHub issue 更偏 VS Code/Joplin/PowerToys 的官方功能缺口，形式多为扩展或插件，但容易被官方后续实现吸收；se 更偏自托管、工具链和专业基础设施。英文侧的说法更常是“privacy/compliance”“vendor lock-in”“official issue still open”“no existing tool”，机会点在 none/weak 且空缺明确的扩展，以及不依赖官方路线图的轻量工具。</li>
-<li><strong>中文社区</strong>：本批数据没有中文社区来源（平台字段只有 qiita、hn、github、forum、se），因此无法从样本判断中文社区的需求侧重和机会，不能编造差异；上面的比较只代表日文与英文样本。</li>
-</ul>
+<p><strong>日文（qiita）</strong>：这个数据集里占比最大，特征是“自建脚本先行”。大量条目的“现有方案”写的是“作者自己已经用 GAS / Python / AutoHotkey / MCP 做出来了，但只是个人脚本”，需求本质是<strong>产品化与分发</strong>（安装包、配置界面、多用户、更新），而不是从零发明。领域上办公自动化特别密集：Google 表格、收据 PDF、Excel 宏库、Notion 表单、报销审计、Kakuyomu 数据、ブクログ藏书。本地化细节（和历日期、敬称、发票登记号、日本地址全角半角、日语 IME）构成天然护城河，但单点市场小、付费意愿普遍标 2–3。另一个明显集群是 AI 编码代理周边（Claude Code、Codex、MCP、GAS 部署），作者多是重度个人开发者。</p>
+<p><strong>英文（Hacker News / StackExchange / GitHub issues）</strong>：更多是<strong>平台级缺口与协议层问题</strong>——Web Push 自托管（<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>）、UA 差异（<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>）、API 破坏性变更追踪（<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a>）、C2PA 截图来源（<a class="chip" href="https://github.com/flameshot-org/flameshot/issues/4978" target="_blank" rel="noopener">gh:flameshot-org/flameshot#4978</a>）、passkey 统一关闭（<a class="chip" href="https://news.ycombinator.com/item?id=49755505" target="_blank" rel="noopener">hn:49755505</a>）。GitHub issue 型需求则是开源项目内的原生功能诉求，特点是“官方总有一天会做”，做插件窗口期短。英文侧隐私、合规、安全的诉求更集中，且偶尔出现付费意愿明显偏高的垂直场景（VST 吉他插件、Withings 健康同步、系统级音频）。</p>
+<p><strong>中文</strong>：本次数据中没有中文社区的条目，无法比较。若要把上面结论外推，需要另行收集中文社区样本再判断——尤其“个人脚本产品化”和“办公表格自动化”这两类在中文语境下是否同样成立，目前没有数据支持。</p>
+<p><strong>机会判断</strong>：日文侧适合做窄而深、带日语界面和本地规则的付费小工具，靠 Qiita 文章 + 原帖回复冷启动；英文侧适合做开发者自己会用的浏览器扩展或 CLI，靠 Show HN、Chrome Web Store、VS Code Marketplace 分发，但同质化和免费竞品更多，必须在“自动化比对/自动判断”这一点上做出差异，否则很快被现成脚本淹没。</p>
 </div></details><details class="fold"><summary>引用的需求</summary><div class="detail">
 <div class="table"><table>
 <thead>
@@ -355,9 +401,9 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 </thead>
 <tbody>
 <tr>
-<td><code>qiita:228dfa134c76e15ab1a8</code></td>
-<td>让 AI 直接读写并部署 Google Apps Script，无需打开浏览器或安装 clasp</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">链接</a></td>
+<td><code>gh:microsoft/vscode#344742</code></td>
+<td>VS Code 文件资源管理器增加扁平化视图选项</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344742">链接</a></td>
 </tr>
 <tr>
 <td><code>gh:microsoft/vscode#338860</code></td>
@@ -365,34 +411,34 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 <td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/338860">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:12ba0b2c6e44f7d38d11</code></td>
-<td>在 Claude Code 终端内选中文本即可翻译/解释/总结的快捷操作插件</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50060564</code></td>
-<td>标准化分享和对比 AI 编程提示词、生成结果与 token 消耗的平台</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50060564">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:obsidian:120058</code></td>
-<td>让 Obsidian 的 Callout 内容跟随文件当前模式（Live Preview/阅读视图）显示</td>
-<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:laurent22/joplin#16779</code></td>
-<td>为 Joplin 笔记的双向链接建立索引，以支持反向链接面板和断链检测</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16779">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:fa431f65dde03a94384f</code></td>
-<td>把 Mermaid 复杂类图转成可编辑、可导出的 draw.io 图，且不破坏原文件</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/joker_/items/fa431f65dde03a94384f">链接</a></td>
+<td><code>qiita:e292a87e8610a8355730</code></td>
+<td>为 VS Code + LaTeX 自动生成并补全章节标签与引用</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/Clairdeluna_eve/items/e292a87e8610a8355730">链接</a></td>
 </tr>
 <tr>
 <td><code>se:softwarerecs:95572</code></td>
 <td>为 VS Code 中固定宽度字段文件按列着色</td>
 <td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95572/extension-for-coloring-fixed-width-files">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:723f8fccd84e39f9c666</code></td>
+<td>让 Windows 自带日语输入法像 Mac 一样用数字键直接选候选词，免去反复按 Tab</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/PowerToys#51759</code></td>
+<td>把 zip 压缩包一键转换成 exe 或 msi 自解压安装包</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51759">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49806516</code></td>
+<td>为 macOS 提供关闭鼠标加速的图形化开关</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49806516">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:b0b249f732f428955867</code></td>
+<td>为 Windows 的 USB/IP 提供图形界面，让用户能轻松把 USB 设备通过网络共享给另一台电脑</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/umaxiaotian/items/b0b249f732f428955867">链接</a></td>
 </tr>
 <tr>
 <td><code>hn:50168676</code></td>
@@ -405,54 +451,34 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50022196">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:497627e449caa8b4e465</code></td>
-<td>用白名单浏览器拦截广告误触和钓鱼链接</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/Takashi_MonbaDev/items/497627e449caa8b4e465">链接</a></td>
+<td><code>qiita:207104b10a46ea6d9960</code></td>
+<td>恢复 Claude 中 Chat 与 Cowork 分离的界面切换</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:49755505</code></td>
-<td>希望有一个全局开关，让所有网站都不再提示使用 passkey 登录</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49755505">链接</a></td>
+<td><code>hn:49656324</code></td>
+<td>用 LLM 自动分析并汇总网站服务条款和隐私政策，帮用户快速了解数据风险</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49656324">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:723f8fccd84e39f9c666</code></td>
-<td>让 Windows 自带日语输入法像 Mac 一样用数字键直接选候选词，免去反复按 Tab</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">链接</a></td>
+<td><code>qiita:228dfa134c76e15ab1a8</code></td>
+<td>让 AI 直接读写并部署 Google Apps Script，无需打开浏览器或安装 clasp</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/228dfa134c76e15ab1a8">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:8d5f16e82816d8fc9eb4</code></td>
-<td>让 Windows 的键盘鼠标通过蓝牙共享给 iPad 使用</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/tukiharu/items/8d5f16e82816d8fc9eb4">链接</a></td>
+<td><code>hn:50060564</code></td>
+<td>标准化分享和对比 AI 编程提示词、生成结果与 token 消耗的平台</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50060564">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:49806516</code></td>
-<td>为 macOS 提供关闭鼠标加速的图形化开关</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49806516">链接</a></td>
+<td><code>qiita:12ba0b2c6e44f7d38d11</code></td>
+<td>在 Claude Code 终端内选中文本即可翻译/解释/总结的快捷操作插件</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/erin/items/12ba0b2c6e44f7d38d11">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:flameshot-org/flameshot#5000</code></td>
-<td>让 Flameshot 在全屏远程桌面（mstsc）下也能用 Print Screen 截图</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/flameshot-org/flameshot/issues/5000">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:b5fb1ca9e460c7e14b9e</code></td>
-<td>为 Wan 2.5 视频生成模型按固定顺序组装提示词（画面、台词、音效）的小工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:8a2f621d3a9cec885170</code></td>
-<td>不知道设计风格名称也能通过图片和滑块探索设计风格的网页工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/Tachiuo/items/8a2f621d3a9cec885170">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:d696ddf067eddde79e7f</code></td>
-<td>一键自动批量生成短视频的AI流水线工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/kuis/items/d696ddf067eddde79e7f">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49824788</code></td>
-<td>为文本转语音提供可控的发音纠正机制</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49824788">链接</a></td>
+<td><code>hn:49595348</code></td>
+<td>团队共享 AI 技能文件（skills）的管理与同步工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49595348">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:7891fed6c9eaae905bc6</code></td>
@@ -465,34 +491,54 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 <td><a target="_blank" rel="noopener" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3">链接</a></td>
 </tr>
 <tr>
+<td><code>qiita:df2fb24f6a0bfec5bb13</code></td>
+<td>用自然语言指令直接调用本地 VBA 宏库来操作 Excel，无需每次让 AI 生成代码</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13">链接</a></td>
+</tr>
+<tr>
 <td><code>qiita:8ce616b8a37248af3677</code></td>
 <td>把外部问询表单直接接入 Notion 数据库，并适配日本地址与限流</td>
 <td><a target="_blank" rel="noopener" href="https://qiita.com/Yoshio12/items/8ce616b8a37248af3677">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:ae5786c4c7b7a7c86077</code></td>
-<td>批量拉取 Search Console 各页面展示/点击数据并对比分析的小工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/tarou_0818/items/ae5786c4c7b7a7c86077">链接</a></td>
+<td><code>qiita:1dc522be2aab57501c03</code></td>
+<td>用 AI 代理定时聚合 X/新闻/arXiv 等技术资讯并显示在 iPhone 主屏小组件</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/eri1600/items/1dc522be2aab57501c03">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:a98b283eed4045391dc0</code></td>
-<td>在笔记本上用 OpenVINO 本地运行日语 LLM 的简易 GUI 工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0">链接</a></td>
+<td><code>qiita:b5fb1ca9e460c7e14b9e</code></td>
+<td>为 Wan 2.5 视频生成模型按固定顺序组装提示词（画面、台词、音效）的小工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">链接</a></td>
 </tr>
 <tr>
-<td><code>se:softwarerecs:95677</code></td>
-<td>自托管的 Web Push 通知服务器，支持多用户、WebUI 管理和 CLI/curl 触发</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server">链接</a></td>
+<td><code>hn:49793876</code></td>
+<td>让音乐流媒体按用户真实收听习惯推荐，而不是塞广告和 AI 噪音</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49793876">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:3c2c7675661590a4309a</code></td>
-<td>检测自建内部工具中隐藏的外部网络请求（隐私/合规自查）</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/hanamilo/items/3c2c7675661590a4309a">链接</a></td>
+<td><code>qiita:c85c8f5d60c18d2b09ec</code></td>
+<td>自动收集Kakuyomu（日本小说网站）作品统计数据并保存历史记录</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/anquimomonaca/items/c85c8f5d60c18d2b09ec">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:49677927</code></td>
-<td>隔离工作应用与个人敏感账户的身份/登录环境</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49677927">链接</a></td>
+<td><code>forum:obsidian:120058</code></td>
+<td>让 Obsidian 的 Callout 内容跟随文件当前模式（Live Preview/阅读视图）显示</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16788</code></td>
+<td>为 Joplin 的 MCP 增加“相关笔记”语义检索工具</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16788">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16779</code></td>
+<td>为 Joplin 笔记的双向链接建立索引，以支持反向链接面板和断链检测</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16779">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:4f09608ac8b779e42533</code></td>
+<td>用关系图谱连接聊天记录与日记，按「关联路径」检索人和知识</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/EasyCording/items/4f09608ac8b779e42533">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:a5e7ce5c9a32f976e339</code></td>
@@ -505,144 +551,9 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 <td><a target="_blank" rel="noopener" href="https://qiita.com/YusukeHarada/items/77c6bc5c47d0264d1aff">链接</a></td>
 </tr>
 <tr>
-<td><code>se:softwarerecs:95595</code></td>
-<td>面向单人微型农场（微型菜苗）的离线 Windows 台账工具，管理育苗盘周期、常备订单与收支</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95595/offline-windows-ledger-for-a-one-person-microgreens-farm-trays-standing-order">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49780959</code></td>
-<td>面向小型固定群体的简易活动报名与通知管理工具</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49780959">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:e9bbed361dcabf20a0cf</code></td>
-<td>面向意志力薄弱者的游戏化习惯养成应用</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:9c08ac6c5a5ef5b4f7d6</code></td>
-<td>用 AI 管理家务周期、垃圾日和购物清单，并主动推送提醒</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50262216</code></td>
-<td>为禁用 JavaScript 的 Hacker News 提供纯 CSS 的评论折叠/展开功能</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50262216">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49602056</code></td>
-<td>为 HN 等社区增加比简单点赞更丰富的帖子质量评价机制</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49602056">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49819092</code></td>
-<td>把网页文章转成可离线收听的语音，并支持灵活切换 TTS 后端</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49819092">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:8f9489403e10f585c3af</code></td>
-<td>在一个界面统一管理所有 Claude Code 会话的本地看板工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:b3df525ee38941ec98f8</code></td>
-<td>给 AI Agent 的 CLI 调用加一层限流/熔断包装，遇到 429 就强制等待</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/Kazeneko/items/b3df525ee38941ec98f8">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:microsoft/vscode#344494</code></td>
-<td>在 VS Code 中对比启用/禁用技能（skill）或技能修改前后的工作流效果</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344494">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:microsoft/vscode#337592</code></td>
-<td>VS Code BYOK 自定义端点支持动态刷新的 OAuth 令牌</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/337592">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49595348</code></td>
-<td>团队共享 AI 技能文件（skills）的管理与同步工具</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49595348">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50144294</code></td>
-<td>标记被私募股权收购公司的浏览器扩展/目录</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50144294">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49886395</code></td>
-<td>过滤亚马逊上仿冒品牌垃圾商品的浏览器扩展</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49886395">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49582536</code></td>
-<td>浏览器扩展：按 AI 生成概率将网页文字渐隐显示</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49582536">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:207104b10a46ea6d9960</code></td>
-<td>恢复 Claude 中 Chat 与 Cowork 分离的界面切换</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/zawa356/items/207104b10a46ea6d9960">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49656324</code></td>
-<td>用 LLM 自动分析并汇总网站服务条款和隐私政策，帮用户快速了解数据风险</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49656324">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:obsidian:120046</code></td>
-<td>让 Obsidian 启动时默认打开关系图谱视图</td>
-<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:laurent22/joplin#16871</code></td>
-<td>Joplin 白板笔记导出 PDF 时导出的是源码而非画布</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16871">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:laurent22/joplin#16789</code></td>
-<td>为 Joplin 的 MCP 接口增加按章节读写笔记的能力</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16789">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:01397cecf44ebbc0cbcf</code></td>
-<td>把 Markdown 渲染结果以富文本格式复制到 Word/邮件/聊天工具的单文件网页工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:d7131f574eb87d7f412c</code></td>
-<td>把 Mastodon 账号的新帖自动转发到 Discord 频道</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/rinfromniigata/items/d7131f574eb87d7f412c">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:1dc522be2aab57501c03</code></td>
-<td>用 AI 代理定时聚合 X/新闻/arXiv 等技术资讯并显示在 iPhone 主屏小组件</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/eri1600/items/1dc522be2aab57501c03">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:31db81e05096c8d6f7b8</code></td>
-<td>在浏览器之外选中任意文本即可本地翻译的桌面工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/Toppo8/items/31db81e05096c8d6f7b8">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49627397</code></td>
-<td>希望在桌面电脑上方便地试用本地端侧 AI 模型</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49627397">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:laurent22/joplin#16969</code></td>
-<td>为 Joplin API 增加禁用邮箱/密码登录的开关</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16969">链接</a></td>
-</tr>
-<tr>
-<td><code>se:softwarerecs:95686</code></td>
-<td>从真实流量自动生成 API 回归测试和依赖 mock 的工具</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95686/open-source-tool-to-auto-generate-api-regression-tests-from-real-traffic-linux">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50110933</code></td>
-<td>为 macOS 提供类似 Podman Quadlets 的声明式服务管理工具</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50110933">链接</a></td>
+<td><code>se:softwarerecs:95677</code></td>
+<td>自托管的 Web Push 通知服务器，支持多用户、WebUI 管理和 CLI/curl 触发</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:cbee14e45f068be1d4e9</code></td>
@@ -650,34 +561,79 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 <td><a target="_blank" rel="noopener" href="https://qiita.com/Nokhysh/items/cbee14e45f068be1d4e9">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#344616</code></td>
-<td>VS Code 最大化副侧边栏时保留主侧边栏（资源管理器）可见的开关</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344616">链接</a></td>
+<td><code>hn:50112258</code></td>
+<td>让 Withings 健康数据免费同步到 Apple Health 的小工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50112258">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#340650</code></td>
-<td>为 VS Code 工作台（尤其是 Copilot Chat 面板）增加可配置的最大宽度设置</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/340650">链接</a></td>
+<td><code>qiita:e9bbed361dcabf20a0cf</code></td>
+<td>面向意志力薄弱者的游戏化习惯养成应用</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yunaeme/items/e9bbed361dcabf20a0cf">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#343904</code></td>
-<td>VS Code 窄屏下自动展开当前选中项、其余项折叠为图标</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/343904">链接</a></td>
+<td><code>se:softwarerecs:95606</code></td>
+<td>把闲置 Android TV 变成只显示指定联系人消息的厨房通知屏</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95606/dynamically-display-text-on-a-remote-android-tv-display">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#345151</code></td>
-<td>在 VS Code 内置更新日志中增加“隐藏 AI 功能”筛选</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/345151">链接</a></td>
+<td><code>hn:49710490</code></td>
+<td>帮助用户识别和找到真正高质量、耐穿服装的工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49710490">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#343293</code></td>
-<td>VS Code 提问工具的长选项列表被原生滚动条遮挡，难以看清选项</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/343293">链接</a></td>
+<td><code>qiita:8f9489403e10f585c3af</code></td>
+<td>在一个界面统一管理所有 Claude Code 会话的本地看板工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/kotobuki5991/items/8f9489403e10f585c3af">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/PowerToys#51759</code></td>
-<td>把 zip 压缩包一键转换成 exe 或 msi 自解压安装包</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51759">链接</a></td>
+<td><code>se:softwarerecs:95686</code></td>
+<td>从真实流量自动生成 API 回归测试和依赖 mock 的工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95686/open-source-tool-to-auto-generate-api-regression-tests-from-real-traffic-linux">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:a98b283eed4045391dc0</code></td>
+<td>在笔记本上用 OpenVINO 本地运行日语 LLM 的简易 GUI 工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49627397</code></td>
+<td>希望在桌面电脑上方便地试用本地端侧 AI 模型</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49627397">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#341290</code></td>
+<td>让 VS Code Copilot 聊天中的 issue/PR 编号自动变成可点击链接</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/341290">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:81cf8f1140fe58f36e66</code></td>
+<td>把浏览器 ChatGPT 里整理好的指令免复制粘贴地传给 VS Code Codex 会话</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/locolisu/items/81cf8f1140fe58f36e66">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50144294</code></td>
+<td>标记被私募股权收购公司的浏览器扩展/目录</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50144294">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49582536</code></td>
+<td>浏览器扩展：按 AI 生成概率将网页文字渐隐显示</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49582536">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:25b8a7b52819035bba5b</code></td>
+<td>让 Claude 等 AI 输出更简洁、结论先行，避免冗长</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/hotate_2235/items/25b8a7b52819035bba5b">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50107094</code></td>
+<td>阻止游戏启动器（Epic/Steam）启动时抢占窗口焦点</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50107094">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50017797</code></td>
+<td>在 macOS 上把快捷键符号（⌘⌥⇧）显示为文字或缩写</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50017797">链接</a></td>
 </tr>
 <tr>
 <td><code>gh:microsoft/PowerToys#50482</code></td>
@@ -685,33 +641,73 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 <td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/50482">链接</a></td>
 </tr>
 <tr>
+<td><code>gh:microsoft/vscode#343293</code></td>
+<td>VS Code 提问工具的长选项列表被原生滚动条遮挡，难以看清选项</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/343293">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:d696ddf067eddde79e7f</code></td>
+<td>一键自动批量生成短视频的AI流水线工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/kuis/items/d696ddf067eddde79e7f">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:1511f46212883dcacca2</code></td>
+<td>为 Exchange Online 管理员提供 Outlook 群组日历的批量配置与分发工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/mnoda/items/1511f46212883dcacca2">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49886395</code></td>
+<td>过滤亚马逊上仿冒品牌垃圾商品的浏览器扩展</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49886395">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:5e6a7ae69019b75374b1</code></td>
+<td>用 Conventional Commits 规范提交信息并自动校验</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/hidao/items/5e6a7ae69019b75374b1">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:50e587e6c541e0089769</code></td>
+<td>在 ChatGPT 对话中直接浏览并插入 Dropbox 文件的小窗工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/tuyomori/items/50e587e6c541e0089769">链接</a></td>
+</tr>
+<tr>
 <td><code>hn:49861720</code></td>
 <td>为 YouTube 预览增加长按触发，避免鼠标悬停误触</td>
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49861720">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:725bc1f282b666db065a</code></td>
-<td>用AI自动比对Word报销制度与Excel报销明细，完成费用审计</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/iceblue/items/725bc1f282b666db065a">链接</a></td>
+<td><code>se:softwarerecs:95654</code></td>
+<td>按页数范围筛选 PDF 的搜索工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:daa5c5938d874af3a335</code></td>
-<td>用AI做海龟汤（横向思维谜题）出题与Yes/No问答的网页游戏</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/tetsuro731/items/daa5c5938d874af3a335">链接</a></td>
+<td><code>hn:49602056</code></td>
+<td>为 HN 等社区增加比简单点赞更丰富的帖子质量评价机制</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49602056">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:aa04078ea2e698e64ea9</code></td>
-<td>把待办管理做成带好感度和角色设定的恋爱养成式双向对话机器人</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/satoshot/items/aa04078ea2e698e64ea9">链接</a></td>
+<td><code>qiita:70e09095d14bb87757ab</code></td>
+<td>在浏览器里准确统计含表情符号的日文字数并提示超出限制</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/mojikaunto/items/70e09095d14bb87757ab">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:49634984</code></td>
-<td>把论坛里的负面批评集中到一个独立线程，让其他讨论保持技术性</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49634984">链接</a></td>
+<td><code>se:softwarerecs:95656</code></td>
+<td>按库版本追踪弃用与破坏性变更的 API/订阅源工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:flameshot-org/flameshot#4978</code></td>
+<td>为截图添加 C2PA 来源元数据，证明截图是真实截屏而非 AI 生成</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/flameshot-org/flameshot/issues/4978">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49755505</code></td>
+<td>希望有一个全局开关，让所有网站都不再提示使用 passkey 登录</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49755505">链接</a></td>
 </tr>
 </tbody>
 </table></div></div></details><details class="fold"><summary>往期存档</summary><div class="detail archive"><a href="2026-W45.html">2026-W45</a><a href="../index.html">最新版</a></div></details>
-  <footer>generated 2026-11-03 09:27 JST · auto-updated daily</footer>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div>generated 2026-11-03 10:29 JST · 每天自动更新</footer>
 </div>
 </body>
 </html>
