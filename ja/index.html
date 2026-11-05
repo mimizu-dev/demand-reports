@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>ニーズレーダー · 2026-11-06 更新</title>
+<meta name="description" content="Hacker News・Reddit・Qiita などから収集した、個人開発者向けのソフトウェア需要とツールのアイデアを毎日お届けします。2026-11-06 更新。">
+<meta property="og:title" content="ニーズレーダー · 2026-11-06 更新">
+<meta property="og:description" content="Hacker News・Reddit・Qiita などから収集した、個人開発者向けのソフトウェア需要とツールのアイデアを毎日お届けします。2026-11-06 更新。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimizu-dev.github.io/demand-reports/ja/index.html">
+<link rel="canonical" href="https://mimizu-dev.github.io/demand-reports/ja/index.html">
+<link rel="alternate" hreflang="en" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
+<link rel="alternate" hreflang="ja" href="https://mimizu-dev.github.io/demand-reports/ja/index.html">
+<link rel="alternate" hreflang="x-default" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Sweetie-16 像素调色板 */
+  --bg: #0d0e1c; --panel: #1a1c2c; --panel-2: #262b44; --line: #333c57; --bd: #566c86;
+  --text: #f4f4f4; --dim: #94b0c2;
+  --cyan: #73eff7; --blue: #41a6f6; --pink: #ff77a8; --lime: #a7f070; --amber: #ffcd75; --red: #ef5d63; --violet: #a46bd6;
+  --pixel: "DotGothic16", "Noto Sans JP", monospace; --arcade: "Press Start 2P", "DotGothic16", monospace;
+  --mono: "DotGothic16", ui-monospace, monospace;
+  --u: 4px;  /* 一个"像素"的大小 */
+}
+* { box-sizing: border-box; }
+html { image-rendering: pixelated; }
+body { margin: 0; color: var(--text); font: 15px/1.75 "Noto Sans JP", system-ui, sans-serif; background-color: var(--bg);
+  background-image:
+    radial-gradient(var(--line) 1px, transparent 1.5px),
+    radial-gradient(#22264a 1px, transparent 1.5px);
+  background-size: 32px 32px, 32px 32px; background-position: 0 0, 16px 16px; }
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+a { color: var(--cyan); text-decoration: none; }
+::selection { background: var(--pink); color: var(--bg); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.c-cyan { color: var(--cyan); } .c-pink { color: var(--pink); } .c-lime { color: var(--lime); }
+.c-amber { color: var(--amber); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+svg.px { width: 16px; height: 16px; fill: currentColor; shape-rendering: crispEdges; flex: none; }
+svg.sprite { shape-rendering: crispEdges; display: block; }
+
+/* 像素边框：上下左右各一条，四角留缺口 + 硬阴影 */
+.pxbox, .card, .fold, .board, .headline, .m, .tabs a.on, .langs a.on, .btn, .stats span, .rank, .refs a, .chip, .archive a {
+  --c: var(--bd);
+  box-shadow: 0 calc(-1 * var(--u)) 0 0 var(--c), 0 var(--u) 0 0 var(--c), calc(-1 * var(--u)) 0 0 0 var(--c), var(--u) 0 0 0 var(--c); }
+.card, .fold, .board { box-shadow: 0 -4px 0 0 var(--c), 0 4px 0 0 var(--c), -4px 0 0 0 var(--c), 4px 0 0 0 var(--c),
+  8px 8px 0 0 #05060d, 4px 12px 0 0 #05060d, 12px 4px 0 0 #05060d; }
+.m, .stats span, .rank, .refs a, .chip, .archive a, .btn { --u: 2px; }
+
+/* 顶部 */
+header { padding: 28px 0 10px; }
+.prompt { font: 10px var(--arcade); color: var(--lime); letter-spacing: .06em; }
+.prompt::after { content: "█"; animation: blink 1s steps(1) infinite; margin-left: 6px; }
+@keyframes blink { 50% { opacity: 0; } }
+.tabs { display: flex; gap: 14px; margin: 18px 4px 4px; }
+.tabs a { font: 400 15px var(--pixel); color: var(--dim); padding: 4px 14px; background: transparent; }
+.tabs a.on { --c: var(--cyan); color: var(--bg); background: var(--cyan); }
+.tabs a:not(.on):hover { color: var(--cyan); }
+.tabs a.on::before { content: "▶ "; }
+.langs { display: flex; gap: 12px; margin: 12px 0 0; }
+.langs a { font: 400 13px var(--pixel); color: var(--dim); padding: 2px 10px; background: transparent; }
+.langs a.on { --c: var(--cyan); color: var(--bg); background: var(--cyan); }
+.langs a:not(.on):hover { color: var(--cyan); }
+.hero { display: flex; align-items: center; gap: 22px; margin: 18px 0 8px; }
+.hero svg.sprite { width: 96px; height: 96px; flex: none; filter: drop-shadow(4px 4px 0 #05060d); animation: bob 1.2s steps(2) infinite; }
+@keyframes bob { 50% { transform: translateY(-4px); } }
+h1 { font: 400 clamp(26px, 5vw, 42px)/1.2 var(--pixel); margin: 0 0 10px; letter-spacing: .04em; color: var(--text);
+  text-shadow: 3px 3px 0 var(--violet), 6px 6px 0 #05060d; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px 14px; font: 13px var(--mono); color: var(--dim); padding-left: 2px; }
+.stats span { background: var(--panel); padding: 1px 10px; }
+.stats b { color: var(--text); font-weight: 400; }
+.ground { height: 16px; margin: 18px 0 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23262b44'/%3E%3Crect width='16' height='4' fill='%2338b764'/%3E%3Crect y='4' width='16' height='2' fill='%23257179'/%3E%3Crect x='2' y='9' width='4' height='2' fill='%23333c57'/%3E%3Crect x='10' y='12' width='4' height='2' fill='%23333c57'/%3E%3Crect x='4' width='2' height='2' y='-0' fill='%23a7f070'/%3E%3Crect x='12' width='2' height='2' fill='%23a7f070'/%3E%3C/svg%3E") repeat-x;
+  background-size: 16px 16px; }
+
+h2 { font: 400 20px var(--pixel); margin: 34px 0 18px; display: flex; align-items: center; gap: 12px; }
+h2::before { content: ""; width: 12px; height: 12px; background: var(--pink);
+  box-shadow: 4px 4px 0 0 var(--violet); animation: blink 1.6s steps(1) infinite; }
+
+/* 卡片 */
+.cards { display: grid; gap: 26px; padding: 4px; }
+.card { background: var(--panel); padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card:hover { --c: var(--cyan); }
+.card-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.rank { --c: var(--amber); font: 12px var(--arcade); color: var(--bg); background: var(--amber); padding: 4px 8px 3px; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--mono); color: var(--dim); }
+.tag svg.px { width: 12px; height: 12px; }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--text); }
+.lede { color: #c2d3e0; margin: 0 0 14px; }
+.meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
+.m { --c: var(--line); background: var(--panel-2); padding: 8px 10px; display: grid; gap: 4px; align-content: start; }
+.m b { font: 400 14px var(--mono); }
+.m b.big { font: 18px/1 var(--arcade); }
+.m span { font: 12px var(--mono); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: #0d0e1c; width: max-content; }
+.pips i { width: 8px; height: 10px; background: #333c57; }
+.pips.amber i.on { background: var(--amber); box-shadow: inset 0 -3px 0 #ef7d57; }
+.pips.lime i.on { background: var(--lime); box-shadow: inset 0 -3px 0 #38b764; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
+.btn { --c: var(--cyan); display: inline-flex; align-items: center; gap: 6px; font: 13px var(--mono); color: var(--cyan); background: var(--panel); padding: 2px 10px; }
+.btn:hover { background: var(--cyan); color: var(--bg); }
+.btn:active { transform: translate(2px, 2px); }
+.btn svg.px { width: 12px; height: 12px; }
+details summary { cursor: pointer; list-style: none; font: 13px var(--mono); color: var(--dim); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▶ "; color: var(--pink); display: inline-block; }
+details[open] > summary::before { content: "▼ "; }
+details summary:hover { color: var(--text); }
+.actions details { flex: 0 1 auto; }
+.actions details summary { padding: 2px 4px; }
+.actions details[open] { flex-basis: 100%; }
+.actions details[open] summary { margin-bottom: 8px; display: inline-block; }
+.detail { font-size: 14px; color: #c2d3e0; }
+.detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
+.detail li::marker { color: var(--pink); }
+.fold { background: var(--panel); padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--text); }
+.fold[open] > summary { margin-bottom: 10px; }
+.table { overflow-x: auto; border: 2px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--line); vertical-align: top; }
+th { background: var(--panel-2); font: 13px var(--mono); color: var(--amber); white-space: nowrap; }
+td:first-child { min-width: 8em; }
+.chip { --c: #257179; font: 12px var(--mono); color: var(--cyan); padding: 0 6px; margin: 2px; white-space: nowrap; display: inline-block; }
+.archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
+.archive a { font: 13px var(--mono); padding: 1px 10px; background: var(--panel-2); }
+footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; text-align: center; }
+
+/* 资讯页 */
+.headline { --c: var(--lime); font: 400 17px/1.6 var(--pixel); background: var(--panel); padding: 12px 16px 12px 44px; margin: 20px 4px 0;
+  position: relative; }
+.headline::before { content: "!"; position: absolute; left: 12px; top: 12px; width: 20px; height: 20px; background: var(--lime);
+  color: var(--bg); font: 12px/20px var(--arcade); text-align: center; }
+.hl h3 { margin: 0 0 6px; }
+.refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
+.refs a { --c: #257179; min-width: 0; font: 12px var(--mono); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--panel-2); }
+.refs a:hover { background: var(--cyan); color: var(--bg); }
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
+.board { background: var(--panel); padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 16px; display: flex; justify-content: space-between; gap: 8px;
+  background: var(--panel-2); border-bottom: 4px solid var(--line); }
+.board h3 small { font: 12px var(--mono); color: var(--dim); }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--line); }
+.board h3 + .row { border-top: 0; }
+.row .no { font: 10px/22px var(--arcade); color: var(--pink); }
+.row:nth-of-type(-n+3) .no { color: var(--amber); }
+.row .t { min-width: 0; }
+.row .t a { color: var(--text); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--cyan); }
+.row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.row .h { font: 12px var(--mono); color: var(--amber); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--dim); }
+.row .h a:hover { color: var(--cyan); }
+.board details summary { margin-top: 6px; }
+@media (max-width: 760px) {
+  .meters { grid-template-columns: repeat(3, 1fr); }
+  .card { padding: 14px 14px 12px; }
+  .boards { grid-template-columns: 1fr; }
+  .hero svg.sprite { width: 64px; height: 64px; }
+  .hero { gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="prompt">&gt; demand-miner --report</div>
+    <nav class="tabs"><a class="on" href="index.html">ニーズレーダー</a><a class="" href="news.html">デイリーダイジェスト</a></nav>
+    <nav class="langs"><a class="" href="../en/index.html">English</a><a class="on" href="index.html">日本語</a></nav>
+    <div class="hero"><svg class="sprite" viewBox="0 0 16 16" role="img" aria-label="ピクセル鉱夫"><rect x="5" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="2" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="2" width="1" height="1" fill="#ffcd75"/><rect x="6" y="2" width="1" height="1" fill="#ffcd75"/><rect x="7" y="2" width="1" height="1" fill="#ffcd75"/><rect x="8" y="2" width="1" height="1" fill="#ffcd75"/><rect x="9" y="2" width="1" height="1" fill="#ffcd75"/><rect x="10" y="2" width="1" height="1" fill="#ffcd75"/><rect x="11" y="2" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="3" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="3" width="1" height="1" fill="#ffcd75"/><rect x="5" y="3" width="1" height="1" fill="#ffcd75"/><rect x="6" y="3" width="1" height="1" fill="#ffcd75"/><rect x="7" y="3" width="1" height="1" fill="#ffcd75"/><rect x="8" y="3" width="1" height="1" fill="#f4f4f4"/><rect x="9" y="3" width="1" height="1" fill="#f4f4f4"/><rect x="10" y="3" width="1" height="1" fill="#ffcd75"/><rect x="11" y="3" width="1" height="1" fill="#ffcd75"/><rect x="12" y="3" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="4" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="4" width="1" height="1" fill="#ffcd75"/><rect x="5" y="4" width="1" height="1" fill="#ffcd75"/><rect x="6" y="4" width="1" height="1" fill="#ffcd75"/><rect x="7" y="4" width="1" height="1" fill="#ffcd75"/><rect x="8" y="4" width="1" height="1" fill="#f4f4f4"/><rect x="9" y="4" width="1" height="1" fill="#f4f4f4"/><rect x="10" y="4" width="1" height="1" fill="#ffcd75"/><rect x="11" y="4" width="1" height="1" fill="#ffcd75"/><rect x="12" y="4" width="1" height="1" fill="#1a1c2c"/><rect x="2" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="11" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="6" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="6" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="14" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="14" y="8" width="1" height="1" fill="#94b0c2"/><rect x="15" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="9" width="1" height="1" fill="#94b0c2"/><rect x="14" y="9" width="1" height="1" fill="#566c86"/><rect x="15" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="10" width="1" height="1" fill="#566c86"/><rect x="14" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="5" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="12" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="11" width="1" height="1" fill="#ef7d57"/><rect x="14" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="12" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="12" width="1" height="1" fill="#f8c4a0"/><rect x="5" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="12" width="1" height="1" fill="#29366f"/><rect x="7" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="12" width="1" height="1" fill="#29366f"/><rect x="10" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="12" width="1" height="1" fill="#f8c4a0"/><rect x="12" y="12" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="12" width="1" height="1" fill="#ef7d57"/><rect x="4" y="13" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="13" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="13" width="1" height="1" fill="#ef7d57"/><rect x="4" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="14" width="1" height="1" fill="#29366f"/><rect x="6" y="14" width="1" height="1" fill="#29366f"/><rect x="7" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="14" width="1" height="1" fill="#29366f"/><rect x="10" y="14" width="1" height="1" fill="#29366f"/><rect x="11" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="14" width="1" height="1" fill="#ef7d57"/><rect x="4" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="11" y="15" width="1" height="1" fill="#1a1c2c"/></svg><div>
+    <h1>ニーズレーダー</h1>
+    <div class="stats"><span><b class="c-cyan">2026-11-06</b> 更新</span><span>直近 <b>90</b> 日間</span><span><b>461</b> 件のニーズ</span><span><b>468</b> 件の投稿</span><span><b>7</b> のソース</span></div>
+    </div></div>
+  </header>
+  <div class="ground"></div>
+  <h2>今日のおすすめ</h2>
+  <div class="cards">
+<article class="card">
+  <div class="card-head"><span class="rank">#1</span><span class="tag">デスクトップアプリ</span><span class="tag"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>2 件の投稿</span></div>
+  <h3>Picasa のようにフォルダをその場で閲覧できる写真管理ツール</h3>
+  <p class="lede">ユーザーは数十万枚の写真を持ち、Apple Photos/Lightroom のような専用データベースにインポートせず、フォルダ内で直接閲覧・タグ付け・重複排除したい。タグ/評価は XMP sidecar に書き込んで移行可能にし、外付けハードディスクやフォルダ名変更後も追跡できるようにしたい…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.8</b><span>総合点</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.9 <span class="dim">▶</span></b><span>注目度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>難易度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>支払い意欲</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱い競合</b><span>競合</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>約18–25日</b><span>開発目安</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>元の投稿</a><details><summary>詳細を見る</summary><div class="detail">
+<p>要件概要（ID 付き）：<a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">reddit:1xhwqwp</a>。ユーザーは数十万枚の写真を持ち、Apple Photos/Lightroom のような専用データベースにインポートせず、フォルダ内で直接閲覧・タグ付け・重複排除したい。タグ/評価は XMP sidecar に書き込んで移行可能にし、外付けハードディスクやフォルダ名変更後も追跡できるようにしたい。総合スコア 6.8、投稿数 2、競合チェックは weak。既存の Sortroom が部分的に満たしているが、サブスク制、分類精度、重複写真の範囲検索、地図ビューはまだ不十分。<br />
+なぜ作る価値があるか：空白が明確で、競合は「その場でのフォルダ閲覧 + XMP の可搬性 + 外付けディスク + リネーム追跡」の4点を同時にカバーしていない。digiKam/XnView MP は無料だが体験が古く、ユーザーはサブスク制に明らかに反発している。リスクは Sortroom がすでに商用化されており、digiKam が無料かつ成熟していること。汎用アルバムを作るのではなく、「ライブラリをロックしない・移行可能・大規模ライブラリの性能」を中核の差別化にする必要がある。<br />
+推奨形態：ローカルデスクトップアプリ、macOS/Windows 優先、ファイルシステムを直接読み取り、元ファイルを移動しない。<br />
+MVP の3つの中核機能：1）フォルダをその場でインデックス化してサムネイルを生成し、データベースにインポートしない；2）タグ/評価を XMP sidecar に書き込み、外付けディスクやフォルダ名変更後のパス追跡に対応；3）コンテンツハッシュによる重複写真のグループ化と一括処理。<br />
+需要の検証方法：元スレッド <a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">reddit:1xhwqwp</a> に返信し、5万枚の写真ディレクトリの画面録画を添付；Reddit の写真管理/データホーディング関連の議論区で MVP を公開し、「自分の実際のディレクトリで試したい」というユーザーを20人集める。<br />
+想定開発日数：18〜25日。</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#2</span><span class="tag">プラグイン</span><span class="tag"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>2 件の投稿</span></div>
+  <h3>ChatGPT が任意のデバイスで Obsidian ノート保管庫を読み書きできるようにする</h3>
+  <p class="lede">ユーザーは ChatGPT の会話内容を自動保存・整理して Obsidian に入れ、既存ノートを逆引き検索できるようにしたい。通常の Web/スマホ版 ChatGPT はローカル vault に直接アクセスできず、デバイス間では特に困難。総合スコア…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.6</b><span>総合点</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.7 <span class="c-lime">▲</span></b><span>注目度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>難易度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>支払い意欲</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱い競合</b><span>競合</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>約15–22日</b><span>開発目安</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>元の投稿</a><details><summary>詳細を見る</summary><div class="detail">
+<p>要件概要（ID 付き）：<a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/">reddit:1xkl9v8</a>。ユーザーは ChatGPT の会話内容を自動保存・整理して Obsidian に入れ、既存ノートを逆引き検索できるようにしたい。通常の Web/スマホ版 ChatGPT はローカル vault に直接アクセスできず、デバイス間では特に困難。総合スコア 6.6、熱度 1.74 で、1週間前の 0.88 から明らかに上昇；既存の Pi Edge プラグインが部分的に解決しており、Obsidian CLI/Headless、Local REST API、MCP サーバーにも散発的な解決策がある。<br />
+なぜ作る価値があるか：需要の上昇が明らかで、既存ツールは一方向のエクスポート/クリップが多く、逆引き検索とデバイス間の体験はまだ弱い；安全な権限、常時起動の PC、複雑な設定はいずれも製品化の空白。リスクは Obsidian 公式の CLI/Headless と MCP エコシステムが急速にカバーする可能性があり、「vault への全権限アクセス」がセキュリティ上の信頼問題を生むこと。細粒度の認可と監査可能なログが必須。<br />
+推奨形態：Obsidian プラグイン + 軽量なローカル/リレーサービスで、まず「会話をノートに保存」と「権限に応じたノート検索」の2つに注力。<br />
+MVP の3つの中核機能：1）フォルダ/タグ単位で ChatGPT の読み書き範囲を認可し、デフォルトは最小権限；2）ワンクリックで会話を frontmatter 付きの Obsidian ノートとして保存；3）既存ノートに対するキーワード/セマンティック検索と引用元の返却。<br />
+需要の検証方法：元スレッド <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/">reddit:1xkl9v8</a> に返信；Obsidian 公式フォーラムと Reddit の Obsidian 関連の議論区で「10分で接続、権限はいつでも取り消し可能」のデモを公開し、ウェイトリストを集める。<br />
+想定開発日数：15〜22日。</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#3</span><span class="tag">プラグイン</span></div>
+  <h3>LibreOffice/OpenOffice から Obsidian への脚注リンクのインポートを修正</h3>
+  <p class="lede">LibreOffice/OpenOffice から Obsidian へコピーまたは変換すると、脚注が文末脚注に変換され、リンクが [174](#sdfootnote174sym)、[174](#… のようになる</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.1</b><span>総合点</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>注目度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>難易度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>支払い意欲</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱い競合</b><span>競合</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>約5–8日</b><span>開発目安</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>元の投稿</a><details><summary>詳細を見る</summary><div class="detail">
+<p>要件概要（ID 付き）：<a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">reddit:1xmmvbz</a>。LibreOffice/OpenOffice から Obsidian へコピーまたは変換すると、脚注が文末脚注に変換され、リンクが <code>[174](#sdfootnote174sym)</code>、<code>[174](#sdfootnote174anc)</code> のような壊れたアンカーになり、一括修復して標準 Markdown 脚注に変換する必要がある。総合スコア 6.1、競合チェックは weak、返信は正規表現のアイデアと脚注を移動できるプラグインのみで、完全なツールはない。<br />
+なぜ作る価値があるか：需要が非常に具体的で検証コストが低く、既存案はユーザー自身が正規表現を書く必要があり一般ユーザーには不可能；プラグイン化すれば Word/LibreOffice から Obsidian へ移行する多くのユーザーをカバーできる。リスクは対象が狭く、支払い意欲が 2 しかなく、Obsidian 公式がインポーターを改善すれば需要が縮小すること；低価格/無料の集客プラグインに適する。<br />
+推奨形態：Obsidian プラグインで、「貼り付け修復」と「現在のノートの一括修復」の2つの入口を提供。<br />
+MVP の3つの中核機能：1）<code>sdfootnote...sym/anc</code> アンカーを自動認識してペアリング；2）<code>[^174]</code> と <code>[^174]:</code> の標準脚注に一括変換；3）修復結果をプレビューし、脚注定義を引用の近くへ移動できる。<br />
+需要の検証方法：元スレッド <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">reddit:1xmmvbz</a> に返信し、LibreOffice コピー例のビフォーアフターを添付；Obsidian フォーラムに「Word/LibreOffice 脚注インポート修復」の投稿をし、ユーザーから壊れたサンプルを集める。<br />
+想定開発日数：5〜8日。</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#4</span><span class="tag">ブラウザ拡張</span></div>
+  <h3>Excel ワークブック構造 X 線解析ツール</h3>
+  <p class="lede">ユーザーはExcelワークブックの内部構造をX線のように解析したいと考えている：数式の依存チェーン、シート間参照、未使用のデッドセル、隠れた参照を、監査・リファクタリング・引き継ぎのために。総合スコア6.0、競合チェックはweak；既存のExce…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.0</b><span>総合点</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>注目度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>難易度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>支払い意欲</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">弱い競合</b><span>競合</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>約12–18日</b><span>開発目安</span></div></div>
+  <div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>元の投稿</a><details><summary>詳細を見る</summary><div class="detail">
+<p>要件概要（ID付き）：<a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">qiita:1bd62fdb86fa7c2a17db</a>。ユーザーはExcelワークブックの内部構造をX線のように解析したいと考えている：数式の依存チェーン、シート間参照、未使用のデッドセル、隠れた参照を、監査・リファクタリング・引き継ぎのために。総合スコア6.0、競合チェックはweak；既存のExcel標準の数式トレースやInquireアドインの機能は限定的で、Deckary/xlCompareはセル単位寄り、tangle/ag-cartographerは参照グラフ寄り。<br />
+なぜ作る価値があるか：空白が明確で、AIや既存ツールは表面的な数値しか見ておらず、引き継ぎ・監査のシナリオは実在する；「xlsxをアップロードすると構造レポートを出力する」小さなツールから始められる。リスクは専門性が高く、Excel Inquire、監査アドイン、Microsoftの今後の機能が一部をカバーする可能性がある；ブラウザ拡張がローカルの大きなファイルにアクセスするのも制限があるため、まずローカル解析かOfficeアドインで作ることを推奨。<br />
+推奨形態：ブラウザ拡張/Officeアドインのいずれでも可、まずは読み取り専用の解析とレポート出力に絞り、ワークブックは変更しない。<br />
+最小実用版の3つの中核機能：1）数式の依存チェーンを解析しシート間参照グラフを描画；2）参照されていない数式/デッドセルと非表示シート/隠れた参照を一覧化；3）共有可能な構造レポート（HTML/PDF/Excel）を出力。<br />
+需要の検証方法：Qiitaの元投稿に返信 <a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">qiita:1bd62fdb86fa7c2a17db</a>；QiitaのExcel/監査関連タグやRedditのExcelコミュニティに匿名のサンプルワークブックを投稿し、「実際のワークブックをアップロードしてレポートと交換してもよい」というユーザーを10人集める。<br />
+想定開発日数：12〜18日。</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#5</span><span class="tag">Web ツール</span></div>
+  <h3>ローカルファーストのメディア資産テーブルデータベースとExcelエクスポートツール</h3>
+  <p class="lede">ユーザーは表を使って製品機能の比較を行いたく、スクリーンショット、動画、マニュアルなどの大容量資産にタグを付け、テーブルの行に関連付けたいと考えている；Excelはメディアの扱いが苦手で重複して容量を占め、既存のデータベースブラウザはWebテーブルと資産メタデータのプレビューに欠ける。総合スコア5.9、競…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">5.9</b><span>総合点</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>注目度</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>難易度</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>支払い意欲</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-lime">競合なし</b><span>競合</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>約12–18日</b><span>開発目安</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/software/comments/1xklosk/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>元の投稿</a><details><summary>詳細を見る</summary><div class="detail">
+<p>要件概要（ID付き）：<a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xklosk/">reddit:1xklosk</a>。ユーザーは表を使って製品機能の比較を行いたく、スクリーンショット、動画、マニュアルなどの大容量資産にタグを付け、テーブルの行に関連付けたいと考えている；Excelはメディアの扱いが苦手で重複して容量を占め、既存のデータベースブラウザはWebテーブルと資産メタデータのプレビューに欠ける。総合スコア5.9、競合チェックはnone、Kexi/PHPRunnerは部分的にしか満たさない。<br />
+なぜ作る価値があるか：競合チェックはnoneで、「製品比較テーブル＋メディアタグ＋コンテンツハッシュによる重複排除＋Webでの行展開プレビュー＋Excelエクスポート」の4点を同時にカバーするツールはない；非技術者の同僚が使えることは明確な価値。リスクは支払い意欲が2しかなく、汎用の表/データベースツールが多数あるため、ユーザーがNotion/Airtable/NocoDBで組み合わせる可能性がある；ローカルファースト、メディアを重複保存しない、Excelエクスポートという3点は必ず守るべき。<br />
+推奨形態：ローカルファーストのWebツール、単体で起動しブラウザからアクセス、データはローカルフォルダ/SQLiteに保存。<br />
+最小実用版の3つの中核機能：1）テーブル行とメディア添付の関連付け、タグとメタデータに対応；2）コンテンツハッシュによる重複排除、行内で画像/動画/マニュアルを展開プレビュー；3）ワンクリックでExcelにエクスポート、資産パスとタグ列を保持。<br />
+需要の検証方法：元投稿に返信 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xklosk/">reddit:1xklosk</a>；Redditのローカルファースト/セルフホスト関連の議論エリアで「登録不要、データはローカルに保持、Excelエクスポート可能」なデモを投稿し、非技術者10人に試用してもらいデータ入力してもらう。<br />
+想定開発日数：12〜18日。</p>
+</div></details></div>
+</article></div>
+  <h2>詳細分析</h2>
+  <details class="fold"><summary>トピック分類</summary><div class="detail">
+<div class="table"><table>
+<thead>
+<tr>
+<th>テーマ</th>
+<th style="text-align: right;">要望数</th>
+<th>関連プラットフォーム</th>
+<th>代表的な要望（ID を記載）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Obsidian／ノートと知識管理</td>
+<td style="text-align: right;">34</td>
+<td>reddit、forum:obsidian、forum:inkdrop、github（Joplin）</td>
+<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/" target="_blank" rel="noopener">reddit:1xkl9v8</a>；<a class="chip" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617" target="_blank" rel="noopener">forum:obsidian:121617</a>；<a class="chip" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614" target="_blank" rel="noopener">forum:inkdrop:5614</a>；<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>；<a class="chip" href="https://github.com/laurent22/joplin/issues/16871" target="_blank" rel="noopener">gh:laurent22/joplin#16871</a></td>
+</tr>
+<tr>
+<td>AI／LLM と開発ツール</td>
+<td style="text-align: right;">25</td>
+<td>reddit、qiita、hn、github、se</td>
+<td><a class="chip" href="https://github.com/microsoft/vscode/issues/346102" target="_blank" rel="noopener">gh:microsoft/vscode#346102</a>；<a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a>；<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xijxgq/" target="_blank" rel="noopener">reddit:1xijxgq</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a>；<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a></td>
+</tr>
+<tr>
+<td>ブラウザ拡張とウェブ強化</td>
+<td style="text-align: right;">19</td>
+<td>reddit、hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>；<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xjeule/" target="_blank" rel="noopener">reddit:1xjeule</a>；<a class="chip" href="https://www.reddit.com/r/chrome/comments/1xet2h9/" target="_blank" rel="noopener">reddit:1xet2h9</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50348904" target="_blank" rel="noopener">hn:50348904</a></td>
+</tr>
+<tr>
+<td>表計算／オフィス文書と業務自動化</td>
+<td style="text-align: right;">15</td>
+<td>reddit、qiita</td>
+<td><a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>；<a class="chip" href="https://www.reddit.com/r/excel/comments/1xnfpsl/" target="_blank" rel="noopener">reddit:1xnfpsl</a>；<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/" target="_blank" rel="noopener">reddit:1xhst2h</a>；<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>；<a class="chip" href="https://www.reddit.com/r/software/comments/1x254gu/" target="_blank" rel="noopener">reddit:1x254gu</a></td>
+</tr>
+<tr>
+<td>ローカルメディアとファイル管理</td>
+<td style="text-align: right;">12</td>
+<td>reddit、qiita、hn、v2ex</td>
+<td><a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>；<a class="chip" href="https://www.reddit.com/r/software/comments/1xklosk/" target="_blank" rel="noopener">reddit:1xklosk</a>；<a class="chip" href="https://qiita.com/ysk400rr/items/de7ce6576a44260fa6f0" target="_blank" rel="noopener">qiita:de7ce6576a44260fa6f0</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50347401" target="_blank" rel="noopener">hn:50347401</a>；<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">v2ex:1253706</a></td>
+</tr>
+<tr>
+<td>システムとデスクトップユーティリティ</td>
+<td style="text-align: right;">12</td>
+<td>qiita、github、hn、forum:appinn、reddit</td>
+<td><a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>；<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51759" target="_blank" rel="noopener">gh:microsoft/PowerToys#51759</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50017797" target="_blank" rel="noopener">hn:50017797</a>；<a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a>；<a class="chip" href="https://www.reddit.com/r/software/comments/1x8bac9/" target="_blank" rel="noopener">reddit:1x8bac9</a></td>
+</tr>
+<tr>
+<td>生活／習慣／スケジュール／健康</td>
+<td style="text-align: right;">12</td>
+<td>reddit、qiita、hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xedimn/" target="_blank" rel="noopener">reddit:1xedimn</a>；<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/" target="_blank" rel="noopener">reddit:1xlwp3a</a>；<a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50112258" target="_blank" rel="noopener">hn:50112258</a>；<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xid69e/" target="_blank" rel="noopener">reddit:1xid69e</a></td>
+</tr>
+<tr>
+<td>業界特化／ニッチなシーン</td>
+<td style="text-align: right;">11</td>
+<td>reddit、qiita、hn、se</td>
+<td><a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>；<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xe67lv/" target="_blank" rel="noopener">reddit:1xe67lv</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50342831" target="_blank" rel="noopener">hn:50342831</a>；<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran" target="_blank" rel="noopener">se:softwarerecs:95654</a>；<a class="chip" href="https://qiita.com/yshinobu07/items/0dcae0b54cb3e7479592" target="_blank" rel="noopener">qiita:0dcae0b54cb3e7479592</a></td>
+</tr>
+<tr>
+<td>スクレイピング／通知／自動化スクリプト</td>
+<td style="text-align: right;">7</td>
+<td>v2ex、qiita、se</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>；<a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>；<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>；<a class="chip" href="https://qiita.com/fujiken818/items/920803e3c31273ffd015" target="_blank" rel="noopener">qiita:920803e3c31273ffd015</a>；<a class="chip" href="https://qiita.com/Kazeneko/items/b3df525ee38941ec98f8" target="_blank" rel="noopener">qiita:b3df525ee38941ec98f8</a></td>
+</tr>
+<tr>
+<td>ゲーム／エンタメ／趣味</td>
+<td style="text-align: right;">3</td>
+<td>reddit、hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xii720/" target="_blank" rel="noopener">reddit:1xii720</a>；<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xg0dqt/" target="_blank" rel="noopener">reddit:1xg0dqt</a>；<a class="chip" href="https://news.ycombinator.com/item?id=50085840" target="_blank" rel="noopener">hn:50085840</a></td>
+</tr>
+</tbody>
+</table></div>
+</div></details><details class="fold"><summary>クロスプラットフォームの共通ニーズ</summary><div class="detail">
+<ul>
+<li><strong>表計算/Excel/Sheetsの構造理解と自動化</strong>：reddit側は具体的な数式、VBA、シート間集計の課題が多く、例えば<a class="chip" href="https://www.reddit.com/r/excel/comments/1x68cvo/" target="_blank" rel="noopener">reddit:1x68cvo</a>、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1wzvzc1/" target="_blank" rel="noopener">reddit:1wzvzc1</a>、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/" target="_blank" rel="noopener">reddit:1xhst2h</a>；qiita側は「ワークブックの骨格を見抜く」ことや現場の帳票をより重視しており、例えば<a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>。共通点は、既存の数式/VBA/GASのハードルが高く、グラフィカルで説明可能、再利用可能なツールを求めていること。</li>
+<li><strong>ブラウザのWebページ改変、セキュリティ、ショッピング情報の透明性</strong>：redditは「現地通貨がリセットされる、バリアントの安値おとり、詐欺対策、拡張機能の移行」といった観点が多く、例えば<a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/" target="_blank" rel="noopener">reddit:1xnwifm</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xjeule/" target="_blank" rel="noopener">reddit:1xjeule</a>、<a class="chip" href="https://www.reddit.com/r/chrome/comments/1xet2h9/" target="_blank" rel="noopener">reddit:1xet2h9</a>；hnは「UAの差異を検出する、偽ブランドをフィルタリングする、HNのUIを書き換える」といった方向が強く、例えば<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50348904" target="_blank" rel="noopener">hn:50348904</a>。表現は異なるが、いずれもWebページのデフォルト表示を、より信頼できユーザーの判断に合った形に変えることを求めている。</li>
+<li><strong>ローカルファーストとプライバシー</strong>：redditはクラウドへのアップロード、サブスクリプションによるロックイン、ファイル移行を懸念しており、例えば<a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xj6w8x/" target="_blank" rel="noopener">reddit:1xj6w8x</a>；qiitaはオフライン、ローカルLLM、情報漏洩なしを強調しており、例えば<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>、<a class="chip" href="https://qiita.com/Toppo8/items/31db81e05096c8d6f7b8" target="_blank" rel="noopener">qiita:31db81e05096c8d6f7b8</a>、<a class="chip" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a" target="_blank" rel="noopener">qiita:f055dadbce1bd27ecb3a</a>；github側は「Copilotの外部モデルへのフォールバックを禁止する」というもの、例えば<a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>。共通の機会はローカル処理、移行可能なフォーマット、明確な権限境界。</li>
+<li><strong>Obsidian/ノートプラグインの「ネイティブ体験」とタスクのデータベース化</strong>：redditはタスクのデータベース化、モバイルのツールバー、UIカスタマイズを求めるものが多く、例えば<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/" target="_blank" rel="noopener">reddit:1x01rfe</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x0oggg/" target="_blank" rel="noopener">reddit:1x0oggg</a>；Obsidian公式フォーラムはエディタの具体的な挙動に焦点を当てており、例えば<a class="chip" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617" target="_blank" rel="noopener">forum:obsidian:121617</a>、<a class="chip" href="https://forum.obsidian.md/t/move-the-ribbons-position/121628" target="_blank" rel="noopener">forum:obsidian:121628</a>；Inkdrop側にもプレビューの折りたたみ要望がある<a class="chip" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614" target="_blank" rel="noopener">forum:inkdrop:5614</a>。共通点は、既存プラグインが重いか、ネイティブなインタラクションに合っていないこと。</li>
+<li><strong>ドキュメントのフォーマット間での忠実な変換</strong>：redditには脚注リンクの修正やPDFの一括変更があり、例えば<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener">reddit:1xmmvbz</a>、<a class="chip" href="https://www.reddit.com/r/software/comments/1x254gu/" target="_blank" rel="noopener">reddit:1x254gu</a>；qiitaにはPDF→Word、Markdown→リッチテキストがあり、例えば<a class="chip" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a" target="_blank" rel="noopener">qiita:f055dadbce1bd27ecb3a</a>、<a class="chip" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf" target="_blank" rel="noopener">qiita:01397cecf44ebbc0cbcf</a>。共通の課題は「変換できるかどうか」ではなく、フォーマットの細部、一括処理、ローカルでのプライバシー。</li>
+<li><strong>ショッピングの価格/バリアント/偽造情報の再配置</strong>：<a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>は現地通貨の固定を求め、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/" target="_blank" rel="noopener">reddit:1xnwifm</a>はAliExpressの実際のバリアント価格の展開を求め、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xo6knv/" target="_blank" rel="noopener">reddit:1xo6knv</a>はレゴのオーストラリア実価格/RRPを求めている；<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>はAmazonの偽ブランドのフィルタリングを求めている。共通の機会は「ページ内での情報再配置＋信頼マーク」であり、単なる為替換算ではない。</li>
+</ul>
+</div></details><details class="fold"><summary>やらない方がよいこと</summary><div class="detail">
+<ul>
+<li><strong>ブラウザ音声のアップミックスは、既に成熟した無料/商用ソリューションでほぼカバー済み</strong>：<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/" target="_blank" rel="noopener">reddit:1xm8zsm</a>。競合調査により「ブラウザ音声を 5.1/7.1 にアップミックスする成熟した Chrome 拡張が複数あり、継続的にメンテナンスされている」ことが明確になっており、新規参入での差別化は難しく、推奨しない。</li>
+<li><strong>公式の自動化やプラットフォーム内部機能でカバーできる小さな修正</strong>：<a class="chip" href="https://www.reddit.com/r/Notion/comments/1xm6kml/" target="_blank" rel="noopener">reddit:1xm6kml</a> は Notion ネイティブのデータベース自動化で Status が Done になった際に日付プロパティをクリアできる；<a class="chip" href="https://github.com/microsoft/vscode/issues/341245" target="_blank" rel="noopener">gh:microsoft/vscode#341245</a> は非公開 API に依存してフローティングウィンドウを実現しており、失敗時のフォールバック体験が悪い。この種のニーズは公式/設定で解決できるか、内部 API の制約を受けるため、プロダクトとしての余地は小さい。</li>
+<li><strong>高度に専門的で、業界データソースやコンプライアンスの壁に依存するツール</strong>：<a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>（IP カメラの RTSP 検収）、<a class="chip" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c" target="_blank" rel="noopener">qiita:4c2c099f1ccc27dd240c</a>（GEE 衛星画像のエクスポート）、<a class="chip" href="https://news.ycombinator.com/item?id=50342831" target="_blank" rel="noopener">hn:50342831</a>（科学ニュースの証拠レベル）、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a>（API の非推奨/破壊的変更の購読フィード）、<a class="chip" href="https://qiita.com/mnoda/items/1511f46212883dcacca2" target="_blank" rel="noopener">qiita:1511f46212883dcacca2</a>（Exchange Online グループカレンダーの一括設定）。ユーザー層が狭く検証コストが高く、専門的なデータ/権限が必要。</li>
+<li><strong>支払い意欲が低く、娯楽/単発的なツール</strong>：<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xii720/" target="_blank" rel="noopener">reddit:1xii720</a>（Web ページをスネークゲームに）、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xg0dqt/" target="_blank" rel="noopener">reddit:1xg0dqt</a>（Twitch で BAN された後に読み取り専用チャット）、<a class="chip" href="https://news.ycombinator.com/item?id=50359031" target="_blank" rel="noopener">hn:50359031</a>（HN の感情スコア）、<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>（V2EX コメント抽選）。これらのニーズは支払い意欲が概ね 1〜2 でリテンションが弱く、プラットフォームのページ構造の変化で途切れやすい。</li>
+<li><strong>個人プロジェクト/オープンソースでほぼ満たされており、差別化が難しいツール</strong>：<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm5k0j/" target="_blank" rel="noopener">reddit:1xm5k0j</a>（Stremio→PotPlayer）、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/" target="_blank" rel="noopener">reddit:1xnwifm</a>（AliSearch は既に無料公開済み）、<a class="chip" href="https://www.reddit.com/r/macapps/comments/1x9hzu3/" target="_blank" rel="noopener">reddit:1x9hzu3</a>（IINA Library は既にオープンソースの beta を公開）、<a class="chip" href="https://qiita.com/tukiharu/items/8d5f16e82816d8fc9eb4" target="_blank" rel="noopener">qiita:8d5f16e82816d8fc9eb4</a>（Universal Bridge は既にオープンソース）、<a class="chip" href="https://www.reddit.com/r/software/comments/1xf6xqm/" target="_blank" rel="noopener">reddit:1xf6xqm</a>（localbg.app は既にオフラインで利用可能）。明確な空白を見つけられない限り、手を付けないか軽量なパッチのみにとどめるのが適切。</li>
+</ul>
+</div></details><details class="fold"><summary>英語・日本語・中国語コミュニティの違い</summary><div class="detail">
+<ul>
+<li><strong>英語圏コミュニティ（reddit、hn）</strong>：ニーズは Obsidian プラグインのカスタマイズ、ブラウザの Web ページ改変、AI コーディング/LLM ワークフロー、個人の生産性に集中している。reddit ユーザーは既存ツールを名指しして不満を述べることが多く、「サブスク制は不合理、データがロックインされる、移行可能であってほしい」といった表現がよく見られる。例：<a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/" target="_blank" rel="noopener">reddit:1xkl9v8</a>。hn はどちらかというとセキュリティ、情報の透明性、UI の書き直しに関心が向かう。例：<a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50348904" target="_blank" rel="noopener">hn:50348904</a>。チャンスは既存ワークフローを強化するプラグイン/拡張機能で、ローカルファースト、取り消し可能、エクスポート可能を強調すること。</li>
+<li><strong>日本語圏コミュニティ（qiita）</strong>：ニーズはより業務現場やローカル環境に密着している。Excel/GAS/PDF/領収書/請求書/Exchange 管理者、Windows 日本語入力、ローカル LLM/OpenVINO、さらに GEE/IP カメラ/木工などの垂直なシーン。例：<a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>、<a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>、<a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>、<a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>。多くの投稿はすでに個人スクリプトのプロトタイプがあり、空白は「すぐ使える、GUI、オフライン/プライバシー、日本の制度の細部（和暦、敬称、インボイス登録番号、NDL 分類）」。チャンスはスクリプトを製品化し、インストール可能・設定可能・保守可能な小さなツールにすること。</li>
+<li><strong>中国語圏コミュニティ（v2ex、forum:appinn）</strong>：今回のサンプルは少なく、主に見られたのはシステム強化、抽選ツール、AI 長尺動画。例：<a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a>、<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>、<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">v2ex:1253706</a>。表現はより短く直接的で、支払い意欲は低め（<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a> 支払い意欲 1；<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">v2ex:1253706</a> 支払い意欲 4 だが難易度 5）。チャンスは軽量なローカル小ツールとシステム強化で、まず元の投稿に返信して検証すべきで、最初から重い製品を作るのは適切ではない。</li>
+</ul>
+</div></details><details class="fold"><summary>引用されたニーズ</summary><div class="detail"><div class="table"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>ニーズ</th>
+<th>元の投稿</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reddit:1xkl9v8</code></td>
+<td>ChatGPT が任意のデバイスで Obsidian のノート保管庫を読み書きできるようにする</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/">リンク</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:121617</code></td>
+<td>Obsidian の「行を上へ/下へ移動」コマンドがリスト構造と空行によるグループ分けを尊重するようにする</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617">リンク</a></td>
+</tr>
+<tr>
+<td><code>forum:inkdrop:5614</code></td>
+<td>Inkdrop のプレビューモードでコードブロックを折りたたむ/展開する</td>
+<td><a target="_blank" rel="noopener" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x3qlgy</code></td>
+<td>Obsidian でデータベースベースのタスク管理プラグイン。タスクごとに個別のノートを作らずに済む</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/">リンク</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16871</code></td>
+<td>Joplin のホワイトボードノートを PDF にエクスポートすると、キャンバスではなくソースが出力される</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16871">リンク</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#346102</code></td>
+<td>VS Code で複数の AI モデルに実装計画を並べて生成・比較させ、選んだらワンクリックで実装を開始する</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/346102">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:b5fb1ca9e460c7e14b9e</code></td>
+<td>Wan 2.5 動画生成モデル向けに、プロンプト（映像・セリフ・効果音）を決まった順序で組み立てる小ツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xijxgq</code></td>
+<td>Web 要素の親コンテナの Flex/Grid レイアウト規則と Tailwind クラスをワンクリックで取得し、AI コーディングツール向けの構造化コンテキストを生成する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xijxgq/">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50060564</code></td>
+<td>AI コーディングのプロンプト、生成結果、トークン消費を標準化して共有・比較できるプラットフォーム</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50060564">リンク</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95656</code></td>
+<td>ライブラリのバージョンごとに非推奨化と破壊的変更を追跡する API/フィードツール</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xnzwou</code></td>
+<td>ショッピングサイトで常に現地通貨の価格を表示させる</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xnzwou/">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50168676</code></td>
+<td>サイトが User-Agent によって異なる内容（AI 向けの隠し命令など）を返しているのを検出するブラウザ拡張</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50168676">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xjeule</code></td>
+<td>ブラウザフィンガープリントの偽装を内部で一貫させ続ける Chrome 拡張</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xjeule/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xet2h9</code></td>
+<td>Chrome 拡張（特に配信停止された uBlock Origin）をバックアップして新しい PC へ移行する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1xet2h9/">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50348904</code></td>
+<td>Hacker News をニューヨーク・タイムズ風に変え、見出しと要約を自動生成するブラウザ拡張</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50348904">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:1bd62fdb86fa7c2a17db</code></td>
+<td>Excel ブックの内部構造（数式の依存関係、デッドコード、隠れた参照）を X 線のように解析できるツールがほしい</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xnfpsl</code></td>
+<td>メールマージで PDF を一括送信する際、PDF のファイル名とメール件名に受信者名を自動で含めたい</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xnfpsl/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xhst2h</code></td>
+<td>Google Sheets で LibreOffice のようにウィンドウを分割し、異なる領域のセルを同時に表示する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:4e417be09c6cf64547b3</code></td>
+<td>Google フォームから日本式の領収書 PDF（和暦日付、敬称、インボイス登録番号を含む）を自動生成する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x254gu</code></td>
+<td>AI の指示で PDF を一括編集する（文字削除、余白の補填、行間の縮小）</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1x254gu/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xhwqwp</code></td>
+<td>Picasa のようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツールがほしい</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xklosk</code></td>
+<td>ローカルファーストで Web インターフェースを備え、画像や動画などの素材を管理して Excel にエクスポートできる簡易データベース管理ツールがほしい</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xklosk/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:de7ce6576a44260fa6f0</code></td>
+<td>NAS の写真を低コストで S3 のディープアーカイブへ自動バックアップし、Raspberry Pi で自前の写真閲覧環境を構築する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ysk400rr/items/de7ce6576a44260fa6f0">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50347401</code></td>
+<td>Web アーカイブの差分比較と可視化探索ツール</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50347401">リンク</a></td>
+</tr>
+<tr>
+<td><code>v2ex:1253706</code></td>
+<td>AI による長尺動画/大量素材の自動編集ツール</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:723f8fccd84e39f9c666</code></td>
+<td>Windows 標準の日本語入力で、Mac のように数字キーで直接候補を選べるようにし、Tab を何度も押さずに済むようにする</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">リンク</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/PowerToys#51759</code></td>
+<td>zip 圧縮ファイルをワンクリックで exe または msi の自己解凍インストーラーに変換する</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51759">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50017797</code></td>
+<td>macOS でショートカット記号（⌘⌥⇧）を文字や略語として表示する</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50017797">リンク</a></td>
+</tr>
+<tr>
+<td><code>forum:appinn:95223</code></td>
+<td>Win11 の「PC」にカスタムフォルダのエントリを追加する</td>
+<td><a target="_blank" rel="noopener" href="https://meta.appinn.net/t/topic/95223">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x8bac9</code></td>
+<td>カメラのジェスチャーや音声でスライド/画像の切り替えを操作する。プログラミング不要</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1x8bac9/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xedimn</code></td>
+<td>家事などのオフラインの手順をステップごとの図解付き操作ガイドにするツール</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xedimn/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xlwp3a</code></td>
+<td>Google Tasks を指定した Google カレンダーにドラッグし、タスクのグループとカレンダーを対応させたまま保つ</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:9c08ac6c5a5ef5b4f7d6</code></td>
+<td>AI で家事の周期、ゴミの日、買い物リストを管理し、積極的にリマインドを通知する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50112258</code></td>
+<td>Withings の健康データを無料で Apple Health に同期させる小ツール</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50112258">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xid69e</code></td>
+<td>計画の混乱で不安になりやすい人向けに、すぐ使える軽量な計画ツール一式を提供する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xid69e/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:a5e7ce5c9a32f976e339</code></td>
+<td>IP カメラの RTSP ストリーム品質検収ツール（フレームレート/パケットロス/タイムスタンプ/フリーズ画面）</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xe67lv</code></td>
+<td>中古車の当時の新車価格と元のウィンドウステッカーを確認できるブラウザツール</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xe67lv/">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50342831</code></td>
+<td>科学ニュースに対して研究のエビデンスレベルと分野の進展の流れを提供する補助ツール</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50342831">リンク</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95654</code></td>
+<td>ページ数の範囲で PDF を絞り込める検索ツール</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:0dcae0b54cb3e7479592</code></td>
+<td>DIY 木工の材料取りツール：板材と部品の寸法を入力すると、材料を節約できる切断レイアウト図を自動生成する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yshinobu07/items/0dcae0b54cb3e7479592">リンク</a></td>
+</tr>
+<tr>
+<td><code>v2ex:1253695</code></td>
+<td>V2EX の投稿コメントから当選ユーザーを安定して抽選できる抽選ツールがほしい</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:7891fed6c9eaae905bc6</code></td>
+<td>GAS で定期的に RSS 記事を重複排除して Google スプレッドシートに収集する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6">リンク</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95677</code></td>
+<td>セルフホスト型の Web Push 通知サーバー。マルチユーザー、WebUI 管理、CLI/curl によるトリガーに対応</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:920803e3c31273ffd015</code></td>
+<td>HTTP 200 だけを見ない、より信頼性の高いリンク切れ検出ツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/fujiken818/items/920803e3c31273ffd015">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:b3df525ee38941ec98f8</code></td>
+<td>AI Agent の CLI 呼び出しにレート制限/サーキットブレーカーのラッパーを追加し、429 に遭遇したら強制的に待機する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/Kazeneko/items/b3df525ee38941ec98f8">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xii720</code></td>
+<td>任意の Web ページを遊べるミニゲーム（スネークゲームなど）に変える Chrome 拡張</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xii720/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xg0dqt</code></td>
+<td>Twitch チャンネルで BAN された後でも、そのチャンネルのチャットを読み取り専用で閲覧できる</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xg0dqt/">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50085840</code></td>
+<td>Web のバーチャルギターを VST プラグイン化し、キーボードでストローク演奏する</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50085840">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x68cvo</code></td>
+<td>指定した範囲内で最後にクリックしたセルの値を、あるセルにリアルタイムで表示させる</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1x68cvo/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xjfw79</code></td>
+<td>複数の同一ワークシートにまたがって、日付範囲ごとにドロップダウン選択肢の出現回数を集計する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wzvzc1</code></td>
+<td>シート名と日付に応じてマクロを自動で起動する Excel ツール</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1wzvzc1/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xnwifm</code></td>
+<td>AliExpress の検索結果を実際のバリエーション価格で展開・並べ替えるブラウザ拡張</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:49886395</code></td>
+<td>Amazon 上の模倣ブランドの粗悪品をフィルタリングするブラウザ拡張</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49886395">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xj6w8x</code></td>
+<td>視覚障害のある VoiceOver ユーザー向けに、Web ページの画像をローカルで説明する Chrome 拡張</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xj6w8x/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:a98b283eed4045391dc0</code></td>
+<td>ノート PC 上で OpenVINO を使って日本語 LLM をローカル実行する簡易 GUI ツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:31db81e05096c8d6f7b8</code></td>
+<td>ブラウザの外で任意のテキストを選択するだけでローカル翻訳できるデスクトップツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/Toppo8/items/31db81e05096c8d6f7b8">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:f055dadbce1bd27ecb3a</code></td>
+<td>PDF を編集可能な Word にローカルで一括変換するツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a">リンク</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#338860</code></td>
+<td>Copilot がローカル LLM のみを使用し、外部モデルへの自動フォールバックを禁止する</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/338860">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x01rfe</code></td>
+<td>Obsidian でインラインタスク作成、プロジェクトへの紐付け、カンバンビューを統合したタスク管理プラグイン</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x0oggg</code></td>
+<td>Obsidian モバイルのツールバーを複数行に展開でき、1 行に折りたためるようにする</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x0oggg/">リンク</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:121628</code></td>
+<td>Obsidian 左側のリボンバーを右上のタブバー付近へ移動する</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-the-ribbons-position/121628">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xmmvbz</code></td>
+<td>LibreOffice/OpenOffice を Obsidian にインポートした際に壊れた脚注リンクを修復し、標準の Markdown 脚注に変換する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:01397cecf44ebbc0cbcf</code></td>
+<td>Markdown のレンダリング結果をリッチテキスト形式で Word/メール/チャットツールにコピーする単一ファイルの Web ツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xo6knv</code></td>
+<td>Google Sheets でレゴセットのオーストラリアでの現在の市場価格や元の RRP を自動取得する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xo6knv/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm8zsm</code></td>
+<td>ブラウザの音声を 5.1/7.1 サラウンドシステムの全チャンネルに振り分けて出力する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm6kml</code></td>
+<td>タスクを完了にすると Notion のリマインダーが自動でオフになる</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xm6kml/">リンク</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#341245</code></td>
+<td>VS Code 拡張がエディタをサイズ指定可能でコンパクト、常に手前に表示されるフローティングウィンドウとして開けるようにする</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/341245">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:4c2c099f1ccc27dd240c</code></td>
+<td>GEE の衛星画像のローカルへのエクスポートと永続的な表示を簡素化する</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:1511f46212883dcacca2</code></td>
+<td>Exchange Online 管理者向けに、Outlook グループカレンダーの一括設定と配布を行うツール</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/mnoda/items/1511f46212883dcacca2">リンク</a></td>
+</tr>
+<tr>
+<td><code>hn:50359031</code></td>
+<td>HN の投稿の横に、コメントに基づくポジティブ/ネガティブ感情スコアを表示する</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50359031">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm5k0j</code></td>
+<td>Stremio Web のストリーミングリンクをワンクリックでローカルの PotPlayer に送って再生する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm5k0j/">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x9hzu3</code></td>
+<td>IINA プレーヤーにローカルの映像ライブラリ閲覧画面を追加する</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1x9hzu3/">リンク</a></td>
+</tr>
+<tr>
+<td><code>qiita:8d5f16e82816d8fc9eb4</code></td>
+<td>Windows のキーボードとマウスを Bluetooth 経由で iPad と共有して使う</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/tukiharu/items/8d5f16e82816d8fc9eb4">リンク</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xf6xqm</code></td>
+<td>オフラインで使える高品質な切り抜き/背景除去ツール</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xf6xqm/">リンク</a></td>
+</tr>
+</tbody>
+</table></div></div></details>
+  <footer>2026-11-06 00:34 JST 生成 · 毎日自動更新</footer>
+</div>
+</body>
+</html>

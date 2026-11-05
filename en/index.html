@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Demand Radar · Updated 2026-11-06</title>
+<meta name="description" content="A daily digest of software needs and indie-developer tool ideas mined from Hacker News, Reddit, Qiita, and more. Updated 2026-11-06.">
+<meta property="og:title" content="Demand Radar · Updated 2026-11-06">
+<meta property="og:description" content="A daily digest of software needs and indie-developer tool ideas mined from Hacker News, Reddit, Qiita, and more. Updated 2026-11-06.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimizu-dev.github.io/demand-reports/en/index.html">
+<link rel="canonical" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
+<link rel="alternate" hreflang="en" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
+<link rel="alternate" hreflang="ja" href="https://mimizu-dev.github.io/demand-reports/ja/index.html">
+<link rel="alternate" hreflang="x-default" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Sweetie-16 像素调色板 */
+  --bg: #0d0e1c; --panel: #1a1c2c; --panel-2: #262b44; --line: #333c57; --bd: #566c86;
+  --text: #f4f4f4; --dim: #94b0c2;
+  --cyan: #73eff7; --blue: #41a6f6; --pink: #ff77a8; --lime: #a7f070; --amber: #ffcd75; --red: #ef5d63; --violet: #a46bd6;
+  --pixel: "DotGothic16", monospace; --arcade: "Press Start 2P", "DotGothic16", monospace;
+  --mono: "DotGothic16", ui-monospace, monospace;
+  --u: 4px;  /* 一个"像素"的大小 */
+}
+* { box-sizing: border-box; }
+html { image-rendering: pixelated; }
+body { margin: 0; color: var(--text); font: 15px/1.75 "DotGothic16", system-ui, sans-serif; background-color: var(--bg);
+  background-image:
+    radial-gradient(var(--line) 1px, transparent 1.5px),
+    radial-gradient(#22264a 1px, transparent 1.5px);
+  background-size: 32px 32px, 32px 32px; background-position: 0 0, 16px 16px; }
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+a { color: var(--cyan); text-decoration: none; }
+::selection { background: var(--pink); color: var(--bg); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.c-cyan { color: var(--cyan); } .c-pink { color: var(--pink); } .c-lime { color: var(--lime); }
+.c-amber { color: var(--amber); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+svg.px { width: 16px; height: 16px; fill: currentColor; shape-rendering: crispEdges; flex: none; }
+svg.sprite { shape-rendering: crispEdges; display: block; }
+
+/* 像素边框：上下左右各一条，四角留缺口 + 硬阴影 */
+.pxbox, .card, .fold, .board, .headline, .m, .tabs a.on, .langs a.on, .btn, .stats span, .rank, .refs a, .chip, .archive a {
+  --c: var(--bd);
+  box-shadow: 0 calc(-1 * var(--u)) 0 0 var(--c), 0 var(--u) 0 0 var(--c), calc(-1 * var(--u)) 0 0 0 var(--c), var(--u) 0 0 0 var(--c); }
+.card, .fold, .board { box-shadow: 0 -4px 0 0 var(--c), 0 4px 0 0 var(--c), -4px 0 0 0 var(--c), 4px 0 0 0 var(--c),
+  8px 8px 0 0 #05060d, 4px 12px 0 0 #05060d, 12px 4px 0 0 #05060d; }
+.m, .stats span, .rank, .refs a, .chip, .archive a, .btn { --u: 2px; }
+
+/* 顶部 */
+header { padding: 28px 0 10px; }
+.prompt { font: 10px var(--arcade); color: var(--lime); letter-spacing: .06em; }
+.prompt::after { content: "█"; animation: blink 1s steps(1) infinite; margin-left: 6px; }
+@keyframes blink { 50% { opacity: 0; } }
+.tabs { display: flex; gap: 14px; margin: 18px 4px 4px; }
+.tabs a { font: 400 15px var(--pixel); color: var(--dim); padding: 4px 14px; background: transparent; }
+.tabs a.on { --c: var(--cyan); color: var(--bg); background: var(--cyan); }
+.tabs a:not(.on):hover { color: var(--cyan); }
+.tabs a.on::before { content: "▶ "; }
+.langs { display: flex; gap: 12px; margin: 12px 0 0; }
+.langs a { font: 400 13px var(--pixel); color: var(--dim); padding: 2px 10px; background: transparent; }
+.langs a.on { --c: var(--cyan); color: var(--bg); background: var(--cyan); }
+.langs a:not(.on):hover { color: var(--cyan); }
+.hero { display: flex; align-items: center; gap: 22px; margin: 18px 0 8px; }
+.hero svg.sprite { width: 96px; height: 96px; flex: none; filter: drop-shadow(4px 4px 0 #05060d); animation: bob 1.2s steps(2) infinite; }
+@keyframes bob { 50% { transform: translateY(-4px); } }
+h1 { font: 400 clamp(26px, 5vw, 42px)/1.2 var(--pixel); margin: 0 0 10px; letter-spacing: .04em; color: var(--text);
+  text-shadow: 3px 3px 0 var(--violet), 6px 6px 0 #05060d; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px 14px; font: 13px var(--mono); color: var(--dim); padding-left: 2px; }
+.stats span { background: var(--panel); padding: 1px 10px; }
+.stats b { color: var(--text); font-weight: 400; }
+.ground { height: 16px; margin: 18px 0 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23262b44'/%3E%3Crect width='16' height='4' fill='%2338b764'/%3E%3Crect y='4' width='16' height='2' fill='%23257179'/%3E%3Crect x='2' y='9' width='4' height='2' fill='%23333c57'/%3E%3Crect x='10' y='12' width='4' height='2' fill='%23333c57'/%3E%3Crect x='4' width='2' height='2' y='-0' fill='%23a7f070'/%3E%3Crect x='12' width='2' height='2' fill='%23a7f070'/%3E%3C/svg%3E") repeat-x;
+  background-size: 16px 16px; }
+
+h2 { font: 400 20px var(--pixel); margin: 34px 0 18px; display: flex; align-items: center; gap: 12px; }
+h2::before { content: ""; width: 12px; height: 12px; background: var(--pink);
+  box-shadow: 4px 4px 0 0 var(--violet); animation: blink 1.6s steps(1) infinite; }
+
+/* 卡片 */
+.cards { display: grid; gap: 26px; padding: 4px; }
+.card { background: var(--panel); padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card:hover { --c: var(--cyan); }
+.card-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.rank { --c: var(--amber); font: 12px var(--arcade); color: var(--bg); background: var(--amber); padding: 4px 8px 3px; }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--mono); color: var(--dim); }
+.tag svg.px { width: 12px; height: 12px; }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--text); }
+.lede { color: #c2d3e0; margin: 0 0 14px; }
+.meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
+.m { --c: var(--line); background: var(--panel-2); padding: 8px 10px; display: grid; gap: 4px; align-content: start; }
+.m b { font: 400 14px var(--mono); }
+.m b.big { font: 18px/1 var(--arcade); }
+.m span { font: 12px var(--mono); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: #0d0e1c; width: max-content; }
+.pips i { width: 8px; height: 10px; background: #333c57; }
+.pips.amber i.on { background: var(--amber); box-shadow: inset 0 -3px 0 #ef7d57; }
+.pips.lime i.on { background: var(--lime); box-shadow: inset 0 -3px 0 #38b764; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
+.btn { --c: var(--cyan); display: inline-flex; align-items: center; gap: 6px; font: 13px var(--mono); color: var(--cyan); background: var(--panel); padding: 2px 10px; }
+.btn:hover { background: var(--cyan); color: var(--bg); }
+.btn:active { transform: translate(2px, 2px); }
+.btn svg.px { width: 12px; height: 12px; }
+details summary { cursor: pointer; list-style: none; font: 13px var(--mono); color: var(--dim); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▶ "; color: var(--pink); display: inline-block; }
+details[open] > summary::before { content: "▼ "; }
+details summary:hover { color: var(--text); }
+.actions details { flex: 0 1 auto; }
+.actions details summary { padding: 2px 4px; }
+.actions details[open] { flex-basis: 100%; }
+.actions details[open] summary { margin-bottom: 8px; display: inline-block; }
+.detail { font-size: 14px; color: #c2d3e0; }
+.detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
+.detail li::marker { color: var(--pink); }
+.fold { background: var(--panel); padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--text); }
+.fold[open] > summary { margin-bottom: 10px; }
+.table { overflow-x: auto; border: 2px solid var(--line); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--line); vertical-align: top; }
+th { background: var(--panel-2); font: 13px var(--mono); color: var(--amber); white-space: nowrap; }
+td:first-child { min-width: 8em; }
+.chip { --c: #257179; font: 12px var(--mono); color: var(--cyan); padding: 0 6px; margin: 2px; white-space: nowrap; display: inline-block; }
+.archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
+.archive a { font: 13px var(--mono); padding: 1px 10px; background: var(--panel-2); }
+footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; text-align: center; }
+
+/* 资讯页 */
+.headline { --c: var(--lime); font: 400 17px/1.6 var(--pixel); background: var(--panel); padding: 12px 16px 12px 44px; margin: 20px 4px 0;
+  position: relative; }
+.headline::before { content: "!"; position: absolute; left: 12px; top: 12px; width: 20px; height: 20px; background: var(--lime);
+  color: var(--bg); font: 12px/20px var(--arcade); text-align: center; }
+.hl h3 { margin: 0 0 6px; }
+.refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
+.refs a { --c: #257179; min-width: 0; font: 12px var(--mono); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--panel-2); }
+.refs a:hover { background: var(--cyan); color: var(--bg); }
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
+.board { background: var(--panel); padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 16px; display: flex; justify-content: space-between; gap: 8px;
+  background: var(--panel-2); border-bottom: 4px solid var(--line); }
+.board h3 small { font: 12px var(--mono); color: var(--dim); }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--line); }
+.board h3 + .row { border-top: 0; }
+.row .no { font: 10px/22px var(--arcade); color: var(--pink); }
+.row:nth-of-type(-n+3) .no { color: var(--amber); }
+.row .t { min-width: 0; }
+.row .t a { color: var(--text); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--cyan); }
+.row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.row .h { font: 12px var(--mono); color: var(--amber); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--dim); }
+.row .h a:hover { color: var(--cyan); }
+.board details summary { margin-top: 6px; }
+@media (max-width: 760px) {
+  .meters { grid-template-columns: repeat(3, 1fr); }
+  .card { padding: 14px 14px 12px; }
+  .boards { grid-template-columns: 1fr; }
+  .hero svg.sprite { width: 64px; height: 64px; }
+  .hero { gap: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="prompt">&gt; demand-miner --report</div>
+    <nav class="tabs"><a class="on" href="index.html">Demand Radar</a><a class="" href="news.html">Daily Digest</a></nav>
+    <nav class="langs"><a class="on" href="index.html">English</a><a class="" href="../ja/index.html">日本語</a></nav>
+    <div class="hero"><svg class="sprite" viewBox="0 0 16 16" role="img" aria-label="Pixel miner"><rect x="5" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="1" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="2" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="2" width="1" height="1" fill="#ffcd75"/><rect x="6" y="2" width="1" height="1" fill="#ffcd75"/><rect x="7" y="2" width="1" height="1" fill="#ffcd75"/><rect x="8" y="2" width="1" height="1" fill="#ffcd75"/><rect x="9" y="2" width="1" height="1" fill="#ffcd75"/><rect x="10" y="2" width="1" height="1" fill="#ffcd75"/><rect x="11" y="2" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="3" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="3" width="1" height="1" fill="#ffcd75"/><rect x="5" y="3" width="1" height="1" fill="#ffcd75"/><rect x="6" y="3" width="1" height="1" fill="#ffcd75"/><rect x="7" y="3" width="1" height="1" fill="#ffcd75"/><rect x="8" y="3" width="1" height="1" fill="#f4f4f4"/><rect x="9" y="3" width="1" height="1" fill="#f4f4f4"/><rect x="10" y="3" width="1" height="1" fill="#ffcd75"/><rect x="11" y="3" width="1" height="1" fill="#ffcd75"/><rect x="12" y="3" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="4" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="4" width="1" height="1" fill="#ffcd75"/><rect x="5" y="4" width="1" height="1" fill="#ffcd75"/><rect x="6" y="4" width="1" height="1" fill="#ffcd75"/><rect x="7" y="4" width="1" height="1" fill="#ffcd75"/><rect x="8" y="4" width="1" height="1" fill="#f4f4f4"/><rect x="9" y="4" width="1" height="1" fill="#f4f4f4"/><rect x="10" y="4" width="1" height="1" fill="#ffcd75"/><rect x="11" y="4" width="1" height="1" fill="#ffcd75"/><rect x="12" y="4" width="1" height="1" fill="#1a1c2c"/><rect x="2" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="11" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="5" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="6" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="6" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="6" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="7" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="7" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="14" y="7" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="6" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="8" width="1" height="1" fill="#f8c4a0"/><rect x="11" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="14" y="8" width="1" height="1" fill="#94b0c2"/><rect x="15" y="8" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="7" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="8" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="9" y="9" width="1" height="1" fill="#f8c4a0"/><rect x="10" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="9" width="1" height="1" fill="#94b0c2"/><rect x="14" y="9" width="1" height="1" fill="#566c86"/><rect x="15" y="9" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="10" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="12" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="10" width="1" height="1" fill="#566c86"/><rect x="14" y="10" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="5" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="11" width="1" height="1" fill="#3b5dc9"/><rect x="12" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="11" width="1" height="1" fill="#ef7d57"/><rect x="14" y="11" width="1" height="1" fill="#1a1c2c"/><rect x="3" y="12" width="1" height="1" fill="#1a1c2c"/><rect x="4" y="12" width="1" height="1" fill="#f8c4a0"/><rect x="5" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="12" width="1" height="1" fill="#29366f"/><rect x="7" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="12" width="1" height="1" fill="#29366f"/><rect x="10" y="12" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="12" width="1" height="1" fill="#f8c4a0"/><rect x="12" y="12" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="12" width="1" height="1" fill="#ef7d57"/><rect x="4" y="13" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="6" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="7" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="8" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="9" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="10" y="13" width="1" height="1" fill="#3b5dc9"/><rect x="11" y="13" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="13" width="1" height="1" fill="#ef7d57"/><rect x="4" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="14" width="1" height="1" fill="#29366f"/><rect x="6" y="14" width="1" height="1" fill="#29366f"/><rect x="7" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="8" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="14" width="1" height="1" fill="#29366f"/><rect x="10" y="14" width="1" height="1" fill="#29366f"/><rect x="11" y="14" width="1" height="1" fill="#1a1c2c"/><rect x="13" y="14" width="1" height="1" fill="#ef7d57"/><rect x="4" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="5" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="6" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="9" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="10" y="15" width="1" height="1" fill="#1a1c2c"/><rect x="11" y="15" width="1" height="1" fill="#1a1c2c"/></svg><div>
+    <h1>Demand Radar</h1>
+    <div class="stats"><span>Updated <b class="c-cyan">2026-11-06</b></span><span>last <b>90</b> days</span><span><b>461</b> needs</span><span><b>468</b> posts</span><span><b>7</b> sources</span></div>
+    </div></div>
+  </header>
+  <div class="ground"></div>
+  <h2>Today's Picks</h2>
+  <div class="cards">
+<article class="card">
+  <div class="card-head"><span class="rank">#1</span><span class="tag">Desktop app</span><span class="tag"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>2 posts</span></div>
+  <h3>A photo management tool that browses folders in place, like Picasa</h3>
+  <p class="lede">The user has hundreds of thousands of photos and wants to browse, tag, and deduplicate them directly in folders, without importing into a proprietary database like Apple Photos/Lightroom; tags/ratings need to be written to XMP sidecars for portability, and should still be trackable after external drive and folder renames…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.8</b><span>Score</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.9 <span class="dim">▶</span></b><span>Heat</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>Difficulty</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>Willing to pay</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">Weak competition</b><span>Competition</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>~18–25 days</b><span>Est. build</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>Original post</a><details><summary>Details</summary><div class="detail">
+<p>Requirement summary (with ID): <a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">reddit:1xhwqwp</a>. The user has hundreds of thousands of photos and wants to browse, tag, and deduplicate them directly in folders, without importing into a proprietary database like Apple Photos/Lightroom; tags/ratings need to be written to XMP sidecars for portability, and should still be trackable after external drive and folder renames. Overall score 6.8, post count 2, competitor check weak; Sortroom already partially satisfies this but its subscription model, classification accuracy, duplicate photo range search, and map view are still lacking.<br />
+Why it's worth building: the gap is clear, and no competitor covers all four points of "in-place folder browsing + XMP portability + external drives + rename tracking" at once; digiKam/XnView MP are free but feel dated, and users clearly dislike subscriptions. The risk is that Sortroom is already commercialized and digiKam is free and mature, so "no lock-in, portable, large-library performance" must be the core differentiator rather than building another generic photo album.<br />
+Suggested form: a local desktop app, macOS/Windows first, reading the file system directly without moving original files.<br />
+3 core features of the MVP: 1) index folders in place and generate thumbnails without importing into a database; 2) write tags/ratings to XMP sidecars, with path tracking after external drive and folder renames; 3) group duplicate photos by content hash and support batch processing.<br />
+How to validate demand: reply to the original post <a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">reddit:1xhwqwp</a> with a screen recording of a 50,000-photo directory; post the MVP in Reddit photo management/data hoarding communities and recruit 20 users willing to try it with their real directories.<br />
+Estimated development days: 18–25 days.</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#2</span><span class="tag">Plugin</span><span class="tag"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/></svg>2 posts</span></div>
+  <h3>Let ChatGPT read and write an Obsidian vault on any device</h3>
+  <p class="lede">The user wants ChatGPT conversations automatically saved and organized into Obsidian, and to be able to query existing notes in reverse; regular web/mobile ChatGPT cannot directly access the local vault, which is especially difficult across devices. Overall score…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.6</b><span>Score</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.7 <span class="c-lime">▲</span></b><span>Heat</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>Difficulty</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>Willing to pay</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">Weak competition</b><span>Competition</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>~15–22 days</b><span>Est. build</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>Original post</a><details><summary>Details</summary><div class="detail">
+<p>Requirement summary (with ID): <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/">reddit:1xkl9v8</a>. The user wants ChatGPT conversations automatically saved and organized into Obsidian, and to be able to query existing notes in reverse; regular web/mobile ChatGPT cannot directly access the local vault, which is especially difficult across devices. Overall score 6.6, heat 1.74, clearly up from 0.88 a week ago; the Pi Edge plugin partially solves it, and Obsidian CLI/Headless, Local REST API, and MCP servers also offer scattered solutions.<br />
+Why it's worth building: demand is clearly rising, existing tools are mostly one-way export/clipping, and reverse retrieval and cross-device experience remain weak; security permissions, an always-on computer, and complex setup are all productizable gaps. The risk is that Obsidian's official CLI/Headless and the MCP ecosystem may cover this quickly, and "full-permission vault access" raises security trust issues, so fine-grained authorization and auditable logs are essential.<br />
+Suggested form: an Obsidian plugin plus a lightweight local/relay service, prioritizing "save conversations into notes" and "retrieve notes by permission."<br />
+3 core features of the MVP: 1) authorize ChatGPT's read/write scope by folder/tag, with least privilege by default; 2) one-click save conversations as Obsidian notes with frontmatter; 3) keyword/semantic search over existing notes with cited sources.<br />
+How to validate demand: reply to the original post <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/">reddit:1xkl9v8</a>; post a demo of "10-minute setup, permissions revocable at any time" on the official Obsidian forum and Reddit Obsidian communities, and collect a waitlist.<br />
+Estimated development days: 15–22 days.</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#3</span><span class="tag">Plugin</span></div>
+  <h3>Fix footnote links when importing from LibreOffice/OpenOffice into Obsidian</h3>
+  <p class="lede">When copying or converting from LibreOffice/OpenOffice to Obsidian, footnotes are turned into endnotes and links become broken anchors like [174](#sdfootnote174sym), [174](#…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.1</b><span>Score</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>Heat</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>Difficulty</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>Willing to pay</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">Weak competition</b><span>Competition</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>~5–8 days</b><span>Est. build</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>Original post</a><details><summary>Details</summary><div class="detail">
+<p>Requirement summary (with ID): <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">reddit:1xmmvbz</a>. When copying or converting from LibreOffice/OpenOffice to Obsidian, footnotes are turned into endnotes and links become broken anchors like <code>[174](#sdfootnote174sym)</code> and <code>[174](#sdfootnote174anc)</code>, which need batch repair and conversion to standard Markdown footnotes. Overall score 6.1, competitor check weak; replies only offer regex ideas and a plugin for movable footnotes, with no complete tool.<br />
+Why it's worth building: the need is very specific and cheap to validate, existing solutions require users to write their own regex, which ordinary users can't do; as a plugin it could cover many users migrating from Word/LibreOffice into Obsidian. The risk is a narrow audience and willingness to pay of only 2, and if Obsidian officially improves its importer the need will shrink; suitable as a low-price/free lead-gen plugin.<br />
+Suggested form: an Obsidian plugin with two entry points: "fix on paste" and "batch fix current note."<br />
+3 core features of the MVP: 1) automatically detect and pair <code>sdfootnote...sym/anc</code> anchors; 2) batch convert to standard footnotes <code>[^174]</code> and <code>[^174]:</code>; 3) preview the fixed result and support moving footnote definitions near their references.<br />
+How to validate demand: reply to the original post <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">reddit:1xmmvbz</a> with a before/after comparison of a LibreOffice copy sample; post "import Word/LibreOffice footnote repair" on the Obsidian forum and collect broken samples uploaded by users.<br />
+Estimated development days: 5–8 days.</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#4</span><span class="tag">Browser extension</span></div>
+  <h3>Excel workbook structure X-ray analysis tool</h3>
+  <p class="lede">Users want to parse the internal structure of Excel workbooks like an X-ray: formula dependency chains, cross-sheet references, unused dead cells, and hidden references, for auditing, refactoring, and handover. Overall score 6.0, competitor check weak; existing Exce…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">6.0</b><span>Score</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>Heat</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>Difficulty</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>Willing to pay</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-amber">Weak competition</b><span>Competition</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>~12–18 days</b><span>Est. build</span></div></div>
+  <div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>Original post</a><details><summary>Details</summary><div class="detail">
+<p>Requirement summary (with ID): <a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">qiita:1bd62fdb86fa7c2a17db</a>. Users want to parse the internal structure of Excel workbooks like an X-ray: formula dependency chains, cross-sheet references, unused dead cells, and hidden references, for auditing, refactoring, and handover. Overall score 6.0, competitor check weak; Excel's built-in formula tracing and the Inquire add-in have limited functionality, Deckary/xlCompare are more cell-level, and tangle/ag-cartographer are more reference-graph oriented.<br />
+Why it's worth building: the gap is clear, AI and existing tools only look at surface values, and handover/audit scenarios genuinely exist; you can start with a small tool that "uploads an xlsx and outputs a structure report." The risk is that it's highly specialized, and Excel Inquire, audit add-ins, and future Microsoft features may cover part of it; browser extensions also have limited access to large local files, so it's recommended to start with local parsing or an Office add-in.<br />
+Suggested form: either a browser extension or an Office add-in; start with read-only parsing and report export, without modifying the workbook.<br />
+3 core features of the MVP: 1) parse formula dependency chains and draw a cross-sheet reference graph; 2) list unreferenced formulas/dead cells and hidden sheets/hidden references; 3) export a shareable structure report (HTML/PDF/Excel).<br />
+How to validate demand: reply to the original Qiita post <a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">qiita:1bd62fdb86fa7c2a17db</a>; post an anonymous sample workbook in Qiita's Excel/audit-related tags and the Reddit Excel community, and collect 10 users who are "willing to upload a real workbook in exchange for a report."<br />
+Estimated development days: 12–18 days.</p>
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#5</span><span class="tag">Web tool</span></div>
+  <h3>Local-first media asset table database with Excel export tool</h3>
+  <p class="lede">Users want to use a table for product feature comparison, tagging large assets such as screenshots, videos, and manuals and linking them to table rows; Excel handles media poorly and duplicates take up space, and existing database browsers lack a web table plus asset metadata preview. Overall score 5.9, compet…</p>
+  <div class="meters"><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg><b class="big c-cyan">5.9</b><span>Score</span></div><div class="m"><svg class="px c-pink" viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="0" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>1.0 <span class="c-lime">NEW</span></b><span>Heat</span></div><div class="m"><svg class="px c-amber" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>Difficulty</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>Willing to pay</span></div><div class="m"><svg class="px c-lime" viewBox="0 0 8 8" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg><b class="c-lime">No competitor</b><span>Competition</span></div><div class="m"><svg class="px c-cyan" viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg><b>~12–18 days</b><span>Est. build</span></div></div>
+  <div class="actions"><a class="btn" href="https://www.reddit.com/r/software/comments/1xklosk/" target="_blank" rel="noopener"><svg class="px " viewBox="0 0 8 8" aria-hidden="true"><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/></svg>Original post</a><details><summary>Details</summary><div class="detail">
+<p>Requirement summary (with ID): <a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xklosk/">reddit:1xklosk</a>. Users want to use a table for product feature comparison, tagging large assets such as screenshots, videos, and manuals and linking them to table rows; Excel handles media poorly and duplicates take up space, and existing database browsers lack a web table plus asset metadata preview. Overall score 5.9, competitor check none, Kexi/PHPRunner only partially satisfy it.<br />
+Why it's worth building: competitor check none, and no tool simultaneously covers the four points "product comparison table + media tags + content hash deduplication + web expandable row preview + Excel export"; usability by non-technical colleagues is clear value. The risk is that willingness to pay is only 2, there are many general table/database tools, and users may cobble something together with Notion/Airtable/NocoDB; you must stick to the three points of local-first, not storing media twice, and Excel export.<br />
+Suggested form: a local-first web tool, started on a single machine and accessed via browser, with data stored in a local folder/SQLite.<br />
+3 core features of the MVP: 1) table rows + media attachment linking, with tag and metadata support; 2) deduplication by content hash, with in-row preview of images/videos/manuals; 3) one-click Excel export, preserving asset paths and tag columns.<br />
+How to validate demand: reply to the original post <a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xklosk/">reddit:1xklosk</a>; post a demo of "no registration, data stays local, Excel exportable" in Reddit local-first/self-hosting discussion areas, and find 10 non-technical users to try data entry.<br />
+Estimated development days: 12–18 days.</p>
+</div></details></div>
+</article></div>
+  <h2>Full Analysis</h2>
+  <details class="fold"><summary>Topic categorization</summary><div class="detail">
+<div class="table"><table>
+<thead>
+<tr>
+<th>Topic</th>
+<th style="text-align: right;">Number of Requests</th>
+<th>Platforms Involved</th>
+<th>Representative Requests (write IDs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Obsidian/Notes and Knowledge Management</td>
+<td style="text-align: right;">34</td>
+<td>reddit, forum:obsidian, forum:inkdrop, github (Joplin)</td>
+<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/" target="_blank" rel="noopener">reddit:1xkl9v8</a>; <a class="chip" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617" target="_blank" rel="noopener">forum:obsidian:121617</a>; <a class="chip" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614" target="_blank" rel="noopener">forum:inkdrop:5614</a>; <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>; <a class="chip" href="https://github.com/laurent22/joplin/issues/16871" target="_blank" rel="noopener">gh:laurent22/joplin#16871</a></td>
+</tr>
+<tr>
+<td>AI/LLM and Developer Tools</td>
+<td style="text-align: right;">25</td>
+<td>reddit, qiita, hn, github, se</td>
+<td><a class="chip" href="https://github.com/microsoft/vscode/issues/346102" target="_blank" rel="noopener">gh:microsoft/vscode#346102</a>; <a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a>; <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xijxgq/" target="_blank" rel="noopener">reddit:1xijxgq</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50060564" target="_blank" rel="noopener">hn:50060564</a>; <a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a></td>
+</tr>
+<tr>
+<td>Browser Extensions and Web Enhancement</td>
+<td style="text-align: right;">19</td>
+<td>reddit, hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>; <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xjeule/" target="_blank" rel="noopener">reddit:1xjeule</a>; <a class="chip" href="https://www.reddit.com/r/chrome/comments/1xet2h9/" target="_blank" rel="noopener">reddit:1xet2h9</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50348904" target="_blank" rel="noopener">hn:50348904</a></td>
+</tr>
+<tr>
+<td>Spreadsheets/Office Documents and Office Automation</td>
+<td style="text-align: right;">15</td>
+<td>reddit, qiita</td>
+<td><a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>; <a class="chip" href="https://www.reddit.com/r/excel/comments/1xnfpsl/" target="_blank" rel="noopener">reddit:1xnfpsl</a>; <a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/" target="_blank" rel="noopener">reddit:1xhst2h</a>; <a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>; <a class="chip" href="https://www.reddit.com/r/software/comments/1x254gu/" target="_blank" rel="noopener">reddit:1x254gu</a></td>
+</tr>
+<tr>
+<td>Local Media and File Management</td>
+<td style="text-align: right;">12</td>
+<td>reddit, qiita, hn, v2ex</td>
+<td><a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>; <a class="chip" href="https://www.reddit.com/r/software/comments/1xklosk/" target="_blank" rel="noopener">reddit:1xklosk</a>; <a class="chip" href="https://qiita.com/ysk400rr/items/de7ce6576a44260fa6f0" target="_blank" rel="noopener">qiita:de7ce6576a44260fa6f0</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50347401" target="_blank" rel="noopener">hn:50347401</a>; <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">v2ex:1253706</a></td>
+</tr>
+<tr>
+<td>System and Desktop Utilities</td>
+<td style="text-align: right;">12</td>
+<td>qiita, github, hn, forum:appinn, reddit</td>
+<td><a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>; <a class="chip" href="https://github.com/microsoft/PowerToys/issues/51759" target="_blank" rel="noopener">gh:microsoft/PowerToys#51759</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50017797" target="_blank" rel="noopener">hn:50017797</a>; <a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a>; <a class="chip" href="https://www.reddit.com/r/software/comments/1x8bac9/" target="_blank" rel="noopener">reddit:1x8bac9</a></td>
+</tr>
+<tr>
+<td>Life/Habits/Scheduling/Health</td>
+<td style="text-align: right;">12</td>
+<td>reddit, qiita, hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xedimn/" target="_blank" rel="noopener">reddit:1xedimn</a>; <a class="chip" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/" target="_blank" rel="noopener">reddit:1xlwp3a</a>; <a class="chip" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6" target="_blank" rel="noopener">qiita:9c08ac6c5a5ef5b4f7d6</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50112258" target="_blank" rel="noopener">hn:50112258</a>; <a class="chip" href="https://www.reddit.com/r/productivity/comments/1xid69e/" target="_blank" rel="noopener">reddit:1xid69e</a></td>
+</tr>
+<tr>
+<td>Vertical Professional/Niche Scenarios</td>
+<td style="text-align: right;">11</td>
+<td>reddit, qiita, hn, se</td>
+<td><a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a>; <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xe67lv/" target="_blank" rel="noopener">reddit:1xe67lv</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50342831" target="_blank" rel="noopener">hn:50342831</a>; <a class="chip" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran" target="_blank" rel="noopener">se:softwarerecs:95654</a>; <a class="chip" href="https://qiita.com/yshinobu07/items/0dcae0b54cb3e7479592" target="_blank" rel="noopener">qiita:0dcae0b54cb3e7479592</a></td>
+</tr>
+<tr>
+<td>Scraping/Notifications/Automation Scripts</td>
+<td style="text-align: right;">7</td>
+<td>v2ex, qiita, se</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>; <a class="chip" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6" target="_blank" rel="noopener">qiita:7891fed6c9eaae905bc6</a>; <a class="chip" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server" target="_blank" rel="noopener">se:softwarerecs:95677</a>; <a class="chip" href="https://qiita.com/fujiken818/items/920803e3c31273ffd015" target="_blank" rel="noopener">qiita:920803e3c31273ffd015</a>; <a class="chip" href="https://qiita.com/Kazeneko/items/b3df525ee38941ec98f8" target="_blank" rel="noopener">qiita:b3df525ee38941ec98f8</a></td>
+</tr>
+<tr>
+<td>Games/Entertainment/Fun</td>
+<td style="text-align: right;">3</td>
+<td>reddit, hn</td>
+<td><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xii720/" target="_blank" rel="noopener">reddit:1xii720</a>; <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xg0dqt/" target="_blank" rel="noopener">reddit:1xg0dqt</a>; <a class="chip" href="https://news.ycombinator.com/item?id=50085840" target="_blank" rel="noopener">hn:50085840</a></td>
+</tr>
+</tbody>
+</table></div>
+</div></details><details class="fold"><summary>Cross-platform common needs</summary><div class="detail">
+<ul>
+<li><strong>Understanding and automating spreadsheet/Excel/Sheets structures</strong>: On Reddit, the pain points are mostly specific formulas, VBA, and cross-sheet calculations, such as <a class="chip" href="https://www.reddit.com/r/excel/comments/1x68cvo/" target="_blank" rel="noopener">reddit:1x68cvo</a>, <a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/" target="_blank" rel="noopener">reddit:1xjfw79</a>, <a class="chip" href="https://www.reddit.com/r/excel/comments/1wzvzc1/" target="_blank" rel="noopener">reddit:1wzvzc1</a>, and <a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/" target="_blank" rel="noopener">reddit:1xhst2h</a>; on Qiita, the emphasis is more on "seeing through the skeleton of a workbook" and on-site forms, such as <a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a> and <a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>. What they share is that existing formulas/VBA/GAS have a high barrier to entry, and people want graphical, explainable, reusable tools.</li>
+<li><strong>Browser webpage modification, security, and shopping information transparency</strong>: Reddit posts mostly start from "local currency being reset, variant low-price bait, anti-fraud, extension migration," such as <a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>, <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/" target="_blank" rel="noopener">reddit:1xnwifm</a>, <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xjeule/" target="_blank" rel="noopener">reddit:1xjeule</a>, and <a class="chip" href="https://www.reddit.com/r/chrome/comments/1xet2h9/" target="_blank" rel="noopener">reddit:1xet2h9</a>; HN leans more toward "detecting UA differences, filtering counterfeit brands, rewriting the HN interface," such as <a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>, <a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>, and <a class="chip" href="https://news.ycombinator.com/item?id=50348904" target="_blank" rel="noopener">hn:50348904</a>. The wording differs, but all of them are asking to change the default display of webpages into a form that is more trustworthy and better aligned with users' judgment.</li>
+<li><strong>Local-first and privacy</strong>: Reddit users worry about cloud uploads, subscription lock-in, and file migration, such as <a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a> and <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xj6w8x/" target="_blank" rel="noopener">reddit:1xj6w8x</a>; Qiita emphasizes offline use, local LLMs, and no data leaks, such as <a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>, <a class="chip" href="https://qiita.com/Toppo8/items/31db81e05096c8d6f7b8" target="_blank" rel="noopener">qiita:31db81e05096c8d6f7b8</a>, and <a class="chip" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a" target="_blank" rel="noopener">qiita:f055dadbce1bd27ecb3a</a>; on GitHub, it is "prohibit Copilot from falling back to external models," such as <a class="chip" href="https://github.com/microsoft/vscode/issues/338860" target="_blank" rel="noopener">gh:microsoft/vscode#338860</a>. The shared opportunity is local processing, portable formats, and clear permission boundaries.</li>
+<li><strong>The "native experience" of Obsidian/note-taking plugins and task database-ification</strong>: Reddit users mostly want task database-ification, mobile toolbars, and UI customization, such as <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>, <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/" target="_blank" rel="noopener">reddit:1x01rfe</a>, and <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x0oggg/" target="_blank" rel="noopener">reddit:1x0oggg</a>; the official Obsidian forum focuses more on specific editor behaviors, such as <a class="chip" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617" target="_blank" rel="noopener">forum:obsidian:121617</a> and <a class="chip" href="https://forum.obsidian.md/t/move-the-ribbons-position/121628" target="_blank" rel="noopener">forum:obsidian:121628</a>; on the Inkdrop side, there is also a need for collapsible previews <a class="chip" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614" target="_blank" rel="noopener">forum:inkdrop:5614</a>. What they share is that existing plugins are either heavy or do not fit native interactions.</li>
+<li><strong>Faithful cross-format document conversion</strong>: On Reddit, there are footnote link fixes and batch PDF editing, such as <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener">reddit:1xmmvbz</a> and <a class="chip" href="https://www.reddit.com/r/software/comments/1x254gu/" target="_blank" rel="noopener">reddit:1x254gu</a>; on Qiita, there are PDF→Word and Markdown→rich text, such as <a class="chip" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a" target="_blank" rel="noopener">qiita:f055dadbce1bd27ecb3a</a> and <a class="chip" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf" target="_blank" rel="noopener">qiita:01397cecf44ebbc0cbcf</a>. The shared pain point is not "whether it can convert," but format details, batch processing, and local privacy.</li>
+<li><strong>Rearranging shopping price/variant/counterfeit information</strong>: <a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a> asks to lock in the local currency, <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/" target="_blank" rel="noopener">reddit:1xnwifm</a> asks to expand the real variant prices on AliExpress, and <a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xo6knv/" target="_blank" rel="noopener">reddit:1xo6knv</a> asks for real LEGO prices in Australia/RRP; <a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a> asks to filter counterfeit brands on Amazon. The shared opportunity is "in-page information rearrangement + trust markers," rather than mere currency conversion.</li>
+</ul>
+</div></details><details class="fold"><summary>Not recommended</summary><div class="detail">
+<ul>
+<li><strong>Browser audio upmixing that mature free/commercial solutions already largely cover</strong>: <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/" target="_blank" rel="noopener">reddit:1xm8zsm</a>. The competitor check already established that "multiple mature Chrome extensions directly implement browser audio upmixing to 5.1/7.1 and are actively maintained," so a new entrant would struggle to differentiate; not recommended.</li>
+<li><strong>Small fixes that official automation or built-in platform capabilities can cover</strong>: <a class="chip" href="https://www.reddit.com/r/Notion/comments/1xm6kml/" target="_blank" rel="noopener">reddit:1xm6kml</a> can use Notion's native database automation to clear a date property when Status changes to Done; <a class="chip" href="https://github.com/microsoft/vscode/issues/341245" target="_blank" rel="noopener">gh:microsoft/vscode#341245</a> relies on non-public APIs for floating windows, and the fallback experience on failure is poor. These needs are either solvable officially/via configuration or constrained by internal APIs, leaving little product space.</li>
+<li><strong>Highly specialized tools that depend on industry data sources or compliance barriers</strong>: <a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a> (IP camera RTSP acceptance testing), <a class="chip" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c" target="_blank" rel="noopener">qiita:4c2c099f1ccc27dd240c</a> (GEE satellite imagery export), <a class="chip" href="https://news.ycombinator.com/item?id=50342831" target="_blank" rel="noopener">hn:50342831</a> (science news evidence levels), <a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a> (API deprecation/breaking-change feeds), <a class="chip" href="https://qiita.com/mnoda/items/1511f46212883dcacca2" target="_blank" rel="noopener">qiita:1511f46212883dcacca2</a> (Exchange Online group calendar bulk configuration). The user base is narrow, validation is costly, and specialized data/permissions are required.</li>
+<li><strong>Tools with low willingness to pay that skew entertainment/one-off</strong>: <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xii720/" target="_blank" rel="noopener">reddit:1xii720</a> (turn web pages into Snake), <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xg0dqt/" target="_blank" rel="noopener">reddit:1xg0dqt</a> (read-only chat after a Twitch ban), <a class="chip" href="https://news.ycombinator.com/item?id=50359031" target="_blank" rel="noopener">hn:50359031</a> (HN sentiment scoring), <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a> (V2EX comment lottery). Willingness to pay for these needs is mostly 1–2, retention is weak, and they are easily broken by platform page structure changes.</li>
+<li><strong>Tools already largely satisfied by personal projects/open source, hard to differentiate</strong>: <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xm5k0j/" target="_blank" rel="noopener">reddit:1xm5k0j</a> (Stremio→PotPlayer), <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/" target="_blank" rel="noopener">reddit:1xnwifm</a> (AliSearch already released for free), <a class="chip" href="https://www.reddit.com/r/macapps/comments/1x9hzu3/" target="_blank" rel="noopener">reddit:1x9hzu3</a> (IINA Library already open-sourced in beta), <a class="chip" href="https://qiita.com/tukiharu/items/8d5f16e82816d8fc9eb4" target="_blank" rel="noopener">qiita:8d5f16e82816d8fc9eb4</a> (Universal Bridge already open-sourced), <a class="chip" href="https://www.reddit.com/r/software/comments/1xf6xqm/" target="_blank" rel="noopener">reddit:1xf6xqm</a> (localbg.app already works offline). Unless a clear gap can be found, it's better to skip these or only ship lightweight patches.</li>
+</ul>
+</div></details><details class="fold"><summary>Differences between English, Japanese, and Chinese communities</summary><div class="detail">
+<ul>
+<li><strong>English communities (reddit, hn)</strong>: Demand centers on Obsidian plugin customization, browser web page modifications, AI coding/LLM workflows, and personal productivity. Reddit users directly name existing tools and their frustrations, often expressing things like "subscription models are unreasonable, data is locked in, we want portability," as in <a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>, <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/" target="_blank" rel="noopener">reddit:1xkl9v8</a>; hn leans more toward security, information transparency, and UI rewrites, as in <a class="chip" href="https://news.ycombinator.com/item?id=50168676" target="_blank" rel="noopener">hn:50168676</a>, <a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>, <a class="chip" href="https://news.ycombinator.com/item?id=50348904" target="_blank" rel="noopener">hn:50348904</a>. The opportunity is enhancement plugins/extensions for existing workflows, emphasizing local-first, undoable, and exportable.</li>
+<li><strong>Japanese communities (qiita)</strong>: Demand is closer to office realities and local environments: Excel/GAS/PDF/receipts/invoices/Exchange administrators, Windows Japanese input methods, local LLM/OpenVINO, and vertical scenarios like GEE/IP cameras/carpentry, as in <a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>, <a class="chip" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3" target="_blank" rel="noopener">qiita:4e417be09c6cf64547b3</a>, <a class="chip" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666" target="_blank" rel="noopener">qiita:723f8fccd84e39f9c666</a>, <a class="chip" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0" target="_blank" rel="noopener">qiita:a98b283eed4045391dc0</a>. Many posts already have personal script prototypes; the gap is in "out-of-the-box usability, graphical interface, offline/privacy, Japanese institutional details (Japanese calendar, honorifics, invoice registration numbers, NDL classification)." The opportunity is to productize scripts into installable, configurable, maintainable small tools.</li>
+<li><strong>Chinese communities (v2ex, forum:appinn)</strong>: This sample is small, mainly showing system enhancements, lottery tools, and AI long videos, as in <a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a>, <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a>, <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">v2ex:1253706</a>. The expression is shorter and more direct, with low willingness to pay (<a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">v2ex:1253695</a> willingness to pay 1; <a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">v2ex:1253706</a> willingness to pay 4 but difficulty 5). The opportunity is lightweight local small tools and system enhancements; validate first by replying in the original thread, and don't start with a heavy product right away.</li>
+</ul>
+</div></details><details class="fold"><summary>Referenced needs</summary><div class="detail"><div class="table"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Need</th>
+<th>Original Post</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reddit:1xkl9v8</code></td>
+<td>Let ChatGPT read and write an Obsidian vault on any device</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xkl9v8/">Link</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:121617</code></td>
+<td>Obsidian's "Move line up/down" commands should respect list structure and empty-line groups</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617">Link</a></td>
+</tr>
+<tr>
+<td><code>forum:inkdrop:5614</code></td>
+<td>Collapse/expand code blocks in Inkdrop preview mode</td>
+<td><a target="_blank" rel="noopener" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x3qlgy</code></td>
+<td>A database-based task management plugin for Obsidian that avoids creating a separate note for each task</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/">Link</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16871</code></td>
+<td>When exporting a Joplin whiteboard note to PDF, the source code is exported instead of the canvas</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16871">Link</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#346102</code></td>
+<td>In VS Code, have multiple AI models generate implementation plans side by side for comparison, then start implementing the chosen one with one click</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/346102">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:b5fb1ca9e460c7e14b9e</code></td>
+<td>A small tool that assembles prompts (visuals, dialogue, sound effects) in a fixed order for the Wan 2.5 video generation model</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xijxgq</code></td>
+<td>One-click capture of a web element's parent container Flex/Grid layout rules and Tailwind classes to generate structured context for AI coding tools</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xijxgq/">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50060564</code></td>
+<td>A platform for standardized sharing and comparison of AI coding prompts, generated results, and token consumption</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50060564">Link</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95656</code></td>
+<td>An API/feed tool that tracks deprecations and breaking changes per library version</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xnzwou</code></td>
+<td>Make shopping sites always display prices in the local currency</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xnzwou/">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50168676</code></td>
+<td>A browser extension that detects when sites serve different content based on User-Agent (e.g., hidden instructions for AI)</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50168676">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xjeule</code></td>
+<td>A Chrome extension that keeps browser fingerprint spoofing internally consistent</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xjeule/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xet2h9</code></td>
+<td>Back up and migrate Chrome extensions (especially the delisted uBlock Origin) to a new computer</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1xet2h9/">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50348904</code></td>
+<td>A browser extension that turns Hacker News into a New York Times-style layout and auto-generates headlines and summaries</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50348904">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:1bd62fdb86fa7c2a17db</code></td>
+<td>Wish there were a tool that X-rays an Excel workbook's internal structure (formula dependencies, dead code, hidden references)</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xnfpsl</code></td>
+<td>When mail-merging and batch-sending PDFs, want the PDF filenames and email subjects to automatically include the recipient's name</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xnfpsl/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xhst2h</code></td>
+<td>Split the window in Google Sheets like in LibreOffice to view cells in different areas at the same time</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:4e417be09c6cf64547b3</code></td>
+<td>Automatically generate Japanese-style receipt PDFs from Google Forms (with Japanese era dates, honorifics, and invoice registration numbers)</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ktg0215/items/4e417be09c6cf64547b3">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x254gu</code></td>
+<td>Batch-edit PDFs with AI instructions (delete text, fill in blanks, tighten spacing)</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1x254gu/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xhwqwp</code></td>
+<td>Want a photo management tool like Picasa that browses folders in place without importing into a database</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xklosk</code></td>
+<td>Need a simple local-first database management tool with a web UI that can manage assets like images and videos and export to Excel</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xklosk/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:de7ce6576a44260fa6f0</code></td>
+<td>Low-cost automatic backup of NAS photos to S3 Deep Archive, plus a self-hosted photo browser on a Raspberry Pi</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ysk400rr/items/de7ce6576a44260fa6f0">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50347401</code></td>
+<td>A diff comparison and visual exploration tool for web archives</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50347401">Link</a></td>
+</tr>
+<tr>
+<td><code>v2ex:1253706</code></td>
+<td>An AI tool for automatically editing long videos/large amounts of footage</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253706">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:723f8fccd84e39f9c666</code></td>
+<td>Make Windows' built-in Japanese IME select candidates directly with number keys like on Mac, avoiding repeated Tab presses</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/ReasonLi/items/723f8fccd84e39f9c666">Link</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/PowerToys#51759</code></td>
+<td>Convert a zip archive into an exe or msi self-extracting installer with one click</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51759">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50017797</code></td>
+<td>Display shortcut key symbols (⌘⌥⇧) as text or abbreviations on macOS</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50017797">Link</a></td>
+</tr>
+<tr>
+<td><code>forum:appinn:95223</code></td>
+<td>Add custom folder entries to "This PC" in Win11</td>
+<td><a target="_blank" rel="noopener" href="https://meta.appinn.net/t/topic/95223">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x8bac9</code></td>
+<td>Control slide/image transitions with camera gestures or voice, no programming required</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1x8bac9/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xedimn</code></td>
+<td>A tool for creating step-by-step illustrated guides for offline processes like household chores</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xedimn/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xlwp3a</code></td>
+<td>Drag Google Tasks to a specific Google Calendar while keeping task groups mapped to calendars</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:9c08ac6c5a5ef5b4f7d6</code></td>
+<td>Use AI to manage household chore cycles, trash days, and shopping lists, with proactive reminders</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/cushionA/items/9c08ac6c5a5ef5b4f7d6">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50112258</code></td>
+<td>A small tool that syncs Withings health data to Apple Health for free</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50112258">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xid69e</code></td>
+<td>An out-of-the-box lightweight planning tool for people who get anxious from chaotic plans</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xid69e/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:a5e7ce5c9a32f976e339</code></td>
+<td>A quality acceptance testing tool for IP camera RTSP streams (frame rate/packet loss/timestamps/frozen frames)</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xe67lv</code></td>
+<td>A browser tool to view a used car's original new-car price and original window sticker</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xe67lv/">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50342831</code></td>
+<td>An assistive tool that provides evidence levels for research and field progress context for science news</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50342831">Link</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95654</code></td>
+<td>A search tool to filter PDFs by page count range</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:0dcae0b54cb3e7479592</code></td>
+<td>A DIY woodworking cut layout tool: input board and part dimensions to automatically generate a material-saving cutting layout diagram</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yshinobu07/items/0dcae0b54cb3e7479592">Link</a></td>
+</tr>
+<tr>
+<td><code>v2ex:1253695</code></td>
+<td>Need a giveaway tool that reliably draws winning users from V2EX post comments</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:7891fed6c9eaae905bc6</code></td>
+<td>Use GAS to periodically collect deduplicated RSS articles into Google Sheets</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/begin082082/items/7891fed6c9eaae905bc6">Link</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95677</code></td>
+<td>A self-hosted Web Push notification server supporting multiple users, WebUI management, and CLI/curl triggering</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95677/web-push-notifications-server">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:920803e3c31273ffd015</code></td>
+<td>A more reliable link-rot detection tool that doesn't just check for HTTP 200</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/fujiken818/items/920803e3c31273ffd015">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:b3df525ee38941ec98f8</code></td>
+<td>Add a rate-limiting/circuit-breaker wrapper around AI Agent CLI calls that forces a wait on 429</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/Kazeneko/items/b3df525ee38941ec98f8">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xii720</code></td>
+<td>A Chrome extension that turns any webpage into a playable mini-game (like Snake)</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xii720/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xg0dqt</code></td>
+<td>View a Twitch channel's chat in read-only mode even after being banned from the channel</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xg0dqt/">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50085840</code></td>
+<td>Turn a web-based virtual guitar into a VST plugin playable by strumming with the keyboard</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50085840">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x68cvo</code></td>
+<td>Have a cell display in real time the value of the last-clicked cell within a specified range</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1x68cvo/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xjfw79</code></td>
+<td>Count dropdown option occurrences by date range across multiple identical worksheets</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xjfw79/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wzvzc1</code></td>
+<td>An Excel tool that automatically triggers macros based on worksheet name and date</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1wzvzc1/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xnwifm</code></td>
+<td>A browser extension that expands and sorts AliExpress search results by actual variant prices</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xnwifm/">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:49886395</code></td>
+<td>A browser extension that filters out counterfeit-brand junk products on Amazon</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49886395">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xj6w8x</code></td>
+<td>A Chrome extension that locally describes web images for blind VoiceOver users</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xj6w8x/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:a98b283eed4045391dc0</code></td>
+<td>A simple GUI tool for running a Japanese LLM locally on a laptop with OpenVINO</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/calcMCalcm/items/a98b283eed4045391dc0">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:31db81e05096c8d6f7b8</code></td>
+<td>A desktop tool that translates any selected text locally, even outside the browser</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/Toppo8/items/31db81e05096c8d6f7b8">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:f055dadbce1bd27ecb3a</code></td>
+<td>A local tool for batch-converting PDFs into editable Word documents</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/carol123/items/f055dadbce1bd27ecb3a">Link</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#338860</code></td>
+<td>Make Copilot use only local LLMs and prohibit automatic fallback to external models</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/338860">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x01rfe</code></td>
+<td>A unified task management plugin for Obsidian with inline task creation, project assignment, and kanban view</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x0oggg</code></td>
+<td>Obsidian mobile toolbar that can expand to multiple rows and collapse back to a single row</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x0oggg/">Link</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:121628</code></td>
+<td>Move Obsidian's left ribbon bar near the top-right tab bar</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-the-ribbons-position/121628">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xmmvbz</code></td>
+<td>Fix broken footnote links after importing LibreOffice/OpenOffice documents into Obsidian and convert them to standard Markdown footnotes</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:01397cecf44ebbc0cbcf</code></td>
+<td>A single-file web tool that copies rendered Markdown as rich text into Word/email/chat apps</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/tokicode/items/01397cecf44ebbc0cbcf">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xo6knv</code></td>
+<td>Automatically fetch the current Australian market price or original RRP of LEGO sets in Google Sheets</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xo6knv/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm8zsm</code></td>
+<td>Make browser audio fill all channels on a 5.1/7.1 surround sound system</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm8zsm/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm6kml</code></td>
+<td>Automatically dismiss Notion reminders once a task is marked complete</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xm6kml/">Link</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#341245</code></td>
+<td>Let VS Code extensions open the editor as a floating window with a specified size, compact, and always on top</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/341245">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:4c2c099f1ccc27dd240c</code></td>
+<td>Simplify local export and persistent display of GEE satellite imagery</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:1511f46212883dcacca2</code></td>
+<td>A bulk configuration and distribution tool for Outlook group calendars for Exchange Online administrators</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/mnoda/items/1511f46212883dcacca2">Link</a></td>
+</tr>
+<tr>
+<td><code>hn:50359031</code></td>
+<td>Show a comment-based positive/negative sentiment score next to HN posts</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50359031">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xm5k0j</code></td>
+<td>Send Stremio Web streaming links to the local PotPlayer for playback with one click</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xm5k0j/">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x9hzu3</code></td>
+<td>Add a local media library browsing interface to the IINA player</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1x9hzu3/">Link</a></td>
+</tr>
+<tr>
+<td><code>qiita:8d5f16e82816d8fc9eb4</code></td>
+<td>Share a Windows keyboard and mouse with an iPad over Bluetooth</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/tukiharu/items/8d5f16e82816d8fc9eb4">Link</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xf6xqm</code></td>
+<td>A high-quality offline-capable background removal/cutout tool</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1xf6xqm/">Link</a></td>
+</tr>
+</tbody>
+</table></div></div></details>
+  <footer>generated 2026-11-06 00:33 JST · auto-updated daily</footer>
+</div>
+</body>
+</html>

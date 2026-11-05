@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://mimizu-dev.github.io/demand-reports/sitemap.xml
