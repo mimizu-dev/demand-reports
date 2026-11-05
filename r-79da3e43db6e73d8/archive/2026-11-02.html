@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>需求综合报告 · 更新于 2026-11-02</title>
+<link rel="icon" href="../assets/cart.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
+  --sky: #056bc5; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
+  --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
+  --text: #5c3e27; --dim: #9a7a5c;
+  --blue: #4a86b8; --green: #5f9a4a; --orange: #c98a3a; --red: #c0605a; --gold: #b8913c;
+  --shadow: rgba(40, 90, 30, .25);
+  --pixel: "DotGothic16", "Noto Sans SC", monospace;
+  --u: 4px;
+}
+* { box-sizing: border-box; }
+img.ico, .deco img { image-rendering: pixelated; image-rendering: crisp-edges; }
+body { margin: 0; overflow-x: clip; color: var(--text); font: 15px/1.75 "Noto Sans SC", system-ui, sans-serif; background-color: var(--grass);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Crect x='6' y='8' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='8' y='6' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='30' y='30' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='32' y='28' width='2' height='2' fill='%238acb57'/%3E%3Crect x='20' y='40' width='2' height='2' fill='%238acb57'/%3E%3Crect x='40' y='12' width='2' height='2' fill='%236ab33b'/%3E%3C/svg%3E");
+  background-size: 48px 48px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: var(--wood-l); color: var(--ink); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.c-cyan { color: var(--blue); } .c-pink { color: var(--red); } .c-lime { color: var(--green); }
+.c-amber { color: var(--orange); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+img.ico { flex: none; vertical-align: middle; }
+
+/* 木框羊皮纸面板：木头边框 + 内侧深色线 + 外侧缺角描边 + 投影 */
+.card, .fold, .board, .lboard { background: var(--paper); border: 5px solid var(--wood);
+  box-shadow: inset 0 0 0 2px var(--wood-l), inset 0 0 0 4px var(--paper-2),
+    0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink),
+    5px 8px 0 0 var(--shadow); }
+/* 小号木牌：按钮、标签、排名 */
+.tabs a, .btn, .rank, .stats span, .refs a, .chip, .archive a, .m {
+  --c: var(--ink);
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+
+/* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
+/* 页面顶部是山顶：天空 → 云海 → 崖边 → 有铁轨的平台，平台下沿的灌木直接压在山谷背景地图上。
+   场景图左右镜像拼接可无缝平铺；场景上方不够高时用天空色补齐（只补到场景图上沿，底边保持透明） */
+/* 页面顶部是山顶，分两层：
+   .sky 天空和云海上半部分，吸顶：往上滚到只剩底部一条就停住，常驻在最上面；停住后下沿露出一圈云底，
+        一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
+   .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
+   图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
+:root { --skyh: 290px; --band: 56px; }
+.sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
+  background: url("../assets/summit-sky.png") repeat-x left bottom / auto 184px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 182px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 28px; pointer-events: none; display: none;
+  background: url("../assets/cloud-edge.png") repeat-x left top / auto 28px; image-rendering: pixelated; }
+.stuck .sky::before { display: block; }
+/* 两侧高高堆起的云（外侧高、中间低），平底藏在前面一层云海后面，不留缝 */
+.cloud-l, .cloud-r, .cloud-front { position: absolute; pointer-events: none; image-rendering: pixelated; background: 0 0 / 100% 100% no-repeat; }
+.cloud-l, .cloud-r { bottom: 4px; z-index: 0; }
+.cloud-l { left: 0; width: 366px; height: 240px; background-image: url("../assets/cloud-l.png"); }
+.cloud-r { right: 0; width: 222px; height: 204px; background-image: url("../assets/cloud-r.png"); }
+.cloud-front { left: 0; right: 0; bottom: 0; height: 44px; z-index: 1;
+  background: url("../assets/cloud-front.png") repeat-x left bottom / auto 44px; }
+.sky > .wrap { position: relative; z-index: 2; }
+/* 头部：导航在左上，标题居中并往下贴近云层，统计排在标题下面 */
+header { position: relative; height: calc(var(--skyh) - 30px); padding-top: 10px; display: flex; flex-direction: column; justify-content: flex-end; }
+.plateau { height: 200px; position: relative;
+  background: url("../assets/summit-ground.png") repeat-x left top / auto 200px; image-rendering: pixelated; }
+.plateau .wrap { position: relative; height: 100%; }
+.stuck img.prop { z-index: 1; }
+.tabs { display: flex; gap: 14px; margin: 12px 0 4px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 3; }
+.tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
+.tabs a.on { color: var(--text); background: var(--paper); }
+.tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
+.hero { position: relative; z-index: 3; text-align: center; }
+.hero, .tabs { transition: opacity .2s; }
+.stuck .hero, .stuck .tabs { opacity: 0; pointer-events: none; }
+/* 标题是生成的木板像素字（木板钉成、带木纹，叶子从木头上长出来，小鸡站在字上） */
+h1 { margin: 0 0 10px; line-height: 0; }
+/* 两页标题图都是 68 像素高、按同一高度显示，两页头部一样高；手机上按较宽的需求页标题能放下的比例一起缩小 */
+h1 img { height: min(136px, calc((100vw - 32px) * 68 / 314)); width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(20, 40, 90, .25)); }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; font: 13px var(--pixel); color: var(--dim); }
+.stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
+.stats b { color: var(--text); font-weight: 400; }
+/* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
+img.prop { position: absolute; z-index: 7; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 8%; bottom: 90px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+img.prop-cart.drag { cursor: grabbing; }
+img.prop-board { left: 10%; bottom: 112px; }
+.deco { position: absolute; right: 0; bottom: 4px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+.deco img { height: 80px; width: auto; }
+.deco img + img { height: 60px; }
+
+/* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--grass) url("../assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
+.main { padding-top: 4px; }
+.yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
+.yard img { image-rendering: pixelated; }
+
+h2 { font: 400 19px var(--pixel); margin: 30px 0 16px 4px; display: flex; width: max-content; max-width: 100%; align-items: center; gap: 10px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d); padding: 4px 16px 4px 10px;
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
+  border: 3px solid var(--wood-d);
+  box-shadow: 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 4px 6px 0 0 var(--shadow); }
+h2 img.ico { filter: drop-shadow(2px 2px 0 var(--shadow)); }
+
+/* 卡片 */
+.cards { display: grid; gap: 26px; padding: 4px; }
+.card { padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.rank { font: 15px/1 var(--pixel); color: var(--paper); background: var(--wood); padding: 5px 8px 4px; text-shadow: 1px 1px 0 var(--wood-d); }
+.nid { font: 13px/1 var(--pixel); color: var(--wood-d); background: var(--paper-2); padding: 4px 8px; border: 2px dashed var(--wood); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--dim); }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.lede { color: var(--text); margin: 0 0 14px; }
+.meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
+.m { --c: var(--wood); background: var(--paper-2); padding: 8px 8px 8px 50px; display: grid; gap: 2px; align-content: center;
+  position: relative; min-height: 58px; min-width: 0; }
+.m img.ico { position: absolute; left: 7px; top: 50%; transform: translateY(-50%); }
+.m b { font: 400 14px var(--pixel); }
+.m b.big { font: 22px/1 var(--pixel); }
+.m span { font: 12px var(--pixel); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: var(--wood-d); width: max-content; }
+.pips i { width: 8px; height: 10px; background: var(--paper-3); }
+.pips.amber i.on { background: #ecb35f; box-shadow: inset 0 -3px 0 #d0914a; }
+.pips.lime i.on { background: #a8d27e; box-shadow: inset 0 -3px 0 #7fb25f; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--paper); background: var(--green); padding: 2px 10px;
+  text-shadow: 1px 1px 0 #44743a; }
+.btn:hover { background: #6daa56; text-decoration: none; }
+.btn:active { transform: translate(2px, 2px); }
+details summary { cursor: pointer; list-style: none; font: 13px var(--pixel); color: var(--dim); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▶ "; color: var(--wood); display: inline-block; }
+details[open] > summary::before { content: "▼ "; }
+details summary:hover { color: var(--ink); }
+.actions details { flex: 0 1 auto; }
+.actions details summary { padding: 2px 4px; }
+.actions details[open] { flex-basis: 100%; }
+.actions details[open] summary { margin-bottom: 8px; display: inline-block; }
+.detail { font-size: 14px; color: var(--text); }
+.detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
+.detail li::marker { color: var(--wood); font-family: var(--pixel); }
+/* 展开详情：浅色底板，每个字段一行：左边木牌标签、右边内容，字段之间像素虚线 */
+.actions .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 4px 16px; }
+.detail .kv { display: grid; grid-template-columns: 9.5em 1fr; gap: 6px 16px; padding: 12px 0; border-top: 2px dashed var(--paper-3); }
+.detail .kv:first-child { border-top: 0; }
+.detail .k { justify-self: start; align-self: start; max-width: 100%; font: 13px/1.5 var(--pixel); color: var(--paper);
+  background: var(--wood); padding: 2px 9px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.detail .v { min-width: 0; line-height: 1.8; }
+.detail .v p { margin: 0 0 4px; }
+.detail .v ol { margin: 2px 0 0; padding-left: 1.6em; }
+.detail .v ol li { padding: 2px 0; }
+/* 完整分析里的条目：像素方块 + 标题单独一行 + 虚线分隔 */
+.fold .detail > ul { list-style: none; padding: 0; margin: 4px 0; }
+.fold .detail > ul > li { position: relative; padding: 10px 0 10px 22px; border-top: 2px dashed var(--paper-3); line-height: 1.8; }
+.fold .detail > ul > li:first-child { border-top: 0; }
+.fold .detail > ul > li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 8px; height: 8px; background: var(--wood);
+  box-shadow: 2px 2px 0 0 var(--wood-d); }
+.fold .detail > ul > li > strong:first-child { display: block; font: 400 15px/1.5 var(--pixel); color: var(--wood-d); margin-bottom: 2px; }
+.fold .detail h3, .fold .detail h4 { font: 400 15px var(--pixel); color: var(--wood-d); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--paper-3); }
+.fold .detail > p { line-height: 1.8; }
+.fold { padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--ink); }
+.fold[open] > summary { margin-bottom: 10px; }
+.table { overflow-x: auto; border: 3px solid var(--wood); background: #fff3d2; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--paper-3); vertical-align: top; }
+th { background: var(--paper-2); font: 13px var(--pixel); color: var(--wood-d); white-space: nowrap; }
+td:first-child { min-width: 8em; }
+.chip { --c: var(--wood); font: 12px var(--pixel); color: var(--blue); background: var(--paper); padding: 0 6px; margin: 3px; white-space: nowrap; display: inline-block; }
+.archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
+.archive a { --c: var(--wood); font: 13px var(--pixel); padding: 1px 10px; background: var(--paper-2); }
+footer { font: 12px/2 var(--pixel); color: var(--text); padding: 24px 0 40px; text-align: center; }
+footer .note { display: inline-block; background: var(--paper); padding: 0 12px; box-shadow: 0 -2px 0 0 var(--wood), 0 2px 0 0 var(--wood), -2px 0 0 0 var(--wood), 2px 0 0 0 var(--wood); }
+
+/* 资讯页 */
+.headline { font: 400 16px/1.6 var(--pixel); color: var(--ink); background: var(--paper); padding: 12px 16px 12px 58px; margin: 0 0 18px 2px;
+  position: relative; border: 4px solid var(--wood); max-width: 760px;
+  box-shadow: inset 0 0 0 2px var(--wood-l), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 5px 7px 0 0 var(--shadow); }
+.headline img.ico { position: absolute; left: 12px; top: 12px; }
+.hl h3 { margin: 0 0 6px; }
+.refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
+.refs a { --c: var(--wood); min-width: 0; font: 12px var(--pixel); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--paper-2); }
+.refs a:hover { background: var(--wood-l); color: var(--ink); text-decoration: none; }
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
+.board { padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px); border-bottom: 3px solid var(--wood-d); }
+.board h3 span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.board h3 small { font: 12px var(--pixel); color: var(--paper-2); text-shadow: 1px 1px 0 var(--wood-d); white-space: nowrap; }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--paper-3); }
+.board h3 + .row { border-top: 0; }
+.row .no { font: 14px/24px var(--pixel); color: var(--dim); }
+.row:nth-of-type(-n+3) .no { color: var(--orange); }
+.row .t { min-width: 0; }
+.row .t a { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--blue); }
+.row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.row .h { font: 12px var(--pixel); color: var(--orange); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--blue); }
+.board details summary { margin-top: 6px; }
+
+/* 排行榜：筛选木牌 + 木框长榜，每行点开看详情 */
+.filters { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 0 8px 18px 6px; }
+.filters button { --c: var(--ink); font: 13px var(--pixel); color: var(--paper); background: var(--wood-d); border: 0; padding: 3px 12px; cursor: pointer;
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+.filters button:hover { background: var(--wood); }
+.filters button.on { color: var(--text); background: var(--paper); }
+.filters button:active { transform: translate(2px, 2px); }
+.lboard { padding: 6px 14px 4px; margin: 0 8px 26px 4px; min-width: 0; }
+.lb-head, .lb > summary { display: grid; grid-template-columns: 34px 46px minmax(0, 1fr) 70px 56px; gap: 10px; align-items: center; }
+.lb-head { font: 12px var(--pixel); color: var(--dim); padding: 6px 4px; border-bottom: 3px solid var(--paper-3); }
+.lb-head span:nth-child(n+4) { text-align: right; }
+.lb { border-top: 2px dashed var(--paper-3); }
+.lb-head + .lb { border-top: 0; }
+.lb > summary { padding: 9px 4px; font: inherit; color: var(--text); }
+.lb > summary::before, .lb[open] > summary::before { content: none; }
+.lb > summary:hover { background: var(--paper-2); }
+.lb[open] > summary { background: var(--paper-2); }
+.lb .no { font: 16px/1 var(--pixel); color: var(--wood-d); text-align: center; }
+.lb:nth-of-type(-n+3) .no { color: var(--paper); background: var(--orange); padding: 5px 0 4px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.mv { font: 13px var(--pixel); text-align: center; }
+.mv.up, small.up { color: var(--green); } .mv.down, small.down { color: var(--red); }
+.mv.new { color: var(--paper); background: var(--green); font-size: 11px; padding: 0 2px; }
+.lb .t { min-width: 0; display: grid; gap: 3px; }
+.lb .t b { font-weight: 500; color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }
+.lb .sub { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font: 12px var(--pixel); color: var(--dim); }
+.lb .sub .nid { font-size: 11px; padding: 1px 6px; border-width: 1px; }
+.lb .kind { color: var(--wood-d); }
+.lb .pick { display: inline-flex; align-items: center; gap: 4px; color: var(--orange); }
+.lb .sc { text-align: right; font: 18px/1.1 var(--pixel); color: var(--blue); display: grid; }
+.lb .sc b { font-weight: 400; }
+.lb .sc small { font: 11px var(--pixel); }
+.lb .ht { text-align: right; font: 13px var(--pixel); color: var(--orange); display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; }
+.lb-body { padding: 12px 4px 16px; }
+.lb-body > .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 2px 16px; margin-top: 14px; }
+.lb-body .actions .detail { margin-top: 0; }
+.sim { margin: 0; padding-left: 1.2em; } .sim li { overflow-wrap: anywhere; }
+.lb-note { font: 12px var(--pixel); color: var(--dim); margin: 6px 4px 8px; }
+@media (max-width: 760px) {
+  .lboard { padding: 4px 8px 2px; }
+  .lb-head { display: none; }
+  .lb > summary { grid-template-columns: 30px minmax(0, 1fr) auto; grid-template-areas: "no t sc" "mv t ht"; gap: 2px 10px; align-items: start; padding: 10px 2px; }
+  .lb .no { grid-area: no; } .lb .mv { grid-area: mv; } .lb .t { grid-area: t; } .lb .sc { grid-area: sc; } .lb .ht { grid-area: ht; }
+  .lb-body { padding: 10px 0 14px; }
+  .lb-body > .detail { padding: 2px 10px; }
+  .filters { gap: 10px 12px; }
+  .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .detail .kv { grid-template-columns: 1fr; gap: 6px; }
+  .actions .detail { padding: 2px 10px; }
+  .card { padding: 14px 14px 12px; }
+  .boards { grid-template-columns: 1fr; }
+  :root { --skyh: 250px; }
+  .cloud-l { width: 244px; height: 160px; } .cloud-r { width: 148px; height: 136px; }
+  .hero { max-width: none; }
+  img.prop { transform-origin: bottom right; transform: scale(.75); }
+  img.prop-cart { right: 64px; } img.prop-board { left: 16px; right: auto; transform-origin: bottom left; }
+  .deco img { height: 60px; } .deco img + img { height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="sky"><i class="cloud-l"></i><i class="cloud-r"></i><i class="cloud-front"></i><div class="wrap">
+  <header>
+    <div class="hero">
+    <h1><img src="../assets/title-needs.png" width="628" height="136" alt="需求综合报告"></h1>
+    <div class="stats"><span>更新于 <b class="c-cyan">2026-11-02</b></span><span>统计最近 <b>90</b> 天</span><span><b>8</b> 个需求</span><span><b>9</b> 条帖子</span><span><b>4</b> 个来源</span></div>
+    </div>
+    <nav class="tabs"><a class="on" href="../index.html">需求雷达</a><a class="" href="../news.html">资讯速递</a></nav>
+  </header>
+</div></div>
+<div class="plateau"><div class="wrap">
+  <img class="ico prop prop-cart" src="../assets/cart.png" width="111" height="108" alt="装满宝石的矿车">
+  <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
+</div></div>
+<div class="wrap main">
+  <h2><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true">今日推荐</h2>
+  <div class="cards">
+<article class="card">
+  <div class="card-head"><span class="rank">#1</span><span class="tag">MCP 服务器（本地进程）+ 极</span></div>
+  <h3>GAS 云端代码直连 MCP 工具</h3>
+  <p class="lede">让 AI 直接读写云端 GAS 代码，免去 clasp 的 clone/pull/push 本地同步与 Node.js 依赖。</p>
+  
+  <div class="actions"><details><summary>展开详情</summary><div class="detail">
+<div class="kv"><div class="k">需求概括</div><div class="v">让 AI 直接读写云端 GAS 代码，免去 clasp 的 clone/pull/push 本地同步与 Node.js 依赖。</div></div>
+<div class="kv"><div class="k">为什么值得做</div><div class="v">最终分 7.2 全场最高，帖子数 2（唯一被多次提及的需求），热度 2.05 且一周前为 0，是明显升温的新话题。痛点链条具体（clasp 往返 → 同步冲突 → AI 改代码等待），日文 GAS 用户基数大且已有作者自建 Python FastMCP 服务器验证了“用 clasprc 令牌直连”这条路可行。注意：该条<strong>竞品检查为“未检查”</strong>，动手前应先补一次搜索（现有 MCP GAS server、Google 官方 API 封装），确认没有强势同类。</div></div>
+<div class="kv"><div class="k">建议形式</div><div class="v">MCP 服务器（本地进程）+ 极简配置面板（浏览器扩展或桌面小窗），作为 Claude/Cursor 等 AI 客户端的插件接入。</div></div>
+<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>令牌授权直连云端（复用 clasprc 令牌或 OAuth），全程不落地本地文件、不依赖 Node.js；</li><li><code>list / read / write</code> 三组工具：列出云端项目文件、读取内容、写回保存；</li><li>写入前的 diff 预览 + 基于 scriptId 与版本号的冲突检测，避免覆盖他人改动。</li></ol></div></div>
+<div class="kv"><div class="k">怎么验证有人要</div><div class="v">在 Qiita 原帖评论回复并附 demo 视频；发布到 Qiita/Zenn 的 GAS 标签、X 日语 GAS 社群、MCP 官方 servers 仓库的 PR 列表。</div></div>
+<div class="kv"><div class="k">预计开发天数</div><div class="v">10–14 天（授权与冲突处理占大头）。</div></div>
+<hr />
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#2</span><span class="tag">纯前端网页工具（localSto</span></div>
+  <h3>Wan 2.5 提示词固定顺序组装器</h3>
+  <p class="lede">把画面描述、台词、环境音/BGM 按固定顺序拼成一段 Wan 2.5 提示词的网页工具，支持多镜头、锁定台词、并排对比。</p>
+  
+  <div class="actions"><details><summary>展开详情</summary><div class="detail">
+<div class="kv"><div class="k">需求概括</div><div class="v">把画面描述、台词、环境音/BGM 按固定顺序拼成一段 Wan 2.5 提示词的网页工具，支持多镜头、锁定台词、并排对比。</div></div>
+<div class="kv"><div class="k">为什么值得做</div><div class="v">难度仅 2，竞品检查为 weak 且空缺明确——现有结果只有代码片段、文档和通用分镜技能，没有专门面向 Wan 2.5 的网页组装器。属于“作者已用 Python 函数部分解决，但没有界面、镜头库、模板管理”的典型空缺，做纯前端单页即可上线，迭代成本极低。</div></div>
+<div class="kv"><div class="k">建议形式</div><div class="v">纯前端网页工具（localStorage 存草稿，可导出 JSON）。</div></div>
+<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>固定顺序的镜头表单：画面/台词/音效/BGM 分段填写，自动按序拼接 + 一键复制；</li><li>台词锁定：填过的台词不被后续编辑或重排覆盖；</li><li>多镜头列表 + 并排对比视图与导出。</li></ol></div></div>
+<div class="kv"><div class="k">怎么验证有人要</div><div class="v">回复 qiita 原帖；发到 Wan/即梦官方社区、X 的 Wan 2.5 话题、Reddit r/StableDiffusion、AI 视频创作群，看是否有人主动要模板或提镜头管理需求。</div></div>
+<div class="kv"><div class="k">预计开发天数</div><div class="v">3–5 天。</div></div>
+<hr />
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#3</span><span class="tag">Obsidian 社区插件。</span></div>
+  <h3>Obsidian 启动默认打开关系图谱</h3>
+  <p class="lede">加一个开关，让 Obsidian 启动时直接进入全局关系图谱，而不是先开笔记再手动切换。</p>
+  
+  <div class="actions"><details><summary>展开详情</summary><div class="detail">
+<div class="kv"><div class="k">需求概括</div><div class="v">加一个开关，让 Obsidian 启动时直接进入全局关系图谱，而不是先开笔记再手动切换。</div></div>
+<div class="kv"><div class="k">为什么值得做</div><div class="v">难度 2，竞品检查 weak 且空缺明确——现有工具只能“启动打开指定工作区/笔记”间接变通，没有插件直接提供这个开关。Obsidian 插件发布链路成熟，可用官方模板几小时搭起骨架，属于“小投入、长期自然流量”的插件。</div></div>
+<div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 社区插件。</div></div>
+<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>设置项开关“启动时打开全局关系图谱”；</li><li>在布局恢复完成后延迟执行，避免与恢复的上次会话打架；</li><li>与“打开指定笔记/工作区”类设置冲突时的优先级选项。</li></ol></div></div>
+<div class="kv"><div class="k">怎么验证有人要</div><div class="v">在原帖回复插件链接；发布到 Obsidian 社区插件市场、r/ObsidianMD、中文 Obsidian 群。</div></div>
+<div class="kv"><div class="k">预计开发天数</div><div class="v">2–3 天。</div></div>
+<hr />
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#4</span><span class="tag">Obsidian 插件（Code</span></div>
+  <h3>Obsidian Callout 内容跟随当前视图模式</h3>
+  <p class="lede">让 Callout 内部内容在 Live Preview 下按编辑态渲染（%%注释%% 可见、连续空行不折叠），阅读视图维持现状。</p>
+  
+  <div class="actions"><details><summary>展开详情</summary><div class="detail">
+<div class="kv"><div class="k">需求概括</div><div class="v">让 Callout 内部内容在 Live Preview 下按编辑态渲染（<code>%%注释%%</code> 可见、连续空行不折叠），阅读视图维持现状。</div></div>
+<div class="kv"><div class="k">为什么值得做</div><div class="v">竞品检查 weak，搜索中没有插件直接解决这个核心点，官方也无方案；痛点非常具体，且和上一条同属 Obsidian 插件，工具链可复用。风险点在于原帖有人认为“插件难以覆盖默认渲染”，所以必须先做可行性验证再投入。</div></div>
+<div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 插件（CodeMirror 扩展 + CSS 覆盖），可先发 CSS 片段试水再插件化。</div></div>
+<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>Live Preview 下 Callout 内部走编辑态解析（注释可见、空行保留）；</li><li>阅读视图渲染保持不变，可随时切回；</li><li>按 Callout 类型（note/warning/…）白名单启用，方便用户避险。</li></ol></div></div>
+<div class="kv"><div class="k">怎么验证有人要</div><div class="v">先在原帖回复一个可行性 demo 或 CSS 片段收集反馈，确认能跑通再全量开发；正式版发 Obsidian 论坛、插件市场、r/ObsidianMD。</div></div>
+<div class="kv"><div class="k">预计开发天数</div><div class="v">5–8 天（含可行性验证）。</div></div>
+<hr />
+</div></details></div>
+</article>
+<article class="card">
+  <div class="card-head"><span class="rank">#5</span><span class="tag">桌面应用（Python + GU</span></div>
+  <h3>IP 摄像头 RTSP 流质量验收桌面工具</h3>
+  <p class="lede">对 RTSP 流做量化验收——帧率、丢包、抖动、RTP 时间戳异常、黑屏/冻结画面检测，输出可归档报告。</p>
+  
+  <div class="actions"><details><summary>展开详情</summary><div class="detail">
+<div class="kv"><div class="k">需求概括</div><div class="v">对 RTSP 流做量化验收——帧率、丢包、抖动、RTP 时间戳异常、黑屏/冻结画面检测，输出可归档报告。</div></div>
+<div class="kv"><div class="k">为什么值得做</div><div class="v">付费意愿 3，是全场最高；竞品检查 weak，现有工具多为 CLI 或绑定 Zabbix/DeepStream 生态，冻结/黑屏检测在多数工具中未明确覆盖。作者已自研 RK Edge Doctor 的 <code>rtsp</code> 子命令，算法与报告格式已被验证，明确的空缺只在于<strong>图形界面、批量多摄像头、报告归档与趋势对比</strong>——这正是可产品化的部分。缺点是难度 4、开发周期最长，建议先做窄。</div></div>
+<div class="kv"><div class="k">建议形式</div><div class="v">桌面应用（Python + GUI，打包单文件 exe），核心检测逻辑开源、GUI 与批量报表作为增值。</div></div>
+<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>填一个 RTSP URL 一键检测，输出帧率/丢包/抖动/时间戳异常指标；</li><li>冻结帧与黑屏检测（判定“画面其实是旧帧”）；</li><li>单页 HTML/PDF 报告 + 多摄像头批量巡检列表。</li></ol></div></div>
+<div class="kv"><div class="k">怎么验证有人要</div><div class="v">在原帖回复并附上一份示例报告；发到 Qiita、GitHub、安防/弱电行业群、r/sysadmin 与 r/networking，重点问“愿不愿为批量巡检和报告归档付费”。</div></div>
+<div class="kv"><div class="k">预计开发天数</div><div class="v">14–20 天（可先做 CLI→GUI 最小封装，约 7 天验证需求）。</div></div>
+</div></details></div>
+</article></div>
+  <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">完整分析</h2>
+  <details class="fold"><summary>主题归类</summary><div class="detail">
+<div class="table"><table>
+<thead>
+<tr>
+<th>主题</th>
+<th>需求数</th>
+<th>涉及平台</th>
+<th>代表需求（ID）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>笔记/编辑器交互与渲染一致性</td>
+<td>3</td>
+<td>forum（Obsidian 论坛、Joplin 论坛）</td>
+<td><a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>、<a class="chip" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046" target="_blank" rel="noopener">forum:obsidian:120046</a>、<a class="chip" href="https://discourse.joplinapp.org/t/in-bullet-lists-double-enter-should-remove-the-but-it-doesnt/51336" target="_blank" rel="noopener">forum:joplin:51336</a></td>
+</tr>
+<tr>
+<td>AI 编程 / 开发工作流集成</td>
+<td>2</td>
+<td>qiita、github</td>
+<td><a class="chip" href="https://qiita.com/shu15511551/items/67a07b5e10025aeb121a" target="_blank" rel="noopener">qiita:67a07b5e10025aeb121a</a>、<a class="chip" href="https://github.com/microsoft/vscode/issues/345427" target="_blank" rel="noopener">gh:microsoft/vscode#345427</a></td>
+</tr>
+<tr>
+<td>AI 生成内容（视频提示词）辅助</td>
+<td>1</td>
+<td>qiita</td>
+<td><a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a></td>
+</tr>
+<tr>
+<td>流媒体 / 设备质量检测</td>
+<td>1</td>
+<td>qiita</td>
+<td><a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a></td>
+</tr>
+<tr>
+<td>可穿戴硬件</td>
+<td>1</td>
+<td>hn</td>
+<td><a class="chip" href="https://news.ycombinator.com/item?id=50321671" target="_blank" rel="noopener">hn:50321671</a></td>
+</tr>
+</tbody>
+</table></div>
+</div></details><details class="fold"><summary>跨平台共同需求</summary><div class="detail">
+<p><strong>1. “编辑器行为与用户预期不一致” —— Obsidian ×2 + Joplin ×1（真正的跨平台共性）</strong></p>
+<ul>
+<li>Obsidian 侧从<strong>视图模式</strong>角度提：Callout 内部内容始终按阅读视图渲染，导致 Live Preview 下 <code>%%注释%%</code> 不显示、空行被折叠（<a class="chip" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058" target="_blank" rel="noopener">forum:obsidian:120058</a>）；以及启动时无法把关系图谱设为默认视图（<a class="chip" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046" target="_blank" rel="noopener">forum:obsidian:120046</a>）。</li>
+<li>Joplin 侧从<strong>按键行为</strong>角度提：列表末尾回车不结束列表、缩进列表回车不减少缩进，与主流 Markdown 编辑器不一致（<a class="chip" href="https://discourse.joplinapp.org/t/in-bullet-lists-double-enter-should-remove-the-but-it-doesnt/51336" target="_blank" rel="noopener">forum:joplin:51336</a>）。</li>
+<li>共同结构：都属于宿主编辑器核心行为，插件难以拦截改写，付费意愿普遍偏低（1–2）。差别在于 Obsidian 用户接受“用插件补”，Joplin 该帖被明确判断为需要改编辑器核心。</li>
+</ul>
+<p><strong>2. “AI 工作流中缺少合适的承载位置” —— qiita + github（弱关联，非同一需求）</strong></p>
+<ul>
+<li>日文侧问的是“AI 能否直接操作真实代码”：GAS 云端代码要经 clasp 落地本地才能被 AI 改，往返慢、易冲突（<a class="chip" href="https://qiita.com/shu15511551/items/67a07b5e10025aeb121a" target="_blank" rel="noopener">qiita:67a07b5e10025aeb121a</a>）。</li>
+<li>英文侧问的是“AI 对话产生的信息往哪放”：扩展的待办/决策记录没有停靠位，塞进聊天输出会滚走（<a class="chip" href="https://github.com/microsoft/vscode/issues/345427" target="_blank" rel="noopener">gh:microsoft/vscode#345427</a>）。</li>
+<li>两者共同点是“AI 编码链路里缺一个环节”，但一个缺权限通道、一个缺 UI 容器，不能合并成一个产品。</li>
+</ul>
+<p>其余需求（Wan 2.5 提示词、RTSP 验收、卡西欧手表）均只出现一次且无跨平台对应项。</p>
+</div></details><details class="fold"><summary>不建议做的</summary><div class="detail">
+<p><strong>1. 需要改动宿主编辑器核心行为的按键/列表逻辑（<a class="chip" href="https://discourse.joplinapp.org/t/in-bullet-lists-double-enter-should-remove-the-but-it-doesnt/51336" target="_blank" rel="noopener">forum:joplin:51336</a>）</strong>
+回车结束列表、缩进回退这类行为在 Joplin 里属于编辑器核心逻辑，插件难以拦截回车并重写行为，帖子本身也没给出任何可行方案。付费意愿只有 1、最终分 1.0，且这类不一致上游很可能直接修掉，做完即被官方覆盖。</p>
+<p><strong>2. 依赖尚未开放的 IDE 扩展 API 的界面改造（<a class="chip" href="https://github.com/microsoft/vscode/issues/345427" target="_blank" rel="noopener">gh:microsoft/vscode#345427</a>）</strong>
+在聊天输入框上方停靠自定义视图，目前没有官方 API，扩展层面做不出来——竞品检查也确认现有工具（如 Chat Tags）只能重排内置视图。这是 GitHub 上的官方 issue，一旦官方实现即归零；付费意愿 1，投入产出不合算。</p>
+<p><strong>3. 硬件类产品（<a class="chip" href="https://news.ycombinator.com/item?id=50321671" target="_blank" rel="noopener">hn:50321671</a>）</strong>
+“极简高频心率卡西欧手表”难度 5、最终分 2.0，属于硬件+供应链+认证的活，一人 AI 辅助开发完全不适用。更关键的是竞品检查结论为 none、空缺说明里写明卡西欧自家 G-SHOCK/G-SQUAD 已有多款连续心率产品直接覆盖该需求——用户可以直接买现成产品，剩下的“去掉蓝牙”差异撑不起一个产品。</p>
+<p><strong>4. 只把个人脚本套个界面的“零增量复刻”</strong>
+<a class="chip" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e" target="_blank" rel="noopener">qiita:b5fb1ca9e460c7e14b9e</a> 和 <a class="chip" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339" target="_blank" rel="noopener">qiita:a5e7ce5c9a32f976e339</a> 的作者都已用脚本解决了核心计算。如果只做“能点按钮跑一遍”，价值增量约等于零。这两条值得做的前提是补上脚本没有的东西——多镜头库与台词锁定、批量巡检与报告归档趋势对比。做成纯 CLI 复刻或单次检测页面，不建议投入。</p>
+</div></details><details class="fold"><summary>英文社区与日文社区的差异</summary><div class="detail">
+<p><strong>日文社区（qiita，3 条）——垂直工作流补全，付费意愿更高</strong></p>
+<ul>
+<li>需求全部落在<strong>具体技术栈的具体手工步骤</strong>上：clasp 与 GAS 的往返、Wan 2.5 提示词顺序、RTSP 流验收指标。三条互不相关，说明日文侧需求高度分散、垂直，没有跨条目共性。</li>
+<li>共同模式是“作者已用 Python/CLI 自建脚本，痛点在于没有界面、批量能力和团队可用性”，即<strong>缺的是产品化而非可行性</strong>。</li>
+<li>付费意愿 2–3，其中 RTSP 验收为 3（全场最高）；热度也最高（GAS 那条 2.05，且一周前为 0，属新升温话题）。</li>
+<li>机会：做“工作流补全型”工具——把脚本升级成带 GUI、批量、报告/模板管理的产品，面向有明确工作场景（GAS</li>
+</ul>
+</div></details><details class="fold"><summary>引用的需求</summary><div class="detail">
+<div class="table"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>需求</th>
+<th>原帖</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>forum:obsidian:120058</code></td>
+<td>让 Obsidian 的 Callout 内容跟随文件当前模式（Live Preview/阅读视图）显示</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/callouts-display-the-contents-of-allouts-in-the-mode-currently-active-in-the-entire-file-live-preview-for-callouts/120058">链接</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:120046</code></td>
+<td>让 Obsidian 启动时默认打开关系图谱视图</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/open-graph-view-as-default-note/120046">链接</a></td>
+</tr>
+<tr>
+<td><code>forum:joplin:51336</code></td>
+<td>Joplin 列表编辑：回车应自动移除项目符号并正确减少缩进</td>
+<td><a target="_blank" rel="noopener" href="https://discourse.joplinapp.org/t/in-bullet-lists-double-enter-should-remove-the-but-it-doesnt/51336">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:67a07b5e10025aeb121a</code></td>
+<td>让 AI 直接读写云端 GAS 代码、免去 clasp 本地同步的 MCP 工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/67a07b5e10025aeb121a">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/vscode#345427</code></td>
+<td>让 VS Code 扩展在聊天输入框上方停靠自定义视图</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/345427">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:b5fb1ca9e460c7e14b9e</code></td>
+<td>为 Wan 2.5 视频生成模型按固定顺序组装提示词（画面、台词、音效）的小工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/yoxi957/items/b5fb1ca9e460c7e14b9e">链接</a></td>
+</tr>
+<tr>
+<td><code>qiita:a5e7ce5c9a32f976e339</code></td>
+<td>IP 摄像头 RTSP 流质量验收检测工具（帧率/丢包/时间戳/冻结画面）</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/anguoyang/items/a5e7ce5c9a32f976e339">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50321671</code></td>
+<td>想要一款只带高频心率监测的极简卡西欧手表</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50321671">链接</a></td>
+</tr>
+</tbody>
+</table></div></div></details><details class="fold"><summary>往期存档</summary><div class="detail archive"><a href="2026-11-05.html">2026-11-05</a><a href="2026-11-04.html">2026-11-04</a><a href="2026-11-03.html">2026-11-03</a><a href="../index.html">最新版</a></div></details>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-05 13:59 JST · 每天自动更新</span></footer>
+</div>
+<script>
+(() => {
+  const cart = document.querySelector(".prop-cart");
+  if (!cart) return;
+  const box = cart.parentElement;
+  let x = null, v = 0, raf = 0;
+  cart.draggable = false;
+  cart.title = "拖动矿车";
+  const max = () => box.clientWidth - cart.offsetWidth;
+  const now = () => (x !== null ? x : cart.offsetLeft);
+  const set = (nx) => { x = Math.max(0, Math.min(max(), nx)); cart.style.left = x + "px"; cart.style.right = "auto"; };
+  cart.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    cancelAnimationFrame(raf);
+    const grab = e.clientX - now();
+    let lastX = e.clientX, lastT = e.timeStamp;
+    try { cart.setPointerCapture(e.pointerId); } catch (_) {}
+    cart.classList.add("drag");
+    const move = (ev) => {
+      set(ev.clientX - grab);
+      v = (ev.clientX - lastX) / Math.max(1, ev.timeStamp - lastT) * 16;
+      lastX = ev.clientX; lastT = ev.timeStamp;
+    };
+    const up = () => {
+      cart.removeEventListener("pointermove", move);
+      cart.classList.remove("drag");
+      const roll = () => { v *= 0.92; if (Math.abs(v) < 0.3) return; set(x + v); raf = requestAnimationFrame(roll); };
+      roll();
+    };
+    cart.addEventListener("pointermove", move);
+    cart.addEventListener("pointerup", up, { once: true });
+    cart.addEventListener("pointercancel", up, { once: true });
+  });
+  addEventListener("resize", () => { if (x !== null) set(x); });
+})();
+</script>
+<script>
+(() => {
+  const sky = document.querySelector(".sky");
+  if (!sky) return;
+  const check = () => document.body.classList.toggle(
+    "stuck", sky.getBoundingClientRect().top <= parseFloat(getComputedStyle(sky).top) + 0.5);
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("resize", check);
+  check();
+})();
+</script>
+<script>
+(() => {
+  const bar = document.querySelector(".filters");
+  if (!bar) return;
+  bar.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    bar.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+    const k = b.dataset.kind;
+    document.querySelectorAll(".lb").forEach((r) => { r.hidden = k !== "all" && r.dataset.kind !== k; });
+  });
+})();
+</script>
+</body>
+</html>
