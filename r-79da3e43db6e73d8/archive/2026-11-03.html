@@ -53,7 +53,7 @@ img.ico { flex: none; vertical-align: middle; }
         一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
    .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
    图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
-:root { --skyh: 290px; --band: 56px; }
+:root { --skyh: 320px; --band: 56px; }
 .sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
   background: url("../assets/summit-sky.png") repeat-x left bottom / auto 184px,
     linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 182px) no-repeat; }
@@ -83,8 +83,10 @@ header { position: relative; height: calc(var(--skyh) - 30px); padding-top: 10px
 .stuck .hero, .stuck .tabs { opacity: 0; pointer-events: none; }
 /* 标题是生成的木板像素字（木板钉成、带木纹，叶子从木头上长出来，小鸡站在字上） */
 h1 { margin: 0 0 10px; line-height: 0; }
-/* 两页标题图都是 68 像素高、按同一高度显示，两页头部一样高；手机上按较宽的需求页标题能放下的比例一起缩小 */
-h1 img { height: min(136px, calc((100vw - 32px) * 68 / 314)); width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(20, 40, 90, .25)); }
+/* 标题是用 Stardew Valley 粉丝字体（Eliot Truelove，Donationware）在本机渲染成的像素图：木板、木纹、钉子，
+   首字母长叶子，小鸡站在字上。字体文件本身不上传（作者不允许再分发），只用渲染出的图片。
+   两张图都是 83 像素高、按同一高度显示；手机上按较宽的需求页标题能放下的比例一起缩小 */
+h1 img { height: min(166px, calc((100vw - 32px) * 83 / 383)); width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(20, 40, 90, .25)); }
 .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; font: 13px var(--pixel); color: var(--dim); }
 .stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
 .stats b { color: var(--text); font-weight: 400; }
@@ -275,7 +277,7 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <div class="sky"><i class="cloud-l"></i><i class="cloud-r"></i><i class="cloud-front"></i><div class="wrap">
   <header>
     <div class="hero">
-    <h1><img src="../assets/title-needs.png" width="628" height="136" alt="需求综合报告"></h1>
+    <h1><img src="../assets/title-needs.png" width="766" height="166" alt="Demand Radar 需求综合报告"></h1>
     <div class="stats"><span>更新于 <b class="c-cyan">2026-11-03</b></span><span>统计最近 <b>90</b> 天</span><span><b>289</b> 个需求</span><span><b>293</b> 条帖子</span><span><b>7</b> 个来源</span></div>
     </div>
     <nav class="tabs"><a class="on" href="../index.html">需求雷达</a><a class="" href="../news.html">资讯速递</a></nav>
@@ -1067,7 +1069,7 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 </tr>
 </tbody>
 </table></div></div></details><details class="fold"><summary>往期存档</summary><div class="detail archive"><a href="2026-11-05.html">2026-11-05</a><a href="2026-11-04.html">2026-11-04</a><a href="2026-11-02.html">2026-11-02</a><a href="../index.html">最新版</a></div></details>
-  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-05 15:03 JST · 每天自动更新</span></footer>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-05 19:34 JST · 每天自动更新</span></footer>
 </div>
 <script>
 (() => {
