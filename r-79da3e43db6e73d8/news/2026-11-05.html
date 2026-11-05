@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>资讯速递 · 2026-11-04</title>
+<link rel="icon" href="../assets/board.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
+  --sky: #056bc5; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
+  --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
+  --text: #5c3e27; --dim: #9a7a5c;
+  --blue: #4a86b8; --green: #5f9a4a; --orange: #c98a3a; --red: #c0605a; --gold: #b8913c;
+  --shadow: rgba(40, 90, 30, .25);
+  --pixel: "DotGothic16", "Noto Sans SC", monospace;
+  --u: 4px;
+}
+* { box-sizing: border-box; }
+img.ico, .deco img { image-rendering: pixelated; image-rendering: crisp-edges; }
+body { margin: 0; overflow-x: clip; color: var(--text); font: 15px/1.75 "Noto Sans SC", system-ui, sans-serif; background-color: var(--grass);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Crect x='6' y='8' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='8' y='6' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='30' y='30' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='32' y='28' width='2' height='2' fill='%238acb57'/%3E%3Crect x='20' y='40' width='2' height='2' fill='%238acb57'/%3E%3Crect x='40' y='12' width='2' height='2' fill='%236ab33b'/%3E%3C/svg%3E");
+  background-size: 48px 48px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: var(--wood-l); color: var(--ink); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.c-cyan { color: var(--blue); } .c-pink { color: var(--red); } .c-lime { color: var(--green); }
+.c-amber { color: var(--orange); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+img.ico { flex: none; vertical-align: middle; }
+
+/* 木框羊皮纸面板：木头边框 + 内侧深色线 + 外侧缺角描边 + 投影 */
+.card, .fold, .board { background: var(--paper); border: 5px solid var(--wood);
+  box-shadow: inset 0 0 0 2px var(--wood-l), inset 0 0 0 4px var(--paper-2),
+    0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink),
+    5px 8px 0 0 var(--shadow); }
+/* 小号木牌：按钮、标签、排名 */
+.tabs a, .btn, .rank, .stats span, .refs a, .chip, .archive a, .m {
+  --c: var(--ink);
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+
+/* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
+/* 页面顶部是山顶：天空 → 云海 → 崖边 → 有铁轨的平台，平台下沿的灌木直接压在山谷背景地图上。
+   场景图左右镜像拼接可无缝平铺；场景上方不够高时用天空色补齐（只补到场景图上沿，底边保持透明） */
+/* 页面顶部是山顶，分两层：
+   .sky 天空和云海上半部分，吸顶：往上滚到只剩底部一条就停住，常驻在最上面；停住后下沿露出一圈云底，
+        一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
+   .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
+   图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
+:root { --skyh: 290px; --band: 56px; }
+.sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
+  background: url("../assets/summit-sky.png") repeat-x left bottom / auto 184px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 182px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 28px; pointer-events: none; display: none;
+  background: url("../assets/cloud-edge.png") repeat-x left top / auto 28px; image-rendering: pixelated; }
+.stuck .sky::before { display: block; }
+/* 两侧高高堆起的云（外侧高、中间低），平底藏在前面一层云海后面，不留缝 */
+.cloud-l, .cloud-r, .cloud-front { position: absolute; pointer-events: none; image-rendering: pixelated; background: 0 0 / 100% 100% no-repeat; }
+.cloud-l, .cloud-r { bottom: 4px; z-index: 0; }
+.cloud-l { left: 0; width: 366px; height: 240px; background-image: url("../assets/cloud-l.png"); }
+.cloud-r { right: 0; width: 222px; height: 204px; background-image: url("../assets/cloud-r.png"); }
+.cloud-front { left: 0; right: 0; bottom: 0; height: 44px; z-index: 1;
+  background: url("../assets/cloud-front.png") repeat-x left bottom / auto 44px; }
+.sky > .wrap { position: relative; z-index: 2; }
+/* 头部：导航在左上，标题居中并往下贴近云层，统计排在标题下面 */
+header { position: relative; height: calc(var(--skyh) - 30px); padding-top: 10px; display: flex; flex-direction: column; justify-content: flex-end; }
+.plateau { height: 200px; position: relative;
+  background: url("../assets/summit-ground.png") repeat-x left top / auto 200px; image-rendering: pixelated; }
+.plateau .wrap { position: relative; height: 100%; }
+.stuck img.prop { z-index: 1; }
+.tabs { display: flex; gap: 14px; margin: 12px 0 4px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 3; }
+.tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
+.tabs a.on { color: var(--text); background: var(--paper); }
+.tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
+.hero { position: relative; z-index: 3; text-align: center; }
+.hero, .tabs { transition: opacity .2s; }
+.stuck .hero, .stuck .tabs { opacity: 0; pointer-events: none; }
+/* 标题是生成的木板像素字（木板钉成、带木纹，叶子从木头上长出来，小鸡站在字上） */
+h1 { margin: 0 0 10px; line-height: 0; }
+/* 两页标题图都是 68 像素高、按同一高度显示，两页头部一样高；手机上按较宽的需求页标题能放下的比例一起缩小 */
+h1 img { height: min(136px, calc((100vw - 32px) * 68 / 314)); width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(20, 40, 90, .25)); }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; font: 13px var(--pixel); color: var(--dim); }
+.stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
+.stats b { color: var(--text); font-weight: 400; }
+/* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
+img.prop { position: absolute; z-index: 7; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 8%; bottom: 90px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+img.prop-cart.drag { cursor: grabbing; }
+img.prop-board { left: 10%; bottom: 112px; }
+.deco { position: absolute; right: 0; bottom: 4px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+.deco img { height: 80px; width: auto; }
+.deco img + img { height: 60px; }
+
+/* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--grass) url("../assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
+.main { padding-top: 4px; }
+.yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
+.yard img { image-rendering: pixelated; }
+
+h2 { font: 400 19px var(--pixel); margin: 30px 0 16px 4px; display: flex; width: max-content; max-width: 100%; align-items: center; gap: 10px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d); padding: 4px 16px 4px 10px;
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
+  border: 3px solid var(--wood-d);
+  box-shadow: 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 4px 6px 0 0 var(--shadow); }
+h2 img.ico { filter: drop-shadow(2px 2px 0 var(--shadow)); }
+
+/* 卡片 */
+.cards { display: grid; gap: 26px; padding: 4px; }
+.card { padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.rank { font: 15px/1 var(--pixel); color: var(--paper); background: var(--wood); padding: 5px 8px 4px; text-shadow: 1px 1px 0 var(--wood-d); }
+.nid { font: 13px/1 var(--pixel); color: var(--wood-d); background: var(--paper-2); padding: 4px 8px; border: 2px dashed var(--wood); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--dim); }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.lede { color: var(--text); margin: 0 0 14px; }
+.meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
+.m { --c: var(--wood); background: var(--paper-2); padding: 8px 8px 8px 50px; display: grid; gap: 2px; align-content: center;
+  position: relative; min-height: 58px; min-width: 0; }
+.m img.ico { position: absolute; left: 7px; top: 50%; transform: translateY(-50%); }
+.m b { font: 400 14px var(--pixel); }
+.m b.big { font: 22px/1 var(--pixel); }
+.m span { font: 12px var(--pixel); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: var(--wood-d); width: max-content; }
+.pips i { width: 8px; height: 10px; background: var(--paper-3); }
+.pips.amber i.on { background: #ecb35f; box-shadow: inset 0 -3px 0 #d0914a; }
+.pips.lime i.on { background: #a8d27e; box-shadow: inset 0 -3px 0 #7fb25f; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--paper); background: var(--green); padding: 2px 10px;
+  text-shadow: 1px 1px 0 #44743a; }
+.btn:hover { background: #6daa56; text-decoration: none; }
+.btn:active { transform: translate(2px, 2px); }
+details summary { cursor: pointer; list-style: none; font: 13px var(--pixel); color: var(--dim); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▶ "; color: var(--wood); display: inline-block; }
+details[open] > summary::before { content: "▼ "; }
+details summary:hover { color: var(--ink); }
+.actions details { flex: 0 1 auto; }
+.actions details summary { padding: 2px 4px; }
+.actions details[open] { flex-basis: 100%; }
+.actions details[open] summary { margin-bottom: 8px; display: inline-block; }
+.detail { font-size: 14px; color: var(--text); }
+.detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
+.detail li::marker { color: var(--wood); font-family: var(--pixel); }
+/* 展开详情：浅色底板，每个字段一行：左边木牌标签、右边内容，字段之间像素虚线 */
+.actions .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 4px 16px; }
+.detail .kv { display: grid; grid-template-columns: 9.5em 1fr; gap: 6px 16px; padding: 12px 0; border-top: 2px dashed var(--paper-3); }
+.detail .kv:first-child { border-top: 0; }
+.detail .k { justify-self: start; align-self: start; max-width: 100%; font: 13px/1.5 var(--pixel); color: var(--paper);
+  background: var(--wood); padding: 2px 9px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.detail .v { min-width: 0; line-height: 1.8; }
+.detail .v p { margin: 0 0 4px; }
+.detail .v ol { margin: 2px 0 0; padding-left: 1.6em; }
+.detail .v ol li { padding: 2px 0; }
+/* 完整分析里的条目：像素方块 + 标题单独一行 + 虚线分隔 */
+.fold .detail > ul { list-style: none; padding: 0; margin: 4px 0; }
+.fold .detail > ul > li { position: relative; padding: 10px 0 10px 22px; border-top: 2px dashed var(--paper-3); line-height: 1.8; }
+.fold .detail > ul > li:first-child { border-top: 0; }
+.fold .detail > ul > li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 8px; height: 8px; background: var(--wood);
+  box-shadow: 2px 2px 0 0 var(--wood-d); }
+.fold .detail > ul > li > strong:first-child { display: block; font: 400 15px/1.5 var(--pixel); color: var(--wood-d); margin-bottom: 2px; }
+.fold .detail h3, .fold .detail h4 { font: 400 15px var(--pixel); color: var(--wood-d); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--paper-3); }
+.fold .detail > p { line-height: 1.8; }
+.fold { padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--ink); }
+.fold[open] > summary { margin-bottom: 10px; }
+.table { overflow-x: auto; border: 3px solid var(--wood); background: #fff3d2; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--paper-3); vertical-align: top; }
+th { background: var(--paper-2); font: 13px var(--pixel); color: var(--wood-d); white-space: nowrap; }
+td:first-child { min-width: 8em; }
+.chip { --c: var(--wood); font: 12px var(--pixel); color: var(--blue); background: var(--paper); padding: 0 6px; margin: 3px; white-space: nowrap; display: inline-block; }
+.archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
+.archive a { --c: var(--wood); font: 13px var(--pixel); padding: 1px 10px; background: var(--paper-2); }
+footer { font: 12px/2 var(--pixel); color: var(--text); padding: 24px 0 40px; text-align: center; }
+footer .note { display: inline-block; background: var(--paper); padding: 0 12px; box-shadow: 0 -2px 0 0 var(--wood), 0 2px 0 0 var(--wood), -2px 0 0 0 var(--wood), 2px 0 0 0 var(--wood); }
+
+/* 资讯页 */
+.headline { font: 400 16px/1.6 var(--pixel); color: var(--ink); background: var(--paper); padding: 12px 16px 12px 58px; margin: 0 0 18px 2px;
+  position: relative; border: 4px solid var(--wood); max-width: 760px;
+  box-shadow: inset 0 0 0 2px var(--wood-l), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 5px 7px 0 0 var(--shadow); }
+.headline img.ico { position: absolute; left: 12px; top: 12px; }
+.hl h3 { margin: 0 0 6px; }
+.refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
+.refs a { --c: var(--wood); min-width: 0; font: 12px var(--pixel); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--paper-2); }
+.refs a:hover { background: var(--wood-l); color: var(--ink); text-decoration: none; }
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
+.board { padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px); border-bottom: 3px solid var(--wood-d); }
+.board h3 span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.board h3 small { font: 12px var(--pixel); color: var(--paper-2); text-shadow: 1px 1px 0 var(--wood-d); white-space: nowrap; }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--paper-3); }
+.board h3 + .row { border-top: 0; }
+.row .no { font: 14px/24px var(--pixel); color: var(--dim); }
+.row:nth-of-type(-n+3) .no { color: var(--orange); }
+.row .t { min-width: 0; }
+.row .t a { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--blue); }
+.row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.row .h { font: 12px var(--pixel); color: var(--orange); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--blue); }
+.board details summary { margin-top: 6px; }
+@media (max-width: 760px) {
+  .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .detail .kv { grid-template-columns: 1fr; gap: 6px; }
+  .actions .detail { padding: 2px 10px; }
+  .card { padding: 14px 14px 12px; }
+  .boards { grid-template-columns: 1fr; }
+  :root { --skyh: 250px; }
+  .cloud-l { width: 244px; height: 160px; } .cloud-r { width: 148px; height: 136px; }
+  .hero { max-width: none; }
+  img.prop { transform-origin: bottom right; transform: scale(.75); }
+  img.prop-cart { right: 64px; } img.prop-board { left: 16px; right: auto; transform-origin: bottom left; }
+  .deco img { height: 60px; } .deco img + img { height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body class="news-page">
+<div class="sky"><i class="cloud-l"></i><i class="cloud-r"></i><i class="cloud-front"></i><div class="wrap">
+  <header>
+    <div class="hero">
+    <h1><img src="../assets/title-news.png" width="402" height="136" alt="资讯速递"></h1>
+    <div class="stats"><span>内容日期 <b class="c-cyan">2026-11-04</b></span><span><b>61</b> 条热门</span><span><b>6</b> 个来源</span></div>
+    </div>
+    <nav class="tabs"><a class="" href="../index.html">需求雷达</a><a class="on" href="../news.html">资讯速递</a></nav>
+  </header>
+</div></div>
+<div class="plateau"><div class="wrap">
+  <img class="ico prop prop-board" src="../assets/board.png" width="78" height="86" alt="村口布告栏">
+  <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
+</div></div>
+<div class="wrap main">
+  <p class="headline"><img class="ico " src="../assets/chat.png" width="36" height="32" alt="" aria-hidden="true">Postman 静默装 AI 插件并共享 API 数据，隐私风险引热议</p>
+  <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">今日要点</h2><div class="cards"><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">Postman 隐私风波</h3><p class="lede">Postman 被曝静默自动安装 AI 插件并试图共享所有 API 数据，引发开发者对工具链数据安全的担忧。独立开发者应检查自己扩展或插件的权限声明，避免类似信任危机；也可考虑做 API 数据本地化或权限审计的小工具。</p><div class="refs"><a href="https://github.com/postmanlabs/postman-app-support/issues/14370" target="_blank" rel="noopener">Postman silently auto-installs AI plugins and attempts to share all API data</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">AI 代理基础设施热</h3><p class="lede">GitHub 上 agent-desktop、claude-mem、worktrunk 等项目走红，分别解决代理的计算机操作、跨会话记忆和并行工作流问题。Product Hunt 上 Render Sandboxes、OpenMail 也在给代理提供运行环境和身份。做浏览器扩展或效率插件时，可集成这些能力降低开发成本。</p><div class="refs"><a href="https://github.com/vercel-labs/agent-desktop" target="_blank" rel="noopener">vercel-labs/agent-desktop</a><a href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener">thedotmack/claude-mem</a><a href="https://github.com/max-sixty/worktrunk" target="_blank" rel="noopener">max-sixty/worktrunk</a><a href="https://www.producthunt.com/products/render?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Render Sandboxes</a><a href="https://www.producthunt.com/products/openmail?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">OpenMail</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">AI 数据合规收紧</h3><p class="lede">Gemini 被指对个人订阅用户也用聊天历史训练，Google 则对拒绝 AI 的学校关闭搜索服务。同时国内 MUJI 应用泄露 2726 万条信息。开发者做 AI 功能时需明确数据使用边界，可做隐私政策生成或本地化 AI 方案作为卖点。</p><div class="refs"><a href="https://news.ycombinator.com/item?id=50363461" target="_blank" rel="noopener">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a><a href="https://www.nytimes.com/2026/11/03/us/google-search-schools-restrict-ai.html" target="_blank" rel="noopener">Google will turn off search for schools that reject AI</a><a href="https://k-tai.watch.impress.co.jp/docs/news/2153688.html" target="_blank" rel="noopener">無印良品「MUJIアプリ」情報流出は2726万件に、セゾン発行「MUJI Card」全桁も対象</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">本地 AI 与离线工具</h3><p class="lede">Qwen 27B 可在笔记本解释模型权重，Strata 本地生成引擎受关注，Project NOMAD 提供离线知识检索。独立开发者可探索离线 AI 浏览器扩展或本地推理小工具，满足隐私敏感用户需求。</p><div class="refs"><a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/" target="_blank" rel="noopener">Qwen 3.8 27B on my laptop can interpret model weights, too</a><a href="https://chimolog.co/strata-guide/" target="_blank" rel="noopener">ローカルAI最強エンジン「Strata」初心者向けガイド【チャットAIで動画やマンガを自動生成】 | ちもろぐ</a><a href="https://gigazine.net/news/20261104-project-nomad/" target="_blank" rel="noopener">無料でネット接続なしでもWikipedia・教科書・オフラインマップが検索できAIアシスタントも搭載したオフライン知識検索ツール「Project NOMAD」</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">AI 开发效率工具</h3><p class="lede">Product Hunt 上 Wanaka Studio 用 AI 做 3D 游戏，Floot Payments 让 ChatGPT/Claude 内应用收款，Dessn 用真实代码做设计画布。GitHub 上 spec-kit 和 skills 帮助规范 AI 开发流程。可借鉴这些方向做轻量级付费插件或模板。</p><div class="refs"><a href="https://www.producthunt.com/products/wanaka-studio?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Wanaka Studio</a><a href="https://www.producthunt.com/products/floot?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Floot Payments</a><a href="https://www.producthunt.com/products/dessn-2?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Dessn</a><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">github/spec-kit</a><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a></div></article></div>
+  <h2><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">各站热榜</h2>
+  <div class="boards"><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Hacker News</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://github.com/postmanlabs/postman-app-support/issues/14370" target="_blank" rel="noopener">Postman silently auto-installs AI plugins and attempts to share all API data</a><p>Postman 被指静默安装 AI 插件并试图共享所有 API 数据</p></div><div class="h">▲ 1,491 分<a href="https://news.ycombinator.com/item?id=50354960" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability" target="_blank" rel="noopener">AI is forcing us to pay off 40 years of technical debt</a><p>AI 迫使企业偿还四十年技术债务的讨论</p></div><div class="h">▲ 1,112 分<a href="https://news.ycombinator.com/item?id=50364336" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://neufangled.com/" target="_blank" rel="noopener">Stringman, an $800 open-source room scale gripper robot</a><p>800 美元开源房间级夹爪机器人 Stringman</p></div><div class="h">▲ 812 分<a href="https://news.ycombinator.com/item?id=50354358" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/" target="_blank" rel="noopener">Qwen 3.8 27B on my laptop can interpret model weights, too</a><p>笔记本上运行 Qwen 27B 可解释模型权重</p></div><div class="h">▲ 719 分<a href="https://news.ycombinator.com/item?id=50355251" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.nytimes.com/2026/11/03/us/google-search-schools-restrict-ai.html" target="_blank" rel="noopener">Google will turn off search for schools that reject AI</a><p>谷歌将对拒绝 AI 的学校关闭搜索服务</p></div><div class="h">▲ 662 分<a href="https://news.ycombinator.com/item?id=50353192" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 10 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://news.ycombinator.com/item?id=50363461" target="_blank" rel="noopener">Tell HN: Gemini trains on chat history, even for subscribers (personal accounts)</a><p>用户称 Gemini 对个人订阅者也用聊天历史训练</p></div><div class="h">▲ 634 分</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop" target="_blank" rel="noopener">Nvidia RTX Spark encrypted firmware slows inference speed to 35% on Linux</a><p>英伟达 RTX Spark 加密固件致 Linux 推理速度降至 35%</p></div><div class="h">▲ 593 分<a href="https://news.ycombinator.com/item?id=50362905" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.theregister.com/security/2026/11/03/north-korean-fake-job-interview-led-to-63b-binance-heist/5307398" target="_blank" rel="noopener">North Korean fake job interview led to $6.3B Binance heist</a><p>朝鲜假面试导致币安 63 亿美元被盗</p></div><div class="h">▲ 587 分<a href="https://news.ycombinator.com/item?id=50365755" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://webkit.org/blog/18541/introducing-adaptive-dark-mode/" target="_blank" rel="noopener">Safari introduces Adaptive Dark Mode in 27.3</a><p>Safari 27.3 引入自适应深色模式</p></div><div class="h">▲ 501 分<a href="https://news.ycombinator.com/item?id=50358562" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://arstechnica.com/tech-policy/2026/10/trump-admin-sues-utah-to-save-kalshi-from-the-states-total-ban-on-gambling/" target="_blank" rel="noopener">Kalshi and its co-founders face felony charges for violating Utah gambling laws</a><p>Kalshi 及联合创始人因违反犹他州赌博法面临重罪指控</p></div><div class="h">▲ 495 分<a href="https://news.ycombinator.com/item?id=50353229" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">11</span><div class="t"><a href="https://mrdoob.github.io/codevember-2026/01/" target="_blank" rel="noopener">Jelly Sheet</a><p>Jelly Sheet 项目展示</p></div><div class="h">▲ 447 分<a href="https://news.ycombinator.com/item?id=50361268" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">12</span><div class="t"><a href="https://asia.nikkei.com/business/technology/artificial-intelligence/us-tech-giants-hidden-ai-debt-swells-90-to-3.2tn-in-6-months" target="_blank" rel="noopener">US tech giants&#x27; hidden AI debt swells 90% to $3.2T in 6 months</a><p>美国科技巨头隐性 AI 债务半年增 90% 至 3.2 万亿美元</p></div><div class="h">▲ 411 分<a href="https://news.ycombinator.com/item?id=50358422" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">13</span><div class="t"><a href="https://andreasfertig.com/blog/2026/11/cpp26-dis-failed-how-does-cpp-survive/" target="_blank" rel="noopener">C++26 Disapproved</a><p>C++26 标准未获批准</p></div><div class="h">▲ 406 分<a href="https://news.ycombinator.com/item?id=50360164" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">14</span><div class="t"><a href="https://arxiv.org/abs/2605.29713" target="_blank" rel="noopener">The Little Book of Generative AI Foundations: An Intuitive Mathematical Primer</a><p>生成式 AI 基础数学入门小书</p></div><div class="h">▲ 384 分<a href="https://news.ycombinator.com/item?id=50358582" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">15</span><div class="t"><a href="https://www.interdb.jp/pg/index.html" target="_blank" rel="noopener">The Internals of PostgreSQL</a><p>PostgreSQL 内部原理资料</p></div><div class="h">▲ 367 分<a href="https://news.ycombinator.com/item?id=50358702" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Product Hunt</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.producthunt.com/products/wanaka-studio?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Wanaka Studio</a><p>AI 游戏引擎 Wanaka Studio，可制作发布 3D 游戏</p></div><div class="h">▲ 357 票</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.producthunt.com/products/floot?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Floot Payments</a><p>在 ChatGPT 和 Claude 内构建的应用中收款</p></div><div class="h">▲ 301 票</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://www.producthunt.com/products/prelulu?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Prelulu</a><p>聊天与视频角色扮演故事应用 Prelulu</p></div><div class="h">▲ 234 票</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://www.producthunt.com/products/render?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Render Sandboxes</a><p>为每个 AI 代理提供计算机的 Render Sandboxes</p></div><div class="h">▲ 199 票</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.producthunt.com/products/openmail?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">OpenMail</a><p>通过邮件给 AI 代理身份的 OpenMail</p></div><div class="h">▲ 185 票</div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://www.producthunt.com/products/orphex-mcp-let-s-do-agentic-marketing?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Orphex MCP</a><p>统一 MCP 运行数字营销栈的 Orphex MCP</p></div><div class="h">▲ 161 票</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.producthunt.com/products/opusclip?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">OpusClip 4.0</a><p>OpusClip 4.0 用 AI 将素材转为可发布视频</p></div><div class="h">▲ 136 票</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.producthunt.com/products/fileai-ai-ocr?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">fileForensics</a><p>AI 信任文件前检查真伪的 fileForensics</p></div><div class="h">▲ 108 票</div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://www.producthunt.com/products/mellow-kids?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Mellow Kids</a><p>面向父母的个性化睡眠与发展应用 Mellow Kids</p></div><div class="h">▲ 100 票</div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://www.producthunt.com/products/dessn-2?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Dessn</a><p>运行真实代码的设计画布 Dessn</p></div><div class="h">▲ 94 票</div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">GitHub Trending</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://github.com/vercel-labs/agent-desktop" target="_blank" rel="noopener">vercel-labs/agent-desktop</a><p>AI 代理计算机使用 CLI（Rust）</p></div><div class="h">▲ 2,470 今日星标</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://github.com/NVIDIA/auto-ontology" target="_blank" rel="noopener">NVIDIA/auto-ontology</a><p>构建语义图推理层的 Python 框架</p></div><div class="h">▲ 2,050 今日星标</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://github.com/D4Vinci/Scrapling" target="_blank" rel="noopener">D4Vinci/Scrapling</a><p>全能网页抓取框架 Scrapling</p></div><div class="h">▲ 2,005 今日星标</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://github.com/JiaFeiMiao-K-Cat/DiscImageStudio" target="_blank" rel="noopener">JiaFeiMiao-K-Cat/DiscImageStudio</a><p>C# 项目 DiscImageStudio</p></div><div class="h">▲ 1,778 今日星标</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a><p>来自 .agents 目录的工程师技能集</p></div><div class="h">▲ 1,379 今日星标</div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener">thedotmack/claude-mem</a><p>为代理提供跨会话持久上下文的 claude-mem</p></div><div class="h">▲ 1,172 今日星标</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://github.com/floci-io/floci" target="_blank" rel="noopener">floci-io/floci</a><p>免费 AWS 本地模拟器替代品 floci</p></div><div class="h">▲ 1,090 今日星标</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">github/spec-kit</a><p>帮助上手 SDD 流程的 GitHub spec-kit</p></div><div class="h">▲ 808 今日星标</div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://github.com/harry0703/MoneyPrinterTurbo" target="_blank" rel="noopener">harry0703/MoneyPrinterTurbo</a><p>AI 一键生成高清短视频的 MoneyPrinterTurbo</p></div><div class="h">▲ 617 今日星标</div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://github.com/max-sixty/worktrunk" target="_blank" rel="noopener">max-sixty/worktrunk</a><p>面向并行 AI 代理工作流的 Git worktree CLI</p></div><div class="h">▲ 531 今日星标</div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Lobsters</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://pavursec.com/blog/stealmybitcoin/" target="_blank" rel="noopener">Observations from Running stealmybitcoin.com</a><p>运行 stealmybitcoin.com 的 PHP 安全观察</p></div><div class="h">▲ 111 分<a href="https://lobste.rs/s/fgucra/observations_from_running" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://dbushell.com/2026/11/03/xslt-rip/" target="_blank" rel="noopener">Death comes for XSLT</a><p>XSLT 的消亡讨论</p></div><div class="h">▲ 104 分<a href="https://lobste.rs/s/chypzr/death_comes_for_xslt" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://utcc.utoronto.ca/~cks/space/blog/linux/Ubuntu2604RustSudoNotCompatible" target="_blank" rel="noopener">The Ubuntu 26.04 Rust sudo is not compatible with standard sudo</a><p>Ubuntu 26.04 的 Rust sudo 与标准 sudo 不兼容</p></div><div class="h">▲ 79 分<a href="https://lobste.rs/s/e201eb/ubuntu_26_04_rust_sudo_is_not_compatible" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://karthihegde.dev/posts/dns_tampering" target="_blank" rel="noopener">So my ISP was hijacking my DNS</a><p>ISP 劫持 DNS 的经历</p></div><div class="h">▲ 75 分<a href="https://lobste.rs/s/cozhtg/so_my_isp_was_hijacking_my_dns" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://dennisforbes.ca/blog/microblog/2026/10/the_accidental_12000x_sqlite_slowdown/" target="_blank" rel="noopener">Shlemiel the Painter Is Back: How Zig’s libc Rewrite Made SQLite Slower</a><p>Zig 重写 libc 致 SQLite 变慢</p></div><div class="h">▲ 65 分<a href="https://lobste.rs/s/lh1j0e/shlemiel_painter_is_back_how_zig_s_libc" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 3 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://nicholas.carlini.com/writing/2026/algorithmic-improvements-chess.html" target="_blank" rel="noopener">Could a modern chess engine on a Pentium have defeated Kasparov in 1996?</a><p>1996 年奔腾上的现代国际象棋引擎能否击败卡斯帕罗夫</p></div><div class="h">▲ 59 分<a href="https://lobste.rs/s/1gndxr/could_modern_chess_engine_on_pentium_have" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://soatok.blog/2026/10/29/your-cryptography-conspiracy-theory-is-wrong/" target="_blank" rel="noopener">Your Cryptography Conspiracy Theory Is Wrong</a><p>驳斥密码学阴谋论</p></div><div class="h">▲ 50 分<a href="https://lobste.rs/s/bqllfe/your_cryptography_conspiracy_theory_is" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.netbsd.org/releases/formal-11/NetBSD-11.1.html" target="_blank" rel="noopener">Announcing NetBSD 11.1</a><p>NetBSD 11.1 发布公告</p></div><div class="h">▲ 46 分<a href="https://lobste.rs/s/siqsg7/announcing_netbsd_11_1" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">はてなブックマーク IT</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://chimolog.co/strata-guide/" target="_blank" rel="noopener">ローカルAI最強エンジン「Strata」初心者向けガイド【チャットAIで動画やマンガを自動生成】 | ちもろぐ</a><p>本地 AI 引擎 Strata 入门指南</p></div><div class="h">▲ 487 收藏<a href="https://b.hatena.ne.jp/entry/s/chimolog.co/strata-guide/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.businessinsider.jp/article/2610-developers-are-burned-out-as-ai-coding-reshapes-work-survey/" target="_blank" rel="noopener">エンジニアはAIのせいで燃え尽き、働く意欲を失い、アイデンティティ喪失の危機に直面している【3万人調査】 | Business Insider Japan</a><p>调查称工程师因 AI 倦怠并身份危机</p></div><div class="h">▲ 134 收藏<a href="https://b.hatena.ne.jp/entry/s/www.businessinsider.jp/article/2610-developers-are-burned-out-as-ai-coding-reshapes-work-survey/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://hashout.jp/ai/13689/" target="_blank" rel="noopener">ChatGPT無料ユーザー、10月29日から返事がそっけなく――褒め言葉も減らす仕様変更に – shiritomo</a><p>ChatGPT 免费用户 10 月 29 日起回复变简短</p></div><div class="h">▲ 134 收藏<a href="https://b.hatena.ne.jp/entry/s/hashout.jp/ai/13689/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://forest.watch.impress.co.jp/docs/serial/yajiuma/2153621.html" target="_blank" rel="noopener">日本の全法令が「Git」の履歴に ～改正で何が変わったのかが一目瞭然／「Git」の意外な弱点も？【やじうまの杜】</a><p>日本全部法令纳入 Git 历史</p></div><div class="h">▲ 124 收藏<a href="https://b.hatena.ne.jp/entry/s/forest.watch.impress.co.jp/docs/serial/yajiuma/2153621.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://qiita.com/Syoitu/items/9364a0a175893bb15219" target="_blank" rel="noopener">AI駆動開発の次の段階: ソフトウェアファクトリー - Qiita</a><p>AI 驱动开发的下一阶段：软件工厂</p></div><div class="h">▲ 83 收藏<a href="https://b.hatena.ne.jp/entry/s/qiita.com/Syoitu/items/9364a0a175893bb15219" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://k-tai.watch.impress.co.jp/docs/news/2153688.html" target="_blank" rel="noopener">無印良品「MUJIアプリ」情報流出は2726万件に、セゾン発行「MUJI Card」全桁も対象</a><p>MUJI 应用信息泄露达 2726 万条</p></div><div class="h">▲ 66 收藏<a href="https://b.hatena.ne.jp/entry/s/k-tai.watch.impress.co.jp/docs/news/2153688.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://gigazine.net/news/20261104-project-nomad/" target="_blank" rel="noopener">無料でネット接続なしでもWikipedia・教科書・オフラインマップが検索できAIアシスタントも搭載したオフライン知識検索ツール「Project NOMAD」</a><p>离线知识检索工具 Project NOMAD</p></div><div class="h">▲ 62 收藏<a href="https://b.hatena.ne.jp/entry/s/gigazine.net/news/20261104-project-nomad/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://blog.tinect.jp/?p=91573" target="_blank" rel="noopener">AIと「聖杯」は似ている。</a><p>将 AI 比作圣杯的随笔</p></div><div class="h">▲ 61 收藏<a href="https://b.hatena.ne.jp/entry/s/blog.tinect.jp/?p=91573" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://av.watch.impress.co.jp/docs/review/review/2152900.html" target="_blank" rel="noopener">【レビュー】 使わなくなったAndroidスマホが音楽プレーヤーに、無料アプリ「reTONE」使ってみた</a><p>用 reTONE 将旧安卓手机变音乐播放器</p></div><div class="h">▲ 54 收藏<a href="https://b.hatena.ne.jp/entry/s/av.watch.impress.co.jp/docs/review/review/2152900.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://www.itmedia.co.jp/pcuser/articles/2611/05/news045.html" target="_blank" rel="noopener">メーカー自身がバックドアを仕込み、犯罪集団に“販売”　乗っ取られたTV用端末130万台超、Googleが遮断　日本の警察庁も参加</a><p>厂商植入后门，130 万台 TV 终端被 Google 阻断</p></div><div class="h">▲ 52 收藏<a href="https://b.hatena.ne.jp/entry/s/www.itmedia.co.jp/pcuser/articles/2611/05/news045.html" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">V2EX 热门</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.v2ex.com/t/1254583" target="_blank" rel="noopener">全新三端纯原生 SSH 客户端： SSH、SFTP 与 AI 尽在一个应用里，随楼依次赠送 100 位评论者 50 个$v2ex</a><p>三端原生 SSH 客户端，集成 SFTP 与 AI</p></div><div class="h">▲ 143 回复</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.v2ex.com/t/1254622" target="_blank" rel="noopener">全球 3.5 万个电台随机听 RoamDial： iOS 版上架了，安卓正在封测，发帖送一波永久 Pro 码</a><p>全球 3.5 万电台随机听应用 RoamDial</p></div><div class="h">▲ 104 回复</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://www.v2ex.com/t/1254452" target="_blank" rel="noopener">昨天通知被裁员了，到现在脑瓜子还是嗡嗡的</a><p>被裁员后的职场倾诉</p></div><div class="h">▲ 81 回复</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://www.v2ex.com/t/1254390" target="_blank" rel="noopener">现在国模编程第一是谁？</a><p>讨论国产模型编程能力第一</p></div><div class="h">▲ 78 回复</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.v2ex.com/t/1254446" target="_blank" rel="noopener">比亚迪的天神之眼 B 是真的烂</a><p>吐槽比亚迪天神之眼 B</p></div><div class="h">▲ 67 回复</div></div><details><summary>再看 3 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://www.v2ex.com/t/1254591" target="_blank" rel="noopener">可以一直压着最左侧限速跑在最左侧道吗🐶</a><p>讨论能否一直压限速跑最左道</p></div><div class="h">▲ 67 回复</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.v2ex.com/t/1254526" target="_blank" rel="noopener">我觉得 ai 时代对于普通人是利好啊，为啥如此多的人反感/不屑呢？</a><p>讨论 AI 时代对普通人是否利好</p></div><div class="h">▲ 66 回复</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.v2ex.com/t/1254524" target="_blank" rel="noopener">勤俭节约的过一辈子，会不会等老了才发现亏大发了</a><p>讨论勤俭节约一辈子是否亏了</p></div><div class="h">▲ 62 回复</div></div></details></section></div>
+  <h2><img class="ico " src="../assets/sprout.png" width="32" height="36" alt="" aria-hidden="true">往期</h2><details class="fold"><summary>往期资讯</summary><div class="detail archive"><a href="2026-11-04.html">2026-11-03</a><a href="2026-11-03.html">2026-11-02</a><a href="../news.html">最新</a></div></details>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-05 12:34 JST · 汇总前一天的热门内容</span></footer>
+</div>
+<script>
+(() => {
+  const sky = document.querySelector(".sky");
+  if (!sky) return;
+  const check = () => document.body.classList.toggle(
+    "stuck", sky.getBoundingClientRect().top <= parseFloat(getComputedStyle(sky).top) + 0.5);
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("resize", check);
+  check();
+})();
+</script>
+</body>
+</html>
