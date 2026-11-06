@@ -8,10 +8,14 @@
 <link rel="alternate" hreflang="en" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
 <link rel="alternate" hreflang="ja" href="https://mimizu-dev.github.io/demand-reports/ja/index.html">
 <link rel="alternate" hreflang="x-default" href="https://mimizu-dev.github.io/demand-reports/en/index.html">
-<meta http-equiv="refresh" content="0; url=https://mimizu-dev.github.io/demand-reports/en/">
-<script>location.replace("https://mimizu-dev.github.io/demand-reports/en/");</script>
+<script>
+  // 分享用的固定网址：浏览器语言是日文就去日文版，其余去英文版
+  var ja = (navigator.languages || [navigator.language || ""]).some(function (l) { return /^ja/i.test(l); });
+  location.replace("https://mimizu-dev.github.io/demand-reports/" + (ja ? "ja" : "en") + "/");
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://mimizu-dev.github.io/demand-reports/en/"></noscript>
 </head>
 <body>
-<p>Redirecting to the <a href="https://mimizu-dev.github.io/demand-reports/en/">English edition</a>.</p>
+<p><a href="https://mimizu-dev.github.io/demand-reports/en/">English</a> · <a href="https://mimizu-dev.github.io/demand-reports/ja/">日本語</a></p>
 </body>
 </html>
