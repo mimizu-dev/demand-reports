@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Demand Radar</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/</link>
+<description>Daily unmet software needs from Reddit, HN, Qiita &amp; GitHub</description>
+<language>en</language>
+<atom:link href="https://mimizu-dev.github.io/demand-reports/en/feed.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>Demand Radar — 2026-11-06</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-06</guid>
+<pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>A photo management tool that browses folders in place, like Picasa</li><li>Let ChatGPT read and write an Obsidian vault on any device</li><li>Unified management of multiple shopping cashback/coupon extensions to avoid repeated price comparison</li><li>Fix broken footnote links after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li><li>Parse the internal structure of Excel workbooks like an X-ray</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-05</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-05</guid>
+<pubDate>Thu, 05 Nov 2026 08:00:00 +0900</pubDate>
+<description>Open-source models and agent toolchains surge on the same day, opening a window for indie developers</description>
+</item>
+</channel>
+</rss>
