@@ -11,7 +11,7 @@
 <link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-06</guid>
 <pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>A photo management tool that browses folders in place, like Picasa</li><li>Let ChatGPT read and write an Obsidian vault on any device</li><li>Unified management of multiple shopping cashback/coupon extensions to avoid repeated price comparison</li><li>Fix broken footnote links after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li><li>Parse the internal structure of Excel workbooks like an X-ray</li></ol></description>
+<description><ol><li>A photo management tool that browses folders in place, like Picasa</li><li>Let ChatGPT read and write an Obsidian vault on any device</li><li>A price-comparison panel that centrally manages multiple shopping cashback/coupon extensions</li><li>Fix LibreOffice/OpenOffice footnote links and convert them to standard Markdown footnotes</li><li>A tool that parses the internal structure of Excel workbooks like an X-ray</li></ol></description>
 </item>
 <item>
 <title>Daily Digest — 2026-11-05</title>
