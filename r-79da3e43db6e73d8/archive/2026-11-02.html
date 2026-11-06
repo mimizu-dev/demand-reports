@@ -294,74 +294,35 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
   <h3>GAS 云端代码直连 MCP 工具</h3>
   <p class="lede">让 AI 直接读写云端 GAS 代码，免去 clasp 的 clone/pull/push 本地同步与 Node.js 依赖。</p>
   
-  <div class="actions"><details><summary>展开详情</summary><div class="detail">
-<div class="kv"><div class="k">需求概括</div><div class="v">让 AI 直接读写云端 GAS 代码，免去 clasp 的 clone/pull/push 本地同步与 Node.js 依赖。</div></div>
-<div class="kv"><div class="k">为什么值得做</div><div class="v">最终分 7.2 全场最高，帖子数 2（唯一被多次提及的需求），热度 2.05 且一周前为 0，是明显升温的新话题。痛点链条具体（clasp 往返 → 同步冲突 → AI 改代码等待），日文 GAS 用户基数大且已有作者自建 Python FastMCP 服务器验证了“用 clasprc 令牌直连”这条路可行。注意：该条<strong>竞品检查为“未检查”</strong>，动手前应先补一次搜索（现有 MCP GAS server、Google 官方 API 封装），确认没有强势同类。</div></div>
-<div class="kv"><div class="k">建议形式</div><div class="v">MCP 服务器（本地进程）+ 极简配置面板（浏览器扩展或桌面小窗），作为 Claude/Cursor 等 AI 客户端的插件接入。</div></div>
-<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>令牌授权直连云端（复用 clasprc 令牌或 OAuth），全程不落地本地文件、不依赖 Node.js；</li><li><code>list / read / write</code> 三组工具：列出云端项目文件、读取内容、写回保存；</li><li>写入前的 diff 预览 + 基于 scriptId 与版本号的冲突检测，避免覆盖他人改动。</li></ol></div></div>
-<div class="kv"><div class="k">怎么验证有人要</div><div class="v">在 Qiita 原帖评论回复并附 demo 视频；发布到 Qiita/Zenn 的 GAS 标签、X 日语 GAS 社群、MCP 官方 servers 仓库的 PR 列表。</div></div>
-<div class="kv"><div class="k">预计开发天数</div><div class="v">10–14 天（授权与冲突处理占大头）。</div></div>
-<hr />
-</div></details></div>
+  <div class="actions"><details><summary>展开详情</summary><div class="detail"><div class="kv"><div class="k">需求概括</div><div class="v">让 AI 直接读写云端 GAS 代码，免去 clasp 的 clone/pull/push 本地同步与 Node.js 依赖。</div></div><div class="kv"><div class="k">为什么值得做</div><div class="v">最终分 7.2 全场最高，帖子数 2（唯一被多次提及的需求），热度 2.05 且一周前为 0，是明显升温的新话题。痛点链条具体（clasp 往返 → 同步冲突 → AI 改代码等待），日文 GAS 用户基数大且已有作者自建 Python FastMCP 服务器验证了“用 clasprc 令牌直连”这条路可行。注意：该条<strong>竞品检查为“未检查”</strong>，动手前应先补一次搜索（现有 MCP GAS server、Google 官方 API 封装），确认没有强势同类。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">MCP 服务器（本地进程）+ 极简配置面板（浏览器扩展或桌面小窗），作为 Claude/Cursor 等 AI 客户端的插件接入。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>令牌授权直连云端（复用 clasprc 令牌或 OAuth），全程不落地本地文件、不依赖 Node.js</li><li><code>list / read / write</code> 三组工具：列出云端项目文件、读取内容、写回保存</li><li>写入前的 diff 预览 + 基于 scriptId 与版本号的冲突检测，避免覆盖他人改动</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">在 Qiita 原帖评论回复并附 demo 视频；发布到 Qiita/Zenn 的 GAS 标签、X 日语 GAS 社群、MCP 官方 servers 仓库的 PR 列表。</div></div><div class="kv"><div class="k">预计开发</div><div class="v">10–14 天（授权与冲突处理占大头）。<br><hr /></div></div></div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#2</span><span class="tag">纯前端网页工具（localSto</span></div>
   <h3>Wan 2.5 提示词固定顺序组装器</h3>
   <p class="lede">把画面描述、台词、环境音/BGM 按固定顺序拼成一段 Wan 2.5 提示词的网页工具，支持多镜头、锁定台词、并排对比。</p>
   
-  <div class="actions"><details><summary>展开详情</summary><div class="detail">
-<div class="kv"><div class="k">需求概括</div><div class="v">把画面描述、台词、环境音/BGM 按固定顺序拼成一段 Wan 2.5 提示词的网页工具，支持多镜头、锁定台词、并排对比。</div></div>
-<div class="kv"><div class="k">为什么值得做</div><div class="v">难度仅 2，竞品检查为 weak 且空缺明确——现有结果只有代码片段、文档和通用分镜技能，没有专门面向 Wan 2.5 的网页组装器。属于“作者已用 Python 函数部分解决，但没有界面、镜头库、模板管理”的典型空缺，做纯前端单页即可上线，迭代成本极低。</div></div>
-<div class="kv"><div class="k">建议形式</div><div class="v">纯前端网页工具（localStorage 存草稿，可导出 JSON）。</div></div>
-<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>固定顺序的镜头表单：画面/台词/音效/BGM 分段填写，自动按序拼接 + 一键复制；</li><li>台词锁定：填过的台词不被后续编辑或重排覆盖；</li><li>多镜头列表 + 并排对比视图与导出。</li></ol></div></div>
-<div class="kv"><div class="k">怎么验证有人要</div><div class="v">回复 qiita 原帖；发到 Wan/即梦官方社区、X 的 Wan 2.5 话题、Reddit r/StableDiffusion、AI 视频创作群，看是否有人主动要模板或提镜头管理需求。</div></div>
-<div class="kv"><div class="k">预计开发天数</div><div class="v">3–5 天。</div></div>
-<hr />
-</div></details></div>
+  <div class="actions"><details><summary>展开详情</summary><div class="detail"><div class="kv"><div class="k">需求概括</div><div class="v">把画面描述、台词、环境音/BGM 按固定顺序拼成一段 Wan 2.5 提示词的网页工具，支持多镜头、锁定台词、并排对比。</div></div><div class="kv"><div class="k">为什么值得做</div><div class="v">难度仅 2，竞品检查为 weak 且空缺明确——现有结果只有代码片段、文档和通用分镜技能，没有专门面向 Wan 2.5 的网页组装器。属于“作者已用 Python 函数部分解决，但没有界面、镜头库、模板管理”的典型空缺，做纯前端单页即可上线，迭代成本极低。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">纯前端网页工具（localStorage 存草稿，可导出 JSON）。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>固定顺序的镜头表单：画面/台词/音效/BGM 分段填写，自动按序拼接 + 一键复制</li><li>台词锁定：填过的台词不被后续编辑或重排覆盖</li><li>多镜头列表 + 并排对比视图与导出</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复 qiita 原帖；发到 Wan/即梦官方社区、X 的 Wan 2.5 话题、Reddit r/StableDiffusion、AI 视频创作群，看是否有人主动要模板或提镜头管理需求。</div></div><div class="kv"><div class="k">预计开发</div><div class="v">3–5 天。<br><hr /></div></div></div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#3</span><span class="tag">Obsidian 社区插件。</span></div>
   <h3>Obsidian 启动默认打开关系图谱</h3>
   <p class="lede">加一个开关，让 Obsidian 启动时直接进入全局关系图谱，而不是先开笔记再手动切换。</p>
   
-  <div class="actions"><details><summary>展开详情</summary><div class="detail">
-<div class="kv"><div class="k">需求概括</div><div class="v">加一个开关，让 Obsidian 启动时直接进入全局关系图谱，而不是先开笔记再手动切换。</div></div>
-<div class="kv"><div class="k">为什么值得做</div><div class="v">难度 2，竞品检查 weak 且空缺明确——现有工具只能“启动打开指定工作区/笔记”间接变通，没有插件直接提供这个开关。Obsidian 插件发布链路成熟，可用官方模板几小时搭起骨架，属于“小投入、长期自然流量”的插件。</div></div>
-<div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 社区插件。</div></div>
-<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>设置项开关“启动时打开全局关系图谱”；</li><li>在布局恢复完成后延迟执行，避免与恢复的上次会话打架；</li><li>与“打开指定笔记/工作区”类设置冲突时的优先级选项。</li></ol></div></div>
-<div class="kv"><div class="k">怎么验证有人要</div><div class="v">在原帖回复插件链接；发布到 Obsidian 社区插件市场、r/ObsidianMD、中文 Obsidian 群。</div></div>
-<div class="kv"><div class="k">预计开发天数</div><div class="v">2–3 天。</div></div>
-<hr />
-</div></details></div>
+  <div class="actions"><details><summary>展开详情</summary><div class="detail"><div class="kv"><div class="k">需求概括</div><div class="v">加一个开关，让 Obsidian 启动时直接进入全局关系图谱，而不是先开笔记再手动切换。</div></div><div class="kv"><div class="k">为什么值得做</div><div class="v">难度 2，竞品检查 weak 且空缺明确——现有工具只能“启动打开指定工作区/笔记”间接变通，没有插件直接提供这个开关。Obsidian 插件发布链路成熟，可用官方模板几小时搭起骨架，属于“小投入、长期自然流量”的插件。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 社区插件。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>设置项开关“启动时打开全局关系图谱”</li><li>在布局恢复完成后延迟执行，避免与恢复的上次会话打架</li><li>与“打开指定笔记/工作区”类设置冲突时的优先级选项</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">在原帖回复插件链接；发布到 Obsidian 社区插件市场、r/ObsidianMD、中文 Obsidian 群。</div></div><div class="kv"><div class="k">预计开发</div><div class="v">2–3 天。<br><hr /></div></div></div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#4</span><span class="tag">Obsidian 插件（Code</span></div>
   <h3>Obsidian Callout 内容跟随当前视图模式</h3>
   <p class="lede">让 Callout 内部内容在 Live Preview 下按编辑态渲染（%%注释%% 可见、连续空行不折叠），阅读视图维持现状。</p>
   
-  <div class="actions"><details><summary>展开详情</summary><div class="detail">
-<div class="kv"><div class="k">需求概括</div><div class="v">让 Callout 内部内容在 Live Preview 下按编辑态渲染（<code>%%注释%%</code> 可见、连续空行不折叠），阅读视图维持现状。</div></div>
-<div class="kv"><div class="k">为什么值得做</div><div class="v">竞品检查 weak，搜索中没有插件直接解决这个核心点，官方也无方案；痛点非常具体，且和上一条同属 Obsidian 插件，工具链可复用。风险点在于原帖有人认为“插件难以覆盖默认渲染”，所以必须先做可行性验证再投入。</div></div>
-<div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 插件（CodeMirror 扩展 + CSS 覆盖），可先发 CSS 片段试水再插件化。</div></div>
-<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>Live Preview 下 Callout 内部走编辑态解析（注释可见、空行保留）；</li><li>阅读视图渲染保持不变，可随时切回；</li><li>按 Callout 类型（note/warning/…）白名单启用，方便用户避险。</li></ol></div></div>
-<div class="kv"><div class="k">怎么验证有人要</div><div class="v">先在原帖回复一个可行性 demo 或 CSS 片段收集反馈，确认能跑通再全量开发；正式版发 Obsidian 论坛、插件市场、r/ObsidianMD。</div></div>
-<div class="kv"><div class="k">预计开发天数</div><div class="v">5–8 天（含可行性验证）。</div></div>
-<hr />
-</div></details></div>
+  <div class="actions"><details><summary>展开详情</summary><div class="detail"><div class="kv"><div class="k">需求概括</div><div class="v">让 Callout 内部内容在 Live Preview 下按编辑态渲染（<code>%%注释%%</code> 可见、连续空行不折叠），阅读视图维持现状。</div></div><div class="kv"><div class="k">为什么值得做</div><div class="v">竞品检查 weak，搜索中没有插件直接解决这个核心点，官方也无方案；痛点非常具体，且和上一条同属 Obsidian 插件，工具链可复用。风险点在于原帖有人认为“插件难以覆盖默认渲染”，所以必须先做可行性验证再投入。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 插件（CodeMirror 扩展 + CSS 覆盖），可先发 CSS 片段试水再插件化。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>Live Preview 下 Callout 内部走编辑态解析（注释可见、空行保留）</li><li>阅读视图渲染保持不变，可随时切回</li><li>按 Callout 类型（note/warning/…）白名单启用，方便用户避险</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">先在原帖回复一个可行性 demo 或 CSS 片段收集反馈，确认能跑通再全量开发；正式版发 Obsidian 论坛、插件市场、r/ObsidianMD。</div></div><div class="kv"><div class="k">预计开发</div><div class="v">5–8 天（含可行性验证）。<br><hr /></div></div></div></details></div>
 </article>
 <article class="card">
   <div class="card-head"><span class="rank">#5</span><span class="tag">桌面应用（Python + GU</span></div>
   <h3>IP 摄像头 RTSP 流质量验收桌面工具</h3>
   <p class="lede">对 RTSP 流做量化验收——帧率、丢包、抖动、RTP 时间戳异常、黑屏/冻结画面检测，输出可归档报告。</p>
   
-  <div class="actions"><details><summary>展开详情</summary><div class="detail">
-<div class="kv"><div class="k">需求概括</div><div class="v">对 RTSP 流做量化验收——帧率、丢包、抖动、RTP 时间戳异常、黑屏/冻结画面检测，输出可归档报告。</div></div>
-<div class="kv"><div class="k">为什么值得做</div><div class="v">付费意愿 3，是全场最高；竞品检查 weak，现有工具多为 CLI 或绑定 Zabbix/DeepStream 生态，冻结/黑屏检测在多数工具中未明确覆盖。作者已自研 RK Edge Doctor 的 <code>rtsp</code> 子命令，算法与报告格式已被验证，明确的空缺只在于<strong>图形界面、批量多摄像头、报告归档与趋势对比</strong>——这正是可产品化的部分。缺点是难度 4、开发周期最长，建议先做窄。</div></div>
-<div class="kv"><div class="k">建议形式</div><div class="v">桌面应用（Python + GUI，打包单文件 exe），核心检测逻辑开源、GUI 与批量报表作为增值。</div></div>
-<div class="kv"><div class="k">MVP 三个核心功能</div><div class="v"><ol><li>填一个 RTSP URL 一键检测，输出帧率/丢包/抖动/时间戳异常指标；</li><li>冻结帧与黑屏检测（判定“画面其实是旧帧”）；</li><li>单页 HTML/PDF 报告 + 多摄像头批量巡检列表。</li></ol></div></div>
-<div class="kv"><div class="k">怎么验证有人要</div><div class="v">在原帖回复并附上一份示例报告；发到 Qiita、GitHub、安防/弱电行业群、r/sysadmin 与 r/networking，重点问“愿不愿为批量巡检和报告归档付费”。</div></div>
-<div class="kv"><div class="k">预计开发天数</div><div class="v">14–20 天（可先做 CLI→GUI 最小封装，约 7 天验证需求）。</div></div>
-</div></details></div>
+  <div class="actions"><details><summary>展开详情</summary><div class="detail"><div class="kv"><div class="k">需求概括</div><div class="v">对 RTSP 流做量化验收——帧率、丢包、抖动、RTP 时间戳异常、黑屏/冻结画面检测，输出可归档报告。</div></div><div class="kv"><div class="k">为什么值得做</div><div class="v">付费意愿 3，是全场最高；竞品检查 weak，现有工具多为 CLI 或绑定 Zabbix/DeepStream 生态，冻结/黑屏检测在多数工具中未明确覆盖。作者已自研 RK Edge Doctor 的 <code>rtsp</code> 子命令，算法与报告格式已被验证，明确的空缺只在于<strong>图形界面、批量多摄像头、报告归档与趋势对比</strong>——这正是可产品化的部分。缺点是难度 4、开发周期最长，建议先做窄。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">桌面应用（Python + GUI，打包单文件 exe），核心检测逻辑开源、GUI 与批量报表作为增值。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>填一个 RTSP URL 一键检测，输出帧率/丢包/抖动/时间戳异常指标</li><li>冻结帧与黑屏检测（判定“画面其实是旧帧”）</li><li>单页 HTML/PDF 报告 + 多摄像头批量巡检列表</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">在原帖回复并附上一份示例报告；发到 Qiita、GitHub、安防/弱电行业群、r/sysadmin 与 r/networking，重点问“愿不愿为批量巡检和报告归档付费”。</div></div><div class="kv"><div class="k">预计开发</div><div class="v">14–20 天（可先做 CLI→GUI 最小封装，约 7 天验证需求）。</div></div></div></details></div>
 </article></div>
   <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">完整分析</h2>
   <details class="fold"><summary>主题归类</summary><div class="detail">
@@ -490,7 +451,7 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 </tr>
 </tbody>
 </table></div></div></details><details class="fold"><summary>往期存档</summary><div class="detail archive"><a href="2026-11-06.html">2026-11-06</a><a href="2026-11-05.html">2026-11-05</a><a href="2026-11-04.html">2026-11-04</a><a href="2026-11-03.html">2026-11-03</a><a href="../index.html">最新版</a></div></details>
-  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-06 12:31 JST · 每天自动更新</span></footer>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-06 12:44 JST · 每天自动更新</span></footer>
 </div>
 <script>
 (() => {

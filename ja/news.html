@@ -119,6 +119,12 @@ details summary:hover { color: var(--text); }
 .detail { font-size: 14px; color: #c2d3e0; }
 .detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
 .detail li::marker { color: var(--pink); }
+/* 详情：一行一条，左边标签、右边内容，虚线分隔 */
+.detail .kv { display: grid; grid-template-columns: 10em 1fr; gap: 6px 16px; padding: 10px 0; border-top: 2px dashed var(--line); }
+.detail .kv:first-child { border-top: 0; }
+.detail .k { justify-self: start; align-self: start; font: 12px/1.6 var(--mono); color: var(--bg); background: var(--amber); padding: 1px 8px; }
+.detail .v { min-width: 0; line-height: 1.75; overflow-wrap: anywhere; }
+.detail .v p { margin: 0 0 4px; } .detail .v ol, .detail .v ul { margin: 2px 0 0; }
 .fold { background: var(--panel); padding: 12px 18px; margin: 0 8px 22px 4px; }
 .fold > summary { font: 400 16px var(--pixel); color: var(--text); }
 .fold[open] > summary { margin-bottom: 10px; }
@@ -159,6 +165,7 @@ footer { font: 9px/2 var(--arcade); color: var(--dim); padding: 24px 0 40px; tex
 .row .h a:hover { color: var(--cyan); }
 .board details summary { margin-top: 6px; }
 @media (max-width: 760px) {
+  .detail .kv { grid-template-columns: 1fr; gap: 6px; }
   .meters { grid-template-columns: repeat(3, 1fr); }
   .card { padding: 14px 14px 12px; }
   .boards { grid-template-columns: 1fr; }
