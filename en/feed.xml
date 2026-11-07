@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-07</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-07</guid>
+<pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Want a photo management tool that browses folders in place like Picasa, without importing into a database</li><li>Let ChatGPT read and write an Obsidian vault on any device</li><li>Want a tool that can centrally manage multiple shopping cashback/coupon extensions and avoid repeated price comparisons</li><li>Fix footnote links broken after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li><li>Want a tool that can parse the internal structure of Excel workbooks like an X-ray (formula dependencies, dead code, hidden references</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-06</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-06</guid>
+<pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
+<description>Claude Code email leak raises privacy concerns, agent skill ecosystem explodes</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-06</title>
 <link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-06</guid>

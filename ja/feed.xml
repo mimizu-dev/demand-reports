@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-07</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-07</guid>
+<pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Picasaのようにフォルダをその場で閲覧でき、データベースにインポートしない写真管理ツールが欲しい</li><li>ChatGPT が任意のデバイスで Obsidian ノート保管庫を読み書きできるようにする</li><li>複数のショッピングキャッシュバック/クーポン拡張を統合管理し、重複した価格比較を避けられるツールが欲しい</li><li>LibreOffice/OpenOfficeからObsidianにインポートした際に壊れた脚注リンクを修復し、標準Markdown脚注に変換する</li><li>Excelブックの内部構造（数式依存、デッドコード、隠れた参照）をX線のように解析できるツールが欲しい</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-06</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-06</guid>
+<pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
+<description>Claude Codeのメール漏洩でプライバシー懸念、Agentスキルエコシステムが爆発的拡大</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-06</title>
 <link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-06</guid>
