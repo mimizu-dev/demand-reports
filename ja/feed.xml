@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-08</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-08</guid>
+<pubDate>Sun, 08 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Apple Silicon Mac 外部音声トラックの遅延微調整とロスレス結合</li><li>Picasa のようにフォルダをその場で閲覧できる写真管理ツール</li><li>让 ChatGPT 跨设备读写 Obsidian 笔记库</li><li>複数のショッピングキャッシュバック/クーポン拡張機能を一元管理</li><li>修复 LibreOffice/OpenOffice 导入 Obsidian 的脚注链接</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-07</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-07</guid>
+<pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
+<description>Agent Skillsエコシステムが爆発的に拡大、AIコーディングツールチェーンが注目の的に</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-07</title>
 <link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-07</guid>
