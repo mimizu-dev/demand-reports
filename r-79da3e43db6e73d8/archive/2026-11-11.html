@@ -294,34 +294,34 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
   <h2><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true">需求排行榜 · 前 50</h2>
   <div class="filters" role="group" aria-label="按实现方式筛选"><button type="button" class="on" data-kind="all">全部 50</button><button type="button" data-kind="browser_extension">浏览器扩展 15</button><button type="button" data-kind="desktop_app">本地软件 7</button><button type="button" data-kind="plugin">软件插件 19</button><button type="button" data-kind="web_tool">网页工具 6</button><button type="button" data-kind="mobile_app">手机 App 3</button></div><div class="lboard"><div class="lb-head"><span>名次</span><span>变化</span><span>需求 · 编号 · 实现方式</span><span>综合分</span><span>热度</span></div><details class="lb" data-kind="desktop_app">
 <summary><span class="no">1</span><span class="mv dim">–</span>
-<span class="t"><b>Apple Silicon Mac 外挂音轨实时对齐与无损合并</b><span class="sub"><span class="nid">C898</span><span class="kind">本地软件</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
+<span class="t"><b>在 Apple Silicon Mac 上实时微调外挂音轨延迟并与视频合并</b><span class="sub"><span class="nid">C898</span><span class="kind">本地软件</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
 <span class="sc"><b>8.5</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">2.0</span></summary>
-<div class="lb-body"><p class="lede">在 Apple Silicon Mac 上加载视频和外挂音轨，实时试听并微调延迟，满意后无损合并导出。痛点是 Avidemux 不支持 M 系列芯片，IINA/mpv 调延迟后要拖进度条才生效，专业剪辑软件又太重。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">8.5</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>2.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>10–14 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 8.5，是本批最高；需求场景具体（演唱会/访谈/现场录像的外挂音轨对齐），现有方案要么重（DaVinci Resolve Free、Shotcut），要么流程卡（mpv + ffmpeg 要手动敲命令），竞品检查为 weak，空缺明确——没有一款轻量工具同时覆盖“实时试听微调 + 一键无损合并”。风险也要写明：DaVinci Resolve 免费版已能完成对齐和导出，部分用户可能不愿为新工具付费；Apple Silicon 原生音视频同步、实时预览不卡顿有开发门槛；付费意愿只有 3。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">macOS 原生窗口应用，Swift + AVFoundation 做预览，ffmpeg 做无损合并；或 Tauri + ffmpeg 外壳，优先保证 Apple Silicon 原生运行。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>拖入视频和外挂音轨，自动读取时长、采样率、声道并显示波形</li><li>用滑块/快捷键实时调整音轨延迟，预览立即生效，不需要拖进度条</li><li>满意后一键无损合并导出（视频流直接 copy，音频按延迟偏移封装）</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖征集测试；发到 r/macapps、r/VideoEditing、r/podcasting，重点找“拍了演唱会/访谈、音轨来自独立录音设备”的用户；用“Resolve 太重、mpv 太麻烦”作为对照文案。</div></div><div class="kv"><div class="k">同组帖子</div><div class="v"><ul class="sim"><li><a href="https://www.reddit.com/r/macapps/comments/1xpxge7/" target="_blank" rel="noopener">在 Mac 上实时调整外部音频延迟并与视频同步合并</a> <span class="dim">reddit/r/macapps</span></li></ul></div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://appahead.studio/news/2025-01-polycapture-sync-mix-merge-video-and-audio-files" target="_blank" rel="noopener">PolyCapture</a>、<a href="https://github.com/r44vc0rp/isocast/blob/18b11cb7a919b9b019f490db9319a272e8ba5bf3/docs/releases/0.0.7.md" target="_blank" rel="noopener">Isocast</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果中没有一款工具同时覆盖“外挂音轨实时试听微调延迟 + 满意后无损合并”的完整流程：AV Sync Fix 偏一次性修正、SyncForge/viode 偏命令行或渲染、PolyCapture 面向录制素材合并、Isocast 尚处早期。针对 Apple Silicon 的轻量实时微调并无损合并仍有明显空缺。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/macapps/comments/1xpxkde/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><span class="tag"><img class="ico " src="../assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div></div>
+<div class="lb-body"><p class="lede">要求把外挂音轨与视频对齐，实时试听并微调延迟，满意后无损合并；现有 Avidemux 不支持 M 系列，IINA/mpv 调延迟后要拖进度条才生效，专业剪辑软件太重。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">8.5</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>2.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 10-14 天（一人 + AI 辅助）</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 8.5 最高，帖子数 2、热度从 0 起升；竞品检查为 weak，空缺明确——没有工具同时覆盖“外挂音轨实时试听微调延迟 + 满意后无损合并”的完整流程。风险是 DaVinci Resolve/Shotcut 能部分完成，专业用户可能觉得场景窄；macOS 上要处理容器/编码兼容、ffmpeg 集成与签名。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">本地 macOS 原生小工具，优先 Apple Silicon，内部可用 ffmpeg 做流复制合并。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>拖入视频和外挂音轨，自动读取时长/采样率并建立统一时间轴</li><li>实时试听，支持 ±10ms/±100ms 微调，调整立即生效，可参考波形</li><li>导出时视频流复制、音频按延迟偏移合并，尽量无损，失败时提示可重编码音频</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xpxkde/">reddit:1xpxkde</a>；发到 r/macapps、r/VideoEditing、r/ffmpeg，附 3 组测试素材和试用包。</div></div><div class="kv"><div class="k">同组帖子</div><div class="v"><ul class="sim"><li><a href="https://www.reddit.com/r/macapps/comments/1xpxge7/" target="_blank" rel="noopener">在 Mac 上实时调整外部音频延迟并与视频同步合并</a> <span class="dim">reddit/r/macapps</span></li></ul></div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://appahead.studio/news/2025-01-polycapture-sync-mix-merge-video-and-audio-files" target="_blank" rel="noopener">PolyCapture</a>、<a href="https://github.com/r44vc0rp/isocast/blob/18b11cb7a919b9b019f490db9319a272e8ba5bf3/docs/releases/0.0.7.md" target="_blank" rel="noopener">Isocast</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果中没有一款工具同时覆盖“外挂音轨实时试听微调延迟 + 满意后无损合并”的完整流程：AV Sync Fix 偏一次性修正、SyncForge/viode 偏命令行或渲染、PolyCapture 面向录制素材合并、Isocast 尚处早期。针对 Apple Silicon 的轻量实时微调并无损合并仍有明显空缺。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/macapps/comments/1xpxkde/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><span class="tag"><img class="ico " src="../assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div></div>
 </details><details class="lb" data-kind="desktop_app">
 <summary><span class="no">2</span><span class="mv dim">–</span>
-<span class="t"><b>像 Picasa 一样原地浏览文件夹的照片管理工具</b><span class="sub"><span class="nid">C350</span><span class="kind">本地软件</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
+<span class="t"><b>想要一个像 Picasa 那样原地浏览文件夹、不导入数据库的照片管理工具</b><span class="sub"><span class="nid">C350</span><span class="kind">本地软件</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
 <span class="sc"><b>6.4</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.6</span></summary>
-<div class="lb-body"><p class="lede">不导入专有数据库，直接在文件夹里浏览几十万张照片，打标签、评分、去重，标签写入可迁移的 XMP sidecar，支持外接硬盘和文件夹重命名后跟踪。用户担心被 Apple Photos/Lightroom 锁死，也对 Sortroom 的订阅制不满。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.4</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.6 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>25–35 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 6.4，痛点真实且情绪强（“不想把整理成果锁在某个应用里”）；竞品检查为 weak，空缺明确——没有工具同时覆盖“几十万张原地浏览 + XMP 可移植 + 外接硬盘 + 重命名跟踪”四点。风险是 digiKam、XnView MP 已经免费且成熟，Sortroom 是较成熟的商业应用；几十万张缩略图的性能是硬门槛；难度 4，开发周期明显长于其他四条；付费意愿 3，用户可能习惯免费工具。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">跨平台桌面应用，Tauri/Rust 或 Electron，SQLite 只存索引和缩略图缓存，原文件不动，标签/评分直接写 XMP sidecar。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>只读式文件夹树 + 缩略图网格，支持几十万张的懒加载和快速滚动</li><li>标签/评分写入 XMP sidecar，并提供“从 XMP 重建索引”的迁移入口</li><li>按标签/评分/文件名过滤，外加基础重复检测（文件哈希 + 尺寸）</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖；发到 r/photography、r/DataHoarder、r/digikam，用“不导入数据库、标签可带走”作为核心卖点；找有外接硬盘和几十万张照片的摄影师试用。</div></div><div class="kv"><div class="k">同组帖子</div><div class="v"><ul class="sim"><li><a href="https://www.reddit.com/r/macapps/comments/1xhw3gz/" target="_blank" rel="noopener">一款像 Picasa 那样直接管理本地文件夹、不导入私有库的照片管理器</a> <span class="dim">reddit/r/macapps</span></li></ul></div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://github.com/cristibaluta/Imagin-Raw#1" target="_blank" rel="noopener">Imagin-Raw</a>、<a href="https://github.com/merlin1de/FlashView#1" target="_blank" rel="noopener">FlashView</a>、<a href="https://github.com/markyip/RAWviewer#1" target="_blank" rel="noopener">RAWviewer</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果里没有一个工具同时完整覆盖四点：几十万张照片的原地文件夹浏览、标签/评分写入 XMP sidecar 可移植、外接硬盘支持、文件夹重命名后自动跟踪。现有工具要么只做 RAW 筛选（FlashView、RAWviewer、photo-review、apertin），要么会建立自己的库（TagStudio），要么处于极早期版本（RAWmakase 0.4.x），要么是移动端（F-Stop）。因此仍有明显空间做一个真正对标 Picasa、以文件夹为第一公民、元数据完全可移植的桌面应用。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><span class="tag"><img class="ico " src="../assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div></div>
+<div class="lb-body"><p class="lede">想要几十万张照片直接在文件夹里浏览、打标签、去重，不像 Apple Photos/Lightroom 导入专有数据库，并担心标签被锁定。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">6.4</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.6 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 25-35 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 6.4，帖子数 2；竞品检查为 weak，空缺是“原地文件夹浏览 + 标签/评分写入 XMP sidecar 可移植 + 外接硬盘 + 文件夹重命名后自动跟踪”四点没有工具完整覆盖。风险是 digiKam、XnView MP 免费成熟，Sortroom 已商业部分满足；几十万张性能、跨平台和 XMP 兼容是硬骨头，付费意愿 3 但用户明确反感订阅。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">本地桌面应用，先做 macOS/Windows 单平台，买断制。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>直接打开文件夹树，缩略图/EXIF 浏览，不导入数据库</li><li>标签、评分写入 XMP sidecar，可被 digiKam/XnView 读取</li><li>重复照片检测（哈希/感知哈希）+ 外置盘路径和文件夹重命名后的重关联</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">reddit:1xhwqwp</a>；发到 r/photography、r/DataHoarder、DPReview 论坛，找有几十万张照片的用户试用。</div></div><div class="kv"><div class="k">同组帖子</div><div class="v"><ul class="sim"><li><a href="https://www.reddit.com/r/macapps/comments/1xhw3gz/" target="_blank" rel="noopener">一款像 Picasa 那样直接管理本地文件夹、不导入私有库的照片管理器</a> <span class="dim">reddit/r/macapps</span></li></ul></div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://github.com/cristibaluta/Imagin-Raw#1" target="_blank" rel="noopener">Imagin-Raw</a>、<a href="https://github.com/merlin1de/FlashView#1" target="_blank" rel="noopener">FlashView</a>、<a href="https://github.com/markyip/RAWviewer#1" target="_blank" rel="noopener">RAWviewer</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果里没有一个工具同时完整覆盖四点：几十万张照片的原地文件夹浏览、标签/评分写入 XMP sidecar 可移植、外接硬盘支持、文件夹重命名后自动跟踪。现有工具要么只做 RAW 筛选（FlashView、RAWviewer、photo-review、apertin），要么会建立自己的库（TagStudio），要么处于极早期版本（RAWmakase 0.4.x），要么是移动端（F-Stop）。因此仍有明显空间做一个真正对标 Picasa、以文件夹为第一公民、元数据完全可移植的桌面应用。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a><span class="tag"><img class="ico " src="../assets/chat.png" width="18" height="16" alt="" aria-hidden="true">2 个帖子</span></div></div>
 </details><details class="lb" data-kind="browser_extension">
 <summary><span class="no">3</span><span class="mv up">↑1</span>
-<span class="t"><b>统一管理多个购物返现/优惠券扩展的比价面板</b><span class="sub"><span class="nid">C799</span><span class="kind">浏览器扩展</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
+<span class="t"><b>希望有一个能统一管理多个购物返现/优惠券扩展、避免重复比价的工具</b><span class="sub"><span class="nid">C799</span><span class="kind">浏览器扩展</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
 <span class="sc"><b>5.9</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">0.9</span></summary>
-<div class="lb-body"><p class="lede">用户同时装了 Coupert、Capital One 等多个购物扩展，返现率、优惠券、比价信息分散，无法确认是否看到同一批优惠，希望有一个统一面板汇总同一商品的返现率和可用优惠，并去重比价。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.9</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.9 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>8–12 天（MVP，不含联盟 API 接入）</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 5.9，竞品检查为 none，空缺明确——没有工具统一汇总多个返现/优惠券扩展在同一商品上的费率并去重。形态轻，浏览器扩展一个人用 AI 辅助可以做。风险必须写明：各返现扩展之间不开放数据，浏览器扩展也不能直接读取另一个扩展的内部状态，实际只能靠聚合公开联盟费率/页面信息，覆盖度可能不如宣传；商业模式依赖返现联盟 API 和商家合作，用户付费意愿只有 2，大概率要靠返佣而不是订阅；Honey/Coupert 等可能封禁或对抗。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">Chrome/Edge 扩展，content script 识别商品页，侧边栏统一面板；后端维护各返现平台的公开费率/跳转链接。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>在商品页自动识别商品（标题/价格/URL），显示已支持平台的返现率对比</li><li>汇总可用优惠券并去重，标注来源和最后验证时间</li><li>一键跳转到当前最高返现/最优优惠的链接，并记录用户选择</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖；发到 r/coupons、r/Frugal、r/beermoney，找“装了 3 个以上购物扩展”的重度用户；先做手动维护费率的版本，验证用户是否真的会打开统一面板。</div></div><div class="kv"><div class="k">竞品</div><div class="v">无竞品</div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果中没有任何工具能统一汇总多个返现/优惠券扩展（如 Coupert、Capital One）在同一商品上的返现率与可用优惠，并去重比价。现有工具要么是又一个同类扩展，要么只针对单一平台排序，或停留在命令行聚合层。做一个浏览器扩展来读取/汇总已装扩展的返现与优惠信息、去重展示最优组合，存在明显空白。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
+<div class="lb-body"><p class="lede">同时装了 Coupert、Capital One 等多个购物扩展，比价、找券、返现信息分散，无法确认是否看到同一批优惠。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.9</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.9 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 8-12 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 5.9，竞品检查为 none，空缺明确——没有工具统一汇总多个返现/优惠券扩展在同一商品上的返现率与可用优惠并去重比价。风险是付费意愿仅 2，浏览器扩展权限敏感，返现联盟接口不公开，Honey/Coupert 可能封锁，商业模式和用户信任是主要难点。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">浏览器扩展，只做聚合面板和跳转，不自动下单。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>在商品页聚合已安装返现扩展的可见返现率/优惠码，支持手动补充，去重展示</li><li>同一商品的多平台返现/价格对比表，记录历史</li><li>一键跳转到当前最优返现链接，不自动填表、不自动下单</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/">reddit:1xp18ee</a>；发到 r/couponing、r/Frugal、r/beermoney，用 landing page 收集 waitlist。</div></div><div class="kv"><div class="k">竞品</div><div class="v">无竞品</div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果中没有任何工具能统一汇总多个返现/优惠券扩展（如 Coupert、Capital One）在同一商品上的返现率与可用优惠，并去重比价。现有工具要么是又一个同类扩展，要么只针对单一平台排序，或停留在命令行聚合层。做一个浏览器扩展来读取/汇总已装扩展的返现与优惠信息、去重展示最优组合，存在明显空白。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="plugin">
 <summary><span class="no">4</span><span class="mv up">↑1</span>
-<span class="t"><b>LibreOffice 脚注导入 Obsidian 的批量修复插件</b><span class="sub"><span class="nid">C502</span><span class="kind">软件插件</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
+<span class="t"><b>把 LibreOffice/OpenOffice 导入 Obsidian 后损坏的脚注链接修复并转为标准 Markdown 脚注</b><span class="sub"><span class="nid">C502</span><span class="kind">软件插件</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
 <span class="sc"><b>5.8</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">0.9</span></summary>
-<div class="lb-body"><p class="lede">从 LibreOffice/OpenOffice 复制或转换到 Obsidian 时，脚注被转成文末尾注，链接变成 [174](#sdfootnote174sym)、[174](#sdfootnote174anc) 这类损坏锚点；需要一个工具批量修复并转成标准 Markdown 脚注 [^174] / [^174]:，并把脚注定义放回合适位置。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.8</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.9 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>5–8 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 5.8，竞品检查为 weak，空缺明确——没有专门针对 <code>#sdfootnote…sym/anc</code> 锚点做修复并转 Obsidian 脚注的插件。难度 3、形态轻，适合一个人快速做完。风险是需求窄且偏一次性：用户迁移完一批笔记后可能不再使用，付费意愿只有 2；回复区已经给出正则替换思路，动手能力强的用户会自己解决；pandoc 或 Obsidian 官方未来可能覆盖部分场景。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 社区插件，TypeScript；对选中文本或整篇笔记做解析，提供预览后再应用，避免误改。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>识别 <code>sdfootnote…sym</code> / <code>sdfootnote…anc</code> 锚点，批量替换为 <code>[^n]</code> 引用和 <code>[^n]:</code> 定义</li><li>提供“脚注定义放文末/就近放置”两个选项，并保留原文备份</li><li>预览修复前后的差异，支持只处理当前选区或当前笔记</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖；发到 Obsidian 官方论坛、r/ObsidianMD、Obsidian Discord，找“从 LibreOffice/Word 迁移到 Obsidian”的用户；用一篇真实损坏笔记做 before/after 演示。</div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://forum-zh.obsidian.md/u/%E5%A6%82%E6%84%BF/activity" target="_blank" rel="noopener">Pandoc（经 Obsidian Pandoc 插件调用）</a>、<a href="https://forum.obsidian.md/t/converting-plaintext-footnotes-into-markdown-footnotes/65830/1" target="_blank" rel="noopener">QuickAdd 宏 + 正则替换</a>、<a href="https://forum.obsidian.md/t/plugin-sidenotes/110632/16" target="_blank" rel="noopener">Sidenotes 插件</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果里没有专门针对 LibreOffice/OpenOffice 复制粘贴产生的 #sdfootnote…sym/anc 锚点做修复并转成 Obsidian Markdown 脚注语法的插件；现有方案要么依赖 Pandoc 外部工具和手动配置，要么只处理纯文本脚注、需用户自写正则，要么是独立转换器而非 Obsidian 插件。做一个开箱即用、能识别并重写 LibreOffice 脚注锚点、支持按章节拆分时保留对应脚注的 Obsidian 插件仍有空间。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
+<div class="lb-body"><p class="lede">从 LibreOffice/OpenOffice 复制或转换到 Obsidian 时，脚注被转成文末尾注，链接变成 [174](#sdfootnote174sym) 与 [174](#sdfootnote174anc) 这类锚点。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.8</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.9 <span class="dim">▶</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 3-5 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 5.8，竞品检查为 weak，空缺明确——没有专门针对 <code>#sdfootnote…sym/anc</code> 锚点做批量修复并转成 Obsidian <code>[^n]</code> 语法的完整工具。风险是场景窄、可能一次性使用；LibreOffice 脚注格式有变体，Obsidian 插件发布要审核，付费意愿仅 2。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">Obsidian 社区插件 + 网页转换器，先做粘贴转换。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>粘贴/导入含 <code>#sdfootnote</code> 锚点的 Markdown，识别 sym/anc 配对</li><li>批量转为 Obsidian 脚注语法 <code>[^n]</code> / <code>[^n]:</code>，去重编号并保留原文顺序</li><li>提供“脚注就近放置/文末统一”选项和修复预览</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复原帖 <a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/">reddit:1xmmvbz</a>；发到 Obsidian 论坛、r/ObsidianMD、中文 Obsidian 群，放一个在线 demo。</div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://forum-zh.obsidian.md/u/%E5%A6%82%E6%84%BF/activity" target="_blank" rel="noopener">Pandoc（经 Obsidian Pandoc 插件调用）</a>、<a href="https://forum.obsidian.md/t/converting-plaintext-footnotes-into-markdown-footnotes/65830/1" target="_blank" rel="noopener">QuickAdd 宏 + 正则替换</a>、<a href="https://forum.obsidian.md/t/plugin-sidenotes/110632/16" target="_blank" rel="noopener">Sidenotes 插件</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果里没有专门针对 LibreOffice/OpenOffice 复制粘贴产生的 #sdfootnote…sym/anc 锚点做修复并转成 Obsidian Markdown 脚注语法的插件；现有方案要么依赖 Pandoc 外部工具和手动配置，要么只处理纯文本脚注、需用户自写正则，要么是独立转换器而非 Obsidian 插件。做一个开箱即用、能识别并重写 LibreOffice 脚注锚点、支持按章节拆分时保留对应脚注的 Obsidian 插件仍有空间。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="browser_extension">
 <summary><span class="no">5</span><span class="mv up">↑1</span>
-<span class="t"><b>Excel 工作簿结构 X 光解析工具</b><span class="sub"><span class="nid">C505</span><span class="kind">浏览器扩展</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
+<span class="t"><b>希望有工具能像X光一样解析Excel工作簿的内部结构（公式依赖、死代码、隐藏引用</b><span class="sub"><span class="nid">C505</span><span class="kind">浏览器扩展</span><span class="pick"><img class="ico " src="../assets/star.png" width="18" height="18" alt="" aria-hidden="true">推荐</span></span></span>
 <span class="sc"><b>5.7</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">0.9</span></summary>
-<div class="lb-body"><p class="lede">像 X 光一样解析 Excel 工作簿内部结构，透视公式依赖链、跨表引用、未被使用的死单元格、隐藏表和隐藏引用，生成整体结构图，用于审计、重构和交接。现有 Excel 自带公式追踪和 Inquire 加载项功能有限，作者自己的“Excel ドック構想”也尚未落地。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.7</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.9 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>18–25 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 5.7，竞品检查为 weak，空缺明确——现有工具要么只做单元格级公式追踪（Deckary、xlCompare），要么只做引用关系图（tangle、ag-cartographer），缺少“整体结构 + 死代码 + 隐藏引用”的组合。目标场景（财务审计、工作簿交接）付费意愿 3，比一般小工具更愿意付费。风险是 Excel 解析复杂度高：公式、命名范围、跨表引用、宏、合并单元格都要处理；浏览器扩展读本地 xlsx 受限，做成网页/桌面工具更现实；Microsoft 的 Copilot/Inquire 可能逐步覆盖；企业销售周期长，一个人做要控制范围。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">本地网页工具优先（用户上传 xlsx，浏览器内解析并出图），后续再做 Excel Office Add-in；不建议纯浏览器扩展直接读本地文件。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>上传/打开 xlsx，解析所有工作表的公式、命名范围、跨表引用和隐藏表</li><li>生成公式依赖图和跨表引用图，支持点击节点定位到单元格</li><li>标记未被引用的死单元格、只被自身引用的公式、隐藏表/隐藏行列，并导出报告</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复 Qiita 原帖；发到 r/excel、r/ExcelTips 和 Qiita，找“接手别人工作簿、需要审计/重构”的用户；用一份真实复杂工作簿做结构图演示，先验证“死代码/隐藏引用”是不是他们最痛的点。</div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://github.com/bizbrf/tangle#1" target="_blank" rel="noopener">tangle</a>、<a href="https://deckary.com/excel/formula-tracer" target="_blank" rel="noopener">Deckary Excel Formula Tracer</a>、<a href="https://preview.perfectxl.com/products/perfectxl-source-inspector/" target="_blank" rel="noopener">PerfectXL Source Inspector</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">现有工具要么只做单元格级公式追踪（Deckary、xlCompare），要么只做引用关系图（tangle、ag-cartographer），要么是零散 VBA 宏或小项目；缺少一个网页工具，能把工作表结构、跨表引用、命名区域和 INDIRECT/OFFSET 等隐藏依赖统一成可交互的工作簿骨架总览，并支持审计与维护视角。因此仍有明显空间。</div></div></div><div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
+<div class="lb-body"><p class="lede">希望透视 Excel 的公式依赖链、跨表引用、未使用死单元格和隐藏结构，用于审计、重构、交接；现有工具只看表面数值或只做单元格级追踪。</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.7</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>0.9 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 12-18 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">为什么值得做</div><div class="v">综合分 5.7，竞品检查为 weak，空缺是“整体结构图 + 死代码/隐藏引用”没有被现有工具完整覆盖；付费意愿 3，企业审计/财务交接有付费可能。风险是 OOXML 公式解析复杂、大文件性能、浏览器扩展读本地文件权限；Inquire、Deckary、xlCompare 等已部分覆盖，企业销售周期长。</div></div><div class="kv"><div class="k">建议形式</div><div class="v">浏览器扩展，先做本地文件解析，不上传工作簿。</div></div><div class="kv"><div class="k">核心功能</div><div class="v"><ol><li>上传 <code>.xlsx</code>，解析工作表、公式、命名区域、隐藏行列/表</li><li>生成跨表引用依赖图，标出未被引用单元格/死代码和隐藏引用</li><li>点击节点跳转单元格，导出结构报告（HTML/JSON）</li></ol></div></div><div class="kv"><div class="k">怎么验证</div><div class="v">回复 Qiita 原帖 <a target="_blank" rel="noopener" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db">qiita:1bd62fdb86fa7c2a17db</a>；发到 Qiita/Zenn、r/excel、Excel 论坛，找财务/审计用户试用。</div></div><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://github.com/bizbrf/tangle#1" target="_blank" rel="noopener">tangle</a>、<a href="https://deckary.com/excel/formula-tracer" target="_blank" rel="noopener">Deckary Excel Formula Tracer</a>、<a href="https://preview.perfectxl.com/products/perfectxl-source-inspector/" target="_blank" rel="noopener">PerfectXL Source Inspector</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">现有工具要么只做单元格级公式追踪（Deckary、xlCompare），要么只做引用关系图（tangle、ag-cartographer），要么是零散 VBA 宏或小项目；缺少一个网页工具，能把工作表结构、跨表引用、命名区域和 INDIRECT/OFFSET 等隐藏依赖统一成可交互的工作簿骨架总览，并支持审计与维护视角。因此仍有明显空间。</div></div></div><div class="actions"><a class="btn" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="web_tool">
 <summary><span class="no">6</span><span class="mv up">↑2</span>
 <span class="t"><b>需要一个本地优先、带网页界面、能管理图片视频等资源并导出 Excel 的简易数据库管理工具</b><span class="sub"><span class="nid">C411</span><span class="kind">网页工具</span></span></span>
@@ -406,30 +406,30 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <span class="sc"><b>5.0</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.0</span></summary>
 <div class="lb-body"><p class="lede">用户用散点图（XY 数值坐标）画了多条线，想给每条线下方填充颜色，但 Excel 内置图表没有直接支持；换成面积图后，同一 X 值对应两个 Y 值会被画成斜线，而不是散点图那样的水平线，导致图形失真</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-lime">无竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 1~2 周</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">竞品</div><div class="v">无竞品</div></div><div class="kv"><div class="k">空缺</div><div class="v">搜索结果中没有找到任何 Excel 插件或工具能直接在散点图（XY 数值坐标）中填充折线下方区域并保持数据联动。EasyCharts 是 Excel 图表插件，但只提供颜色拾取、数据读取等辅助功能，不解决散点图区域填充；ScottPlot 的 PlotFill 是 .NET 绘图库，不是 Excel 插件；XlsxWriter 的 up-down bars 仅限折线图且非区域填充；DevExtreme 的 Step Area 是网页图表组件。因此该需求在 Excel 插件生态中仍属空白，值得开发。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/excel/comments/1xp4969/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
-</details><details class="lb" data-kind="browser_extension">
-<summary><span class="no">20</span><span class="mv up">↑11</span>
-<span class="t"><b>阻止网站通过 history.pushState 反复往浏览历史里塞同一页面的记录</b><span class="sub"><span class="nid">C913</span><span class="kind">浏览器扩展</span></span></span>
-<span class="sc"><b>5.0</b></span>
-<span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.0</span></summary>
-<div class="lb-body"><p class="lede">用户点返回键时，发现历史记录里同一页面被网站插入了 5-30 条重复条目，必须手动翻找才能回到真正的上一页</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 3~5 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://chromewebstore.google.com/detail/history-interceptor/cjkffncgiimpelnkgcbbnmnagogihbpp" target="_blank" rel="noopener">History Interceptor（浏览记录拦截器）</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">现有扩展要么按 URL 规则事后删除/整站屏蔽历史，要么是需开发者接入的 JS 库；没有面向普通用户的扩展在 pushState 调用层做同页重复检测与降级为 replaceState，同时保留正常 SPA 导航。可做：注入页面脚本包装 pushState，比较当前 URL 与目标 URL，相同则改走 replaceState 或丢弃，并提供按站点开关与计数提示。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/chrome/comments/1xqaqhb/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="plugin">
-<summary><span class="no">21</span><span class="mv up">↑11</span>
+<summary><span class="no">20</span><span class="mv up">↑12</span>
 <span class="t"><b>Obsidian Pantry 插件配置太复杂，希望有更简单的食谱与库存管理方案</b><span class="sub"><span class="nid">C860</span><span class="kind">软件插件</span></span></span>
 <span class="sc"><b>5.0</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.0</span></summary>
 <div class="lb-body"><p class="lede">Pantry 插件设置项繁多，新手面对大量配置无从下手，迟迟不敢开始搭建自己的食谱与食材库存库；同时不确定非英文食谱的单位识别是否可用</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">5.0</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 1~2 周</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://community.obsidian.md/plugins/food-assistant-module#scorecard" target="_blank" rel="noopener">Food Assistant Module</a>、<a href="https://community.obsidian.md/plugins/pantry" target="_blank" rel="noopener">Pantry</a>、<a href="https://community.obsidian.md/plugins/recipe-box" target="_blank" rel="noopener">Recipe Box</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">现有插件大多功能齐全但配置项多，或依赖 canvas、模板、Cooklang 等前置设置，新手仍难上手；搜索结果中没有任何工具明确解决非英文食谱的单位识别问题，也没有以“零配置、开箱即用”为核心卖点的库存加食谱方案，因此仍有做出更简单替代品的空间。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/ObsidianMD/comments/1xpb9ab/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="browser_extension">
-<summary><span class="no">22</span><span class="mv up">↑6</span>
+<summary><span class="no">21</span><span class="mv up">↑7</span>
 <span class="t"><b>用 LLM 识别并过滤网页信息流中的广告内容</b><span class="sub"><span class="nid">C1100</span><span class="kind">浏览器扩展</span></span></span>
 <span class="sc"><b>4.9</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.0</span></summary>
 <div class="lb-body"><p class="lede">uBlock Origin 这类基于规则和选择器的拦截器无法屏蔽 Facebook 等平台原生嵌入信息流、与正常内容结构相同的广告，用户仍被大量广告干扰</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">4.9</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="dim">未查</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 2~4 周</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">竞品</div><div class="v">还没查</div></div></div><div class="actions"><a class="btn" href="https://news.ycombinator.com/item?id=50427481" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="web_tool">
-<summary><span class="no">23</span><span class="mv up">↑6</span>
+<summary><span class="no">22</span><span class="mv up">↑7</span>
 <span class="t"><b>希望有一个 GPU 租赁比价与套利平台</b><span class="sub"><span class="nid">C1103</span><span class="kind">网页工具</span></span></span>
 <span class="sc"><b>4.9</b></span>
 <span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.0</span></summary>
 <div class="lb-body"><p class="lede">同一块 H100 在不同云厂商的时租价格差异巨大（$2.69 到 $12.29），用户缺少一个统一比价、甚至能自动套利下单的工具</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">4.9</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="dim">未查</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 2~4 周</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">竞品</div><div class="v">还没查</div></div></div><div class="actions"><a class="btn" href="https://news.ycombinator.com/item?id=50427769" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
+</details><details class="lb" data-kind="browser_extension">
+<summary><span class="no">23</span><span class="mv up">↑8</span>
+<span class="t"><b>阻止网站通过 history.pushState 反复往浏览历史里塞同一页面的记录</b><span class="sub"><span class="nid">C913</span><span class="kind">浏览器扩展</span></span></span>
+<span class="sc"><b>4.9</b></span>
+<span class="ht"><img class="ico " src="../assets/flame.png" width="16" height="18" alt="" aria-hidden="true">1.0</span></summary>
+<div class="lb-body"><p class="lede">用户点返回键时，发现历史记录里同一页面被网站插入了 5-30 条重复条目，必须手动翻找才能回到真正的上一页</p><div class="meters"><div class="m"><img class="ico " src="../assets/star.png" width="36" height="36" alt="" aria-hidden="true"><b class="big c-cyan">4.9</b><span>综合分</span></div><div class="m"><img class="ico " src="../assets/flame.png" width="32" height="36" alt="" aria-hidden="true"><b>1.0 <span class="c-lime">NEW</span></b><span>热度</span></div><div class="m"><img class="ico " src="../assets/hammer.png" width="36" height="36" alt="" aria-hidden="true"><span class="pips amber"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>难度</span></div><div class="m"><img class="ico " src="../assets/coin.png" width="32" height="36" alt="" aria-hidden="true"><span class="pips lime"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span>付费意愿</span></div><div class="m"><img class="ico " src="../assets/shield.png" width="36" height="36" alt="" aria-hidden="true"><b class="c-amber">弱竞品</b><span>竞争</span></div><div class="m"><img class="ico " src="../assets/clock.png" width="28" height="36" alt="" aria-hidden="true"><b>约 3~5 天</b><span>预计开发</span></div></div><div class="detail"><div class="kv"><div class="k">竞品</div><div class="v">弱竞品：<a href="https://chromewebstore.google.com/detail/history-interceptor/cjkffncgiimpelnkgcbbnmnagogihbpp" target="_blank" rel="noopener">History Interceptor（浏览记录拦截器）</a></div></div><div class="kv"><div class="k">空缺</div><div class="v">现有扩展要么按 URL 规则事后删除/整站屏蔽历史，要么是需开发者接入的 JS 库；没有面向普通用户的扩展在 pushState 调用层做同页重复检测与降级为 replaceState，同时保留正常 SPA 导航。可做：注入页面脚本包装 pushState，比较当前 URL 与目标 URL，相同则改走 replaceState 或丢弃，并提供按站点开关与计数提示。</div></div></div><div class="actions"><a class="btn" href="https://www.reddit.com/r/chrome/comments/1xqaqhb/" target="_blank" rel="noopener"><img class="ico " src="../assets/arrow.png" width="17" height="18" alt="" aria-hidden="true">原帖</a></div></div>
 </details><details class="lb" data-kind="desktop_app">
 <summary><span class="no">24</span><span class="mv up">↑10</span>
 <span class="t"><b>为 SSH 密钥签名文本提供图形界面工具</b><span class="sub"><span class="nid">C1034</span><span class="kind">本地软件</span></span></span>
@@ -595,121 +595,101 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 </details><p class="lb-note">点开一行看详情 · 排名变化和 2026-11-10 相比 · 已排除已解决和强竞品</p></div>
   <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">完整分析</h2>
   <details class="fold"><summary>主题归类</summary><div class="detail">
-<blockquote>
-<p>按需求的主导形态归类，同一需求只计一次；少量跨类需求归入主类，需求数为约数。</p>
-</blockquote>
+<p>按主要痛点归类，一条只计一次，共 150 条。</p>
 <div class="table"><table>
 <thead>
 <tr>
 <th>主题</th>
 <th style="text-align: right;">需求数</th>
 <th>涉及平台</th>
-<th>代表需求</th>
+<th>代表需求（写 ID）</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Obsidian 编辑与笔记体验</td>
-<td style="text-align: right;">28</td>
-<td>Obsidian 桌面/移动端、Obsidian 官方论坛</td>
-<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener">reddit:1xmmvbz</a>、<a class="chip" href="https://forum.obsidian.md/t/separate-new-move-line-up-down-logic-from-smart-lists-setting/121647" target="_blank" rel="noopener">forum:obsidian:121647</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xozdum/" target="_blank" rel="noopener">reddit:1xozdum</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x1qbed/" target="_blank" rel="noopener">reddit:1x1qbed</a></td>
+<td>Obsidian/笔记与知识管理插件</td>
+<td style="text-align: right;">43</td>
+<td>Reddit、Obsidian 论坛、Joplin 论坛、Inkdrop 论坛</td>
+<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xmmvbz/" target="_blank" rel="noopener">reddit:1xmmvbz</a>、<a class="chip" href="https://forum.obsidian.md/t/separate-new-move-line-up-down-logic-from-smart-lists-setting/121647" target="_blank" rel="noopener">forum:obsidian:121647</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a></td>
 </tr>
 <tr>
-<td>浏览器扩展：网页净化与浏览控制</td>
-<td style="text-align: right;">23</td>
-<td>Chrome、Edge、Firefox、Safari、Hacker News、App Store</td>
-<td><a class="chip" href="https://www.reddit.com/r/chrome/comments/1xqaqhb/" target="_blank" rel="noopener">reddit:1xqaqhb</a>、<a class="chip" href="https://www.reddit.com/r/browsers/comments/1x6mt90/" target="_blank" rel="noopener">reddit:1x6mt90</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50429391" target="_blank" rel="noopener">hn:50429391</a>、<a class="chip" href="https://www.reddit.com/r/chrome/comments/1xqe9if/" target="_blank" rel="noopener">reddit:1xqe9if</a></td>
+<td>浏览器扩展与网页内容治理</td>
+<td style="text-align: right;">26</td>
+<td>Reddit、HN</td>
+<td><a class="chip" href="https://www.reddit.com/r/browsers/comments/1xr8j7h/" target="_blank" rel="noopener">reddit:1xr8j7h</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50427481" target="_blank" rel="noopener">hn:50427481</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xazoup/" target="_blank" rel="noopener">reddit:1xazoup</a></td>
 </tr>
 <tr>
-<td>本地系统与桌面工具</td>
-<td style="text-align: right;">15</td>
-<td>macOS、Windows、Apple Silicon、Win11</td>
-<td><a class="chip" href="https://www.reddit.com/r/macapps/comments/1xpxkde/" target="_blank" rel="noopener">reddit:1xpxkde</a>、<a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51989" target="_blank" rel="noopener">gh:microsoft/PowerToys#51989</a></td>
+<td>开发工具、数据自动化与平台服务</td>
+<td style="text-align: right;">17</td>
+<td>VS Code GitHub、Joplin GitHub、Qiita、HN、V2EX、Reddit、SE</td>
+<td><a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>、<a class="chip" href="https://qiita.com/joker_/items/fa431f65dde03a94384f" target="_blank" rel="noopener">qiita:fa431f65dde03a94384f</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a></td>
 </tr>
 <tr>
-<td>表格与办公文档自动化</td>
+<td>办公表格/文档/PDF 处理</td>
 <td style="text-align: right;">14</td>
-<td>Excel、Google Sheets、LibreOffice、Word 邮件合并、PDF</td>
-<td><a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xp4969/" target="_blank" rel="noopener">reddit:1xp4969</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xnfpsl/" target="_blank" rel="noopener">reddit:1xnfpsl</a>、<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/" target="_blank" rel="noopener">reddit:1xhst2h</a></td>
+<td>Reddit、Qiita</td>
+<td><a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>、<a class="chip" href="https://www.reddit.com/r/excel/comments/1xp4969/" target="_blank" rel="noopener">reddit:1xp4969</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1wrc4n5/" target="_blank" rel="noopener">reddit:1wrc4n5</a></td>
 </tr>
 <tr>
-<td>开发者工具与 IDE/平台插件</td>
-<td style="text-align: right;">12</td>
-<td>VS Code、PowerToys、Joplin、Inkdrop、GEE、WARC</td>
-<td><a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16873" target="_blank" rel="noopener">gh:laurent22/joplin#16873</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a>、<a class="chip" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c" target="_blank" rel="noopener">qiita:4c2c099f1ccc27dd240c</a></td>
-</tr>
-<tr>
-<td>媒体下载、截图与音视频处理</td>
+<td>本地系统与桌面增强</td>
 <td style="text-align: right;">11</td>
-<td>YouTube、Instagram、Reddit、Chrome、本地播放器</td>
-<td><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wwl04l/" target="_blank" rel="noopener">reddit:1wwl04l</a>、<a class="chip" href="https://www.reddit.com/r/browsers/comments/1x3ajp3/" target="_blank" rel="noopener">reddit:1x3ajp3</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1x2fzp5/" target="_blank" rel="noopener">reddit:1x2fzp5</a>、<a class="chip" href="https://www.reddit.com/r/software/comments/1x7x0ke/" target="_blank" rel="noopener">reddit:1x7x0ke</a></td>
+<td>Reddit、HN、Appinn、PowerToys GitHub</td>
+<td><a class="chip" href="https://www.reddit.com/r/macapps/comments/1xrbyal/" target="_blank" rel="noopener">reddit:1xrbyal</a>、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51984" target="_blank" rel="noopener">gh:microsoft/PowerToys#51984</a>、<a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a></td>
 </tr>
 <tr>
-<td>任务、时间与生活管理</td>
-<td style="text-align: right;">10</td>
-<td>手机 App、网页工具、本地软件、Google 日历</td>
-<td><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xid69e/" target="_blank" rel="noopener">reddit:1xid69e</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xfmz63/" target="_blank" rel="noopener">reddit:1xfmz63</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wsmymp/" target="_blank" rel="noopener">reddit:1wsmymp</a>、<a class="chip" href="https://www.reddit.com/r/AppIdeas/comments/1wus8s7/" target="_blank" rel="noopener">reddit:1wus8s7</a></td>
+<td>社交媒体/内容平台增强与下载</td>
+<td style="text-align: right;">11</td>
+<td>Reddit</td>
+<td><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wwl04l/" target="_blank" rel="noopener">reddit:1wwl04l</a>、<a class="chip" href="https://www.reddit.com/r/software/comments/1x7x0ke/" target="_blank" rel="noopener">reddit:1x7x0ke</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xq2l5m/" target="_blank" rel="noopener">reddit:1xq2l5m</a></td>
 </tr>
 <tr>
-<td>Notion / Joplin / 其他笔记平台</td>
-<td style="text-align: right;">9</td>
-<td>Notion、Joplin、Inkdrop、Quartz</td>
-<td><a class="chip" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/" target="_blank" rel="noopener">reddit:1xfr8v3</a>、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1wmih10/" target="_blank" rel="noopener">reddit:1wmih10</a>、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1x32yj5/" target="_blank" rel="noopener">reddit:1x32yj5</a>、<a class="chip" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614" target="_blank" rel="noopener">forum:inkdrop:5614</a></td>
-</tr>
-<tr>
-<td>Obsidian 任务、数据库与图谱</td>
+<td>媒体/图片/视频与音频处理</td>
 <td style="text-align: right;">8</td>
-<td>Obsidian Bases、Canvas、关系图谱、Tasks</td>
-<td><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xm7pg2/" target="_blank" rel="noopener">reddit:1xm7pg2</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/" target="_blank" rel="noopener">reddit:1x01rfe</a>、reddit:1xwwuiod</td>
+<td>Reddit、HN、V2EX</td>
+<td><a class="chip" href="https://www.reddit.com/r/macapps/comments/1xpxkde/" target="_blank" rel="noopener">reddit:1xpxkde</a>、<a class="chip" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/" target="_blank" rel="noopener">reddit:1xhwqwp</a>、<a class="chip" href="https://www.reddit.com/r/software/comments/1wwkr66/" target="_blank" rel="noopener">reddit:1wwkr66</a></td>
 </tr>
 <tr>
-<td>购物与电商辅助</td>
+<td>邮件/消息/日历与协作</td>
+<td style="text-align: right;">8</td>
+<td>Reddit、HN、V2EX</td>
+<td><a class="chip" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/" target="_blank" rel="noopener">reddit:1xfr8v3</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wwvj3x/" target="_blank" rel="noopener">reddit:1wwvj3x</a>、<a class="chip" href="https://www.v2ex.com/t/1255771" target="_blank" rel="noopener">v2ex:1255771</a></td>
+</tr>
+<tr>
+<td>任务/时间/个人效率与流程</td>
+<td style="text-align: right;">7</td>
+<td>Reddit</td>
+<td><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xfmz63/" target="_blank" rel="noopener">reddit:1xfmz63</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wsmymp/" target="_blank" rel="noopener">reddit:1wsmymp</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wndfha/" target="_blank" rel="noopener">reddit:1wndfha</a></td>
+</tr>
+<tr>
+<td>购物/价格/消费辅助</td>
 <td style="text-align: right;">5</td>
-<td>Chrome/Edge 扩展、Amazon、Shopify 系电商</td>
-<td><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/" target="_blank" rel="noopener">reddit:1xp18ee</a>、<a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1x01j7l/" target="_blank" rel="noopener">reddit:1x01j7l</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a></td>
+<td>Reddit、HN</td>
+<td><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/" target="_blank" rel="noopener">reddit:1xp18ee</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1x01j7l/" target="_blank" rel="noopener">reddit:1x01j7l</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a></td>
 </tr>
 </tbody>
 </table></div>
 </div></details><details class="fold"><summary>跨平台共同需求</summary><div class="detail">
-<p><strong>1. 屏蔽/过滤 AI 内容，但各社区要过滤的对象不同。</strong>
-- <a class="chip" href="https://www.reddit.com/r/browsers/comments/1x6mt90/" target="_blank" rel="noopener">reddit:1x6mt90</a> 要的是“搜索结果只显示 2022 年前、有可验证日期的内容，并移除图片标签页”，偏时间截断和搜索页改造。
-- <a class="chip" href="https://news.ycombinator.com/item?id=50429391" target="_blank" rel="noopener">hn:50429391</a> 要的是在 Hacker News 上按标题关键词自动点 Hide，偏单站点关键词过滤。
-- <a class="chip" href="https://news.ycombinator.com/item?id=50412017" target="_blank" rel="noopener">hn:50412017</a> 要的是识别“AI 生成的文本”并自动屏蔽，偏文本检测。
-- <a class="chip" href="https://news.ycombinator.com/item?id=50391275" target="_blank" rel="noopener">hn:50391275</a> 要的是在 App Store 过滤 AI 相关应用，偏应用商店列表。
-共同点是官方不提供开关、用户愿意装扩展；差异在于有的靠日期，有的靠关键词，有的靠分类/检测。做成一个“可配置规则 + 多站点适配”的扩展比单点工具更有复用价值，但 AI 文本检测准确率是硬风险。</p>
-<p><strong>2. Obsidian Smart Lists 的移动/缩进行为，在官方论坛多次出现且诉求互相冲突。</strong>
-- <a class="chip" href="https://forum.obsidian.md/t/separate-new-move-line-up-down-logic-from-smart-lists-setting/121647" target="_blank" rel="noopener">forum:obsidian:121647</a>：希望“上移/下移行”只移动单行，不要连带整个列表项和子项。
-- <a class="chip" href="https://forum.obsidian.md/t/suggestions-on-how-smart-list-actions-commands-should-work-move-line-up-down-indent-unindent/121691" target="_blank" rel="noopener">forum:obsidian:121691</a>：缩进/取消缩进会打乱编号和层级，子项被挂到错误父项。
-- <a class="chip" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617" target="_blank" rel="noopener">forum:obsidian:121617</a>：移动时不应跨空行把相邻分组一起挪走，但关掉 Smart Lists 又失去回车续写。
-三条都来自 Obsidian 官方论坛，说明是高频摩擦点；但“单行移动”和“列表项连子项移动”本身是两种预期，插件需要提供可配置模式，而不是只修一个 bug。</p>
-<p><strong>3. 网页界面元素“持久隐藏/净化”，跨 Notion、Chrome、通用网页反复出现。</strong>
-- <a class="chip" href="https://www.reddit.com/r/Notion/comments/1xrnipv/" target="_blank" rel="noopener">reddit:1xrnipv</a>：关闭 Notion 点击时弹出的“make something great”提示。
-- <a class="chip" href="https://www.reddit.com/r/Notion/comments/1wqoed2/" target="_blank" rel="noopener">reddit:1wqoed2</a>：隐藏 Notion 画廊视图的“+ 新建页面”按钮。
-- <a class="chip" href="https://www.reddit.com/r/chrome/comments/1xqe9if/" target="_blank" rel="noopener">reddit:1xqe9if</a>：移除 Chrome 底部工具栏误触的 Gemini 图标。
-- <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xazoup/" target="_blank" rel="noopener">reddit:1xazoup</a>：跨 Windows/安卓设备永久隐藏网页上某个区块。
-说法差异很大：Notion 用户要的是“单个 UI 元素开关”，Chrome 用户要的是“浏览器自身 UI”，通用网页用户要的是“跨设备同步的隐藏规则”。现有 uBlock Origin/Stylus 都能做，但都要手写选择器，普通用户门槛高；Chrome 内部页面又无法被普通扩展注入，这是明显空缺也是明显限制。</p>
-<p><strong>4. 任务与笔记/日历融合，跨 Obsidian、Google Calendar、Notion 出现。</strong>
-- <a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/" target="_blank" rel="noopener">reddit:1x01rfe</a>、reddit:1xwy8lmf：都想在 Obsidian 内做数据库式/ TickTick 式任务管理，避免每个任务一条笔记。
-- reddit:1xwwvj3x：想在 Google 日历卡片里直接编辑任务备注、附件、子任务。
-- <a class="chip" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/" target="_blank" rel="noopener">reddit:1xlwp3a</a>：想把 Google Tasks 按分组拖到对应日历并保留任务属性。
-- <a class="chip" href="https://www.reddit.com/r/Notion/comments/1x32yj5/" target="_blank" rel="noopener">reddit:1x32yj5</a>：想让 Notion 日历的每一天打开成可写画的空白页。
-共同诉求是“不要在任务应用、笔记、日历之间来回切换”；但各平台 API 开放程度差很多，Obsidian 插件最好做，Google/Notion 受官方接口限制最大。</p>
+<ul>
+<li><strong>Obsidian 列表编辑/智能列表</strong><a class="chip" href="https://forum.obsidian.md/t/separate-new-move-line-up-down-logic-from-smart-lists-setting/121647" target="_blank" rel="noopener">forum:obsidian:121647</a>、<a class="chip" href="https://forum.obsidian.md/t/suggestions-on-how-smart-list-actions-commands-should-work-move-line-up-down-indent-unindent/121691" target="_blank" rel="noopener">forum:obsidian:121691</a>、<a class="chip" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617" target="_blank" rel="noopener">forum:obsidian:121617</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x7s2v6/" target="_blank" rel="noopener">reddit:1x7s2v6</a>。论坛用户把问题归因于 Smart Lists 总开关、空行分组、嵌套项无法脱离；Reddit 用户描述为子列表结束后回不到上一级、Tab/空格无效。共同缺口是“单行移动/缩进可预测”，论坛更关注原生行为，Reddit 更关注写作流。</li>
+<li><strong>浏览器内容过滤/AI 内容治理</strong><a class="chip" href="https://www.reddit.com/r/browsers/comments/1x6mt90/" target="_blank" rel="noopener">reddit:1x6mt90</a>、<a class="chip" href="https://www.reddit.com/r/browsers/comments/1xsc7yj/" target="_blank" rel="noopener">reddit:1xsc7yj</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50427481" target="_blank" rel="noopener">hn:50427481</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50429391" target="_blank" rel="noopener">hn:50429391</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50412017" target="_blank" rel="noopener">hn:50412017</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50391275" target="_blank" rel="noopener">hn:50391275</a>。Reddit 说法偏“屏蔽 AI 生成内容、儿童视频、界面干扰”，HN 偏“信息流广告、AI 标题、AI 文本检测、App Store AI 应用”。共同需求是用户侧可配置过滤，但 HN 更接受技术检测，Reddit 更在意使用体验。</li>
+<li><strong>购物/价格/消费辅助</strong><a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/" target="_blank" rel="noopener">reddit:1xp18ee</a>、<a class="chip" href="https://www.reddit.com/r/browsers/comments/1xnzwou/" target="_blank" rel="noopener">reddit:1xnzwou</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1x01j7l/" target="_blank" rel="noopener">reddit:1x01j7l</a>、<a class="chip" href="https://www.reddit.com/r/browsers/comments/1x4f4b3/" target="_blank" rel="noopener">reddit:1x4f4b3</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49886395" target="_blank" rel="noopener">hn:49886395</a>。Reddit 关注返现聚合、本地货币、降价追踪、结账自动勾选；HN 关注仿冒品牌过滤。共同是减少购物决策噪音，Reddit 偏省钱，HN 偏商品质量。</li>
+<li><strong>任务管理与日历/笔记联动</strong><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/" target="_blank" rel="noopener">reddit:1x3qlgy</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1wy8lmf/" target="_blank" rel="noopener">reddit:1wy8lmf</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/" target="_blank" rel="noopener">reddit:1x01rfe</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1wwsmtr/" target="_blank" rel="noopener">reddit:1wwsmtr</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wwvj3x/" target="_blank" rel="noopener">reddit:1wwvj3x</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/" target="_blank" rel="noopener">reddit:1xlwp3a</a>、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1x32yj5/" target="_blank" rel="noopener">reddit:1x32yj5</a>。Obsidian 用户要数据库式/内联任务、不生成大量任务笔记；Google 日历用户要任务卡片可编辑、按分组映射日历；Notion 用户要每天打开成可写页面。共同是任务不能只停留在列表，但各平台载体不同。</li>
+<li><strong>PDF 处理</strong><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1wrc4n5/" target="_blank" rel="noopener">reddit:1wrc4n5</a>、<a class="chip" href="https://www.reddit.com/r/software/comments/1x254gu/" target="_blank" rel="noopener">reddit:1x254gu</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3xp2t/" target="_blank" rel="noopener">reddit:1x3xp2t</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1wno8ki/" target="_blank" rel="noopener">reddit:1wno8ki</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran" target="_blank" rel="noopener">se:softwarerecs:95654</a>、<a class="chip" href="https://github.com/laurent22/joplin/issues/16871" target="_blank" rel="noopener">gh:laurent22/joplin#16871</a>。学生要 PDF 笔记转 Markdown/手写批注/幻灯片并排；办公用户要批量 AI 改 PDF；研究者要按页数筛选；Joplin 要白板导出 PDF。共同是 PDF 的结构化编辑/转换，但场景从学习到办公到笔记导出。</li>
+<li><strong>本地系统增强</strong><a class="chip" href="https://github.com/microsoft/PowerToys/issues/51984" target="_blank" rel="noopener">gh:microsoft/PowerToys#51984</a>、<a class="chip" href="https://github.com/microsoft/PowerToys/issues/51989" target="_blank" rel="noopener">gh:microsoft/PowerToys#51989</a>、<a class="chip" href="https://www.reddit.com/r/macapps/comments/1xrbyal/" target="_blank" rel="noopener">reddit:1xrbyal</a>、<a class="chip" href="https://www.reddit.com/r/macapps/comments/1wp942a/" target="_blank" rel="noopener">reddit:1wp942a</a>、<a class="chip" href="https://news.ycombinator.com/item?id=49806516" target="_blank" rel="noopener">hn:49806516</a>、<a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a>、<a class="chip" href="https://meta.appinn.net/t/topic/95506" target="_blank" rel="noopener">forum:appinn:95506</a>。Windows 侧要光标高亮、窗口保护、此电脑入口、SMTC；macOS 侧要菜单栏占位、鼠标加速、内存历史。共同是系统级小工具，但 Windows 偏功能注入，macOS 偏系统设置补缺。</li>
+<li><strong>浏览器媒体/播放控制</strong><a class="chip" href="https://www.reddit.com/r/browsers/comments/1xr8j7h/" target="_blank" rel="noopener">reddit:1xr8j7h</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1x1qkzz/" target="_blank" rel="noopener">reddit:1x1qkzz</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wruhdy/" target="_blank" rel="noopener">reddit:1wruhdy</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wru53o/" target="_blank" rel="noopener">reddit:1wru53o</a>。Reddit 多次出现媒体键路由、YouTube 结尾淡出、网页音频均衡、阻止 AI 自动滚动。说法都围绕“浏览器对当前音频/滚动控制不够细”，但分别要接管媒体键、按进度改音量、动态压缩、拦截滚动。</li>
+</ul>
 </div></details><details class="fold"><summary>不建议做的</summary><div class="detail">
-<p><strong>1. 依赖平台私有接口或页面结构的抓取型小工具。</strong>
-典型如 V2EX 评论抽奖（<a class="chip" href="https://www.v2ex.com/t/1253695" target="_blank" rel="noopener">v2ex:1253695</a>）、Chrome Tabs/Session 二进制恢复（<a class="chip" href="https://www.reddit.com/r/chrome/comments/1wpyvsw/" target="_blank" rel="noopener">reddit:1wpyvsw</a>）、Google Forms 动态 SPA 自动填充（<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wp6phz/" target="_blank" rel="noopener">reddit:1wp6phz</a>）。这类工具的价值完全建立在“对方页面/文件格式不变”上，接口一改就失效，维护成本高；付费意愿普遍只有 1–2，用户默认应该免费；而且已有零散脚本，很难形成产品壁垒。</p>
-<p><strong>2. 官方随时可能内置、或已有免费成熟替代的“补丁型”需求。</strong>
-如 Google Sheets 拆分窗口（<a class="chip" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/" target="_blank" rel="noopener">reddit:1xhst2h</a>）、VS Code 文件资源管理器扁平化（<a class="chip" href="https://github.com/microsoft/vscode/issues/344742" target="_blank" rel="noopener">gh:microsoft/vscode#344742</a>）、Chrome 媒体键路由（<a class="chip" href="https://www.reddit.com/r/browsers/comments/1xr8j7h/" target="_blank" rel="noopener">reddit:1xr8j7h</a>）。拆分窗口可以用多标签/冻结行列替代，官方也可能直接做；VS Code 已有多个小众扩展部分覆盖；Chrome 媒体键是浏览器自身 Media Session 优先级 bug，扩展很难从根本上接管，用户也不愿为此付费。做这类需求容易做完就撞上官方更新。</p>
-<p><strong>3. 太专业、受众极窄或需要重运营的需求。</strong>
-如 SSH 密钥签名 GUI（<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95777/does-any-software-provide-a-graphical-interface-to-sign-text-with-an-ssh-key" target="_blank" rel="noopener">se:softwarerecs:95777</a>）、药理学 Obsidian 化学结构插件（<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x10zie/" target="_blank" rel="noopener">reddit:1x10zie</a>）、GPU 租赁比价与套利平台（<a class="chip" href="https://news.ycombinator.com/item?id=50427769" target="_blank" rel="noopener">hn:50427769</a>）。SSH 签名受众极小，付费意愿 2；药理学需要化学结构渲染、药物-靶点-通路数据和文献源，一个人用 AI 辅助很难维护专业数据；GPU 比价套利需要实时库存、跨平台下单和合规处理，本质是重运营生意，不是小工具。</p>
-<p><strong>4. 违反平台 ToS 或有账号/法律风险的需求。</strong>
-如 Snapchat 批量删好友（<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wy5hcs/" target="_blank" rel="noopener">reddit:1wy5hcs</a>）、Instagram 收藏 Reels 批量下载并离线播放（<a class="chip" href="https://www.reddit.com/r/software/comments/1x7x0ke/" target="_blank" rel="noopener">reddit:1x7x0ke</a>）、把 Google 搜索恢复成 2014 界面（<a class="chip" href="https://www.reddit.com/r/chrome/comments/1xpoz3y/" target="_blank" rel="noopener">reddit:1xpoz3y</a>）。批量操作和批量下载容易触发平台反爬/封号，用户自己也知道有风险；复刻 Google 旧界面涉及平台 UI 和 ToS，且付费意愿只有 1。这类需求即使做出来，也难长期稳定运营。</p>
-<p><strong>5. 付费意愿极低的一次性界面修补。</strong>
-如永久关闭 Chrome“固定到任务栏”提示（<a class="chip" href="https://www.reddit.com/r/chrome/comments/1x4yvou/" target="_blank" rel="noopener">reddit:1x4yvou</a>）、移除 Chrome 底部 Gemini 图标（<a class="chip" href="https://www.reddit.com/r/chrome/comments/1xqe9if/" target="_blank" rel="noopener">reddit:1xqe9if</a>）、临时 Gmail 邮箱（<a class="chip" href="https://www.v2ex.com/t/1255771" target="_blank" rel="noopener">v2ex:1255771</a>）。前两个受限于 <code>chrome://</code> 页面无法被普通扩展注入，能做到的程度有限；临时邮箱已有大量免费成熟服务，且平台会屏蔽临时域名，核心问题不在工具端。用户付费意愿都是 1–2，不值得作为独立产品。</p>
+<ul>
+<li><strong>通用任务/习惯/番茄钟/时间块工具</strong><a class="chip" href="https://www.reddit.com/r/productivity/comments/1xid69e/" target="_blank" rel="noopener">reddit:1xid69e</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1xfmz63/" target="_blank" rel="noopener">reddit:1xfmz63</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wndfha/" target="_blank" rel="noopener">reddit:1wndfha</a>、<a class="chip" href="https://www.reddit.com/r/productivity/comments/1wsmymp/" target="_blank" rel="noopener">reddit:1wsmymp</a> 等。Todoist、Google Calendar、纸质清单和现成番茄钟已经很多，付费意愿低，差异化难；真人问责还涉及运营和双边市场，不适合一人小工具。</li>
+<li><strong>平台封闭 UI 微调/一次性脚本</strong><a class="chip" href="https://www.reddit.com/r/chrome/comments/1xqe9if/" target="_blank" rel="noopener">reddit:1xqe9if</a>、<a class="chip" href="https://www.reddit.com/r/chrome/comments/1x4yvou/" target="_blank" rel="noopener">reddit:1x4yvou</a>、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1xrnipv/" target="_blank" rel="noopener">reddit:1xrnipv</a>、<a class="chip" href="https://www.reddit.com/r/Notion/comments/1wqoed2/" target="_blank" rel="noopener">reddit:1wqoed2</a>、<a class="chip" href="https://forum.obsidian.md/t/move-the-ribbons-position/121628" target="_blank" rel="noopener">forum:obsidian:121628</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3na68/" target="_blank" rel="noopener">reddit:1x3na68</a>。Chrome 内部页面、Notion 按钮、Obsidian ribbon 等扩展难稳定注入，官方改版即失效，付费意愿多为 1-2，维护成本高。</li>
+<li><strong>依赖平台条款的批量下载/自动化/套利</strong><a class="chip" href="https://www.reddit.com/r/software/comments/1x7x0ke/" target="_blank" rel="noopener">reddit:1x7x0ke</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wy5hcs/" target="_blank" rel="noopener">reddit:1wy5hcs</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50427769" target="_blank" rel="noopener">hn:50427769</a>，以及自动爬价/自动下单类。封号、合规、反爬、支付和库存接口都是深水区，不适合一个人用 AI 辅助做轻工具。</li>
+<li><strong>过于专业/小众的开发者科研工具</strong><a class="chip" href="https://softwarerecs.stackexchange.com/questions/95777/does-any-software-provide-a-graphical-interface-to-sign-text-with-an-ssh-key" target="_blank" rel="noopener">se:softwarerecs:95777</a>、<a class="chip" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c" target="_blank" rel="noopener">qiita:4c2c099f1ccc27dd240c</a>、<a class="chip" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio" target="_blank" rel="noopener">se:softwarerecs:95656</a>、<a class="chip" href="https://news.ycombinator.com/item?id=50347401" target="_blank" rel="noopener">hn:50347401</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x10zie/" target="_blank" rel="noopener">reddit:1x10zie</a>。用户群窄、教育成本高，付费意愿多在 2-3，获客很难覆盖维护成本。</li>
+<li><strong>需要移动端系统权限/设备端 AI 的 App</strong><a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1xpqtsc/" target="_blank" rel="noopener">reddit:1xpqtsc</a>、<a class="chip" href="https://forum.obsidian.md/t/make-notes-searchable-from-android-system-search-samsung-finder-pixel-launcher-etc/121693" target="_blank" rel="noopener">forum:obsidian:121693</a>、<a class="chip" href="https://www.reddit.com/r/ObsidianMD/comments/1x3xp2t/" target="_blank" rel="noopener">reddit:1x3xp2t</a>。iOS/Android 开发、WatchOS、本地模型、系统搜索权限都重，难度 4，已有订阅竞品，一人 MVP 周期长。</li>
+</ul>
 </div></details><details class="fold"><summary>英文、日文、中文社区的差异</summary><div class="detail">
-<p><strong>英文社区（reddit、hn、se）需求量大、覆盖面最广，偏“个人生产力 + 浏览器扩展 + 本地优先”。</strong> 大量需求集中在 Obsidian 插件、Chrome 扩展、照片/文件管理、购物辅助、隐私工具（本地 AI 图片描述 <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1xj6w8x/" target="_blank" rel="noopener">reddit:1xj6w8x</a>、本地邮件助手 <a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wu2zbo/" target="_blank" rel="noopener">reddit:1wu2zbo</a>、本地截图 <a class="chip" href="https://www.reddit.com/r/chrome/comments/1wrvarq/" target="_blank" rel="noopener">reddit:1wrvarq</a>）。用户会主动列出竞品和现有方案，也会明确说“不想订阅/不想上云”。付费意愿分布很宽：既有愿意为隐私和效率付 4 的（<a class="chip" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/" target="_blank" rel="noopener">reddit:1xfr8v3</a>、<a class="chip" href="https://www.reddit.com/r/chrome_extensions/comments/1wu2zbo/" target="_blank" rel="noopener">reddit:1wu2zbo</a>），也有大量只愿免费用的一次性小修补。机会在于做“轻量替代品”和“明确空缺的浏览器扩展/Obsidian 插件”，分发靠 Reddit 和扩展商店；风险是免费竞品多，必须选竞品检查为 none/weak 且空缺具体的需求。</p>
-<p><strong>日文社区（qiita）样本少但垂直更深，偏专业工作流和工程化工具。</strong> 典型如 Excel 工作簿结构解析（<a class="chip" href="https://qiita.com/shu15511551/items/1bd62fdb86fa7c2a17db" target="_blank" rel="noopener">qiita:1bd62fdb86fa7c2a17db</a>）、Mermaid 复杂类图安全转换（<a class="chip" href="https://qiita.com/joker_/items/fa431f65dde03a94384f" target="_blank" rel="noopener">qiita:fa431f65dde03a94384f</a>）、GEE 卫星影像本地导出与地图持久化（<a class="chip" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c" target="_blank" rel="noopener">qiita:4c2c099f1ccc27dd240c</a>）。描述非常具体，会写清楚现有工具为什么不够、自己试过什么；付费意愿多在 2–3，但对“能解决具体工作流最后一公里”的工具接受度更高。机会是做垂直专业工具的封装和 GUI 化，单价可以比通用小工具高；难点是获客依赖日文技术社区和文档，且需要一定的领域知识。</p>
-<p><strong>中文社区（v2ex、appinn）偏实用小工具、系统折腾和平台便利。</strong> 典型如 V2EX 抽奖（<a class="chip" href="https://www.v2ex.com/t/1253695" target="_blank" rel="noopener">v2ex:1253695</a>）、临时 Gmail 邮箱（<a class="chip" href="https://www.v2ex.com/t/1255771" target="_blank" rel="noopener">v2ex:1255771</a>）、Win11“此电脑”自定义文件夹（<a class="chip" href="https://meta.appinn.net/t/topic/95223" target="_blank" rel="noopener">forum:appinn:95223</a>）、精简版 Windows 恢复 SMTC（<a class="chip" href="https://meta.appinn.net/t/topic/95506" target="_blank" rel="noopener">forum:appinn:95506</a>）、本地开源 AI 配音（<a class="chip" href="https://www.v2ex.com/t/1254926" target="_blank" rel="noopener">v2ex:1254926</a>）。需求往往来自“某个具体操作不顺”，希望有免费/开源/绿色版工具；付费意愿普遍偏低（多为 1–2），回复区也常给出手动配置或脚本方案。机会是做免费工具引流、开源积累口碑，或做极轻量的网页工具靠社区传播；直接收费难度大，更适合作为作品集或流量入口。</p>
-<p><strong>论坛类需求（Obsidian、Joplin、Inkdrop、Appinn）以插件生态和具体 bug 为主。</strong> Obsidian 论坛的列表移动/缩进问题（<a class="chip" href="https://forum.obsidian.md/t/separate-new-move-line-up-down-logic-from-smart-lists-setting/121647" target="_blank" rel="noopener">forum:obsidian:121647</a>、121691、121617）反复出现且诉求互相冲突，说明官方总开关不够用，插件有空间但要做成可配置模式；Joplin/VS Code 的 issue 多为 API 暴露和 UI 细节，适合做小型插件或上游 PR，不太适合做独立商业产品。</p>
+<p>英文社区（Reddit/HN/SE/GitHub）需求最长尾、最贴个人工作流：Reddit 大量是 Obsidian 插件、浏览器扩展、购物、媒体小工具，描述细、愿意讲自己的工作流；HN 更偏平台治理、隐私和技术基础设施，如 LLM 过滤信息流广告、AI 文本检测、GPU 比价、WARC/WACZ diff、UA 差异检测；SE 是明确“求软件”的窄需求；GitHub issue 适合判断官方功能缺口，但很多受 API 和平台限制。付费意愿分化，买断、本地优先、隐私不上传更容易被接受。机会是轻量买断的浏览器扩展/桌面小工具，先回复原帖拿 10-20 个种子用户。</p>
+<p>日文社区（Qiita）帖子少但工作流非常具体，偏“解析/转换/可视化”：Excel 工作簿结构 X 光、Mermaid 复杂类图转可编辑 PDF、GEE 卫星影像本地导出与地图持久化。用户会写清失败路径和现有工具哪里不行，技术实现导向强。机会是面向日本企业 Excel/文档文化的结构化解析与安全导出工具，日语界面、示例和本地文件处理很重要；可做付费或咨询，但要解决大文件性能和公式兼容。</p>
+<p>中文社区（V2EX/Appinn）更常以“有没有现成工具/资源推荐”出现，需求直接、工具化：V2EX 评论抽奖、临时 Gmail 收验证码、Win11 此电脑自定义入口、精简版 Windows 装回 SMTC、本地 AI 配音。免费/低付费预期明显，但传播快、口碑效应强。机会是做开箱即用、免配置的 Windows/网页小工具，用免费+捐赠/增值变现；不宜一上来做重订阅或复杂账号体系。</p>
 </div></details><details class="fold"><summary>引用的需求</summary><div class="detail">
 <div class="table"><table>
 <thead>
@@ -731,54 +711,39 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/separate-new-move-line-up-down-logic-from-smart-lists-setting/121647">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xozdum</code></td>
-<td>在 Obsidian 编辑模式下方便地预览脚注内容</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xozdum/">链接</a></td>
+<td><code>reddit:1x3qlgy</code></td>
+<td>Obsidian 中基于数据库的任务管理插件，避免每个任务单独建一条笔记</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1x1qbed</code></td>
-<td>在 Obsidian 里用 Tab/Enter 快速生成节点的思维导图工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x1qbed/">链接</a></td>
+<td><code>reddit:1xr8j7h</code></td>
+<td>让 Chrome 的媒体播放/暂停键只控制当前正在发声的标签页，而不是随机唤醒后台暂停的 YouTube 标签</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xr8j7h/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xqaqhb</code></td>
-<td>阻止网站通过 history.pushState 反复往浏览历史里塞同一页面的记录</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1xqaqhb/">链接</a></td>
+<td><code>hn:50427481</code></td>
+<td>用 LLM 识别并过滤网页信息流中的广告内容</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50427481">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1x6mt90</code></td>
-<td>屏蔽 AI 生成内容和 2022 年后内容的浏览器扩展</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1x6mt90/">链接</a></td>
+<td><code>reddit:1xazoup</code></td>
+<td>跨设备（Windows、安卓手机和平板）永久隐藏网页上某个特定区块</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xazoup/">链接</a></td>
 </tr>
 <tr>
-<td><code>hn:50429391</code></td>
-<td>自动隐藏 Hacker News 上 AI 相关标题的浏览器扩展</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50429391">链接</a></td>
+<td><code>gh:microsoft/vscode#344742</code></td>
+<td>为 VS Code 文件资源管理器增加扁平化视图选项</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344742">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xqe9if</code></td>
-<td>移除或隐藏 Chrome 底部工具栏里误触的 Gemini 图标</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1xqe9if/">链接</a></td>
+<td><code>qiita:fa431f65dde03a94384f</code></td>
+<td>需要一个能安全地把 Mermaid 复杂类图转成可编辑、可导出 PDF 的本地工具</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/joker_/items/fa431f65dde03a94384f">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xpxkde</code></td>
-<td>在 Apple Silicon Mac 上实时微调外挂音轨延迟并与视频合并</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xpxkde/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xhwqwp</code></td>
-<td>想要一个像 Picasa 那样原地浏览文件夹、不导入数据库的照片管理工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:49806516</code></td>
-<td>为 macOS 提供关闭鼠标加速的图形化开关</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49806516">链接</a></td>
-</tr>
-<tr>
-<td><code>gh:microsoft/PowerToys#51989</code></td>
-<td>防止误关重要窗口的窗口保护模式</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51989">链接</a></td>
+<td><code>se:softwarerecs:95656</code></td>
+<td>按库版本追踪弃用和破坏性变更的API/订阅源工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio">链接</a></td>
 </tr>
 <tr>
 <td><code>qiita:1bd62fdb86fa7c2a17db</code></td>
@@ -791,34 +756,24 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xp4969/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xnfpsl</code></td>
-<td>邮件合并批量发送 PDF 时，希望 PDF 文件名和邮件主题能自动带上收件人姓名</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/excel/comments/1xnfpsl/">链接</a></td>
+<td><code>reddit:1wrc4n5</code></td>
+<td>把带图片和表格的 PDF 笔记转成 Obsidian 可用的 Markdown（含图片整理、OCR、表格还原）</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1wrc4n5/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xhst2h</code></td>
-<td>在 Google Sheets 中像 LibreOffice 一样拆分窗口，同时查看不同区域的单元格</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/googlesheets/comments/1xhst2h/">链接</a></td>
+<td><code>reddit:1xrbyal</code></td>
+<td>在 macOS 菜单栏插入自定义宽度的空白占位符，以强制显示隐藏箭头</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xrbyal/">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:microsoft/vscode#344742</code></td>
-<td>为 VS Code 文件资源管理器增加扁平化视图选项</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/vscode/issues/344742">链接</a></td>
+<td><code>gh:microsoft/PowerToys#51984</code></td>
+<td>打字时高亮文本光标位置（类似 Find My Mouse 的聚光灯效果）</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51984">链接</a></td>
 </tr>
 <tr>
-<td><code>gh:laurent22/joplin#16873</code></td>
-<td>为 Joplin 白板添加键盘快捷键（全选、复制粘贴节点、加粗斜体）</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16873">链接</a></td>
-</tr>
-<tr>
-<td><code>se:softwarerecs:95656</code></td>
-<td>按库版本追踪弃用和破坏性变更的API/订阅源工具</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95656/tool-or-service-that-tracks-deprecations-and-breaking-changes-per-library-versio">链接</a></td>
-</tr>
-<tr>
-<td><code>qiita:4c2c099f1ccc27dd240c</code></td>
-<td>简化 GEE 卫星影像的本地导出与地图持久化</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c">链接</a></td>
+<td><code>forum:appinn:95223</code></td>
+<td>在 Win11 的“此电脑”里添加自定义文件夹入口</td>
+<td><a target="_blank" rel="noopener" href="https://meta.appinn.net/t/topic/95223">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1wwl04l</code></td>
@@ -826,24 +781,44 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1wwl04l/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1x3ajp3</code></td>
-<td>一键下载 Reddit 单个帖子内所有图片并打包成 ZIP</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1x3ajp3/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1x2fzp5</code></td>
-<td>想要一款集录屏、缩放特效、视频编辑和敏感信息打码于一体的 Chrome 扩展</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1x2fzp5/">链接</a></td>
-</tr>
-<tr>
 <td><code>reddit:1x7x0ke</code></td>
 <td>批量下载 Instagram 收藏的 Reels，并在桌面或 iOS 上以离线连续滑动的方式播放</td>
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1x7x0ke/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xid69e</code></td>
-<td>想要一款真正好用、能缓解规划焦虑的任务规划工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xid69e/">链接</a></td>
+<td><code>reddit:1xq2l5m</code></td>
+<td>在 Telegram 安卓端屏蔽搜索功能以戒掉刷新闻的习惯</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xq2l5m/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xpxkde</code></td>
+<td>在 Apple Silicon Mac 上实时微调外挂音轨延迟并与视频合并</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xpxkde/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xhwqwp</code></td>
+<td>想要一个像 Picasa 那样原地浏览文件夹、不导入数据库的照片管理工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1xhwqwp/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wwkr66</code></td>
+<td>本地数字标牌播放器：按播放列表循环播放 PDF、图片和视频</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1wwkr66/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xfr8v3</code></td>
+<td>把邮件和聊天消息自动收进 Notion，不用手动复制粘贴</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wwvj3x</code></td>
+<td>在 Google 日历内直接查看并编辑任务卡片（含备注、附件、子任务）的双向同步工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1wwvj3x/">链接</a></td>
+</tr>
+<tr>
+<td><code>v2ex:1255771</code></td>
+<td>临时 Gmail 邮箱接收验证码的平台推荐</td>
+<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1255771">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1xfmz63</code></td>
@@ -856,54 +831,14 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1wsmymp/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1wus8s7</code></td>
-<td>拍照记录物品存放位置和借出物品，日后可搜索并自动提醒归还</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/AppIdeas/comments/1wus8s7/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xfr8v3</code></td>
-<td>把邮件和聊天消息自动收进 Notion，不用手动复制粘贴</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1xfr8v3/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1wmih10</code></td>
-<td>为 Notion 笔记提供自动本地备份，防止同步冲突导致内容丢失</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1wmih10/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1x32yj5</code></td>
-<td>让 Notion 日历的每一天都能打开成可写画的空白页面</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1x32yj5/">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:inkdrop:5614</code></td>
-<td>在 Inkdrop 预览模式下折叠/展开代码块</td>
-<td><a target="_blank" rel="noopener" href="https://forum.inkdrop.app/t/option-to-collapse-code-blocks/5614">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1x3qlgy</code></td>
-<td>Obsidian 中基于数据库的任务管理插件，避免每个任务单独建一条笔记</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x3qlgy/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xm7pg2</code></td>
-<td>Obsidian Bases 公式缺少幂、开方、三角函数等数学函数</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xm7pg2/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1x01rfe</code></td>
-<td>在 Obsidian 中实现内联任务创建、项目归属与看板视图的统一任务管理插件</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/">链接</a></td>
+<td><code>reddit:1wndfha</code></td>
+<td>想要一个能像纸质笔记本一样“盯着你”的数字时间块工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1wndfha/">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1xp18ee</code></td>
 <td>希望有一个能统一管理多个购物返现/优惠券扩展、避免重复比价的工具</td>
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xp18ee/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xnzwou</code></td>
-<td>让购物网站始终显示本地货币价格</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xnzwou/">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1x01j7l</code></td>
@@ -916,6 +851,36 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49886395">链接</a></td>
 </tr>
 <tr>
+<td><code>forum:obsidian:121691</code></td>
+<td>Obsidian 智能列表的移动/缩进命令行为不符合预期，希望改进</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/suggestions-on-how-smart-list-actions-commands-should-work-move-line-up-down-indent-unindent/121691">链接</a></td>
+</tr>
+<tr>
+<td><code>forum:obsidian:121617</code></td>
+<td>Obsidian 的“上移/下移行”命令应尊重列表结构和空行分组</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x7s2v6</code></td>
+<td>在 Obsidian 中让子列表结束后回到上一级项目符号并正确对齐</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x7s2v6/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x6mt90</code></td>
+<td>屏蔽 AI 生成内容和 2022 年后内容的浏览器扩展</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1x6mt90/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xsc7yj</code></td>
+<td>在 YouTube 上过滤掉「为儿童打造」的视频，方便建歌单</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xsc7yj/">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:50429391</code></td>
+<td>自动隐藏 Hacker News 上 AI 相关标题的浏览器扩展</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50429391">链接</a></td>
+</tr>
+<tr>
 <td><code>hn:50412017</code></td>
 <td>想要一个能可靠识别并过滤 AI 生成文本的浏览器扩展</td>
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50412017">链接</a></td>
@@ -926,14 +891,114 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50391275">链接</a></td>
 </tr>
 <tr>
-<td><code>forum:obsidian:121691</code></td>
-<td>Obsidian 智能列表的移动/缩进命令行为不符合预期，希望改进</td>
-<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/suggestions-on-how-smart-list-actions-commands-should-work-move-line-up-down-indent-unindent/121691">链接</a></td>
+<td><code>reddit:1xnzwou</code></td>
+<td>让购物网站始终显示本地货币价格</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xnzwou/">链接</a></td>
 </tr>
 <tr>
-<td><code>forum:obsidian:121617</code></td>
-<td>Obsidian 的“上移/下移行”命令应尊重列表结构和空行分组</td>
-<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-line-up-down-should-respect-list-structure-and-empty-line-groups/121617">链接</a></td>
+<td><code>reddit:1x4f4b3</code></td>
+<td>屏蔽购物网站结账时自动勾选的 Shop 账号创建/自动注册</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1x4f4b3/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wy8lmf</code></td>
+<td>在 Obsidian 内做一个 TickTick 风格的任务管理插件</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1wy8lmf/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x01rfe</code></td>
+<td>在 Obsidian 中实现内联任务创建、项目归属与看板视图的统一任务管理插件</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x01rfe/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wwsmtr</code></td>
+<td>在 Obsidian 里用尽量少的插件实现任务、日历、笔记一体化的 LifeOS</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1wwsmtr/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xlwp3a</code></td>
+<td>把 Google Tasks 拖到指定 Google 日历并保持任务属性（而非变成普通事件）</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x32yj5</code></td>
+<td>让 Notion 日历的每一天都能打开成可写画的空白页面</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1x32yj5/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x254gu</code></td>
+<td>批量用 AI 指令编辑 PDF（删文字、补空白、缩间距）</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/software/comments/1x254gu/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x3xp2t</code></td>
+<td>在 Obsidian 移动端（安卓平板）上直接对 PDF 手写批注</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x3xp2t/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wno8ki</code></td>
+<td>在 Obsidian 中把 PDF 讲义幻灯片与逐页笔记并排显示并导出 PDF</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1wno8ki/">链接</a></td>
+</tr>
+<tr>
+<td><code>se:softwarerecs:95654</code></td>
+<td>按页数范围筛选 PDF 的搜索工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95654/using-google-or-any-other-search-engine-to-search-for-pdfs-with-fixed-page-ran">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:laurent22/joplin#16871</code></td>
+<td>Joplin 白板笔记导出 PDF 时只导出源码而非画布</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/laurent22/joplin/issues/16871">链接</a></td>
+</tr>
+<tr>
+<td><code>gh:microsoft/PowerToys#51989</code></td>
+<td>防止误关重要窗口的窗口保护模式</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys/issues/51989">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wp942a</code></td>
+<td>希望有工具能回溯查看 Mac 内存占用飙升时是哪个应用或进程造成的</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/macapps/comments/1wp942a/">链接</a></td>
+</tr>
+<tr>
+<td><code>hn:49806516</code></td>
+<td>为 macOS 提供关闭鼠标加速的图形化开关</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=49806516">链接</a></td>
+</tr>
+<tr>
+<td><code>forum:appinn:95506</code></td>
+<td>精简版 Windows 缺少 SMTC（系统媒体传输控制）组件，想装回来让音乐播放信息显示在 HM HubX 上</td>
+<td><a target="_blank" rel="noopener" href="https://meta.appinn.net/t/topic/95506">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x1qkzz</code></td>
+<td>YouTube 视频结尾自动淡出音量的扩展</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1x1qkzz/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wruhdy</code></td>
+<td>自动均衡网页音频音量，避免视频声音忽大忽小</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1wruhdy/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1wru53o</code></td>
+<td>阻止 Gemini/ChatGPT 在生成回复时自动把页面滚到底部</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1wru53o/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xid69e</code></td>
+<td>想要一款真正好用、能缓解规划焦虑的任务规划工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xid69e/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1xqe9if</code></td>
+<td>移除或隐藏 Chrome 底部工具栏里误触的 Gemini 图标</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1xqe9if/">链接</a></td>
+</tr>
+<tr>
+<td><code>reddit:1x4yvou</code></td>
+<td>永久关闭 Chrome 弹出的“将 Chrome 固定到任务栏”提示</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1x4yvou/">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1xrnipv</code></td>
@@ -946,49 +1011,14 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/Notion/comments/1wqoed2/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xazoup</code></td>
-<td>跨设备（Windows、安卓手机和平板）永久隐藏网页上某个特定区块</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xazoup/">链接</a></td>
+<td><code>forum:obsidian:121628</code></td>
+<td>把 Obsidian 左侧功能区的 ribbon 栏移到右上角标签栏附近</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/move-the-ribbons-position/121628">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xlwp3a</code></td>
-<td>把 Google Tasks 拖到指定 Google 日历并保持任务属性（而非变成普通事件）</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/productivity/comments/1xlwp3a/">链接</a></td>
-</tr>
-<tr>
-<td><code>v2ex:1253695</code></td>
-<td>需要一个能稳定抽取 V2EX 帖子评论中奖用户的抽奖工具</td>
-<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1253695">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1wpyvsw</code></td>
-<td>从 Chrome 的 Tabs/Session 二进制文件中提取并恢复丢失的标签页链接</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1wpyvsw/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1wp6phz</code></td>
-<td>自动填充 Google Forms 等动态 SPA 表单的 Chrome 扩展</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1wp6phz/">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1xr8j7h</code></td>
-<td>让 Chrome 的媒体播放/暂停键只控制当前正在发声的标签页，而不是随机唤醒后台暂停的 YouTube 标签</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/browsers/comments/1xr8j7h/">链接</a></td>
-</tr>
-<tr>
-<td><code>se:softwarerecs:95777</code></td>
-<td>为 SSH 密钥签名文本提供图形界面工具</td>
-<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95777/does-any-software-provide-a-graphical-interface-to-sign-text-with-an-ssh-key">链接</a></td>
-</tr>
-<tr>
-<td><code>reddit:1x10zie</code></td>
-<td>药理学学生需要 Obsidian 插件来管理化学结构、药物信息和文献笔记</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x10zie/">链接</a></td>
-</tr>
-<tr>
-<td><code>hn:50427769</code></td>
-<td>希望有一个 GPU 租赁比价与套利平台</td>
-<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50427769">链接</a></td>
+<td><code>reddit:1x3na68</code></td>
+<td>自定义 Obsidian 新标签页上显示的快捷操作按钮</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x3na68/">链接</a></td>
 </tr>
 <tr>
 <td><code>reddit:1wy5hcs</code></td>
@@ -996,58 +1026,43 @@ footer .note { display: inline-block; background: var(--paper); padding: 0 12px;
 <td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1wy5hcs/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xpoz3y</code></td>
-<td>把 Google 搜索（含图片搜索）恢复成 2014 年的旧版界面</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1xpoz3y/">链接</a></td>
+<td><code>hn:50427769</code></td>
+<td>希望有一个 GPU 租赁比价与套利平台</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50427769">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1x4yvou</code></td>
-<td>永久关闭 Chrome 弹出的“将 Chrome 固定到任务栏”提示</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1x4yvou/">链接</a></td>
+<td><code>se:softwarerecs:95777</code></td>
+<td>为 SSH 密钥签名文本提供图形界面工具</td>
+<td><a target="_blank" rel="noopener" href="https://softwarerecs.stackexchange.com/questions/95777/does-any-software-provide-a-graphical-interface-to-sign-text-with-an-ssh-key">链接</a></td>
 </tr>
 <tr>
-<td><code>v2ex:1255771</code></td>
-<td>临时 Gmail 邮箱接收验证码的平台推荐</td>
-<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1255771">链接</a></td>
+<td><code>qiita:4c2c099f1ccc27dd240c</code></td>
+<td>简化 GEE 卫星影像的本地导出与地图持久化</td>
+<td><a target="_blank" rel="noopener" href="https://qiita.com/AIMMearth/items/4c2c099f1ccc27dd240c">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1xj6w8x</code></td>
-<td>为 VoiceOver 视障用户提供本地图片描述的开源 Chrome 扩展</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1xj6w8x/">链接</a></td>
+<td><code>hn:50347401</code></td>
+<td>为网页存档（WARC/WACZ）提供差异对比与可视化浏览的工具</td>
+<td><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=50347401">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1wu2zbo</code></td>
-<td>完全本地运行、不上传数据的 Gmail/Outlook 隐私优先 AI 邮件助手</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome_extensions/comments/1wu2zbo/">链接</a></td>
+<td><code>reddit:1x10zie</code></td>
+<td>药理学学生需要 Obsidian 插件来管理化学结构、药物信息和文献笔记</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1x10zie/">链接</a></td>
 </tr>
 <tr>
-<td><code>reddit:1wrvarq</code></td>
-<td>想要一个本地保存、可标注打码的截图扩展，不上传云端</td>
-<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/chrome/comments/1wrvarq/">链接</a></td>
+<td><code>reddit:1xpqtsc</code></td>
+<td>在 iPhone 和 Apple Watch 上快速记录想法，用本地 AI 整理后发送到 Obsidian 收件箱</td>
+<td><a target="_blank" rel="noopener" href="https://www.reddit.com/r/ObsidianMD/comments/1xpqtsc/">链接</a></td>
 </tr>
 <tr>
-<td><code>qiita:fa431f65dde03a94384f</code></td>
-<td>需要一个能安全地把 Mermaid 复杂类图转成可编辑、可导出 PDF 的本地工具</td>
-<td><a target="_blank" rel="noopener" href="https://qiita.com/joker_/items/fa431f65dde03a94384f">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:appinn:95223</code></td>
-<td>在 Win11 的“此电脑”里添加自定义文件夹入口</td>
-<td><a target="_blank" rel="noopener" href="https://meta.appinn.net/t/topic/95223">链接</a></td>
-</tr>
-<tr>
-<td><code>forum:appinn:95506</code></td>
-<td>精简版 Windows 缺少 SMTC（系统媒体传输控制）组件，想装回来让音乐播放信息显示在 HM HubX 上</td>
-<td><a target="_blank" rel="noopener" href="https://meta.appinn.net/t/topic/95506">链接</a></td>
-</tr>
-<tr>
-<td><code>v2ex:1254926</code></td>
-<td>寻找可本地部署的开源 AI 配音软件</td>
-<td><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/1254926">链接</a></td>
+<td><code>forum:obsidian:121693</code></td>
+<td>让 Obsidian 笔记出现在 Android 系统搜索（三星 Finder、Pixel Launcher）中</td>
+<td><a target="_blank" rel="noopener" href="https://forum.obsidian.md/t/make-notes-searchable-from-android-system-search-samsung-finder-pixel-launcher-etc/121693">链接</a></td>
 </tr>
 </tbody>
 </table></div></div></details><details class="fold"><summary>往期存档</summary><div class="detail archive"><a href="2026-11-10.html">2026-11-10</a><a href="2026-11-09.html">2026-11-09</a><a href="2026-11-08.html">2026-11-08</a><a href="2026-11-07.html">2026-11-07</a><a href="2026-11-06.html">2026-11-06</a><a href="2026-11-05.html">2026-11-05</a><a href="2026-11-04.html">2026-11-04</a><a href="2026-11-03.html">2026-11-03</a><a href="2026-11-02.html">2026-11-02</a><a href="../index.html">最新版</a></div></details>
-  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-11 00:57 JST · 每天自动更新</span></footer>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-11 01:14 JST · 每天自动更新</span></footer>
 </div>
 <script>
 (() => {

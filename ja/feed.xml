@@ -11,7 +11,7 @@
 <link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-11</guid>
 <pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Apple Silicon Mac向け外部音声トラックのリアルタイム同期とロスレス結合</li><li>Picasaのようにフォルダをその場で閲覧する写真管理ツール</li><li>複数のショッピング還元/クーポン拡張機能を一元管理する価格比較パネル</li><li>LibreOfficeの脚注をObsidianにインポートする際の一括修復プラグイン</li><li>Excelワークブック構造X線解析ツール</li></ol></description>
+<description><ol><li>Apple Silicon Mac 上で外部音声トラックの遅延をリアルタイムに微調整し、動画と結合する</li><li>Picasa のようにフォルダをその場で閲覧でき、データベースにインポートしない写真管理ツールが欲しい</li><li>複数のショッピング返金/クーポン拡張機能を一元管理し、重複した価格比較を避けられるツールが欲しい</li><li>LibreOffice/OpenOffice から Obsidian にインポートした際に壊れた脚注リンクを修復し、標準 Markdown 脚注に変換する</li><li>Excel ワークブックの内部構造（数式依存、デッドコード、隠れた参照）を X 線のように解析できるツールが欲しい</li></ol></description>
 </item>
 <item>
 <title>デイリーダイジェスト — 2026-11-10</title>

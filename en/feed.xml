@@ -11,7 +11,7 @@
 <link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-11</guid>
 <pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Real-time alignment and lossless merging of external audio tracks on Apple Silicon Macs</li><li>A photo management tool that browses folders in place like Picasa</li><li>A comparison panel that unifies multiple shopping cashback/coupon extensions</li><li>A batch repair plugin for LibreOffice footnotes imported into Obsidian</li><li>An X-ray parsing tool for Excel workbook structure</li></ol></description>
+<description><ol><li>Fine-tune external audio track delay in real time on Apple Silicon Macs and merge it with the video</li><li>Want a photo management tool that browses folders in place like Picasa, without importing into a database</li><li>Want a tool that centrally manages multiple shopping cashback/coupon extensions and avoids duplicate price comparisons</li><li>Fix broken footnote links after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li><li>Want a tool that can parse the internal structure of an Excel workbook like an X-ray (formula dependencies, dead code, hidden references</li></ol></description>
 </item>
 <item>
 <title>Daily Digest — 2026-11-10</title>
