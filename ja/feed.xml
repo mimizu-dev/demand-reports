@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-11</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-11</guid>
+<pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Apple Silicon Mac向け外部音声トラックのリアルタイム同期とロスレス結合</li><li>Picasaのようにフォルダをその場で閲覧する写真管理ツール</li><li>複数のショッピング還元/クーポン拡張機能を一元管理する価格比較パネル</li><li>LibreOfficeの脚注をObsidianにインポートする際の一括修復プラグイン</li><li>Excelワークブック構造X線解析ツール</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-10</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-10</guid>
+<pubDate>Tue, 10 Nov 2026 08:00:00 +0900</pubDate>
+<description>Claude Fable 5.2がリリース、AIプログラミングとAgentエコシステムが同時に加熱</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-10</title>
 <link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-10</guid>
