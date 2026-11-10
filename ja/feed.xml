@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-10</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-10</guid>
+<pubDate>Tue, 10 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Apple Silicon Mac 上で外部音声トラックの遅延をリアルタイム微調整し、ロスレスで結合する</li><li>Picasa のようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツール</li><li>エディタのサイドバーに Claude Code の使用量を常駐表示し、上限超過を予測する</li><li>複数のショッピング還元 / クーポン拡張を一元管理し、重複した価格比較を避ける</li><li>LibreOffice/OpenOfficeからObsidianにインポートした際に壊れた脚注リンクを修正し、標準Markdown脚注に変換する</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-09</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-09</guid>
+<pubDate>Mon, 09 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIモデルの反復とMCPエコシステムの爆発、インディー開発者のツールチェーンに多くのチャンス</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-09</title>
 <link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-09</guid>
