@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>资讯速递 · 2026-11-11</title>
+<link rel="icon" href="../assets/board.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
+  --sky: #056bc5; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
+  --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
+  --text: #5c3e27; --dim: #9a7a5c;
+  --blue: #4a86b8; --green: #5f9a4a; --orange: #c98a3a; --red: #c0605a; --gold: #b8913c;
+  --shadow: rgba(40, 90, 30, .25);
+  --pixel: "DotGothic16", "Noto Sans SC", monospace;
+  --u: 4px;
+}
+* { box-sizing: border-box; }
+img.ico, .deco img { image-rendering: pixelated; image-rendering: crisp-edges; }
+body { margin: 0; overflow-x: clip; color: var(--text); font: 15px/1.75 "Noto Sans SC", system-ui, sans-serif; background-color: var(--grass);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Crect x='6' y='8' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='8' y='6' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='30' y='30' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='32' y='28' width='2' height='2' fill='%238acb57'/%3E%3Crect x='20' y='40' width='2' height='2' fill='%238acb57'/%3E%3Crect x='40' y='12' width='2' height='2' fill='%236ab33b'/%3E%3C/svg%3E");
+  background-size: 48px 48px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: var(--wood-l); color: var(--ink); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.c-cyan { color: var(--blue); } .c-pink { color: var(--red); } .c-lime { color: var(--green); }
+.c-amber { color: var(--orange); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+img.ico { flex: none; vertical-align: middle; }
+
+/* 木框羊皮纸面板：木头边框 + 内侧深色线 + 外侧缺角描边 + 投影 */
+.card, .fold, .board, .lboard { background: var(--paper); border: 5px solid var(--wood);
+  box-shadow: inset 0 0 0 2px var(--wood-l), inset 0 0 0 4px var(--paper-2),
+    0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink),
+    5px 8px 0 0 var(--shadow); }
+/* 小号木牌：按钮、标签、排名 */
+.tabs a, .btn, .rank, .stats span, .refs a, .chip, .archive a, .m {
+  --c: var(--ink);
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+
+/* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
+/* 页面顶部是山顶：天空 → 云海 → 崖边 → 有铁轨的平台，平台下沿的灌木直接压在山谷背景地图上。
+   场景图左右镜像拼接可无缝平铺；场景上方不够高时用天空色补齐（只补到场景图上沿，底边保持透明） */
+/* 页面顶部是山顶，分两层：
+   .sky 天空和云海上半部分，吸顶：往上滚到只剩底部一条就停住，常驻在最上面；停住后下沿露出一圈云底，
+        一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
+   .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
+   图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
+:root { --skyh: 320px; --band: 56px; }
+.sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
+  background: url("../assets/summit-sky.png") repeat-x left bottom / auto 184px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 182px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 28px; pointer-events: none; display: none;
+  background: url("../assets/cloud-edge.png") repeat-x left top / auto 28px; image-rendering: pixelated; }
+.stuck .sky::before { display: block; }
+/* 两侧高高堆起的云（外侧高、中间低），平底藏在前面一层云海后面，不留缝 */
+.cloud-l, .cloud-r, .cloud-front { position: absolute; pointer-events: none; image-rendering: pixelated; background: 0 0 / 100% 100% no-repeat; }
+.cloud-l, .cloud-r { bottom: 4px; z-index: 0; }
+.cloud-l { left: 0; width: 366px; height: 240px; background-image: url("../assets/cloud-l.png"); }
+.cloud-r { right: 0; width: 222px; height: 204px; background-image: url("../assets/cloud-r.png"); }
+.cloud-front { left: 0; right: 0; bottom: 0; height: 44px; z-index: 1;
+  background: url("../assets/cloud-front.png") repeat-x left bottom / auto 44px; }
+.sky > .wrap { position: relative; z-index: 2; }
+/* 头部：导航在左上，标题居中并往下贴近云层，统计排在标题下面 */
+header { position: relative; height: calc(var(--skyh) - 30px); padding-top: 10px; display: flex; flex-direction: column; justify-content: flex-end; }
+.plateau { height: 200px; position: relative;
+  background: url("../assets/summit-ground.png") repeat-x left top / auto 200px; image-rendering: pixelated; }
+.plateau .wrap { position: relative; height: 100%; }
+.stuck img.prop { z-index: 1; }
+.tabs { display: flex; gap: 14px; margin: 12px 0 4px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 3; }
+.tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
+.tabs a.on { color: var(--text); background: var(--paper); }
+.tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
+.hero { position: relative; z-index: 3; text-align: center; }
+.hero, .tabs, .pub { transition: opacity .2s; }
+.stuck .hero, .stuck .tabs, .stuck .pub { opacity: 0; pointer-events: none; }
+.pub { position: relative; z-index: 3; width: max-content; margin: 10px auto 0; font: 12px var(--pixel); color: var(--dim);
+  background: var(--paper); padding: 0 10px;
+  box-shadow: 0 -2px 0 0 var(--wood), 0 2px 0 0 var(--wood), -2px 0 0 0 var(--wood), 2px 0 0 0 var(--wood); }
+.pub a { color: var(--blue); }
+/* 标题是生成的木板像素字（木板钉成、带木纹，叶子从木头上长出来，小鸡站在字上） */
+h1 { margin: 0 0 10px; line-height: 0; }
+/* 标题用的是用户购买的 Stardew 风格像素字母（PNG，带投影），按原生像素缩回后拼成；首字母加叶子，小鸡站在字上。
+   两张图都是 89 像素高、按同一高度显示；手机上按较宽的需求页标题能放下的比例一起缩小 */
+h1 img { height: min(128px, calc((100vw - 32px) * 89 / 614)); width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(20, 40, 90, .25)); }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; font: 13px var(--pixel); color: var(--dim); }
+.stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
+.stats b { color: var(--text); font-weight: 400; }
+/* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
+img.prop { position: absolute; z-index: 7; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 8%; bottom: 90px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+img.prop-cart.drag { cursor: grabbing; }
+img.prop-board { left: 10%; bottom: 112px; }
+.deco { position: absolute; right: 0; bottom: 4px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+.deco img { height: 80px; width: auto; }
+.deco img + img { height: 60px; }
+
+/* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--grass) url("../assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
+.main { padding-top: 4px; }
+.yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
+.yard img { image-rendering: pixelated; }
+
+h2 { font: 400 19px var(--pixel); margin: 30px 0 16px 4px; display: flex; width: max-content; max-width: 100%; align-items: center; gap: 10px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d); padding: 4px 16px 4px 10px;
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
+  border: 3px solid var(--wood-d);
+  box-shadow: 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 4px 6px 0 0 var(--shadow); }
+h2 img.ico { filter: drop-shadow(2px 2px 0 var(--shadow)); }
+
+/* 卡片 */
+.cards { display: grid; gap: 26px; padding: 4px; }
+.card { padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.rank { font: 15px/1 var(--pixel); color: var(--paper); background: var(--wood); padding: 5px 8px 4px; text-shadow: 1px 1px 0 var(--wood-d); }
+.nid { font: 13px/1 var(--pixel); color: var(--wood-d); background: var(--paper-2); padding: 4px 8px; border: 2px dashed var(--wood); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--dim); }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.lede { color: var(--text); margin: 0 0 14px; }
+.meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
+.m { --c: var(--wood); background: var(--paper-2); padding: 8px 8px 8px 50px; display: grid; gap: 2px; align-content: center;
+  position: relative; min-height: 58px; min-width: 0; }
+.m img.ico { position: absolute; left: 7px; top: 50%; transform: translateY(-50%); }
+.m b { font: 400 14px var(--pixel); }
+.m b.big { font: 22px/1 var(--pixel); }
+.m span { font: 12px var(--pixel); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: var(--wood-d); width: max-content; }
+.pips i { width: 8px; height: 10px; background: var(--paper-3); }
+.pips.amber i.on { background: #ecb35f; box-shadow: inset 0 -3px 0 #d0914a; }
+.pips.lime i.on { background: #a8d27e; box-shadow: inset 0 -3px 0 #7fb25f; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--paper); background: var(--green); padding: 2px 10px;
+  text-shadow: 1px 1px 0 #44743a; }
+.btn:hover { background: #6daa56; text-decoration: none; }
+.btn:active { transform: translate(2px, 2px); }
+details summary { cursor: pointer; list-style: none; font: 13px var(--pixel); color: var(--dim); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▶ "; color: var(--wood); display: inline-block; }
+details[open] > summary::before { content: "▼ "; }
+details summary:hover { color: var(--ink); }
+.actions details { flex: 0 1 auto; }
+.actions details summary { padding: 2px 4px; }
+.actions details[open] { flex-basis: 100%; }
+.actions details[open] summary { margin-bottom: 8px; display: inline-block; }
+.detail { font-size: 14px; color: var(--text); }
+.detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
+.detail li::marker { color: var(--wood); font-family: var(--pixel); }
+/* 展开详情：浅色底板，每个字段一行：左边木牌标签、右边内容，字段之间像素虚线 */
+.actions .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 4px 16px; }
+.detail .kv { display: grid; grid-template-columns: 9.5em 1fr; gap: 6px 16px; padding: 12px 0; border-top: 2px dashed var(--paper-3); }
+.detail .kv:first-child { border-top: 0; }
+.detail .k { justify-self: start; align-self: start; max-width: 100%; font: 13px/1.5 var(--pixel); color: var(--paper);
+  background: var(--wood); padding: 2px 9px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.detail .v { min-width: 0; line-height: 1.8; }
+.detail .v p { margin: 0 0 4px; }
+.detail .v ol { margin: 2px 0 0; padding-left: 1.6em; }
+.detail .v ol li { padding: 2px 0; }
+/* 完整分析里的条目：像素方块 + 标题单独一行 + 虚线分隔 */
+.fold .detail > ul { list-style: none; padding: 0; margin: 4px 0; }
+.fold .detail > ul > li { position: relative; padding: 10px 0 10px 22px; border-top: 2px dashed var(--paper-3); line-height: 1.8; }
+.fold .detail > ul > li:first-child { border-top: 0; }
+.fold .detail > ul > li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 8px; height: 8px; background: var(--wood);
+  box-shadow: 2px 2px 0 0 var(--wood-d); }
+.fold .detail > ul > li > strong:first-child { display: block; font: 400 15px/1.5 var(--pixel); color: var(--wood-d); margin-bottom: 2px; }
+.fold .detail h3, .fold .detail h4 { font: 400 15px var(--pixel); color: var(--wood-d); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--paper-3); }
+.fold .detail > p { line-height: 1.8; }
+.fold { padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--ink); }
+.fold[open] > summary { margin-bottom: 10px; }
+.table { overflow-x: auto; border: 3px solid var(--wood); background: #fff3d2; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--paper-3); vertical-align: top; }
+th { background: var(--paper-2); font: 13px var(--pixel); color: var(--wood-d); white-space: nowrap; }
+td:first-child { min-width: 8em; }
+.chip { --c: var(--wood); font: 12px var(--pixel); color: var(--blue); background: var(--paper); padding: 0 6px; margin: 3px; white-space: nowrap; display: inline-block; }
+.archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
+.archive a { --c: var(--wood); font: 13px var(--pixel); padding: 1px 10px; background: var(--paper-2); }
+footer { font: 12px/2 var(--pixel); color: var(--text); padding: 24px 0 40px; text-align: center; }
+footer .note { display: inline-block; background: var(--paper); padding: 0 12px; box-shadow: 0 -2px 0 0 var(--wood), 0 2px 0 0 var(--wood), -2px 0 0 0 var(--wood), 2px 0 0 0 var(--wood); }
+
+/* 资讯页 */
+.headline { font: 400 16px/1.6 var(--pixel); color: var(--ink); background: var(--paper); padding: 12px 16px 12px 58px; margin: 0 0 18px 2px;
+  position: relative; border: 4px solid var(--wood); max-width: 760px;
+  box-shadow: inset 0 0 0 2px var(--wood-l), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 5px 7px 0 0 var(--shadow); }
+.headline img.ico { position: absolute; left: 12px; top: 12px; }
+.hl h3 { margin: 0 0 6px; }
+.refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
+.refs a { --c: var(--wood); min-width: 0; font: 12px var(--pixel); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--paper-2); }
+.refs a:hover { background: var(--wood-l); color: var(--ink); text-decoration: none; }
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
+.board { padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px); border-bottom: 3px solid var(--wood-d); }
+.board h3 span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.board h3 small { font: 12px var(--pixel); color: var(--paper-2); text-shadow: 1px 1px 0 var(--wood-d); white-space: nowrap; }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--paper-3); }
+.board h3 + .row { border-top: 0; }
+.row .no { font: 14px/24px var(--pixel); color: var(--dim); }
+.row:nth-of-type(-n+3) .no { color: var(--orange); }
+.row .t { min-width: 0; }
+.row .t a { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--blue); }
+.row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.row .h { font: 12px var(--pixel); color: var(--orange); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--blue); }
+.board details summary { margin-top: 6px; }
+
+/* 排行榜：筛选木牌 + 木框长榜，每行点开看详情 */
+.filters { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 0 8px 18px 6px; }
+.filters button { --c: var(--ink); font: 13px var(--pixel); color: var(--paper); background: var(--wood-d); border: 0; padding: 3px 12px; cursor: pointer;
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+.filters button:hover { background: var(--wood); }
+.filters button.on { color: var(--text); background: var(--paper); }
+.filters button:active { transform: translate(2px, 2px); }
+.lboard { padding: 6px 14px 4px; margin: 0 8px 26px 4px; min-width: 0; }
+.lb-head, .lb > summary { display: grid; grid-template-columns: 34px 46px minmax(0, 1fr) 70px 56px; gap: 10px; align-items: center; }
+.lb-head { font: 12px var(--pixel); color: var(--dim); padding: 6px 4px; border-bottom: 3px solid var(--paper-3); }
+.lb-head span:nth-child(n+4) { text-align: right; }
+.lb { border-top: 2px dashed var(--paper-3); }
+.lb-head + .lb { border-top: 0; }
+.lb > summary { padding: 9px 4px; font: inherit; color: var(--text); }
+.lb > summary::before, .lb[open] > summary::before { content: none; }
+.lb > summary:hover { background: var(--paper-2); }
+.lb[open] > summary { background: var(--paper-2); }
+.lb .no { font: 16px/1 var(--pixel); color: var(--wood-d); text-align: center; }
+.lb:nth-of-type(-n+3) .no { color: var(--paper); background: var(--orange); padding: 5px 0 4px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.mv { font: 13px var(--pixel); text-align: center; }
+.mv.up, small.up { color: var(--green); } .mv.down, small.down { color: var(--red); }
+.mv.new { color: var(--paper); background: var(--green); font-size: 11px; padding: 0 2px; }
+.lb .t { min-width: 0; display: grid; gap: 3px; }
+.lb .t b { font-weight: 500; color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }
+.lb .sub { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font: 12px var(--pixel); color: var(--dim); }
+.lb .sub .nid { font-size: 11px; padding: 1px 6px; border-width: 1px; }
+.lb .kind { color: var(--wood-d); }
+.lb .pick { display: inline-flex; align-items: center; gap: 4px; color: var(--orange); }
+.lb .sc { text-align: right; font: 18px/1.1 var(--pixel); color: var(--blue); display: grid; }
+.lb .sc b { font-weight: 400; }
+.lb .sc small { font: 11px var(--pixel); }
+.lb .ht { text-align: right; font: 13px var(--pixel); color: var(--orange); display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; }
+.lb-body { padding: 12px 4px 16px; }
+.lb-body > .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 2px 16px; margin-top: 14px; }
+.lb-body .actions .detail { margin-top: 0; }
+.sim { margin: 0; padding-left: 1.2em; } .sim li { overflow-wrap: anywhere; }
+.lb-note { font: 12px var(--pixel); color: var(--dim); margin: 6px 4px 8px; }
+@media (max-width: 760px) {
+  .lboard { padding: 4px 8px 2px; }
+  .lb-head { display: none; }
+  .lb > summary { grid-template-columns: 30px minmax(0, 1fr) auto; grid-template-areas: "no t sc" "mv t ht"; gap: 2px 10px; align-items: start; padding: 10px 2px; }
+  .lb .no { grid-area: no; } .lb .mv { grid-area: mv; } .lb .t { grid-area: t; } .lb .sc { grid-area: sc; } .lb .ht { grid-area: ht; }
+  .lb-body { padding: 10px 0 14px; }
+  .lb-body > .detail { padding: 2px 10px; }
+  .filters { gap: 10px 12px; }
+  .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .detail .kv { grid-template-columns: 1fr; gap: 6px; }
+  .actions .detail { padding: 2px 10px; }
+  .card { padding: 14px 14px 12px; }
+  .boards { grid-template-columns: 1fr; }
+  :root { --skyh: 250px; }
+  .cloud-l { width: 244px; height: 160px; } .cloud-r { width: 148px; height: 136px; }
+  .hero { max-width: none; }
+  img.prop { transform-origin: bottom right; transform: scale(.75); }
+  img.prop-cart { right: 64px; } img.prop-board { left: 16px; right: auto; transform-origin: bottom left; }
+  .deco img { height: 60px; } .deco img + img { height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body class="news-page">
+<div class="sky"><i class="cloud-l"></i><i class="cloud-r"></i><i class="cloud-front"></i><div class="wrap">
+  <header>
+    <div class="hero">
+    <h1><img src="../assets/title-news.png" width="735" height="128" alt="Daily Digest 资讯速递"></h1>
+    <div class="stats"><span>内容日期 <b class="c-cyan">2026-11-11</b></span><span><b>61</b> 条热门</span><span><b>6</b> 个来源</span></div>
+    </div>
+    <nav class="tabs"><a class="" href="../index.html">需求雷达</a><a class="on" href="../news.html">资讯速递</a></nav><p class="pub">公开版 <a href="https://mimizu-dev.github.io/demand-reports/en/news.html" target="_blank" rel="noopener">English</a> · <a href="https://mimizu-dev.github.io/demand-reports/ja/news.html" target="_blank" rel="noopener">日本語</a></p>
+  </header>
+</div></div>
+<div class="plateau"><div class="wrap">
+  <img class="ico prop prop-board" src="../assets/board.png" width="78" height="86" alt="村口布告栏">
+  <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
+</div></div>
+<div class="wrap main">
+  <p class="headline"><img class="ico " src="../assets/chat.png" width="36" height="32" alt="" aria-hidden="true">AI 代理工具链爆发，本地化与浏览器自动化成热点</p>
+  <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">今日要点</h2><div class="cards"><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">AI 代理工具链集中爆发</h3><p class="lede">GitHub 趋势榜上 agent-browser、agent-skills、ha-mcp 等一批面向 AI 代理的工具同日上榜，说明“给代理用的基础设施”正成为独立开发者的新赛道。可考虑做代理专用的浏览器扩展或轻量技能包，抢占早期生态位。</p><div class="refs"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">addyosmani/agent-skills</a><a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noopener">vercel-labs/agent-browser</a><a href="https://github.com/homeassistant-ai/ha-mcp" target="_blank" rel="noopener">homeassistant-ai/ha-mcp</a><a href="https://www.producthunt.com/products/n8n-io?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Nod by n8n</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">本地 AI 与模型降本</h3><p class="lede">Apple 将推简化本地模型运行的 Mac 应用，Meta 发布低成本高吞吐的 Muse Ember，本地 LLM 也被验证可用于游戏开发。对做小工具的开发者意味着端侧推理门槛降低，可做离线优先的效率插件，避开 API 成本。</p><div class="refs"><a href="https://9to5mac.com/2026/11/10/apple-has-new-mac-app-coming-to-make-running-local-ai-models-easy/" target="_blank" rel="noopener">Apple has new Mac app coming to make running local AI models easy</a><a href="https://www.producthunt.com/products/meta-ai?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Muse Ember by Meta</a><a href="https://pc.watch.impress.co.jp/docs/news/2155676.html" target="_blank" rel="noopener">ローカルLLMはゲーム開発に使えるか、スクウェア・エニックスがNemotronで検証</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">网页平台知识可被代理调用</h3><p class="lede">Chrome 推出 Modern Web Guidance 1.0，让编码代理掌握现代 Web 平台知识；社区也在吐槽代理仍停留在 2019 年的 JS 写法。做浏览器扩展时可借此让 AI 生成更现代的代码，或做“旧代码现代化”小工具。</p><div class="refs"><a href="https://github.com/GoogleChrome/modern-web-guidance" target="_blank" rel="noopener">Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives</a><a href="https://github.com/GoogleChrome/modern-web-guidance-src" target="_blank" rel="noopener">GoogleChrome/modern-web-guidance-src</a><a href="https://developer.chrome.com/blog/modern-web-guidance-v1?hl=ja" target="_blank" rel="noopener">Modern Web Guidance 1.0: コーディング エージェントに欠けているウェブ プラットフォームの専門知識  |  Blog  |  Chrome for Developers</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">平台关停与专利风险</h3><p class="lede">Val Town 宣布关停，Synaptics 专利主张导致 DisplayLink 驱动停摆。依赖第三方平台的小工具存在存续风险，建议把核心逻辑做成可迁移的本地扩展，并留意硬件驱动类专利雷区。</p><div class="refs"><a href="https://blog.val.town/winding-down" target="_blank" rel="noopener">Val Town is winding down</a><a href="https://lwn.net/SubscriberLink/1102549/acbc92e00cee3a3f/" target="_blank" rel="noopener">Synaptics patent claims stop work on DisplayLink drivers</a><a href="https://lwn.net/SubscriberLink/1102549/acbc92e00cee3a3f/" target="_blank" rel="noopener">Synaptics patent claims stop work on DisplayLink drivers</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">智能家居与隐私需求升温</h3><p class="lede">HN 热议智能家居应断网可用，另有记者追问电视厂商如何监视用户。隐私焦虑是浏览器扩展的天然卖点，可做断网可用、本地处理的家庭设备控制或反追踪插件。</p><div class="refs"><a href="https://docodethatmatters.com/home-automation-overnight-success/" target="_blank" rel="noopener">Smart home devices should work without the internet</a><a href="https://www.theverge.com/tech/1012372/tv-privacy-acr-questions" target="_blank" rel="noopener">I asked every TV manufacturer 17 questions about how they spy on you</a><a href="https://lobste.rs/s/m43bas/how_do_you_actually_self_host_securely" target="_blank" rel="noopener">How do you actually self-host securely?</a></div></article></div>
+  <h2><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">各站热榜</h2>
+  <div class="boards"><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Hacker News</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://docodethatmatters.com/home-automation-overnight-success/" target="_blank" rel="noopener">Smart home devices should work without the internet</a><p>呼吁智能家居设备应支持离线可用</p></div><div class="h">▲ 1,148 分<a href="https://news.ycombinator.com/item?id=50441707" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028" target="_blank" rel="noopener">Tim Peters has died</a><p>Python 核心开发者 Tim Peters 逝世</p></div><div class="h">▲ 950 分<a href="https://news.ycombinator.com/item?id=50450488" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://pietromiotti.com/latest/maya-site" target="_blank" rel="noopener">My AI agents found an unmapped Maya site?</a><p>有人称 AI 代理发现未记录的玛雅遗址</p></div><div class="h">▲ 945 分<a href="https://news.ycombinator.com/item?id=50452455" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://neil.fraser.name/news/2026/11/10/" target="_blank" rel="noopener">.name Grandfathered</a><p>.name 域名获祖父条款保留</p></div><div class="h">▲ 921 分<a href="https://news.ycombinator.com/item?id=50442736" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.theautopian.com/scion-is-back-and-its-going-to-sell-a-freaking-kei-truck-in-america/" target="_blank" rel="noopener">Scion is back and is going to sell a kei truck in America</a><p>Scion 品牌回归，将在美售 kei 小卡车</p></div><div class="h">▲ 553 分<a href="https://news.ycombinator.com/item?id=50445401" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 10 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://9to5mac.com/2026/11/10/apple-has-new-mac-app-coming-to-make-running-local-ai-models-easy/" target="_blank" rel="noopener">Apple has new Mac app coming to make running local AI models easy</a><p>苹果将推简化本地 AI 模型运行的 Mac 应用</p></div><div class="h">▲ 521 分<a href="https://news.ycombinator.com/item?id=50446520" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://starlink.com/mini-2" target="_blank" rel="noopener">Starlink Mini 2</a><p>Starlink Mini 2 卫星上网终端</p></div><div class="h">▲ 504 分<a href="https://news.ycombinator.com/item?id=50444129" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.blender.org/download/releases/5-3/" target="_blank" rel="noopener">Blender 5.3 released with Gaussian Splat support</a><p>Blender 5.3 发布，支持高斯泼溅</p></div><div class="h">▲ 490 分<a href="https://news.ycombinator.com/item?id=50442426" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://lwn.net/SubscriberLink/1102549/acbc92e00cee3a3f/" target="_blank" rel="noopener">Synaptics patent claims stop work on DisplayLink drivers</a><p>Synaptics 专利主张致 DisplayLink 驱动停摆</p></div><div class="h">▲ 482 分<a href="https://news.ycombinator.com/item?id=50443824" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://www.vulncheck.com/blog/anthropic-glasswing-november-update" target="_blank" rel="noopener">Tracking Anthropic-discovered vulnerabilities</a><p>追踪 Anthropic 发现的漏洞清单</p></div><div class="h">▲ 447 分<a href="https://news.ycombinator.com/item?id=50447074" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">11</span><div class="t"><a href="https://github.com/GoogleChrome/modern-web-guidance" target="_blank" rel="noopener">Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives</a><p>Show HN：让编码代理用现代 Web 原语</p></div><div class="h">▲ 425 分<a href="https://news.ycombinator.com/item?id=50443812" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">12</span><div class="t"><a href="https://blog.val.town/winding-down" target="_blank" rel="noopener">Val Town is winding down</a><p>在线代码平台 Val Town 宣布关停</p></div><div class="h">▲ 418 分<a href="https://news.ycombinator.com/item?id=50443427" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">13</span><div class="t"><a href="https://gatezh.com/posts/macos-secure-enclave-ssh-keys/" target="_blank" rel="noopener">Protecting SSH Keys with macOS Secure Enclave</a><p>用 macOS 安全隔区保护 SSH 密钥</p></div><div class="h">▲ 384 分<a href="https://news.ycombinator.com/item?id=50449748" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">14</span><div class="t"><a href="https://www.theverge.com/tech/1012372/tv-privacy-acr-questions" target="_blank" rel="noopener">I asked every TV manufacturer 17 questions about how they spy on you</a><p>记者向电视厂商追问 17 个监视问题</p></div><div class="h">▲ 343 分<a href="https://news.ycombinator.com/item?id=50453474" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">15</span><div class="t"><a href="https://av.github.io/safe-sand/" target="_blank" rel="noopener">Hyper-Realistic Sand with WebGL2</a><p>WebGL2 实现的超写实沙粒效果</p></div><div class="h">▲ 330 分<a href="https://news.ycombinator.com/item?id=50453288" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Product Hunt</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.producthunt.com/products/scroogefrog-ai-antifraud?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">ScroogeFrog AI</a><p>AI 广告欺诈检测工具</p></div><div class="h">▲ 261 票</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.producthunt.com/products/n8n-io?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Nod by n8n</a><p>n8n 推出的开源个人 AI 代理</p></div><div class="h">▲ 259 票</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://www.producthunt.com/products/call-e?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">CALL-E</a><p>面向 AI 代理的电话线路服务</p></div><div class="h">▲ 190 票</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://www.producthunt.com/products/elevenlabs?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Scribe v3 by ElevenLabs</a><p>ElevenLabs 新版多语种语音转文字</p></div><div class="h">▲ 162 票</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.producthunt.com/products/skillbox-5?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Skillbox</a><p>跨代理同步 AI 技能的统一库</p></div><div class="h">▲ 136 票</div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://www.producthunt.com/products/minimax?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">MiniMax H3-Image</a><p>MiniMax 的 4K 快速图像生成模型</p></div><div class="h">▲ 120 票</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.producthunt.com/products/relaytoai?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Relay</a><p>面向 AI 代理的文档收发工具</p></div><div class="h">▲ 117 票</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.producthunt.com/products/shot-video?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Shot.video</a><p>用现有手机拍多机位视频</p></div><div class="h">▲ 112 票</div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://www.producthunt.com/products/meta-ai?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Muse Ember by Meta</a><p>Meta 面向高吞吐代理任务的低价模型</p></div><div class="h">▲ 106 票</div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://www.producthunt.com/products/reddit?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Reddit Reviews</a><p>抓取 subreddit 口碑的产品页工具</p></div><div class="h">▲ 103 票</div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">GitHub Trending</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://github.com/meta/astryx" target="_blank" rel="noopener">meta/astryx</a><p>可定制、面向代理的开源设计系统</p></div><div class="h">▲ 2,776 今日星标</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://github.com/we-promise/sure" target="_blank" rel="noopener">we-promise/sure</a><p>开源个人理财应用</p></div><div class="h">▲ 1,078 今日星标</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">addyosmani/agent-skills</a><p>面向 AI 编码代理的工程技能集</p></div><div class="h">▲ 787 今日星标</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://github.com/vercel-labs/agent-browser" target="_blank" rel="noopener">vercel-labs/agent-browser</a><p>面向 AI 代理的浏览器自动化 CLI</p></div><div class="h">▲ 708 今日星标</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://github.com/homeassistant-ai/ha-mcp" target="_blank" rel="noopener">homeassistant-ai/ha-mcp</a><p>用 AI 助手配置 Home Assistant 的 MCP</p></div><div class="h">▲ 645 今日星标</div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://github.com/shadcn/improve" target="_blank" rel="noopener">shadcn/improve</a><p>用强模型审计代码、弱模型执行</p></div><div class="h">▲ 361 今日星标</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank" rel="noopener">ZhuLinsen/daily_stock_analysis</a><p>LLM 驱动的多市场股票分析系统</p></div><div class="h">▲ 278 今日星标</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://github.com/GoogleChrome/modern-web-guidance-src" target="_blank" rel="noopener">GoogleChrome/modern-web-guidance-src</a><p>Chrome 现代 Web 指南源码仓库</p></div><div class="h">▲ 159 今日星标</div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://github.com/openai/codex-security" target="_blank" rel="noopener">openai/codex-security</a><p>OpenAI 的代码安全扫描 CLI 与 SDK</p></div><div class="h">▲ 52 今日星标</div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://github.com/TheAlgorithms/Java" target="_blank" rel="noopener">TheAlgorithms/Java</a><p>Java 实现的经典算法合集</p></div><div class="h">▲ 51 今日星标</div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Lobsters</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://neil.fraser.name/news/2026/11/10/" target="_blank" rel="noopener">.name grandfathered</a><p>.name 域名祖父条款讨论</p></div><div class="h">▲ 183 分<a href="https://lobste.rs/s/vkkbwo/name_grandfathered" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://lobste.rs/s/m43bas/how_do_you_actually_self_host_securely" target="_blank" rel="noopener">How do you actually self-host securely?</a><p>请教如何安全地自托管服务</p></div><div class="h">▲ 96 分</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028" target="_blank" rel="noopener">In Memoriam: Tim Peters 1952–2026</a><p>悼念 Tim Peters 的纪念文章</p></div><div class="h">▲ 73 分<a href="https://lobste.rs/s/romf5e/memoriam_tim_peters_1952_2026" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://lobste.rs/s/nld6x3/what_are_some_no_ai_apps_companies" target="_blank" rel="noopener">What are some &quot;No AI&quot; apps/companies/resources you know of?</a><p>征集“无 AI”应用与资源清单</p></div><div class="h">▲ 71 分</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://blog.infected.systems/posts/2026-11-03-i-deleted-all-my-ssh-keys/" target="_blank" rel="noopener">I deleted all my SSH keys</a><p>作者删除了自己所有 SSH 密钥</p></div><div class="h">▲ 60 分<a href="https://lobste.rs/s/sdtcvv/i_deleted_all_my_ssh_keys" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 3 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://lwn.net/SubscriberLink/1102549/acbc92e00cee3a3f/" target="_blank" rel="noopener">Synaptics patent claims stop work on DisplayLink drivers</a><p>Synaptics 专利致 DisplayLink 停摆</p></div><div class="h">▲ 59 分<a href="https://lobste.rs/s/fdnic2/synaptics_patent_claims_stop_work_on" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://lyra.horse/blog/2026/11/disinformation-machine/" target="_blank" rel="noopener">How I accidentally became a millionaire</a><p>一次意外成为百万富翁的安全故事</p></div><div class="h">▲ 48 分<a href="https://lobste.rs/s/lnau2d/how_i_accidentally_became_millionaire" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://michael.bacarella.com/2026/11/10/false-smoke-alarm-jane-street-datacenter/" target="_blank" rel="noopener">How a false smoke alarm almost drowned Jane Street&#x27;s only NYC datacenter</a><p>误报火警险淹 Jane Street 数据中心</p></div><div class="h">▲ 47 分<a href="https://lobste.rs/s/ii1gzp/how_false_smoke_alarm_almost_drowned_jane" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">はてなブックマーク IT</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.jpcert.or.jp/ir_report_checklist_20261111.html" target="_blank" rel="noopener">インシデント調査報告書チェックリスト公開のお知らせ</a><p>JPCERT 发布事件调查报告检查清单</p></div><div class="h">▲ 281 收藏<a href="https://b.hatena.ne.jp/entry/s/www.jpcert.or.jp/ir_report_checklist_20261111.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://pc.watch.impress.co.jp/docs/topic/feature/2155692.html" target="_blank" rel="noopener">【特集】 AIが“ダチ”になった。Meta「Muse」と過ごした2週間</a><p>体验 Meta Muse AI 两周的专题报道</p></div><div class="h">▲ 214 收藏<a href="https://b.hatena.ne.jp/entry/s/pc.watch.impress.co.jp/docs/topic/feature/2155692.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://scrapbox.io/shokai/software-factory-mode-2026aki_skill" target="_blank" rel="noopener">software-factory-mode-2026aki skill - 橋本商会</a><p>桥本商会分享的软件工厂模式技能</p></div><div class="h">▲ 136 收藏<a href="https://b.hatena.ne.jp/entry/s/scrapbox.io/shokai/software-factory-mode-2026aki_skill" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://forbesjapan.com/articles/detail/107841" target="_blank" rel="noopener">Z世代がAIブームから一斉に「ログアウト」し始めた深刻な理由　米国 | Forbes JAPAN 公式サイト（フォーブス ジャパン）</a><p>Z 世代开始集体退出 AI 热潮</p></div><div class="h">▲ 109 收藏<a href="https://b.hatena.ne.jp/entry/s/forbesjapan.com/articles/detail/107841" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://github.com/aws/aws-emulator" target="_blank" rel="noopener">GitHub - aws/aws-emulator: AWS Emulator is a local emulator of the AWS APIs.</a><p>AWS 官方本地 API 模拟器</p></div><div class="h">▲ 103 收藏<a href="https://b.hatena.ne.jp/entry/s/github.com/aws/aws-emulator" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://developer.chrome.com/blog/modern-web-guidance-v1?hl=ja" target="_blank" rel="noopener">Modern Web Guidance 1.0: コーディング エージェントに欠けているウェブ プラットフォームの専門知識  |  Blog  |  Chrome for Developers</a><p>Chrome 现代 Web 指南 1.0 发布</p></div><div class="h">▲ 74 收藏<a href="https://b.hatena.ne.jp/entry/s/developer.chrome.com/blog/modern-web-guidance-v1?hl=ja" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://future-architect.github.io/articles/20261111a/" target="_blank" rel="noopener">お客様の前に立つフロント人材になるために、技術以外の最小構成 | フューチャー技術ブログ</a><p>面向客户的前端人才非技术能力清单</p></div><div class="h">▲ 72 收藏<a href="https://b.hatena.ne.jp/entry/s/future-architect.github.io/articles/20261111a/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://pc.watch.impress.co.jp/docs/news/2155676.html" target="_blank" rel="noopener">ローカルLLMはゲーム開発に使えるか、スクウェア・エニックスがNemotronで検証</a><p>Square Enix 用 Nemotron 验证本地 LLM 做游戏</p></div><div class="h">▲ 70 收藏<a href="https://b.hatena.ne.jp/entry/s/pc.watch.impress.co.jp/docs/news/2155676.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://koyasi777.com/mozkey/" target="_blank" rel="noopener">Mozkey（もずきー）| 書くことに集中できる、日本語入力。</a><p>专注书写的日语输入法</p></div><div class="h">▲ 64 收藏<a href="https://b.hatena.ne.jp/entry/s/koyasi777.com/mozkey/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://sterfield.co.jp/blog/blog-44/" target="_blank" rel="noopener">2026 年、すべての主要ブラウザで使えるようになった CSS 機能</a><p>2026 年主流浏览器通用的 CSS 特性</p></div><div class="h">▲ 63 收藏<a href="https://b.hatena.ne.jp/entry/s/sterfield.co.jp/blog/blog-44/" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">V2EX 热门</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.v2ex.com/t/1256209" target="_blank" rel="noopener">家人们，我失恋了</a><p>V2EX 用户倾诉失恋</p></div><div class="h">▲ 112 回复</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.v2ex.com/t/1256189" target="_blank" rel="noopener">最近秋招陆陆续续面了一堆应届生，说点感受</a><p>面试应届生后的招聘感受</p></div><div class="h">▲ 102 回复</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://www.v2ex.com/t/1256359" target="_blank" rel="noopener">腾讯裁员一半</a><p>传闻腾讯裁员一半</p></div><div class="h">▲ 76 回复</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://www.v2ex.com/t/1256329" target="_blank" rel="noopener">31 岁男前来讨教 V 吧老哥备孕秘籍</a><p>31 岁男性求备孕经验</p></div><div class="h">▲ 72 回复</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.v2ex.com/t/1256122" target="_blank" rel="noopener">双十一都买了什么</a><p>双十一购物分享讨论</p></div><div class="h">▲ 67 回复</div></div><details><summary>再看 3 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://www.v2ex.com/t/1256244" target="_blank" rel="noopener">兄弟们，房贷终于要还清了！</a><p>用户分享房贷即将还清</p></div><div class="h">▲ 55 回复</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.v2ex.com/t/1256332" target="_blank" rel="noopener">咸鱼怎么卖东西，好多东西挂了许久也卖不出去，只有购买记录，售出记录屈指可数</a><p>闲鱼卖不出东西的求助</p></div><div class="h">▲ 55 回复</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.v2ex.com/t/1256139" target="_blank" rel="noopener">未来公司的护城河是什么</a><p>讨论未来公司的护城河</p></div><div class="h">▲ 51 回复</div></div></details></section></div>
+  <h2><img class="ico " src="../assets/sprout.png" width="32" height="36" alt="" aria-hidden="true">往期</h2><details class="fold"><summary>往期资讯</summary><div class="detail archive"><a href="2026-11-11.html">2026-11-10</a><a href="2026-11-10.html">2026-11-09</a><a href="2026-11-09.html">2026-11-08</a><a href="2026-11-08.html">2026-11-07</a><a href="2026-11-07.html">2026-11-06</a><a href="2026-11-06.html">2026-11-05</a><a href="2026-11-05.html">2026-11-04</a><a href="2026-11-04.html">2026-11-03</a><a href="2026-11-03.html">2026-11-02</a><a href="../news.html">最新</a></div></details>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-12 12:54 JST · 汇总前一天的热门内容</span></footer>
+</div>
+<script>
+(() => {
+  const sky = document.querySelector(".sky");
+  if (!sky) return;
+  const check = () => document.body.classList.toggle(
+    "stuck", sky.getBoundingClientRect().top <= parseFloat(getComputedStyle(sky).top) + 0.5);
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("resize", check);
+  check();
+})();
+</script>
+</body>
+</html>

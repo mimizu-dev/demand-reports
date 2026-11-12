@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-12</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-12</guid>
+<pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Fine-tune external audio track delay in real time on Apple Silicon Macs and merge it with the video</li><li>Want a photo management tool that browses folders in place like Picasa, without importing into a database</li><li>Hope Joplin supports saving and browsing images directly as notes</li><li>Want a tool that centrally manages multiple shopping cashback/coupon extensions and avoids duplicate price comparisons</li><li>Fix broken footnote links after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-11</title>
+<link>https://mimizu-dev.github.io/demand-reports/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-11</guid>
+<pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
+<description>AI agent toolchains surge, with localization and browser automation becoming hot topics</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-11</title>
 <link>https://mimizu-dev.github.io/demand-reports/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-11</guid>

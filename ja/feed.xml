@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://mimizu-dev.github.io/demand-reports/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-12</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-12</guid>
+<pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Apple Silicon Mac 上で外部音声トラックの遅延をリアルタイムに微調整し、動画と結合する</li><li>Picasa のようにフォルダをその場で閲覧でき、データベースにインポートしない写真管理ツールが欲しい</li><li>Joplin で画像をそのままノートとして保存・閲覧できるようにしてほしい</li><li>複数のショッピング返金/クーポン拡張機能を一元管理し、重複した価格比較を避けられるツールが欲しい</li><li>LibreOffice/OpenOffice から Obsidian にインポートした際に壊れた脚注リンクを修復し、標準 Markdown 脚注に変換する</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-11</title>
+<link>https://mimizu-dev.github.io/demand-reports/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-11</guid>
+<pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIエージェントツールチェーンの爆発、ローカライズとブラウザ自動化がホットに</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-11</title>
 <link>https://mimizu-dev.github.io/demand-reports/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-11</guid>
