@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mimizu-dev.github.io/demand-reports/sitemap.xml
+Sitemap: https://radar.mimizu-dev.com/sitemap.xml
