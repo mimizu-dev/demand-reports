@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-13</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-13</guid>
+<pubDate>Fri, 13 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Apple Silicon 上での外部音声トラックのリアルタイム同期とロスレス結合</li><li>データベースにインポートしないフォルダ型写真マネージャー</li><li>Google Sheets のマスターテーブルから複数部門のサブテーブルへのデータ+書式ミラーリング</li><li>複数フィールドの連絡先スニペットマネージャー</li><li>Joplinで画像を独立したノートとして閲覧する</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-12</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-12</guid>
+<pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
+<description>NVIDIAのCEOジェンスン・フアンが突然辞任、AI業界に衝撃</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-12</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-12</guid>

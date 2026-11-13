@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-13</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-13</guid>
+<pubDate>Fri, 13 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Real-time alignment and lossless merging of external audio tracks on Apple Silicon</li><li>A folder-based photo manager that doesn't import into a database</li><li>Data + format mirroring from a Google Sheets master sheet to multi-department sub-sheets</li><li>Multi-field contact snippet manager</li><li>Browse Joplin images as standalone notes</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-12</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-12</guid>
+<pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
+<description>NVIDIA CEO Jensen Huang Suddenly Resigns, Shocking the AI World</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-12</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-12</guid>
