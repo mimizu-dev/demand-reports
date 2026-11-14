@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-14</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-14</guid>
+<pubDate>Sat, 14 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Apple Silicon Mac 上で外部音声トラックの遅延をリアルタイムに微調整し、動画と結合する</li><li>Google Sheets のピボットテーブルで「複数人が同一セル」の参加者ごとにスコアを集計する</li><li>メインシートのデータと書式（色、スタイル）を複数の部門サブシートに同期ミラーする</li><li>Picasa のようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツールが欲しい</li><li>表/複数フィールドに対応したローカルスニペット管理ツールで、連絡先で検索し指定フィールドを素早くコピーしたい</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-13</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-13</guid>
+<pubDate>Fri, 13 Nov 2026 08:00:00 +0900</pubDate>
+<description>Microsoft 365の長時間障害とClaudeサービスのエラー、クラウド依存リスクが浮き彫りに</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-13</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-13</guid>

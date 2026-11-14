@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-14</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-14</guid>
+<pubDate>Sat, 14 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Fine-tune external audio track delay in real time on Apple Silicon Macs and merge it with the video</li><li>In a Google Sheets pivot table, count scores by participant when multiple participants share a cell</li><li>Mirror the main sheet's data and formatting (colors, styles) to multiple department sub-sheets</li><li>Want a photo management tool like Picasa that browses folders in place without importing into a database</li><li>Want a local snippet management tool that supports tables/multiple fields, can search by contact, and quickly copy a specified field</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-13</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-13</guid>
+<pubDate>Fri, 13 Nov 2026 08:00:00 +0900</pubDate>
+<description>Microsoft 365 prolonged outage and Claude service errors highlight cloud dependency risks</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-13</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-13</guid>
