@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-15</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-15</guid>
+<pubDate>Sun, 15 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Google Sheets のピボットテーブルで「複数人が同一セル」の参加者ごとにスコアを集計する</li><li>メインシートのデータと書式（色、スタイル）を複数の部門サブシートに同期ミラーする</li><li>Picasa のようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツールが欲しい</li><li>表/複数フィールドに対応したローカルスニペット管理ツールで、連絡先で検索し指定フィールドを素早くコピーしたい</li><li>Joplinでノートをインポートする際、新しいノートブックを作成するのではなく、対象のノートブックに自動的に統合してほしい</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-14</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-14</guid>
+<pubDate>Sat, 14 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIコーディングツールのエコシステムが爆発的に拡大、開発者ツールとデータセキュリティが焦点に</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-14</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-14</guid>

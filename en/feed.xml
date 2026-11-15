@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-15</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-15</guid>
+<pubDate>Sun, 15 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>In a Google Sheets pivot table, count scores by participant when multiple participants share a cell</li><li>Mirror the main sheet's data and formatting (colors, styles) to multiple department sub-sheets</li><li>Want a photo management tool like Picasa that browses folders in place without importing into a database</li><li>Want a local snippet management tool that supports tables/multiple fields, can search by contact, and quickly copy a specified field</li><li>When importing notes in Joplin, I want them to be automatically merged into the target notebook instead of creating a new notebook.</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-14</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-14</guid>
+<pubDate>Sat, 14 Nov 2026 08:00:00 +0900</pubDate>
+<description>AI coding tool ecosystem explodes, with developer tools and data security in focus</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-14</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-14</guid>
