@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-16</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-16</guid>
+<pubDate>Mon, 16 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidianの単一ファイル内検索でアクセント記号（発音区別符号）の無視を完全にサポートする</li><li>Google Sheets のピボットテーブルで「複数人が同一セル」の参加者ごとにスコアを集計する</li><li>メインシートのデータと書式（色、スタイル）を複数の部門サブシートに同期ミラーする</li><li>Picasaのようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツール</li><li>表/複数フィールドをサポートするローカルスニペット管理ツールで、連絡先で検索し指定フィールドを素早くコピーできる</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-15</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-15</guid>
+<pubDate>Sun, 15 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIコーディングツールのエコシステムが爆発的に拡大、しかしセキュリティとコストの問題が浮上</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-15</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-15</guid>

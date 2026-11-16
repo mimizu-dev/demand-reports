@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-16</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-16</guid>
+<pubDate>Mon, 16 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Make Obsidian's single-file find fully support ignoring accents (diacritics)</li><li>In a Google Sheets pivot table, count scores by participant when multiple participants share a cell</li><li>Mirror the main sheet's data and formatting (colors, styles) to multiple department sub-sheets</li><li>A photo management tool like Picasa that browses folders in place without importing into a database</li><li>A local snippet management tool supporting tables/multiple fields, searchable by contact with quick copying of specific fields</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-15</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-15</guid>
+<pubDate>Sun, 15 Nov 2026 08:00:00 +0900</pubDate>
+<description>The AI coding tool ecosystem is booming, but security and cost concerns are emerging</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-15</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-15</guid>
