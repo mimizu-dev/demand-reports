@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>资讯速递 · 2026-11-18</title>
+<link rel="icon" href="../assets/board.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 柔和的田园调色板（参考官方美术：长色阶、低对比，暗部偏青/偏棕而不是近黑） */
+  --sky: #056bc5; --grass: #77bf44; --grass-2: #6ab33b; --grass-3: #3f8a33; --grass-4: #8acb57;
+  --wood: #c99460; --wood-l: #e3bb88; --wood-d: #a06c43; --ink: #7d5236;
+  --paper: #fcf0d2; --paper-2: #f5e1b5; --paper-3: #e9cd98;
+  --text: #5c3e27; --dim: #9a7a5c;
+  --blue: #4a86b8; --green: #5f9a4a; --orange: #c98a3a; --red: #c0605a; --gold: #b8913c;
+  --shadow: rgba(40, 90, 30, .25);
+  --pixel: "DotGothic16", "Noto Sans SC", monospace;
+  --u: 4px;
+}
+* { box-sizing: border-box; }
+img.ico, .deco img { image-rendering: pixelated; image-rendering: crisp-edges; }
+body { margin: 0; overflow-x: clip; color: var(--text); font: 15px/1.75 "Noto Sans SC", system-ui, sans-serif; background-color: var(--grass);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' shape-rendering='crispEdges'%3E%3Crect x='6' y='8' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='8' y='6' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='30' y='30' width='2' height='2' fill='%236ab33b'/%3E%3Crect x='32' y='28' width='2' height='2' fill='%238acb57'/%3E%3Crect x='20' y='40' width='2' height='2' fill='%238acb57'/%3E%3Crect x='40' y='12' width='2' height='2' fill='%236ab33b'/%3E%3C/svg%3E");
+  background-size: 48px 48px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+::selection { background: var(--wood-l); color: var(--ink); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+.c-cyan { color: var(--blue); } .c-pink { color: var(--red); } .c-lime { color: var(--green); }
+.c-amber { color: var(--orange); } .c-red { color: var(--red); } .dim { color: var(--dim); }
+img.ico { flex: none; vertical-align: middle; }
+
+/* 木框羊皮纸面板：木头边框 + 内侧深色线 + 外侧缺角描边 + 投影 */
+.card, .fold, .board, .lboard { background: var(--paper); border: 5px solid var(--wood);
+  box-shadow: inset 0 0 0 2px var(--wood-l), inset 0 0 0 4px var(--paper-2),
+    0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink),
+    5px 8px 0 0 var(--shadow); }
+/* 小号木牌：按钮、标签、排名 */
+.tabs a, .btn, .rank, .stats span, .refs a, .chip, .archive a, .m {
+  --c: var(--ink);
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+
+/* 顶部：生成的田园全景（天空、山丘、土路和铁轨），左右镜像拼接可无缝平铺；上方不够高时用天空色补齐 */
+/* 页面顶部是山顶：天空 → 云海 → 崖边 → 有铁轨的平台，平台下沿的灌木直接压在山谷背景地图上。
+   场景图左右镜像拼接可无缝平铺；场景上方不够高时用天空色补齐（只补到场景图上沿，底边保持透明） */
+/* 页面顶部是山顶，分两层：
+   .sky 天空和云海上半部分，吸顶：往上滚到只剩底部一条就停住，常驻在最上面；停住后下沿露出一圈云底，
+        一团团垂在内容上（云底形状取自云海顶部轮廓的倒影，没有直线切口）；
+   .plateau 云海下半部分、悬崖边和山顶平台（草地、铁轨、矿车、灌木），跟着页面滚动，下沿灌木压在固定的山谷地图上。
+   图都左右镜像拼接可无缝平铺；天空图上方不够高时用天空色补齐 */
+:root { --skyh: 320px; --band: 56px; }
+.sky { position: sticky; top: calc(var(--band) - var(--skyh)); height: var(--skyh); z-index: 5;
+  background: url("../assets/summit-sky.png") repeat-x left bottom / auto 184px,
+    linear-gradient(var(--sky), var(--sky)) left top / 100% calc(100% - 182px) no-repeat; }
+.sky::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 28px; pointer-events: none; display: none;
+  background: url("../assets/cloud-edge.png") repeat-x left top / auto 28px; image-rendering: pixelated; }
+.stuck .sky::before { display: block; }
+/* 两侧高高堆起的云（外侧高、中间低），平底藏在前面一层云海后面，不留缝 */
+.cloud-l, .cloud-r, .cloud-front { position: absolute; pointer-events: none; image-rendering: pixelated; background: 0 0 / 100% 100% no-repeat; }
+.cloud-l, .cloud-r { bottom: 4px; z-index: 0; }
+.cloud-l { left: 0; width: 366px; height: 240px; background-image: url("../assets/cloud-l.png"); }
+.cloud-r { right: 0; width: 222px; height: 204px; background-image: url("../assets/cloud-r.png"); }
+.cloud-front { left: 0; right: 0; bottom: 0; height: 44px; z-index: 1;
+  background: url("../assets/cloud-front.png") repeat-x left bottom / auto 44px; }
+.sky > .wrap { position: relative; z-index: 2; }
+/* 头部：导航在左上，标题居中并往下贴近云层，统计排在标题下面 */
+header { position: relative; height: calc(var(--skyh) - 30px); padding-top: 10px; display: flex; flex-direction: column; justify-content: flex-end; }
+.plateau { height: 200px; position: relative;
+  background: url("../assets/summit-ground.png") repeat-x left top / auto 200px; image-rendering: pixelated; }
+.plateau .wrap { position: relative; height: 100%; }
+.stuck img.prop { z-index: 1; }
+.tabs { display: flex; gap: 14px; margin: 12px 0 4px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 3; }
+.tabs a { font: 400 15px var(--pixel); color: var(--paper); padding: 4px 14px; background: var(--wood-d); }
+.tabs a.on { color: var(--text); background: var(--paper); }
+.tabs a:not(.on):hover { background: var(--wood); text-decoration: none; }
+.hero { position: relative; z-index: 3; text-align: center; }
+.hero, .tabs, .pub { transition: opacity .2s; }
+.stuck .hero, .stuck .tabs, .stuck .pub { opacity: 0; pointer-events: none; }
+.pub { position: relative; z-index: 3; width: max-content; margin: 10px auto 0; font: 12px var(--pixel); color: var(--dim);
+  background: var(--paper); padding: 0 10px;
+  box-shadow: 0 -2px 0 0 var(--wood), 0 2px 0 0 var(--wood), -2px 0 0 0 var(--wood), 2px 0 0 0 var(--wood); }
+.pub a { color: var(--blue); }
+/* 标题是生成的木板像素字（木板钉成、带木纹，叶子从木头上长出来，小鸡站在字上） */
+h1 { margin: 0 0 10px; line-height: 0; }
+/* 标题用的是用户购买的 Stardew 风格像素字母（PNG，带投影），按原生像素缩回后拼成；首字母加叶子，小鸡站在字上。
+   两张图都是 89 像素高、按同一高度显示；手机上按较宽的需求页标题能放下的比例一起缩小 */
+h1 img { height: min(128px, calc((100vw - 32px) * 89 / 614)); width: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(20, 40, 90, .25)); }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 12px; font: 13px var(--pixel); color: var(--dim); }
+.stats span { --c: var(--wood); background: var(--paper); padding: 0 10px; }
+.stats b { color: var(--text); font-weight: 400; }
+/* 矿车停在铁轨上（轨面在场景底部往上约 62px），布告栏立在铁轨前的草地上 */
+img.prop { position: absolute; z-index: 7; filter: drop-shadow(3px 3px 0 var(--shadow)); }
+img.prop-cart { right: 8%; bottom: 90px; cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+img.prop-cart.drag { cursor: grabbing; }
+img.prop-board { left: 10%; bottom: 112px; }
+.deco { position: absolute; right: 0; bottom: 4px; display: flex; align-items: flex-end; gap: 2px; z-index: 2; }
+.deco img { height: 80px; width: auto; }
+.deco img + img { height: 60px; }
+
+/* 整页背景是一张固定不动的小镇农场地图，滚动时只有前景（卡片等）移动并遮住它 */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--grass) url("../assets/bg-map.png") center / cover no-repeat; image-rendering: pixelated; }
+.main { padding-top: 4px; }
+.yard { display: flex; justify-content: center; align-items: flex-end; gap: 14px; margin-bottom: 6px; }
+.yard img { image-rendering: pixelated; }
+
+h2 { font: 400 19px var(--pixel); margin: 30px 0 16px 4px; display: flex; width: max-content; max-width: 100%; align-items: center; gap: 10px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d); padding: 4px 16px 4px 10px;
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px);
+  border: 3px solid var(--wood-d);
+  box-shadow: 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 4px 6px 0 0 var(--shadow); }
+h2 img.ico { filter: drop-shadow(2px 2px 0 var(--shadow)); }
+
+/* 卡片 */
+.cards { display: grid; gap: 26px; padding: 4px; }
+.card { padding: 18px 20px 14px; position: relative; margin: 0 8px 8px 4px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.rank { font: 15px/1 var(--pixel); color: var(--paper); background: var(--wood); padding: 5px 8px 4px; text-shadow: 1px 1px 0 var(--wood-d); }
+.nid { font: 13px/1 var(--pixel); color: var(--wood-d); background: var(--paper-2); padding: 4px 8px; border: 2px dashed var(--wood); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--dim); }
+.card h3 { font: 400 19px/1.45 var(--pixel); margin: 12px 0 6px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.lede { color: var(--text); margin: 0 0 14px; }
+.meters { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; padding: 2px; }
+.m { --c: var(--wood); background: var(--paper-2); padding: 8px 8px 8px 50px; display: grid; gap: 2px; align-content: center;
+  position: relative; min-height: 58px; min-width: 0; }
+.m img.ico { position: absolute; left: 7px; top: 50%; transform: translateY(-50%); }
+.m b { font: 400 14px var(--pixel); }
+.m b.big { font: 22px/1 var(--pixel); }
+.m span { font: 12px var(--pixel); color: var(--dim); }
+.pips { display: inline-flex; gap: 2px; padding: 2px; background: var(--wood-d); width: max-content; }
+.pips i { width: 8px; height: 10px; background: var(--paper-3); }
+.pips.amber i.on { background: #ecb35f; box-shadow: inset 0 -3px 0 #d0914a; }
+.pips.lime i.on { background: #a8d27e; box-shadow: inset 0 -3px 0 #7fb25f; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; margin-top: 16px; padding-left: 2px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 13px var(--pixel); color: var(--paper); background: var(--green); padding: 2px 10px;
+  text-shadow: 1px 1px 0 #44743a; }
+.btn:hover { background: #6daa56; text-decoration: none; }
+.btn:active { transform: translate(2px, 2px); }
+details summary { cursor: pointer; list-style: none; font: 13px var(--pixel); color: var(--dim); }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "▶ "; color: var(--wood); display: inline-block; }
+details[open] > summary::before { content: "▼ "; }
+details summary:hover { color: var(--ink); }
+.actions details { flex: 0 1 auto; }
+.actions details summary { padding: 2px 4px; }
+.actions details[open] { flex-basis: 100%; }
+.actions details[open] summary { margin-bottom: 8px; display: inline-block; }
+.detail { font-size: 14px; color: var(--text); }
+.detail p { margin: 6px 0; } .detail ul, .detail ol { padding-left: 1.3em; margin: 6px 0; }
+.detail li::marker { color: var(--wood); font-family: var(--pixel); }
+/* 展开详情：浅色底板，每个字段一行：左边木牌标签、右边内容，字段之间像素虚线 */
+.actions .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 4px 16px; }
+.detail .kv { display: grid; grid-template-columns: 9.5em 1fr; gap: 6px 16px; padding: 12px 0; border-top: 2px dashed var(--paper-3); }
+.detail .kv:first-child { border-top: 0; }
+.detail .k { justify-self: start; align-self: start; max-width: 100%; font: 13px/1.5 var(--pixel); color: var(--paper);
+  background: var(--wood); padding: 2px 9px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.detail .v { min-width: 0; line-height: 1.8; }
+.detail .v p { margin: 0 0 4px; }
+.detail .v ol { margin: 2px 0 0; padding-left: 1.6em; }
+.detail .v ol li { padding: 2px 0; }
+/* 完整分析里的条目：像素方块 + 标题单独一行 + 虚线分隔 */
+.fold .detail > ul { list-style: none; padding: 0; margin: 4px 0; }
+.fold .detail > ul > li { position: relative; padding: 10px 0 10px 22px; border-top: 2px dashed var(--paper-3); line-height: 1.8; }
+.fold .detail > ul > li:first-child { border-top: 0; }
+.fold .detail > ul > li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 8px; height: 8px; background: var(--wood);
+  box-shadow: 2px 2px 0 0 var(--wood-d); }
+.fold .detail > ul > li > strong:first-child { display: block; font: 400 15px/1.5 var(--pixel); color: var(--wood-d); margin-bottom: 2px; }
+.fold .detail h3, .fold .detail h4 { font: 400 15px var(--pixel); color: var(--wood-d); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 2px solid var(--paper-3); }
+.fold .detail > p { line-height: 1.8; }
+.fold { padding: 12px 18px; margin: 0 8px 22px 4px; }
+.fold > summary { font: 400 16px var(--pixel); color: var(--ink); }
+.fold[open] > summary { margin-bottom: 10px; }
+.table { overflow-x: auto; border: 3px solid var(--wood); background: #fff3d2; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 2px dashed var(--paper-3); vertical-align: top; }
+th { background: var(--paper-2); font: 13px var(--pixel); color: var(--wood-d); white-space: nowrap; }
+td:first-child { min-width: 8em; }
+.chip { --c: var(--wood); font: 12px var(--pixel); color: var(--blue); background: var(--paper); padding: 0 6px; margin: 3px; white-space: nowrap; display: inline-block; }
+.archive { display: flex; flex-wrap: wrap; gap: 12px; padding: 4px; }
+.archive a { --c: var(--wood); font: 13px var(--pixel); padding: 1px 10px; background: var(--paper-2); }
+footer { font: 12px/2 var(--pixel); color: var(--text); padding: 24px 0 40px; text-align: center; }
+footer .note { display: inline-block; background: var(--paper); padding: 0 12px; box-shadow: 0 -2px 0 0 var(--wood), 0 2px 0 0 var(--wood), -2px 0 0 0 var(--wood), 2px 0 0 0 var(--wood); }
+
+/* 资讯页 */
+.headline { font: 400 16px/1.6 var(--pixel); color: var(--ink); background: var(--paper); padding: 12px 16px 12px 58px; margin: 0 0 18px 2px;
+  position: relative; border: 4px solid var(--wood); max-width: 760px;
+  box-shadow: inset 0 0 0 2px var(--wood-l), 0 -3px 0 0 var(--ink), 0 3px 0 0 var(--ink), -3px 0 0 0 var(--ink), 3px 0 0 0 var(--ink), 5px 7px 0 0 var(--shadow); }
+.headline img.ico { position: absolute; left: 12px; top: 12px; }
+.hl h3 { margin: 0 0 6px; }
+.refs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding: 2px; }
+.refs a { --c: var(--wood); min-width: 0; font: 12px var(--pixel); padding: 0 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: var(--paper-2); }
+.refs a:hover { background: var(--wood-l); color: var(--ink); text-decoration: none; }
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; padding: 4px; }
+.board { padding: 14px 16px; min-width: 0; margin: 0 8px 8px 4px; }
+.board h3 { font: 400 16px var(--pixel); margin: -14px -16px 8px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  color: var(--paper); text-shadow: 2px 2px 0 var(--wood-d);
+  background: repeating-linear-gradient(180deg, var(--wood) 0 12px, #bb8656 12px 14px, var(--wood-l) 14px 15px, var(--wood) 15px 16px); border-bottom: 3px solid var(--wood-d); }
+.board h3 span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.board h3 small { font: 12px var(--pixel); color: var(--paper-2); text-shadow: 1px 1px 0 var(--wood-d); white-space: nowrap; }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 0; border-top: 2px dashed var(--paper-3); }
+.board h3 + .row { border-top: 0; }
+.row .no { font: 14px/24px var(--pixel); color: var(--dim); }
+.row:nth-of-type(-n+3) .no { color: var(--orange); }
+.row .t { min-width: 0; }
+.row .t a { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+.row .t a:hover { color: var(--blue); }
+.row .t p { margin: 2px 0 0; font-size: 13px; color: var(--dim); }
+.row .h { font: 12px var(--pixel); color: var(--orange); white-space: nowrap; text-align: right; }
+.row .h a { display: block; color: var(--blue); }
+.board details summary { margin-top: 6px; }
+
+/* 排行榜：筛选木牌 + 木框长榜，每行点开看详情 */
+.filters { display: flex; flex-wrap: wrap; gap: 12px 14px; margin: 0 8px 18px 6px; }
+.filters button { --c: var(--ink); font: 13px var(--pixel); color: var(--paper); background: var(--wood-d); border: 0; padding: 3px 12px; cursor: pointer;
+  box-shadow: 0 -2px 0 0 var(--c), 0 2px 0 0 var(--c), -2px 0 0 0 var(--c), 2px 0 0 0 var(--c); }
+.filters button:hover { background: var(--wood); }
+.filters button.on { color: var(--text); background: var(--paper); }
+.filters button:active { transform: translate(2px, 2px); }
+.lboard { padding: 6px 14px 4px; margin: 0 8px 26px 4px; min-width: 0; }
+.lb-head, .lb > summary { display: grid; grid-template-columns: 34px 46px minmax(0, 1fr) 70px 56px; gap: 10px; align-items: center; }
+.lb-head { font: 12px var(--pixel); color: var(--dim); padding: 6px 4px; border-bottom: 3px solid var(--paper-3); }
+.lb-head span:nth-child(n+4) { text-align: right; }
+.lb { border-top: 2px dashed var(--paper-3); }
+.lb-head + .lb { border-top: 0; }
+.lb > summary { padding: 9px 4px; font: inherit; color: var(--text); }
+.lb > summary::before, .lb[open] > summary::before { content: none; }
+.lb > summary:hover { background: var(--paper-2); }
+.lb[open] > summary { background: var(--paper-2); }
+.lb .no { font: 16px/1 var(--pixel); color: var(--wood-d); text-align: center; }
+.lb:nth-of-type(-n+3) .no { color: var(--paper); background: var(--orange); padding: 5px 0 4px; text-shadow: 1px 1px 0 var(--wood-d);
+  box-shadow: 0 -2px 0 0 var(--wood-d), 0 2px 0 0 var(--wood-d), -2px 0 0 0 var(--wood-d), 2px 0 0 0 var(--wood-d); }
+.mv { font: 13px var(--pixel); text-align: center; }
+.mv.up, small.up { color: var(--green); } .mv.down, small.down { color: var(--red); }
+.mv.new { color: var(--paper); background: var(--green); font-size: 11px; padding: 0 2px; }
+.lb .t { min-width: 0; display: grid; gap: 3px; }
+.lb .t b { font-weight: 500; color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }
+.lb .sub { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font: 12px var(--pixel); color: var(--dim); }
+.lb .sub .nid { font-size: 11px; padding: 1px 6px; border-width: 1px; }
+.lb .kind { color: var(--wood-d); }
+.lb .pick { display: inline-flex; align-items: center; gap: 4px; color: var(--orange); }
+.lb .sc { text-align: right; font: 18px/1.1 var(--pixel); color: var(--blue); display: grid; }
+.lb .sc b { font-weight: 400; }
+.lb .sc small { font: 11px var(--pixel); }
+.lb .ht { text-align: right; font: 13px var(--pixel); color: var(--orange); display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; }
+.lb-body { padding: 12px 4px 16px; }
+.lb-body > .detail { background: #fff8e4; border: 2px solid var(--paper-3); padding: 2px 16px; margin-top: 14px; }
+.lb-body .actions .detail { margin-top: 0; }
+.sim { margin: 0; padding-left: 1.2em; } .sim li { overflow-wrap: anywhere; }
+.lb-note { font: 12px var(--pixel); color: var(--dim); margin: 6px 4px 8px; }
+@media (max-width: 760px) {
+  .lboard { padding: 4px 8px 2px; }
+  .lb-head { display: none; }
+  .lb > summary { grid-template-columns: 30px minmax(0, 1fr) auto; grid-template-areas: "no t sc" "mv t ht"; gap: 2px 10px; align-items: start; padding: 10px 2px; }
+  .lb .no { grid-area: no; } .lb .mv { grid-area: mv; } .lb .t { grid-area: t; } .lb .sc { grid-area: sc; } .lb .ht { grid-area: ht; }
+  .lb-body { padding: 10px 0 14px; }
+  .lb-body > .detail { padding: 2px 10px; }
+  .filters { gap: 10px 12px; }
+  .meters { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .detail .kv { grid-template-columns: 1fr; gap: 6px; }
+  .actions .detail { padding: 2px 10px; }
+  .card { padding: 14px 14px 12px; }
+  .boards { grid-template-columns: 1fr; }
+  :root { --skyh: 250px; }
+  .cloud-l { width: 244px; height: 160px; } .cloud-r { width: 148px; height: 136px; }
+  .hero { max-width: none; }
+  img.prop { transform-origin: bottom right; transform: scale(.75); }
+  img.prop-cart { right: 64px; } img.prop-board { left: 16px; right: auto; transform-origin: bottom left; }
+  .deco img { height: 60px; } .deco img + img { height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body class="news-page">
+<div class="sky"><i class="cloud-l"></i><i class="cloud-r"></i><i class="cloud-front"></i><div class="wrap">
+  <header>
+    <div class="hero">
+    <h1><img src="../assets/title-news.png" width="735" height="128" alt="Daily Digest 资讯速递"></h1>
+    <div class="stats"><span>内容日期 <b class="c-cyan">2026-11-18</b></span><span><b>61</b> 条热门</span><span><b>6</b> 个来源</span></div>
+    </div>
+    <nav class="tabs"><a class="" href="../index.html">需求雷达</a><a class="on" href="../news.html">资讯速递</a></nav><p class="pub">公开版 <a href="https://radar.mimizu-dev.com/en/news.html" target="_blank" rel="noopener">English</a> · <a href="https://radar.mimizu-dev.com/ja/news.html" target="_blank" rel="noopener">日本語</a></p>
+  </header>
+</div></div>
+<div class="plateau"><div class="wrap">
+  <img class="ico prop prop-board" src="../assets/board.png" width="78" height="86" alt="村口布告栏">
+  <div class="deco"><img src="../assets/sunflower.png" alt=""><img src="../assets/sunflower.png" alt=""></div>
+</div></div>
+<div class="wrap main">
+  <p class="headline"><img class="ico " src="../assets/chat.png" width="36" height="32" alt="" aria-hidden="true">GPT-6.2双模型发布，Agent技能框架与工作流工具集中爆发</p>
+  <h2><img class="ico " src="../assets/scroll.png" width="34" height="36" alt="" aria-hidden="true">今日要点</h2><div class="cards"><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">GPT-6.2双模型登场</h3><p class="lede">OpenAI推出前沿版Astra与高效版Sol两款模型，社区已有开发者试用后讨论转投Gemini。新模型意味着你的AI插件可做模型切换/成本对比功能，或针对Sol低延迟场景做轻量工具。</p><div class="refs"><a href="https://openai.com/index/introducing-gpt-6-2-astra-sol/" target="_blank" rel="noopener">GPT‑6.2 Astra and Sol</a><a href="https://www.producthunt.com/products/openai?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">GPT-6.2 Astra and Sol</a><a href="https://www.v2ex.com/t/1258022" target="_blank" rel="noopener">用完 gpt-6.2 当场退订转 gemini</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">Agent技能框架扎堆</h3><p class="lede">GitHub趋势榜被Agent技能框架占据：superpowers、ECC、last30days-skill、stitch-skills等。可参考这些开源标准为浏览器扩展封装可复用技能，或做技能市场/管理面板赚信息差。</p><div class="refs"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">mvanhorn/last30days-skill</a><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a><a href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener">google-labs-code/stitch-skills</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">工作流可视化机会</h3><p class="lede">Product Hunt上Mermaid Flow、Toone、dusk bot等把Grok/agent接入n8n/zapier式流程。独立开发者可做轻量可视化编排插件，切入小团队自动化需求。</p><div class="refs"><a href="https://www.producthunt.com/products/toone?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Toone</a><a href="https://www.producthunt.com/products/mermaid-chart?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Mermaid Flow</a><a href="https://www.producthunt.com/products/dusk-bot?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">dusk bot</a><a href="https://github.com/n8n-io/n8n" target="_blank" rel="noopener">n8n-io/n8n</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">搜索流量被AI截流</h3><p class="lede">Google AI回答使搜索流量降约40%，个人博客All About Berlin被AI冲击。依赖SEO导流的小工具需转向扩展商店、社区分发或订阅制，别把增长押在搜索上。</p><div class="refs"><a href="https://nicolasbouliane.com/blog/death-by-ai" target="_blank" rel="noopener">AI is killing All About Berlin</a><a href="https://revscope.co/blog/search-seo-geo-2026/" target="_blank" rel="noopener">Google&#x27;s AI answers reducing search traffic by 40%</a></div></article><article class="card hl"><h3><img class="ico " src="../assets/heart.png" width="36" height="32" alt="" aria-hidden="true">安全事件频发</h3><p class="lede">Java4Shell、nginx HTTP/2漏洞、PHP致命漏洞接连曝出，另有Windows 11收集编码Agent使用数据。做开发工具时可加依赖漏洞扫描或隐私提示，形成差异化卖点。</p><div class="refs"><a href="https://calif.io/java4shell/" target="_blank" rel="noopener">Java4Shell: RCE in OpenJDK when processing Base64</a><a href="https://calif.io/java4shell/" target="_blank" rel="noopener">Java4Shell: Write once, RCE everywhere</a><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/" target="_blank" rel="noopener">Windows 11 collects data on which coding agents and dev tools you use</a><a href="https://forest.watch.impress.co.jp/docs/news/2157690.html" target="_blank" rel="noopener">「PHP」に再び“致命的”な脆弱性、日本時間19日夜にセキュリティリリースへ／サポート中の全バージョンが対象</a><a href="https://dev.classmethod.jp/articles/nginx-http2-rce-aws-mitigation/" target="_blank" rel="noopener">nginx2root の HTTP/2 脆弱性2件を AWS 構成ごとに整理してみた | DevelopersIO</a><a href="https://piyolog.hatenadiary.jp/entry/2026/11/19/065715" target="_blank" rel="noopener">NGINXの脆弱性 CVE-2026-123633、CVE-2026-123007についてまとめてみた - piyolog</a></div></article></div>
+  <h2><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">各站热榜</h2>
+  <div class="boards"><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Hacker News</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://openai.com/index/introducing-gpt-6-2-astra-sol/" target="_blank" rel="noopener">GPT‑6.2 Astra and Sol</a><p>HN热议OpenAI新模型GPT-6.2 Astra与Sol</p></div><div class="h">▲ 1,337 分<a href="https://news.ycombinator.com/item?id=50535230" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://calif.io/java4shell/" target="_blank" rel="noopener">Java4Shell: RCE in OpenJDK when processing Base64</a><p>OpenJDK处理Base64时存在远程代码执行漏洞</p></div><div class="h">▲ 1,157 分<a href="https://news.ycombinator.com/item?id=50538240" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://blog.cloudflare.com/quad9-withdrawal-from-france/" target="_blank" rel="noopener">Quad9&#x27;s withdrawal from France: A canary in the coal mine</a><p>Quad9退出法国引发DNS审查担忧</p></div><div class="h">▲ 885 分<a href="https://news.ycombinator.com/item?id=50538994" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://nicolasbouliane.com/blog/death-by-ai" target="_blank" rel="noopener">AI is killing All About Berlin</a><p>AI摘要冲击独立博客流量致其停更</p></div><div class="h">▲ 766 分<a href="https://news.ycombinator.com/item?id=50542705" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://developer.apple.com/system-status/" target="_blank" rel="noopener">Apple Services Down</a><p>苹果多项服务出现宕机</p></div><div class="h">▲ 719 分<a href="https://news.ycombinator.com/item?id=50535238" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 10 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://revscope.co/blog/search-seo-geo-2026/" target="_blank" rel="noopener">Google&#x27;s AI answers reducing search traffic by 40%</a><p>谷歌AI回答致搜索流量下滑四成</p></div><div class="h">▲ 691 分<a href="https://news.ycombinator.com/item?id=50540178" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.cnn.com/2026/11/17/politics/highly-classified-national-security-communications-network-goes-down" target="_blank" rel="noopener">Highly classified US national security communications network goes down</a><p>美国家安全通信网络发生故障</p></div><div class="h">▲ 664 分<a href="https://news.ycombinator.com/item?id=50532849" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf" target="_blank" rel="noopener">Nvidia stopped disclosing Singapore sales as revenues hit $104B</a><p>英伟达营收破千亿后停披新加坡销售数据</p></div><div class="h">▲ 658 分<a href="https://news.ycombinator.com/item?id=50534631" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://techstackups.com/articles/quad9-leaves-france-dns-blocking/" target="_blank" rel="noopener">DNS resolvers are the wrong place to fight piracy</a><p>评论认为DNS解析器不该承担反盗版职责</p></div><div class="h">▲ 625 分<a href="https://news.ycombinator.com/item?id=50545958" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://consumerrights.wiki/w/ID.me_terms_required_for_IRS_sign-in" target="_blank" rel="noopener">ID.me terms required for IRS sign-in</a><p>美国税局登录强制使用ID.me条款引争议</p></div><div class="h">▲ 495 分<a href="https://news.ycombinator.com/item?id=50540437" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">11</span><div class="t"><a href="https://reddit.com/r/recruitinghell/comments/1xyr6ml/interviewed_at_a_yc_startup_spent_30_hours/" target="_blank" rel="noopener">Interviewed at a YC startup, found out they used my LinkedIn without permission</a><p>求职者称YC初创未经许可使用其LinkedIn</p></div><div class="h">▲ 493 分<a href="https://news.ycombinator.com/item?id=50542135" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">12</span><div class="t"><a href="https://phrack.org/issues/73/introduction_md" target="_blank" rel="noopener">Phrack 73</a><p>黑客杂志Phrack第73期发布</p></div><div class="h">▲ 461 分<a href="https://news.ycombinator.com/item?id=50535992" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">13</span><div class="t"><a href="https://github.com/microsoft/onnxruntime" target="_blank" rel="noopener">Microsoft&#x27;s ONNX Runtime has disappeared from GitHub</a><p>微软ONNX Runtime仓库从GitHub消失</p></div><div class="h">▲ 451 分<a href="https://news.ycombinator.com/item?id=50539610" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">14</span><div class="t"><a href="https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/" target="_blank" rel="noopener">MAI Code 2 and Code 2 Flash</a><p>微软发布MAI Code 2与Code 2 Flash模型</p></div><div class="h">▲ 417 分<a href="https://news.ycombinator.com/item?id=50535885" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">15</span><div class="t"><a href="https://www.sciencenorway.no/culture-history-history-of-science/350-years-ago-this-man-discovered-that-light-has-a-finite-speed/2737969" target="_blank" rel="noopener">350 years ago, Ole Rømer discovered that light has a finite speed</a><p>回顾350年前罗默测得光速有限</p></div><div class="h">▲ 409 分<a href="https://news.ycombinator.com/item?id=50536813" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Product Hunt</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.producthunt.com/products/s-space?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">S.Space</a><p>团队与AI代理协作的工作空间S.Space</p></div><div class="h">▲ 337 票</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.producthunt.com/products/bluedot-2?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Bluedot Phone Calls</a><p>电话通话AI笔记工具Bluedot</p></div><div class="h">▲ 285 票</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://www.producthunt.com/products/toone?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Toone</a><p>把Grok机器人接入n8n/zapier的Toone</p></div><div class="h">▲ 245 票</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://www.producthunt.com/products/waldo-by-wherobots?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Waldo by Wherobots</a><p>面向空间数据的工程AI代理Waldo</p></div><div class="h">▲ 212 票</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.producthunt.com/products/dippr?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Dippr</a><p>一句话为代理搭建数据平台的Dippr</p></div><div class="h">▲ 193 票</div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://www.producthunt.com/products/pitchavatar?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Pitch Avatar HR Suite</a><p>用对话式AI虚拟人做入职培训的HR套件</p></div><div class="h">▲ 163 票</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.producthunt.com/products/mermaid-chart?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Mermaid Flow</a><p>代理工作流的可视化搭建器Mermaid Flow</p></div><div class="h">▲ 143 票</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.producthunt.com/products/dusk-bot?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">dusk bot</a><p>开源免费的Grok机器人替代品dusk bot</p></div><div class="h">▲ 134 票</div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://www.producthunt.com/products/review-box?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">Review Box</a><p>快速审阅GitHub PR的桌面应用Review Box</p></div><div class="h">▲ 132 票</div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://www.producthunt.com/products/openai?utm_campaign=producthunt-api&amp;utm_medium=api-v2&amp;utm_source=Application%3A+demand-miner+%28ID%3A+317195%29" target="_blank" rel="noopener">GPT-6.2 Astra and Sol</a><p>OpenAI两款新模型Astra与Sol上线PH</p></div><div class="h">▲ 123 票</div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">GitHub Trending</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://github.com/google-research/paper-orchestra" target="_blank" rel="noopener">google-research/paper-orchestra</a><p>多代理自动撰写AI论文的框架</p></div><div class="h">▲ 1,524 今日星标</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">affaan-m/ECC</a><p>代理技能与记忆优化的性能系统ECC</p></div><div class="h">▲ 1,108 今日星标</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">mvanhorn/last30days-skill</a><p>跨多平台调研话题并生成摘要的代理技能</p></div><div class="h">▲ 1,059 今日星标</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a><p>可落地的代理技能框架与开发方法论</p></div><div class="h">▲ 822 今日星标</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://github.com/sveltejs/svelte" target="_blank" rel="noopener">sveltejs/svelte</a><p>前端框架Svelte持续登上趋势榜</p></div><div class="h">▲ 692 今日星标</div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://github.com/getarcaneapp/arcane" target="_blank" rel="noopener">getarcaneapp/arcane</a><p>面向大众的现代Docker管理工具Arcane</p></div><div class="h">▲ 547 今日星标</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://github.com/HKUDS/CLI-Anything" target="_blank" rel="noopener">HKUDS/CLI-Anything</a><p>让所有软件原生支持代理的CLI项目</p></div><div class="h">▲ 389 今日星标</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener">google-labs-code/stitch-skills</a><p>配合Stitch MCP服务器的代理技能库</p></div><div class="h">▲ 365 今日星标</div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://github.com/n8n-io/n8n" target="_blank" rel="noopener">n8n-io/n8n</a><p>带原生AI能力的开源工作流自动化平台n8n</p></div><div class="h">▲ 325 今日星标</div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://github.com/cursor/plugins" target="_blank" rel="noopener">cursor/plugins</a><p>Cursor官方插件规范与插件集</p></div><div class="h">▲ 314 今日星标</div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">Lobsters</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://social.anoxinon.de/@Codeberg/117636454915265360" target="_blank" rel="noopener">Codeberg&#x27;s domain suddenly disappeared from their account, site is unreachable</a><p>Codeberg域名突然失效致站点无法访问</p></div><div class="h">▲ 188 分<a href="https://lobste.rs/s/spmgsd/codeberg_s_domain_suddenly_disappeared" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://xint.io/blog/nginx2root-remote-code-execution" target="_blank" rel="noopener">nginx2root</a><p>nginx HTTP/2漏洞可致提权至root</p></div><div class="h">▲ 67 分<a href="https://lobste.rs/s/wj2svg/nginx2root" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://phrack.org/issues/73/introduction_md.html" target="_blank" rel="noopener">Phrack 73</a><p>Phrack第73期在Lobsters再获关注</p></div><div class="h">▲ 64 分<a href="https://lobste.rs/s/xu4ajj/phrack_73" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://calif.io/java4shell/" target="_blank" rel="noopener">Java4Shell: Write once, RCE everywhere</a><p>Java4Shell漏洞可跨环境远程执行代码</p></div><div class="h">▲ 56 分<a href="https://lobste.rs/s/g0bf9i/java4shell_write_once_rce_everywhere" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://xusheng.dev/posts/windows-coding-agent-telemetry/" target="_blank" rel="noopener">Windows 11 collects data on which coding agents and dev tools you use</a><p>Win11被指收集用户所用编码代理与开发工具</p></div><div class="h">▲ 36 分<a href="https://lobste.rs/s/cwxmdw/windows_11_collects_data_on_which_coding" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 3 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://picaq.github.io/sarasa" target="_blank" rel="noopener">Sarasa Gothic Mono</a><p>等宽字体Sarasa Gothic Mono获推荐</p></div><div class="h">▲ 29 分<a href="https://lobste.rs/s/de02yg/sarasa_gothic_mono" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://gregoire.dev/writing/gus/" target="_blank" rel="noopener">FreeBSD GUS</a><p>FreeBSD的GUS相关讨论</p></div><div class="h">▲ 28 分<a href="https://lobste.rs/s/bhfexs/freebsd_gus" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://mccue.dev/pages/11-18-26-java4shell" target="_blank" rel="noopener">Java4Shell is a reason to use Java</a><p>观点称Java4Shell反成用Java的理由</p></div><div class="h">▲ 27 分<a href="https://lobste.rs/s/a1uff5/java4shell_is_reason_use_java" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">はてなブックマーク IT</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://xtech.nikkei.com/atcl/nxt/column/18/00001/12190/" target="_blank" rel="noopener">MUJI Card発行のクレディセゾン、カード番号削除を2度依頼　無印は実行せず</a><p>MUJI Card发卡方两次要求删卡号未被执行</p></div><div class="h">▲ 411 收藏<a href="https://b.hatena.ne.jp/entry/s/xtech.nikkei.com/atcl/nxt/column/18/00001/12190/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://forest.watch.impress.co.jp/docs/news/2157690.html" target="_blank" rel="noopener">「PHP」に再び“致命的”な脆弱性、日本時間19日夜にセキュリティリリースへ／サポート中の全バージョンが対象</a><p>PHP曝出影响全部受支持版本的致命漏洞</p></div><div class="h">▲ 266 收藏<a href="https://b.hatena.ne.jp/entry/s/forest.watch.impress.co.jp/docs/news/2157690.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://togetter.com/li/2772114" target="_blank" rel="noopener">「ガチャを回すみたいに強盗する」裁判傍聴の民が実際に見てきたトクリュウの実態がしんどすぎる「普通に仕事しろ」</a><p>旁听者讲述匿名流动犯罪团伙作案实态</p></div><div class="h">▲ 255 收藏<a href="https://b.hatena.ne.jp/entry/s/togetter.com/li/2772114" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://note.com/y_hirano/n/nc986ab18b90e" target="_blank" rel="noopener">実質的無職になった｜Y.Hirano</a><p>日本开发者因接单困难陷入实质无业</p></div><div class="h">▲ 202 收藏<a href="https://b.hatena.ne.jp/entry/s/note.com/y_hirano/n/nc986ab18b90e" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://speakerdeck.com/minorun365/2026-11-lab-datsubotorunekku-ningen" target="_blank" rel="noopener">認知負荷の減らし方 ～開発にも日常業務にも活かせるノウハウ～</a><p>分享开发与日常中降低认知负荷的方法</p></div><div class="h">▲ 143 收藏<a href="https://b.hatena.ne.jp/entry/s/speakerdeck.com/minorun365/2026-11-lab-datsubotorunekku-ningen" target="_blank" rel="noopener">讨论</a></div></div><details><summary>再看 5 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://news.web.nhk/newsweb/na/nd-20261117de77369" target="_blank" rel="noopener">アプリ作りに専門知識が不要に!? AIが変える常識と落とし穴 | NHKニュース</a><p>NHK报道AI让零基础者也能做应用及其陷阱</p></div><div class="h">▲ 138 收藏<a href="https://b.hatena.ne.jp/entry/s/news.web.nhk/newsweb/na/nd-20261117de77369" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.itmedia.co.jp/news/article/2611/19/2000003316/" target="_blank" rel="noopener">六花亭、カード番号全桁＋セキュリティコード約8000件流出か　決済画面のプログラム改ざん</a><p>六花亭支付页面被篡改致约8000条卡信息泄露</p></div><div class="h">▲ 133 收藏<a href="https://b.hatena.ne.jp/entry/s/www.itmedia.co.jp/news/article/2611/19/2000003316/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://dev.classmethod.jp/articles/nginx-http2-rce-aws-mitigation/" target="_blank" rel="noopener">nginx2root の HTTP/2 脆弱性2件を AWS 構成ごとに整理してみた | DevelopersIO</a><p>按AWS架构梳理nginx HTTP/2两个漏洞影响</p></div><div class="h">▲ 96 收藏<a href="https://b.hatena.ne.jp/entry/s/dev.classmethod.jp/articles/nginx-http2-rce-aws-mitigation/" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">09</span><div class="t"><a href="https://pc.watch.impress.co.jp/docs/topic/feature/2157654.html" target="_blank" rel="noopener">【特集】 Museに「僕と“家の鍵”を交換してザウルス開発者になってよ」と頼んでみた</a><p>用Muse与AI交换家钥体验Zaurus开发</p></div><div class="h">▲ 81 收藏<a href="https://b.hatena.ne.jp/entry/s/pc.watch.impress.co.jp/docs/topic/feature/2157654.html" target="_blank" rel="noopener">讨论</a></div></div><div class="row"><span class="no">10</span><div class="t"><a href="https://piyolog.hatenadiary.jp/entry/2026/11/19/065715" target="_blank" rel="noopener">NGINXの脆弱性 CVE-2026-123633、CVE-2026-123007についてまとめてみた - piyolog</a><p>日本官方就nginx漏洞发布预警汇总</p></div><div class="h">▲ 74 收藏<a href="https://b.hatena.ne.jp/entry/s/piyolog.hatenadiary.jp/entry/2026/11/19/065715" target="_blank" rel="noopener">讨论</a></div></div></details></section><section class="board"><h3><span><img class="ico " src="../assets/news.png" width="32" height="34" alt="" aria-hidden="true">V2EX 热门</span><small>按热度排序</small></h3><div class="row"><span class="no">01</span><div class="t"><a href="https://www.v2ex.com/t/1258010" target="_blank" rel="noopener">新 offer 我该怎么选？</a><p>V2EX网友求助在两个新offer间选择</p></div><div class="h">▲ 104 回复</div></div><div class="row"><span class="no">02</span><div class="t"><a href="https://www.v2ex.com/t/1258200" target="_blank" rel="noopener">我司全面禁止 AI Coding，一夜之间回到古法编程时代</a><p>公司全面禁用AI编码工具引热议</p></div><div class="h">▲ 92 回复</div></div><div class="row"><span class="no">03</span><div class="t"><a href="https://www.v2ex.com/t/1257964" target="_blank" rel="noopener">成都和重庆那个好玩呢？</a><p>讨论成都与重庆哪里更好玩</p></div><div class="h">▲ 68 回复</div></div><div class="row"><span class="no">04</span><div class="t"><a href="https://www.v2ex.com/t/1258022" target="_blank" rel="noopener">用完 gpt-6.2 当场退订转 gemini</a><p>用户称用完GPT-6.2即退订转投Gemini</p></div><div class="h">▲ 67 回复</div></div><div class="row"><span class="no">05</span><div class="t"><a href="https://www.v2ex.com/t/1258013" target="_blank" rel="noopener">一次涨薪谈话，感受到了行业寒意</a><p>一次涨薪谈话折射行业寒意</p></div><div class="h">▲ 62 回复</div></div><details><summary>再看 3 条</summary><div class="row"><span class="no">06</span><div class="t"><a href="https://www.v2ex.com/t/1258207" target="_blank" rel="noopener">UU 远程宣布收费</a><p>UU远程工具宣布开始收费</p></div><div class="h">▲ 61 回复</div></div><div class="row"><span class="no">07</span><div class="t"><a href="https://www.v2ex.com/t/1258180" target="_blank" rel="noopener">哎 裁员了 好难受</a><p>网友发帖倾诉被裁员的难受</p></div><div class="h">▲ 57 回复</div></div><div class="row"><span class="no">08</span><div class="t"><a href="https://www.v2ex.com/t/1258094" target="_blank" rel="noopener">有没有什么办法让我忘记开梯子的时候，让 Claude 断网？</a><p>求让Claude在开代理时断网的办法</p></div><div class="h">▲ 51 回复</div></div></details></section></div>
+  <h2><img class="ico " src="../assets/sprout.png" width="32" height="36" alt="" aria-hidden="true">往期</h2><details class="fold"><summary>往期资讯</summary><div class="detail archive"><a href="2026-11-18.html">2026-11-17</a><a href="2026-11-17.html">2026-11-16</a><a href="2026-11-16.html">2026-11-15</a><a href="2026-11-15.html">2026-11-14</a><a href="2026-11-14.html">2026-11-13</a><a href="2026-11-13.html">2026-11-12</a><a href="2026-11-12.html">2026-11-11</a><a href="2026-11-11.html">2026-11-10</a><a href="2026-11-10.html">2026-11-09</a><a href="2026-11-09.html">2026-11-08</a><a href="2026-11-08.html">2026-11-07</a><a href="2026-11-07.html">2026-11-06</a><a href="2026-11-06.html">2026-11-05</a><a href="../news.html">最新</a></div></details>
+  <footer><div class="yard"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"><img class="ico " src="../assets/hen.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/hay.png" width="44" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/hen2.png" width="34" height="34" alt="" aria-hidden="true"><img class="ico " src="../assets/barrel.png" width="36" height="46" alt="" aria-hidden="true"><img class="ico " src="../assets/flowers.png" width="48" height="40" alt="" aria-hidden="true"></div><span class="note">generated 2026-11-19 13:13 JST · 汇总前一天的热门内容</span></footer>
+</div>
+<script>
+(() => {
+  const sky = document.querySelector(".sky");
+  if (!sky) return;
+  const check = () => document.body.classList.toggle(
+    "stuck", sky.getBoundingClientRect().top <= parseFloat(getComputedStyle(sky).top) + 0.5);
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("resize", check);
+  check();
+})();
+</script>
+</body>
+</html>

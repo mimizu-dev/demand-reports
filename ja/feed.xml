@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-19</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-19</guid>
+<pubDate>Thu, 19 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidianの単一ファイル検索でアクセント記号（発音区別符号）の無視を完全にサポートする</li><li>Googleスプレッドシートのピボットテーブルで「複数人同セル」の参加者ごとに評価を集計する</li><li>クロスプラットフォームでモデルベンダーに縛られないAIミニアプリライブラリ</li><li>マスターテーブルのデータと書式を複数の部門サブテーブルに同期ミラーする</li><li>フォルダをその場で閲覧し、データベースにインポートしない写真管理ツール</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-18</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-18</guid>
+<pubDate>Wed, 18 Nov 2026 08:00:00 +0900</pubDate>
+<description>GPT-6.2のデュアルモデルがリリース、Agentスキルフレームワークとワークフローツールが集中的に爆発</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-18</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-18</guid>
