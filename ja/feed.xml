@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-20</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-20</guid>
+<pubDate>Fri, 20 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidianの単一ファイル検索でアクセント記号の無視を完全にサポートさせる</li><li>Googleスプレッドシートのピボットテーブルで「複数人同セル」の参加者ごとに評価を集計する</li><li>クロスプラットフォームでモデルベンダーに縛られないAIミニアプリライブラリ</li><li>メインテーブルのデータとフォーマットを複数の部門サブテーブルにミラーリング同期する</li><li>Picasa のようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツール</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-19</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-19</guid>
+<pubDate>Thu, 19 Nov 2026 08:00:00 +0900</pubDate>
+<description>Nginx/PHP/Rails にリモートコード実行脆弱性、AI モデルと Agent ツールが引き続き加熱</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-19</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-19</guid>
