@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-21</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-21</guid>
+<pubDate>Sat, 21 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidianの単一ファイル内検索でアクセント記号の無視を完全サポートする</li><li>EXIFベースの写真版Letterboxd統計ツール</li><li>マスターテーブルのデータと書式（色、フォント、罫線）を複数の部門サブテーブルにミラー同期する</li><li>Picasa のようにフォルダをその場で閲覧し、データベースにインポートしない写真管理ツール</li><li>クロスプラットフォームでモデルベンダーに縛られないミニアプリライブラリ</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-20</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-20</guid>
+<pubDate>Fri, 20 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIが数学と科学研究に進出、安全・コンプライアンスリスクも同時に高まる</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-20</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-20</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">ja-news-2026-11-06</guid>
 <pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
 <description>Claude Codeのメール漏洩でプライバシー懸念、Agentスキルエコシステムが爆発的拡大</description>
-</item>
-<item>
-<title>ニーズレーダー — 2026-11-06</title>
-<link>https://radar.mimizu-dev.com/ja/index.html</link>
-<guid isPermaLink="false">ja-needs-2026-11-06</guid>
-<pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Picasa のようにフォルダをその場で閲覧できる写真管理ツール</li><li>ChatGPT が任意のデバイスで Obsidian ノート保管庫を読み書きできるようにする</li><li>複数のショッピング還元/クーポン拡張機能を一元管理する価格比較パネル</li><li>LibreOffice/OpenOffice の脚注リンクを修復し、標準 Markdown 脚注に変換</li><li>Excel ワークブックの内部構造を X 線のように解析するツール</li></ol></description>
-</item>
-<item>
-<title>デイリーダイジェスト — 2026-11-05</title>
-<link>https://radar.mimizu-dev.com/ja/news.html</link>
-<guid isPermaLink="false">ja-news-2026-11-05</guid>
-<pubDate>Thu, 05 Nov 2026 08:00:00 +0900</pubDate>
-<description>オープンソースモデルとAgentツールチェーンが同日に爆発、インディー開発者のチャンスの窓が開く</description>
 </item>
 </channel>
 </rss>

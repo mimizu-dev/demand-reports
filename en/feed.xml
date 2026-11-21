@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-21</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-21</guid>
+<pubDate>Sat, 21 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Make Obsidian's in-file search fully support ignoring accents</li><li>An EXIF-based Letterboxd-style stats tool for photographers</li><li>Mirror the master sheet's data and formatting (colors, fonts, borders) to multiple department sub-sheets</li><li>A photo management tool that browses folders in place like Picasa, without importing into a database</li><li>A cross-platform mini-app library not tied to any model vendor</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-20</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-20</guid>
+<pubDate>Fri, 20 Nov 2026 08:00:00 +0900</pubDate>
+<description>AI pushes into math and scientific research, while security and compliance risks heat up in tandem</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-20</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-20</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">en-news-2026-11-06</guid>
 <pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
 <description>Claude Code email leak raises privacy concerns, agent skill ecosystem explodes</description>
-</item>
-<item>
-<title>Demand Radar — 2026-11-06</title>
-<link>https://radar.mimizu-dev.com/en/index.html</link>
-<guid isPermaLink="false">en-needs-2026-11-06</guid>
-<pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>A photo management tool that browses folders in place, like Picasa</li><li>Let ChatGPT read and write an Obsidian vault on any device</li><li>A price-comparison panel that centrally manages multiple shopping cashback/coupon extensions</li><li>Fix LibreOffice/OpenOffice footnote links and convert them to standard Markdown footnotes</li><li>A tool that parses the internal structure of Excel workbooks like an X-ray</li></ol></description>
-</item>
-<item>
-<title>Daily Digest — 2026-11-05</title>
-<link>https://radar.mimizu-dev.com/en/news.html</link>
-<guid isPermaLink="false">en-news-2026-11-05</guid>
-<pubDate>Thu, 05 Nov 2026 08:00:00 +0900</pubDate>
-<description>Open-source models and agent toolchains surge on the same day, opening a window for indie developers</description>
 </item>
 </channel>
 </rss>
