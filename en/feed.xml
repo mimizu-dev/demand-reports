@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-22</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-22</guid>
+<pubDate>Sun, 22 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidian single-file find with full accent-insensitivity</li><li>An EXIF-based Letterboxd-style stats tool for photographers</li><li>Cross-platform AI mini-app library not tied to any model vendor</li><li>Mirror master-sheet data and formatting to multiple department sub-sheets</li><li>A photo management tool that browses folders in place like Picasa</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-21</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-21</guid>
+<pubDate>Sat, 21 Nov 2026 08:00:00 +0900</pubDate>
+<description>AI agent skill frameworks and toolchains are exploding, letting indie developers build products fast</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-21</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-21</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">en-news-2026-11-07</guid>
 <pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
 <description>Agent Skills ecosystem explodes, AI coding toolchain takes focus</description>
-</item>
-<item>
-<title>Demand Radar — 2026-11-07</title>
-<link>https://radar.mimizu-dev.com/en/index.html</link>
-<guid isPermaLink="false">en-needs-2026-11-07</guid>
-<pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Want a photo management tool that browses folders in place like Picasa, without importing into a database</li><li>Let ChatGPT read and write an Obsidian vault on any device</li><li>Want a tool that can centrally manage multiple shopping cashback/coupon extensions and avoid repeated price comparisons</li><li>Fix footnote links broken after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li><li>Want a tool that can parse the internal structure of Excel workbooks like an X-ray (formula dependencies, dead code, hidden references</li></ol></description>
-</item>
-<item>
-<title>Daily Digest — 2026-11-06</title>
-<link>https://radar.mimizu-dev.com/en/news.html</link>
-<guid isPermaLink="false">en-news-2026-11-06</guid>
-<pubDate>Fri, 06 Nov 2026 08:00:00 +0900</pubDate>
-<description>Claude Code email leak raises privacy concerns, agent skill ecosystem explodes</description>
 </item>
 </channel>
 </rss>
