@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-23</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-23</guid>
+<pubDate>Mon, 23 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Make Obsidian's single-file search fully support ignoring accents</li><li>Structured disease note templates and workflow for medical students</li><li>An EXIF-based Letterboxd-style stats tool for photographers</li><li>Cross-platform AI mini-app library not tied to any model vendor</li><li>Mirror the master sheet's data and formatting to multiple department sub-sheets</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-22</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-22</guid>
+<pubDate>Sun, 22 Nov 2026 08:00:00 +0900</pubDate>
+<description>AI agent skill frameworks and CLI tools became today's developer hot topic</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-22</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-22</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">en-news-2026-11-08</guid>
 <pubDate>Sun, 08 Nov 2026 08:00:00 +0900</pubDate>
 <description>Claude Code config leaks secrets; MCP and Agent toolchains keep heating up</description>
-</item>
-<item>
-<title>Demand Radar — 2026-11-08</title>
-<link>https://radar.mimizu-dev.com/en/index.html</link>
-<guid isPermaLink="false">en-needs-2026-11-08</guid>
-<pubDate>Sun, 08 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Fine-tuning external audio track delay and lossless merging on Apple Silicon Macs</li><li>A photo management tool that browses folders in place like Picasa</li><li>Let ChatGPT read and write an Obsidian vault across devices</li><li>Unified management of multiple shopping cashback/coupon extensions</li><li>Fix footnote links when importing from LibreOffice/OpenOffice into Obsidian</li></ol></description>
-</item>
-<item>
-<title>Daily Digest — 2026-11-07</title>
-<link>https://radar.mimizu-dev.com/en/news.html</link>
-<guid isPermaLink="false">en-news-2026-11-07</guid>
-<pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
-<description>Agent Skills ecosystem explodes, AI coding toolchain takes focus</description>
 </item>
 </channel>
 </rss>

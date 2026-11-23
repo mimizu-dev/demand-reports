@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-23</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-23</guid>
+<pubDate>Mon, 23 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidianの単一ファイル検索でアクセント記号の無視を完全にサポートする</li><li>医学生向けの構造化された疾患ノートテンプレートとワークフロー</li><li>EXIFベースの写真版Letterboxd統計ツール</li><li>クロスプラットフォームで、モデルベンダーに縛られないAIミニアプリライブラリ</li><li>マスターテーブルのデータと書式を複数の部門サブテーブルにミラーリングする</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-22</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-22</guid>
+<pubDate>Sun, 22 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIエージェントのスキルフレームワークとCLIツールが今日の開発者の注目を集める</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-22</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-22</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">ja-news-2026-11-08</guid>
 <pubDate>Sun, 08 Nov 2026 08:00:00 +0900</pubDate>
 <description>Claude Codeの設定が鍵を漏洩、MCPとAgentツールチェーンが引き続き加熱</description>
-</item>
-<item>
-<title>ニーズレーダー — 2026-11-08</title>
-<link>https://radar.mimizu-dev.com/ja/index.html</link>
-<guid isPermaLink="false">ja-needs-2026-11-08</guid>
-<pubDate>Sun, 08 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Apple Silicon Mac 外部音声トラックの遅延微調整とロスレス結合</li><li>Picasa のようにフォルダをその場で閲覧できる写真管理ツール</li><li>让 ChatGPT 跨设备读写 Obsidian 笔记库</li><li>複数のショッピングキャッシュバック/クーポン拡張機能を一元管理</li><li>修复 LibreOffice/OpenOffice 导入 Obsidian 的脚注链接</li></ol></description>
-</item>
-<item>
-<title>デイリーダイジェスト — 2026-11-07</title>
-<link>https://radar.mimizu-dev.com/ja/news.html</link>
-<guid isPermaLink="false">ja-news-2026-11-07</guid>
-<pubDate>Sat, 07 Nov 2026 08:00:00 +0900</pubDate>
-<description>Agent Skillsエコシステムが爆発的に拡大、AIコーディングツールチェーンが注目の的に</description>
 </item>
 </channel>
 </rss>
