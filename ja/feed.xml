@@ -7,6 +7,20 @@
 <language>ja</language>
 <atom:link href="https://radar.mimizu-dev.com/ja/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>ニーズレーダー — 2026-11-26</title>
+<link>https://radar.mimizu-dev.com/ja/index.html</link>
+<guid isPermaLink="false">ja-needs-2026-11-26</guid>
+<pubDate>Thu, 26 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>Obsidianの単一ファイル検索でアクセント記号の無視を完全にサポートさせる</li><li>医学生向けの構造化されたObsidian疾患ノートテンプレートとワークフロー</li><li>ブラウザのアドレスバーとタブバーを隠しつつウィンドウサイズを保つ拡張機能</li><li>コメント欄でコンテンツがAIだと非難するコメントをブロックする</li><li>Microsoft To Do終了後のシンプルなマルチデバイスToDo代替品</li></ol></description>
+</item>
+<item>
+<title>デイリーダイジェスト — 2026-11-25</title>
+<link>https://radar.mimizu-dev.com/ja/news.html</link>
+<guid isPermaLink="false">ja-news-2026-11-25</guid>
+<pubDate>Wed, 25 Nov 2026 08:00:00 +0900</pubDate>
+<description>AIエージェントスキルエコシステムが爆発的成長、MCPにSkills over MCP機能が追加</description>
+</item>
+<item>
 <title>ニーズレーダー — 2026-11-25</title>
 <link>https://radar.mimizu-dev.com/ja/index.html</link>
 <guid isPermaLink="false">ja-needs-2026-11-25</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">ja-news-2026-11-11</guid>
 <pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
 <description>AIエージェントツールチェーンの爆発、ローカライズとブラウザ自動化がホットに</description>
-</item>
-<item>
-<title>ニーズレーダー — 2026-11-11</title>
-<link>https://radar.mimizu-dev.com/ja/index.html</link>
-<guid isPermaLink="false">ja-needs-2026-11-11</guid>
-<pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Apple Silicon Mac 上で外部音声トラックの遅延をリアルタイムに微調整し、動画と結合する</li><li>Picasa のようにフォルダをその場で閲覧でき、データベースにインポートしない写真管理ツールが欲しい</li><li>複数のショッピング返金/クーポン拡張機能を一元管理し、重複した価格比較を避けられるツールが欲しい</li><li>LibreOffice/OpenOffice から Obsidian にインポートした際に壊れた脚注リンクを修復し、標準 Markdown 脚注に変換する</li><li>Excel ワークブックの内部構造（数式依存、デッドコード、隠れた参照）を X 線のように解析できるツールが欲しい</li></ol></description>
-</item>
-<item>
-<title>デイリーダイジェスト — 2026-11-10</title>
-<link>https://radar.mimizu-dev.com/ja/news.html</link>
-<guid isPermaLink="false">ja-news-2026-11-10</guid>
-<pubDate>Tue, 10 Nov 2026 08:00:00 +0900</pubDate>
-<description>Claude Fable 5.2がリリース、AIプログラミングとAgentエコシステムが同時に加熱</description>
 </item>
 </channel>
 </rss>
