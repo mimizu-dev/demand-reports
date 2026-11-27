@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-27</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-27</guid>
+<pubDate>Fri, 27 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>C Drive Space Cleanup and Safe Deletion Assistant</li><li>Full diacritic-insensitive search for Obsidian single-file find</li><li>Structured disease note template and pre-exam quick-reference workflow for medical students</li><li>Extension that hides the address bar and tab bar while preserving window size</li><li>Block accusatory comments in comment sections saying "this is AI-generated"</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-26</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-26</guid>
+<pubDate>Thu, 26 Nov 2026 08:00:00 +0900</pubDate>
+<description>OpenAI tightens quotas and 1Password has an incident: opportunities and risks coexist in the AI toolchain</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-26</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-26</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">en-news-2026-11-12</guid>
 <pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
 <description>NVIDIA CEO Jensen Huang Suddenly Resigns, Shocking the AI World</description>
-</item>
-<item>
-<title>Demand Radar — 2026-11-12</title>
-<link>https://radar.mimizu-dev.com/en/index.html</link>
-<guid isPermaLink="false">en-needs-2026-11-12</guid>
-<pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Fine-tune external audio track delay in real time on Apple Silicon Macs and merge it with the video</li><li>A photo management tool that browses folders in place like Picasa, without importing into a database</li><li>Joplin supports saving and browsing images directly as notes</li><li>Unified management of multiple shopping cashback/coupon extensions, avoiding duplicate price comparisons</li><li>Fix broken footnote links after importing LibreOffice/OpenOffice into Obsidian and convert them to standard Markdown footnotes</li></ol></description>
-</item>
-<item>
-<title>Daily Digest — 2026-11-11</title>
-<link>https://radar.mimizu-dev.com/en/news.html</link>
-<guid isPermaLink="false">en-news-2026-11-11</guid>
-<pubDate>Wed, 11 Nov 2026 08:00:00 +0900</pubDate>
-<description>AI agent toolchains surge, with localization and browser automation becoming hot topics</description>
 </item>
 </channel>
 </rss>
