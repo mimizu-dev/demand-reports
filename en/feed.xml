@@ -7,6 +7,20 @@
 <language>en</language>
 <atom:link href="https://radar.mimizu-dev.com/en/feed.xml" rel="self" type="application/rss+xml"/>
 <item>
+<title>Demand Radar — 2026-11-28</title>
+<link>https://radar.mimizu-dev.com/en/index.html</link>
+<guid isPermaLink="false">en-needs-2026-11-28</guid>
+<pubDate>Sat, 28 Nov 2026 08:00:00 +0900</pubDate>
+<description><ol><li>A tool for cleaning up C: drive space and judging "can this actually be deleted?"</li><li>Obsidian single-file search that fully ignores accents</li><li>Structured disease-note templates and workflow for medical students</li><li>A browser extension that hides accusatory "this is AI-generated" comments</li><li>A simple, free to-do alternative after Microsoft To Do is discontinued (start with migration + Windows widget</li></ol></description>
+</item>
+<item>
+<title>Daily Digest — 2026-11-27</title>
+<link>https://radar.mimizu-dev.com/en/news.html</link>
+<guid isPermaLink="false">en-news-2026-11-27</guid>
+<pubDate>Fri, 27 Nov 2026 08:00:00 +0900</pubDate>
+<description>AI skill packs and agent toolchains are exploding at once; indie developers can ride the wave by building plugins</description>
+</item>
+<item>
 <title>Demand Radar — 2026-11-27</title>
 <link>https://radar.mimizu-dev.com/en/index.html</link>
 <guid isPermaLink="false">en-needs-2026-11-27</guid>
@@ -201,20 +215,6 @@
 <guid isPermaLink="false">en-news-2026-11-13</guid>
 <pubDate>Fri, 13 Nov 2026 08:00:00 +0900</pubDate>
 <description>Microsoft 365 prolonged outage and Claude service errors highlight cloud dependency risks</description>
-</item>
-<item>
-<title>Demand Radar — 2026-11-13</title>
-<link>https://radar.mimizu-dev.com/en/index.html</link>
-<guid isPermaLink="false">en-needs-2026-11-13</guid>
-<pubDate>Fri, 13 Nov 2026 08:00:00 +0900</pubDate>
-<description><ol><li>Real-time alignment and lossless merging of external audio tracks on Apple Silicon</li><li>A folder-based photo manager that doesn't import into a database</li><li>Data + format mirroring from a Google Sheets master sheet to multi-department sub-sheets</li><li>Multi-field contact snippet manager</li><li>Browse Joplin images as standalone notes</li></ol></description>
-</item>
-<item>
-<title>Daily Digest — 2026-11-12</title>
-<link>https://radar.mimizu-dev.com/en/news.html</link>
-<guid isPermaLink="false">en-news-2026-11-12</guid>
-<pubDate>Thu, 12 Nov 2026 08:00:00 +0900</pubDate>
-<description>NVIDIA CEO Jensen Huang Suddenly Resigns, Shocking the AI World</description>
 </item>
 </channel>
 </rss>
